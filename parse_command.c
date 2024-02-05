@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "inc/minishell.h"
 
 void	execute_command(char *command, char **env)
 {
@@ -13,7 +13,7 @@ void	execute_command(char *command, char **env)
 	{
         // Child process
         char *args[] = {command, NULL};
-        if (execve(command, args, env) == -1)
+        if (execvp(command, args) == -1)
 		{
             perror("execve");
             exit(EXIT_FAILURE);

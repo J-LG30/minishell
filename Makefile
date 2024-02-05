@@ -3,7 +3,7 @@ CC = @cc
 FLAGS = -Wall -Wextra -Werror #-fsanitize=address -static-libsan -g
 LIB = -lreadline
 
-SRCS = main.c parse_command.c
+SRCS = main.c parse_command.c lexer/lexer.c lexer/lexer_lst_utils.c
 OBJS = $(SRCS:.c=.o)
 
 LIBFT_DIR = libft

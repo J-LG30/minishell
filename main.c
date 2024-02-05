@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "inc/minishell.h"
 
 void	check_input(char *line, char ** env)
 {
@@ -11,11 +11,19 @@ void	check_input(char *line, char ** env)
 void	wait_loop(char **env)
 {
 	char	*line;
+	t_token *token;
+
 	while (1)
 	{
 		rl_on_new_line();
 		printf("%s minishell > ", "\U0001F975");
 		line = readline("");
+		token = lexer(line);
+		while (token != NULL)
+		{
+			printf("%i\n", token->type);
+			token = token->next;
+		}
 		check_input(line, env);
 		add_history(line);
 	}
