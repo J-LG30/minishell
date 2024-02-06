@@ -18,10 +18,14 @@ void	wait_loop(char **env)
 		rl_on_new_line();
 		printf("%s minishell > ", "\U0001F975");
 		line = readline("");
-		token = lexer(line);
+		token = tokenize(line);
 		while (token != NULL)
 		{
 			printf("%i\n", token->type);
+			if (token->error == 1)
+				printf("Error with quotes\n");
+			if (token->value != NULL)
+				printf("%s\n", token->value);
 			token = token->next;
 		}
 		check_input(line, env);

@@ -15,6 +15,7 @@
 #define REDIR_OUT 8
 #define REDIR_APP 9
 #define REDIR_DELIMIT 10
+#define END 11
 
 
 typedef struct t_token
@@ -27,9 +28,9 @@ typedef struct t_token
 }   t_token;
 
 void	execute_command(char *command, char **env);
-t_token *lexer(char *line);
 
 /* LEXER FUNCTIONS */
 t_token	*ft_tokenlast(t_token *lst);
 void	ft_tokenadd_back(t_token **lst, t_token *new);
-t_token	*new_token(t_token *prev);
+t_token	*ft_new_token();
+t_token *tokenize(char *line);

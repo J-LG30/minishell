@@ -26,12 +26,13 @@ void	ft_tokenadd_back(t_token **lst, t_token *new)
 		else
 		{
 			cursor = ft_tokenlast(*lst);
-			cursor -> next = new;
+			cursor->next = new;
+			new->prev = cursor;
 		}
 	}
 }
 
-t_token	*ft_new_token(t_token *prev)
+t_token	*ft_new_token()
 {
 	t_token *new;
 
@@ -41,7 +42,7 @@ t_token	*ft_new_token(t_token *prev)
 		return (NULL);
 	new->error = -1;
 	new->next = NULL;
-	new->prev = prev;
+	new->prev = NULL;
 	new->type = 0;
 	new->value = NULL;
 	return (new);
