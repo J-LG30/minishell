@@ -27,6 +27,14 @@ typedef struct t_token
 	int				error;
 }   t_token;
 
+typedef struct t_ast
+{
+	struct t_ast	*left;
+	struct t_ast	*right;
+	int				type;
+	char			*value;	
+}	t_ast;
+
 void	execute_command(char *command, char **env);
 
 /* LEXER FUNCTIONS */
