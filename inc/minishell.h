@@ -46,8 +46,10 @@ t_token	*ft_new_token();
 t_token *tokenize(char *line);
 
 /* PARSER FUNCTIONS*/
-void	parser(t_token **head);
+t_ast	*parser(t_token **head);
 t_ast *new_node_init();
 t_ast	*new_pipe_node();
 t_ast	*new_word_node(t_token *token);
 t_ast	*new_redir_node(t_token *token);
+t_ast	*new_env_node(t_token *token);
+t_ast	*new_end_node();

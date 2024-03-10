@@ -4,7 +4,7 @@ FLAGS = -Wall -Wextra -Werror #-fsanitize=address -static-libsan -g
 LIB = -lreadline
 
 SRCS = main.c exec_command.c lexer/lexer.c lexer/lexer_lst_utils.c \
-		
+		parser/parser.c parser/ast_helper.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -48,6 +48,28 @@ t_ast	*new_redir_node(t_token *token)
 	new = new_node_init();
 	if (!new)
 		return (NULL);
+	new->type = token->type;
 	new->value = token->value;
+	return (new);
 }
 
+t_ast	*new_env_node(t_token *token)
+{
+	t_ast	*new;
+
+	new = new_node_init();
+	if (!new)
+		return (NULL);
+	new->type = ENV;
+	new->value = token->value;
+	return (new);
+}
+
+t_ast	*new_end_node()
+{
+	t_ast	*new;
+	if (!new)
+		return (NULL);
+	new->type = END;
+	return (new);
+}

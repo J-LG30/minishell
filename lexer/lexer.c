@@ -121,5 +121,6 @@ t_token *tokenize(char *line)
 	token = ft_new_token();
 	token->type = END;
 	ft_tokenadd_back(&head, token);
+	head->prev = token;
 	return (head);
 }
