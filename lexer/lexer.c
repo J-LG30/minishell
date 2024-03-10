@@ -29,16 +29,21 @@ int	str_token(t_token *token, int type, char *line, int i)
 	if (type == WORD)
 	{
 		j = i;
-		while (line[j] && line[j] != ' ')
+		while (line[j] && line[j] != ' ' && line[j] != '|' && line[j] != '<' && line[j] != '>')
 			j++;
-		token->value = ft_substr(line, i - 1, j - i + 1);
+		//printf("oh%cgod\n", line[j]);
+		token->value = ft_substr(line, i, j - i);
+		//printf("%c\n", line[j]);
+		return (j);
 	}
 	else
+	{
 		token->value = ft_substr(line, i + 1, j - i - 1);
+		return (j + 1);
+	}
 	//if (token->value == NULL)
 		//do something
 		//error management
-	return (j + 1);
 
 }
 
@@ -67,6 +72,21 @@ int	redirect_token(t_token *token, char *line, int i)
 	return (0);
 }
 
+//check for other whitespaces
+int	env_token(t_token *token, char *line, int i)
+{
+	int	j;
+
+	j = i + 1;
+	token->type = ENV;
+	while (line[j] && line[j] != '|' && line[j] != '<' && line[j] != '>')
+		j++;
+	token->value = ft_substr(line, i + 1, j - i - 1);
+	while (line[j] && line[j] != ' ')
+		j++;
+	return (j);
+}
+
 t_token *tokenize(char *line)
 {
 	int	i;
@@ -77,6 +97,7 @@ t_token *tokenize(char *line)
 	head = NULL;
 	while (line[i])
 	{
+		//printf("%c\n", line[i]);
 		token = ft_new_token();
 		while(line[i] == ' ')
 			i++;
@@ -86,14 +107,13 @@ t_token *tokenize(char *line)
 			i = str_token(token, S_STR, line, i);
 		else if (line[i] == '<' || line[i] == '>')
 			i = redirect_token(token, line, i);
-		else if (line[i++] == '|')
-			token->type = PIPE;
-		else if (line[i] == '$')
+		else if (line[i] == '|')
 		{
-			token->type = ENV;
-			while (line[i] != ' ')
+			token->type = PIPE;
 			i++;
 		}
+		else if (line[i] == '$')
+			i = env_token(token, line, i);
 		else
 			i = str_token(token, WORD, line, i);
 		ft_tokenadd_back(&head, token);	

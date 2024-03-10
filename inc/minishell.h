@@ -33,6 +33,8 @@ typedef struct t_ast
 	struct t_ast	*right;
 	int				type;
 	char			*value;	
+	int				in_fd;
+	int				out_fd;
 }	t_ast;
 
 void	execute_command(char *command, char **env);
@@ -42,3 +44,10 @@ t_token	*ft_tokenlast(t_token *lst);
 void	ft_tokenadd_back(t_token **lst, t_token *new);
 t_token	*ft_new_token();
 t_token *tokenize(char *line);
+
+/* PARSER FUNCTIONS*/
+void	parser(t_token **head);
+t_ast *new_node_init();
+t_ast	*new_pipe_node();
+t_ast	*new_word_node(t_token *token);
+t_ast	*new_redir_node(t_token *token);
