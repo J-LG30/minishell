@@ -43,13 +43,16 @@ void	execute_command(char *command, char **env);
 t_token	*ft_tokenlast(t_token *lst);
 void	ft_tokenadd_back(t_token **lst, t_token *new);
 t_token	*ft_new_token();
+t_token	*token_type_exists(t_token *lst, int type);
 t_token *tokenize(char *line);
 
 /* PARSER FUNCTIONS*/
 t_ast	*parser(t_token **head);
-t_ast *new_node_init();
+t_ast 	*new_node_init();
 t_ast	*new_pipe_node();
 t_ast	*new_word_node(t_token *token);
 t_ast	*new_redir_node(t_token *token);
 t_ast	*new_env_node(t_token *token);
 t_ast	*new_end_node();
+
+t_ast	*create_command(t_token *head);

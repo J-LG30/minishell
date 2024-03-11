@@ -26,17 +26,29 @@ https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
 
 Grammar rules:
 N:B word in CAPITALS are tokens w/ that token type. Words in lower case are non-terminals and words in upper case are terminals.
-expression → command 
+expression → command
         | command PIPE expression
 
-command → redirectin? WORD+ redirectout? 
-        | redirectin? WORD+ literal redirectout?
+command → command_prefix command_word command_suffix
 
-redirectin -> REDIR_IN (WORD | literal) 
-        | REDIR. APP (WORD | literal)
+command_prefix -> redirectin
+        | command_prefix redirectin
+        | redirectout
+        | command_prefix redirectout
 
-redirectout → REDIR_OUT (WORD | literal) 
-        | REDIR_DELIMIT (WORD | literal)
+command_suffix -> redirectin
+        | command_suffix redirectin
+        | redirectout
+        | command_suffix redirectout
 
-literal -> S_STR 
+redirectin -> REDIR_IN command_word
+        | REDIR_APP command_word
+
+redirectout → REDIR_OUT command_word
+        | REDIR_DELIMIT command_word
+
+command_word -> S_STR 
         | D_STR
+        | WORD
+
+https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_03

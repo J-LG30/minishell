@@ -35,7 +35,7 @@ void	wait_loop(char **env)
 		// }
 		// if (!is_pipe)
 		// 		printf("single command\n");
-		parser(&token);
+		//parser(&token);
 		check_input(line, env);
 		add_history(line);
 	}

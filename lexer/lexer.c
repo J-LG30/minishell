@@ -49,24 +49,30 @@ int	str_token(t_token *token, int type, char *line, int i)
 
 int	redirect_token(t_token *token, char *line, int i)
 {
+	int	j;
+
 	if (line[i] == '<' && line[i + 1] == '<')
 	{
 		token->type = REDIR_DELIMIT;
+		j = i + 2;
 		return (i + 2);
 	}
 	else if (line[i] == '>' && line[i + 1] == '>')
 	{
 		token->type = REDIR_APP;
+		j = i + 2;
 		return (i + 2);
 	}
 	else if (line[i] == '>')
 	{
 		token->type = REDIR_OUT;
+		j = i + 1;
 		return (i + 1);
 	}
 	else if (line[i] == '<')
 	{
 		token->type = REDIR_IN;
+		j = i + 1;
 		return (i + 1);
 	}
 	return (0);

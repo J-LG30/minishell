@@ -47,3 +47,20 @@ t_token	*ft_new_token()
 	new->value = NULL;
 	return (new);
 }
+
+t_token	*token_type_exists(t_token *lst, int type)
+{
+	t_token	*cursor;
+
+	cursor = *lst;
+	if (lst)
+	{
+		while (cursor)
+		{
+			if (cursor->type == type)
+				return (cursor);
+			cursor = cursor->next;
+		}
+	}
+	return (NULL);
+}
