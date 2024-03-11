@@ -23,3 +23,20 @@ https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-Writing
 
 another guide for shell syntax kinda like bash manual:
 https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
+
+Grammar rules:
+N:B word in CAPITALS are tokens w/ that token type. Words in lower case are non-terminals and words in upper case are terminals.
+expression → command 
+        | command PIPE expression
+
+command → redirectin? WORD+ redirectout? 
+        | redirectin? WORD+ literal redirectout?
+
+redirectin -> REDIR_IN (WORD | literal) 
+        | REDIR. APP (WORD | literal)
+
+redirectout → REDIR_OUT (WORD | literal) 
+        | REDIR_DELIMIT (WORD | literal)
+
+literal -> S_STR 
+        | D_STR
