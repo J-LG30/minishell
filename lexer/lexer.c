@@ -1,50 +1,132 @@
 #include "../inc/minishell.h"
 
-t_token *lexer(char *line)
+int	str_token(t_token *token, int type, char *line, int i)
 {
-	int i;
-	int err_flag;
-	t_token *token;
-	t_token *head;
+	int	j;
+	char quote;
+	char *new_line;
+
+	j = i + 1;
+	if (type == D_STR)
+		quote = '"';
+	if (type == S_STR)
+		quote = '\'';
+	token->type = type;
+	if (type == D_STR || type == S_STR)
+	{
+		while (line[j])
+		{
+			if (line[j] == quote)
+			{
+				token->error = 0;
+				break ;
+			}
+			j++;
+		}
+		if (token->error != 0)
+			token->error = 1;
+	}
+	if (type == WORD)
+	{
+		j = i;
+		while (line[j] && line[j] != ' ' && line[j] != '|' && line[j] != '<' && line[j] != '>')
+			j++;
+		//printf("oh%cgod\n", line[j]);
+		token->value = ft_substr(line, i, j - i);
+		//printf("%c\n", line[j]);
+		return (j);
+	}
+	else
+	{
+		token->value = ft_substr(line, i + 1, j - i - 1);
+		return (j + 1);
+	}
+	//if (token->value == NULL)
+		//do something
+		//error management
+
+}
+
+int	redirect_token(t_token *token, char *line, int i)
+{
+	int	j;
+
+	if (line[i] == '<' && line[i + 1] == '<')
+	{
+		token->type = REDIR_DELIMIT;
+		j = i + 2;
+		return (i + 2);
+	}
+	else if (line[i] == '>' && line[i + 1] == '>')
+	{
+		token->type = REDIR_APP;
+		j = i + 2;
+		return (i + 2);
+	}
+	else if (line[i] == '>')
+	{
+		token->type = REDIR_OUT;
+		j = i + 1;
+		return (i + 1);
+	}
+	else if (line[i] == '<')
+	{
+		token->type = REDIR_IN;
+		j = i + 1;
+		return (i + 1);
+	}
+	return (0);
+}
+
+//check for other whitespaces
+int	env_token(t_token *token, char *line, int i)
+{
+	int	j;
+
+	j = i + 1;
+	token->type = ENV;
+	while (line[j] && line[j] != '|' && line[j] != '<' && line[j] != '>')
+		j++;
+	token->value = ft_substr(line, i + 1, j - i - 1);
+	while (line[j] && line[j] != ' ')
+		j++;
+	return (j);
+}
+
+t_token *tokenize(char *line)
+{
+	int	i;
+	t_token	*token;
+	t_token	*head;
 
 	i = 0;
 	head = NULL;
 	while (line[i])
 	{
-		while (line[i] && line[i] == ' ')
+		//printf("%c\n", line[i]);
+		token = ft_new_token();
+		while(line[i] == ' ')
 			i++;
-		err_flag = -1;
-		token = malloc(sizeof(t_token));
-		if (!token)
-			return (0);
-		token->next = NULL;
-		if (line[i] == '|' || line[i] == '>' || line[i] == '<')
-				token->type = OPERATOR;
-		else if (line[i] == '\"')
+		if (line[i] == '"')
+			i = str_token(token, D_STR, line, i);
+		else if (line[i] == '\'')
+			i = str_token(token, S_STR, line, i);
+		else if (line[i] == '<' || line[i] == '>')
+			i = redirect_token(token, line, i);
+		else if (line[i] == '|')
 		{
-			token->type = D_STR;
-			while (line[++i])
-			{
-				if (line[i] == '\"')
-				{
-					err_flag = 0;
-					break ;
-				}
-			}
-			if (err_flag == -1)
-			{
-				write (1, "invalid str", 11);
-				exit (1);
-			}
+			token->type = PIPE;
+			i++;
 		}
+		else if (line[i] == '$')
+			i = env_token(token, line, i);
 		else
-		{
-			token->type = COMMAND;
-			while (line[i] && line[i] != ' ')
-				i++;
-		}
-		ft_tokenadd_back(&head, token);
+			i = str_token(token, WORD, line, i);
+		ft_tokenadd_back(&head, token);	
 	}
-	token->next = NULL;
+	token = ft_new_token();
+	token->type = END;
+	ft_tokenadd_back(&head, token);
+	head->prev = token;
 	return (head);
 }

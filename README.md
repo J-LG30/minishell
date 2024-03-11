@@ -23,3 +23,32 @@ https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-Writing
 
 another guide for shell syntax kinda like bash manual:
 https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
+
+Grammar rules:
+N:B word in CAPITALS are tokens w/ that token type. Words in lower case are non-terminals and words in upper case are terminals.
+expression → command
+        | command PIPE expression
+
+command → command_prefix command_word command_suffix
+
+command_prefix -> redirectin
+        | command_prefix redirectin
+        | redirectout
+        | command_prefix redirectout
+
+command_suffix -> redirectin
+        | command_suffix redirectin
+        | redirectout
+        | command_suffix redirectout
+
+redirectin -> REDIR_IN command_word
+        | REDIR_APP command_word
+
+redirectout → REDIR_OUT command_word
+        | REDIR_DELIMIT command_word
+
+command_word -> S_STR 
+        | D_STR
+        | WORD
+
+https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_03
