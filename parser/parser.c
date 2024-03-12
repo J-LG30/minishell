@@ -21,7 +21,8 @@ t_ast	*expression_two(t_token *head)
 
 }	
 
-//expression → command | command PIPE expression
+//expression → command
+//			| command PIPE expression
 t_ast	*create_expression(t_token *head)
 {
 	t_ast	*tree;
@@ -41,13 +42,13 @@ t_ast	*create_expression(t_token *head)
 	return (NULL);
 }
 
-t_ast	*parser(t_token **head)
+t_ast	*parser(t_token *head, t_mshell **)
 {
 	t_ast	*node;
 	t_ast	*ast_tree;
 
 	ast_tree = create_expression(*head);
 	if (!ast_tree)
-		return (NULL);	
+		return (NULL);
 	return (ast_tree);
 }

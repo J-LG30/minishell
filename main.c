@@ -12,14 +12,18 @@ void	wait_loop(char **env)
 {
 	char	*line;
 	t_token *token;
-	int is_pipe = 0;
+	t_shelgon *mshell;
 
+	info = malloc(sizeof(t_mshell) * 1);
+	if (!info)
+		return ;
 	while (1)
 	{
 		rl_on_new_line();
 		printf("%s minishell > ", "\U0001F975");
 		line = readline("");
 		token = tokenize(line);
+		info->list_token = token;
 		while (token)
 		{
 			// printf("%i\n", token->type);
@@ -35,7 +39,7 @@ void	wait_loop(char **env)
 		}
 		// if (!is_pipe)
 		// 		printf("single command\n");
-		//parser(&token);
+		//parser(token, &mshell);
 		check_input(line, env);
 		add_history(line);
 	}

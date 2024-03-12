@@ -1,30 +1,64 @@
 #include "../inc/minishell.h"
 
-//command → command_prefix command_word command_suffix
-
-// command_word -> WORD
-t_ast   *command_word(t_token *head)
+//command_prefix command_word command_suffix
+t_ast	*command_one(t_token *head)
 {
+	t_ast	*cmd_prefix;
+	t_ast	*cmd_word;
+	t_ast	*cmd_suffix;
 
+	cmd_prefix = command_prefix(head);
+	if (!cmd_prefix)
+		return (NULL);
+	cmd_word = command_word(head);
+	if (!cmd_word)
+	{
+		//free prefix ast
+		return (NULL);
+	}
+	cmd_suffix = command_suffix(head);
+	{
+		//free prefix and word ast
+		return (NULL);
+	}
+	if (cmd_prefix && cmd_word && cmd_suffix)
+		//connect all subtrees and return big subtree
 }
 
-// command_prefix -> redirectin
-//         | command_prefix redirectin
-//         | redirectout
-//         | command_prefix redirectout
-t_ast   *command_prefix(t_token *head)
+//command_prefix command_word
+t_ast	*command_two(t_token *head)
 {
+	t_ast	*cmd_prefix;
+	t_ast	*cmd_word;
 
+	cmd_prefix = command_prefix(head);
+	cmd_word = command_word(head);
+	if (cmd_prefix && cmd_word)
+		//connect all subtrees and return big subtree
 }
 
-// command_suffix -> redirectin
-//         | command_suffix redirectin
-//         | redirectout
-//         | command_suffix redirectout
-//         | command_word
-t_ast   *command_suffix(t_token *head)
+//command_word command_suffix
+t_ast	*command_three(t_token *head)
 {
+	t_ast	*cmd_word;
+	t_ast	*cmd_suffix;
 
+	head->current = 1;
+	cmd_word = command_word(head);
+	cmd_suffix = command_suffix(head);
+	if (cmd_word && cmd_suffix)
+		//connect all subtrees and return big subtree
+}
+
+//command_word
+t_ast	*command_four(t_token *head)
+{
+	t_ast	*cmd_word;
+
+	cmd_word = command_word(head);
+	if (cmd_word)
+		return (cmd_word);
+	return (NULL);
 }
 
 // command → command_prefix command_word command_suffix
@@ -33,5 +67,18 @@ t_ast   *command_suffix(t_token *head)
 //         | command_word
 t_ast	*create_command(t_token *head)
 {
+	t_ast	*command;
 	
+	command = command_one(head);
+	if (command)
+		return (command);
+	command = command_two(head);
+		return (command);
+	command = command_three(head);
+	if (command)
+		return (command);
+	command = command_four(head);
+	if (command)
+		return (command);
+	return (NULL);
 }
