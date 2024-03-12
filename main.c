@@ -10,11 +10,11 @@ void	check_input(char *line, char ** env)
 }
 void	wait_loop(char **env)
 {
-	char	*line;
-	t_token *token;
-	t_shelgon *mshell;
+	char		*line;
+	t_token 	*token;
+	t_shelgon	*shelgon;
 
-	info = malloc(sizeof(t_mshell) * 1);
+	info = malloc(sizeof(t_shelgon) * 1);
 	if (!info)
 		return ;
 	while (1)
@@ -39,7 +39,7 @@ void	wait_loop(char **env)
 		}
 		// if (!is_pipe)
 		// 		printf("single command\n");
-		//parser(token, &mshell);
+		//parser(token, &shelgon);
 		check_input(line, env);
 		add_history(line);
 	}
