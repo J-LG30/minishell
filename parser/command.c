@@ -22,7 +22,10 @@ t_ast	*command_one(t_token *head)
 		return (NULL);
 	}
 	if (cmd_prefix && cmd_word && cmd_suffix)
-		//connect all subtrees and return big subtree
+	{
+			//connect all subtrees and return big subtree
+	}
+	return (NULL);
 }
 
 //command_prefix command_word
@@ -34,7 +37,10 @@ t_ast	*command_two(t_token *head)
 	cmd_prefix = command_prefix(head);
 	cmd_word = command_word(head);
 	if (cmd_prefix && cmd_word)
+	{
 		//connect all subtrees and return big subtree
+	}
+	return (NULL);
 }
 
 //command_word command_suffix
@@ -43,11 +49,14 @@ t_ast	*command_three(t_token *head)
 	t_ast	*cmd_word;
 	t_ast	*cmd_suffix;
 
-	head->current = 1;
 	cmd_word = command_word(head);
 	cmd_suffix = command_suffix(head);
 	if (cmd_word && cmd_suffix)
+	{
 		//connect all subtrees and return big subtree
+
+	}
+	return (NULL);
 }
 
 //command_word
@@ -69,6 +78,7 @@ t_ast	*create_command(t_token *head)
 {
 	t_ast	*command;
 	
+	printf("entering create command function\n");
 	command = command_one(head);
 	if (command)
 		return (command);

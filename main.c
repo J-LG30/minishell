@@ -14,8 +14,8 @@ void	wait_loop(char **env)
 	t_token 	*token;
 	t_shelgon	*shelgon;
 
-	info = malloc(sizeof(t_shelgon) * 1);
-	if (!info)
+	shelgon = malloc(sizeof(t_shelgon) * 1);
+	if (!shelgon)
 		return ;
 	while (1)
 	{
@@ -23,23 +23,25 @@ void	wait_loop(char **env)
 		printf("%s minishell > ", "\U0001F975");
 		line = readline("");
 		token = tokenize(line);
-		info->list_token = token;
-		while (token)
-		{
-			// printf("%i\n", token->type);
-			// if (token->error == 1)
-			// 	printf("Error with quotes\n");
-			if (token->value != NULL)
-				printf("%s\n", token->value);
-			if (token->value == NULL)
-				printf("null str value\n");
-			// if (token->type == PIPE)
-			// 	is_pipe = 1;
-			token = token->next;
-		}
+		shelgon->list_token = token;
+		shelgon->current = token;
+		// while (token)
+		// {
+		// 	// printf("%i\n", token->type);
+		// 	// if (token->error == 1)
+		// 	// 	printf("Error with quotes\n");
+		// 	if (token->value != NULL)
+		// 		printf("%s\n", token->value);
+		// 	if (token->value == NULL)
+		// 		printf("null str value\n");
+		// 	// if (token->type == PIPE)
+		// 	// 	is_pipe = 1;
+		// 	token = token->next;
+		// }
 		// if (!is_pipe)
 		// 		printf("single command\n");
-		//parser(token, &shelgon);
+		shelgon->tree = parser(token, &shelgon);
+		print_tree(shelgon->tree);
 		check_input(line, env);
 		add_history(line);
 	}

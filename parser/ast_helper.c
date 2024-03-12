@@ -49,7 +49,7 @@ t_ast	*new_redir_node(t_token *token)
 	if (!new)
 		return (NULL);
 	new->type = token->type;
-	new->value = token->value;
+	//new->value = token->value;
 	return (new);
 }
 
@@ -72,4 +72,20 @@ t_ast	*new_end_node()
 		return (NULL);
 	new->type = END;
 	return (new);
+}
+
+void	print_tree(t_ast *root)
+{
+	t_ast	*cursor;
+	t_ast	*temp;
+
+	printf("entering print tree function\n");
+	cursor = root;
+	if (root)
+	{
+		printf("Type of node: %d\nValue of node: %s\n", cursor->type, cursor->value);
+		print_tree(root->left);
+		print_tree(root->right);
+	}
+	return ;
 }

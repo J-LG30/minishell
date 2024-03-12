@@ -39,9 +39,9 @@ typedef struct t_ast
 
 typedef	struct t_shelgon
 {
-	t_token **list_token;
+	t_token *list_token;
 	t_token	*current;
-	t_ast	**tree;
+	t_ast	*tree;
 }	t_shelgon;
 
 void	execute_command(char *command, char **env);
@@ -71,4 +71,7 @@ t_ast   *command_suffix(t_token *head);
 //redirection productions
 t_ast	*create_redirectout(t_token *head);
 t_ast	*create_redirectin(t_token *head);
+
+/*DEBUGGING*/
+void	print_tree(t_ast *root);
 
