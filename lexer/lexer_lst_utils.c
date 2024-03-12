@@ -52,7 +52,7 @@ t_token	*token_type_exists(t_token *lst, int type)
 {
 	t_token	*cursor;
 
-	cursor = *lst;
+	cursor = lst;
 	if (lst)
 	{
 		while (cursor)

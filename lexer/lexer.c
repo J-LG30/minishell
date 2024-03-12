@@ -93,6 +93,7 @@ int	env_token(t_token *token, char *line, int i)
 	return (j);
 }
 
+//version of tokenizer with only word tokens for all types of words(w or w/o quotes)
 t_token *tokenize(char *line)
 {
 	int	i;
@@ -103,15 +104,10 @@ t_token *tokenize(char *line)
 	head = NULL;
 	while (line[i])
 	{
-		//printf("%c\n", line[i]);
 		token = ft_new_token();
 		while(line[i] == ' ')
 			i++;
-		if (line[i] == '"')
-			i = str_token(token, D_STR, line, i);
-		else if (line[i] == '\'')
-			i = str_token(token, S_STR, line, i);
-		else if (line[i] == '<' || line[i] == '>')
+		if (line[i] == '<' || line[i] == '>')
 			i = redirect_token(token, line, i);
 		else if (line[i] == '|')
 		{
@@ -130,3 +126,42 @@ t_token *tokenize(char *line)
 	head->prev = token;
 	return (head);
 }
+
+//version of tokenizer with word d_str and s_str tokens
+// t_token *tokenize(char *line)
+// {
+// 	int	i;
+// 	t_token	*token;
+// 	t_token	*head;
+
+// 	i = 0;
+// 	head = NULL;
+// 	while (line[i])
+// 	{
+// 		//printf("%c\n", line[i]);
+// 		token = ft_new_token();
+// 		while(line[i] == ' ')
+// 			i++;
+// 		if (line[i] == '"')
+// 			i = str_token(token, D_STR, line, i);
+// 		else if (line[i] == '\'')
+// 			i = str_token(token, S_STR, line, i);
+// 		else if (line[i] == '<' || line[i] == '>')
+// 			i = redirect_token(token, line, i);
+// 		else if (line[i] == '|')
+// 		{
+// 			token->type = PIPE;
+// 			i++;
+// 		}
+// 		else if (line[i] == '$')
+// 			i = env_token(token, line, i);
+// 		else
+// 			i = str_token(token, WORD, line, i);
+// 		ft_tokenadd_back(&head, token);	
+// 	}
+// 	token = ft_new_token();
+// 	token->type = END;
+// 	ft_tokenadd_back(&head, token);
+// 	head->prev = token;
+// 	return (head);
+// }

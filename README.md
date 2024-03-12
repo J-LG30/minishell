@@ -30,6 +30,9 @@ expression → command
         | command PIPE expression
 
 command → command_prefix command_word command_suffix
+        | command_prefix command_word
+        | command_word command_suffix
+        | command_word
 
 command_prefix -> redirectin
         | command_prefix redirectin
@@ -37,9 +40,11 @@ command_prefix -> redirectin
         | command_prefix redirectout
 
 command_suffix -> redirectin
-        | command_suffix redirectin
+        | redirectin command_suffix
         | redirectout
-        | command_suffix redirectout
+        | redirectout command_suffix
+        | command_word command_suffix
+        | command_word
 
 redirectin -> REDIR_IN command_word
         | REDIR_APP command_word
@@ -47,8 +52,6 @@ redirectin -> REDIR_IN command_word
 redirectout → REDIR_OUT command_word
         | REDIR_DELIMIT command_word
 
-command_word -> S_STR 
-        | D_STR
-        | WORD
+command_word -> WORD
 
 https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_03
