@@ -21,7 +21,6 @@ typedef struct t_token
 {
 	struct	t_token *prev;
 	struct	t_token *next;
-	struct	t_token *current;
 	char            *value;
 	int				type;
 	int				error;
@@ -61,16 +60,17 @@ t_ast	*new_word_node(t_token *token);
 t_ast	*new_redir_node(t_token *token);
 t_ast	*new_env_node(t_token *token);
 t_ast	*new_end_node();
+t_ast	*connect_subtree(t_ast *root, t_ast *l_subtree, t_ast *r_subtree);
 
 //command productions
-t_ast	*create_command(t_token *head);
-t_ast   *command_word(t_token *head);
-t_ast   *command_prefix(t_token *head);
-t_ast   *command_suffix(t_token *head);
+t_ast	*create_command(t_token *head, t_shelgon **shelgon);
+t_ast   *command_word(t_shelgon **shelgon);
+t_ast   *command_prefix(t_shelgon **shelgon);
+t_ast   *command_suffix(t_shelgon **shelgon);
 
 //redirection productions
-t_ast	*create_redirectout(t_token *head);
-t_ast	*create_redirectin(t_token *head);
+t_ast	*create_redirectout(t_shelgon **shelgon);
+t_ast	*create_redirectin(t_shelgon **shelgon);
 
 /*DEBUGGING*/
 void	print_tree(t_ast *root);

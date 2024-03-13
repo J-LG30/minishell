@@ -45,7 +45,7 @@ t_token	*ft_new_token()
 	new->prev = NULL;
 	new->type = 0;
 	new->value = NULL;
-	new->current = NULL;
+	//new->current = NULL;
 	return (new);
 }
 

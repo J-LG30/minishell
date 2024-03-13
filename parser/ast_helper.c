@@ -79,13 +79,37 @@ void	print_tree(t_ast *root)
 	t_ast	*cursor;
 	t_ast	*temp;
 
-	printf("entering print tree function\n");
+	//printf("entering print tree function\n");
 	cursor = root;
+	//printf("root node: ");
 	if (root)
 	{
-		printf("Type of node: %d\nValue of node: %s\n", cursor->type, cursor->value);
+		printf("Type of node: %d Value of node: %s\n", cursor->type, cursor->value);
+		printf("GOING LEFT:");
 		print_tree(root->left);
+		printf("GOING RIGHT: ");
 		print_tree(root->right);
+		printf("finished subtree\n");
 	}
+	else
+		printf("(null)\n");
 	return ;
+}
+
+t_ast	*connect_subtree(t_ast *root, t_ast *l_subtree, t_ast *r_subtree)
+{
+	t_ast	*combined_tree;
+
+	if (!root)
+	{
+		combined_tree = r_subtree;
+		combined_tree->left = NULL;
+	}
+	else
+	{
+		combined_tree = root;
+		combined_tree->left = l_subtree;
+		combined_tree->right = r_subtree;
+	}
+	return (combined_tree);
 }

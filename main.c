@@ -27,7 +27,7 @@ void	wait_loop(char **env)
 		shelgon->current = token;
 		// while (token)
 		// {
-		// 	// printf("%i\n", token->type);
+		// 	printf("%i\n", token->type);
 		// 	// if (token->error == 1)
 		// 	// 	printf("Error with quotes\n");
 		// 	if (token->value != NULL)
@@ -38,8 +38,7 @@ void	wait_loop(char **env)
 		// 	// 	is_pipe = 1;
 		// 	token = token->next;
 		// }
-		// if (!is_pipe)
-		// 		printf("single command\n");
+		//printf("\n\n\n");
 		shelgon->tree = parser(token, &shelgon);
 		print_tree(shelgon->tree);
 		check_input(line, env);
