@@ -16,4 +16,3 @@ int	main(int ac, char **av, char **env)
 	}
 	print_list(arr);
 }
-
