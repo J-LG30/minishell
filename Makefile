@@ -5,7 +5,7 @@ LIB = -lreadline
 
 SRCS = main.c exec_command.c lexer/lexer.c lexer/lexer_lst_utils.c \
 		parser/parser.c parser/ast_helper.c parser/command.c parser/command_production.c \
-		parser/redirections.c
+		parser/redirections.c parser/print_ast.c
 
 OBJS = $(SRCS:.c=.o)
 

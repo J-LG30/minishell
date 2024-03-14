@@ -74,27 +74,27 @@ t_ast	*new_end_node()
 	return (new);
 }
 
-void	print_tree(t_ast *root)
-{
-	t_ast	*cursor;
-	t_ast	*temp;
+// void	print_tree(t_ast *root)
+// {
+// 	t_ast	*cursor;
+// 	t_ast	*temp;
 
-	//printf("entering print tree function\n");
-	cursor = root;
-	//printf("root node: ");
-	if (root)
-	{
-		printf("Type of node: %d Value of node: %s\n", cursor->type, cursor->value);
-		printf("GOING LEFT:");
-		print_tree(root->left);
-		printf("GOING RIGHT: ");
-		print_tree(root->right);
-		printf("finished subtree\n");
-	}
-	else
-		printf("(null)\n");
-	return ;
-}
+// 	//printf("entering print tree function\n");
+// 	cursor = root;
+// 	//printf("root node: ");
+// 	if (root)
+// 	{
+// 		printf("Type of node: %d Value of node: %s\n", cursor->type, cursor->value);
+// 		printf("GOING LEFT:");
+// 		print_tree(root->left);
+// 		printf("GOING RIGHT: ");
+// 		print_tree(root->right);
+// 		printf("finished subtree\n");
+// 	}
+// 	else
+// 		printf("(null)\n");
+// 	return ;
+// }
 
 t_ast	*connect_subtree(t_ast *root, t_ast *l_subtree, t_ast *r_subtree)
 {
