@@ -38,11 +38,15 @@ void	wait_loop(char **env)
 		// 	// 	is_pipe = 1;
 		// 	token = token->next;
 		// }
-		//printf("\n\n\n");
 		shelgon->tree = parser(token, &shelgon);
-		print_tree(shelgon->tree);
-		check_input(line, env);
-		add_history(line);
+		if (shelgon->tree)
+		{
+			print_tree(shelgon->tree);
+			check_input(line, env);
+			add_history(line);
+		}
+		else
+			printf("minishell: error with parsing\n");
 	}
 }
 

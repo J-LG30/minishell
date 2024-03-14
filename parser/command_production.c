@@ -15,10 +15,10 @@ t_ast   *command_word(t_shelgon **shelgon)
 	return (NULL);
 }
 
-// command_prefix -> redirectin
-//         | command_prefix redirectin
+// command_prefix -> redirectin command_prefix
+//         | redirectout command_prefix
+//         | redirectin 
 //         | redirectout
-//         | command_prefix redirectout
 t_ast   *command_prefix(t_shelgon **shelgon)
 {
 	t_ast	*cmd_prefix;
@@ -63,11 +63,14 @@ t_ast   *command_prefix(t_shelgon **shelgon)
 	return (cmd_prefix);
 }
 
-// command_suffix -> redirectin
-//         | command_suffix redirectin
+// command_suffix -> redirectin command_suffix
+//         | redirectout command_suffix
+//         | command_word command_suffix
+//         | redirectin
 //         | redirectout
-//         | command_suffix redirectout
 //         | command_word
+
+
 t_ast   *command_suffix(t_shelgon **shelgon)
 {
 	t_ast	*cmd_suffix;
@@ -79,6 +82,7 @@ t_ast   *command_suffix(t_shelgon **shelgon)
 	temp = (*shelgon)->current;
 	while (1)
 	{
+		printf("CURRENT TOKEN: %d\n", (*shelgon)->current->type);
 		status = 0;
 		subtree = create_redirectin(shelgon);
 		if (subtree)

@@ -34,16 +34,16 @@ command → command_prefix command_word command_suffix
         | command_word command_suffix
         | command_word
 
-command_prefix -> redirectin
-        | command_prefix redirectin
+command_prefix -> redirectin command_prefix
+        | redirectout command_prefix
+        | redirectin 
         | redirectout
-        | command_prefix redirectout
 
-command_suffix -> redirectin
-        | redirectin command_suffix
-        | redirectout
+command_suffix -> redirectin command_suffix
         | redirectout command_suffix
         | command_word command_suffix
+        | redirectin
+        | redirectout
         | command_word
 
 redirectin -> REDIR_IN command_word

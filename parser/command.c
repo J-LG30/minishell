@@ -136,6 +136,10 @@ t_ast	*command_four(t_token *head, t_shelgon **shelgon)
 	printf("entering command 4 function\n");
 
 	temp = (*shelgon)->current;
+	// printf("CURRENT TOKEN: %d\n", (*shelgon)->current->type);
+	// printf("NEXT TOKEN: %d\n", (*shelgon)->current->next->type);
+	if (temp->next->type != END && temp->next->type != PIPE)
+		return (NULL);
 	cmd_word = command_word(shelgon);
 	if (cmd_word)
 		return (cmd_word);

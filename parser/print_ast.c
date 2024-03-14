@@ -18,7 +18,7 @@ void print_node_type(int type) {
             printf("REDIR_IN");
 			break;
 		case REDIR_OUT:
-            printf("REDIR_APP");
+            printf("REDIR_OUT");
             break;
         default:
             printf("NULL");

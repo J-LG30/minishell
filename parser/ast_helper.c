@@ -49,7 +49,7 @@ t_ast	*new_redir_node(t_token *token)
 	if (!new)
 		return (NULL);
 	new->type = token->type;
-	//new->value = token->value;
+	new->value = token->next->value;
 	return (new);
 }
 
