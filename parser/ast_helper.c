@@ -96,14 +96,41 @@ t_ast	*new_end_node()
 // 	return ;
 // }
 
+t_ast	*connect_trees(t_ast *root, t_ast *subtree)
+{
+	t_ast	*new;
+
+	if (!root)
+	{
+		new = subtree;
+		new->left = NULL;
+		new->right = NULL;
+	}
+	else
+	{
+		if (subtree->type == REDIR_APP || subtree->type == REDIR_DELIMIT
+			|| subtree->type == REDIR_IN || subtree->type == REDIR_OUT)
+		{
+			new->left = subtree;
+			new->right = NULL;
+		}
+		else if (subtree->type == WORD || subtree->type == ENV)
+		{
+			new->right = subtree;
+			new->left = NULL;
+		}
+	}
+	return (new);
+}
+
 t_ast	*connect_subtree(t_ast *root, t_ast *l_subtree, t_ast *r_subtree)
 {
 	t_ast	*combined_tree;
 
 	if (!root)
 	{
-		combined_tree = r_subtree;
-		combined_tree->left = NULL;
+		combined_tree = l_subtree;
+		combined_tree->right = r_subtree;
 	}
 	else
 	{

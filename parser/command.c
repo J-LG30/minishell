@@ -38,7 +38,9 @@ t_ast	*command_one(t_token *head, t_shelgon **shelgon)
 	}
 	if (cmd_prefix && cmd_word && cmd_suffix)
 	{
-		full_cmd = connect_subtree(cmd_word, cmd_prefix, cmd_suffix);
+		//full_cmd = connect_subtree(cmd_word, cmd_prefix, cmd_suffix);
+		full_cmd = connect_trees(cmd_word, cmd_prefix);
+		full_cmd = connect_trees(cmd_word, cmd_suffix);
 		if (!full_cmd)
 		{
 			(*shelgon)->current = temp;
@@ -77,7 +79,8 @@ t_ast	*command_two(t_token *head, t_shelgon **shelgon)
 	}
 	if (cmd_prefix && cmd_word)
 	{
-		full_cmd = connect_subtree(cmd_word, cmd_prefix, NULL);
+		//full_cmd = connect_subtree(cmd_word, cmd_prefix, NULL);
+		full_cmd = connect_trees(cmd_word, cmd_prefix);
 		if (!full_cmd)
 		{
 			//free
@@ -106,16 +109,22 @@ t_ast	*command_three(t_token *head, t_shelgon **shelgon)
 		(*shelgon)->current = temp;
 		return (NULL);
 	}
-	cmd_suffix = command_suffix(shelgon);
+	printf("cmd_word good\n");
+	temp = (*shelgon)->current;
+	cmd_suffix = command_suffix(shelgon); 
 	if (!cmd_suffix)
 	{
+		printf("suffix not good\n");
 		//free word ast
 		(*shelgon)->current = temp;
 		return (NULL);
 	}
+	printf("suffix good\n");
 	if (cmd_word && cmd_suffix)
 	{
-		full_cmd = connect_subtree(cmd_word, NULL, cmd_suffix);
+		printf("command+ suffix good\n");
+		//full_cmd = connect_subtree(cmd_word, NULL, cmd_suffix);
+		full_cmd = connect_trees(cmd_word, cmd_suffix);
 		if (!full_cmd)
 		{
 			//free

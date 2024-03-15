@@ -65,3 +65,13 @@ t_token	*token_type_exists(t_token *lst, int type)
 	}
 	return (NULL);
 }
+
+int	is_token_type(t_token *token, int type)
+{
+	if (token)
+	{
+		if (token->type == type)
+			return (1);
+	}
+	return (0);
+}

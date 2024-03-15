@@ -50,6 +50,7 @@ t_token	*ft_tokenlast(t_token *lst);
 void	ft_tokenadd_back(t_token **lst, t_token *new);
 t_token	*ft_new_token();
 t_token	*token_type_exists(t_token *lst, int type);
+int		is_token_type(t_token *token, int type);
 t_token *tokenize(char *line);
 
 /* PARSER FUNCTIONS*/
@@ -74,4 +75,6 @@ t_ast	*create_redirectin(t_shelgon **shelgon);
 
 /*DEBUGGING*/
 void	print_tree(t_ast *root);
+
+t_ast	*connect_trees(t_ast *root, t_ast *subtree);
 
