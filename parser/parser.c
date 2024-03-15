@@ -10,11 +10,14 @@ t_ast	*expression_one(t_token *head, t_shelgon **shelgon)
 	t_ast	*combined_tree;
 	t_ast 	*expression_tree;
 	t_token	*temp;
+	t_ast	*root;
 
 	temp = (*shelgon)->current;
 	pipe_node = new_pipe_node();
 	if (!pipe_node)
 		return (NULL);
+	(*shelgon)->top_root = pipe_node;
+	root = (*shelgon)->top_root;
 	command_tree = create_command(head, shelgon);
 	if (!command_tree)
 	{

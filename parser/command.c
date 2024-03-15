@@ -109,7 +109,7 @@ t_ast	*command_three(t_token *head, t_shelgon **shelgon)
 		(*shelgon)->current = temp;
 		return (NULL);
 	}
-	printf("cmd_word good\n");
+	//printf("cmd_word good\n");
 	temp = (*shelgon)->current;
 	cmd_suffix = command_suffix(shelgon); 
 	if (!cmd_suffix)
@@ -119,7 +119,8 @@ t_ast	*command_three(t_token *head, t_shelgon **shelgon)
 		(*shelgon)->current = temp;
 		return (NULL);
 	}
-	printf("suffix good\n");
+
+	//printf("suffix good\n");
 	if (cmd_word && cmd_suffix)
 	{
 		printf("command+ suffix good\n");
@@ -163,7 +164,7 @@ t_ast	*command_four(t_token *head, t_shelgon **shelgon)
 //         | command_word
 t_ast	*create_command(t_token *head, t_shelgon **shelgon)
 {
-	t_ast	*command;
+	t_ast	*command_word;
 	
 	printf("entering create command function\n");
 	command = command_one(head, shelgon);

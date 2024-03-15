@@ -108,6 +108,8 @@ t_ast	*connect_trees(t_ast *root, t_ast *subtree)
 	}
 	else
 	{
+		new = root;
+		//printf("root is valid in connect trees\n");
 		if (subtree->type == REDIR_APP || subtree->type == REDIR_DELIMIT
 			|| subtree->type == REDIR_IN || subtree->type == REDIR_OUT)
 		{

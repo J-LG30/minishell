@@ -40,6 +40,7 @@ typedef	struct t_shelgon
 {
 	t_token *list_token;
 	t_token	*current;
+	t_ast	*top_root;
 	t_ast	*tree;
 }	t_shelgon;
 
