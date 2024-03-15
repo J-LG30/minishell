@@ -75,20 +75,20 @@ t_ast	*word_suffix(t_shelgon **shelgon)
 	t_token	*temp;
 
 	printf("entered word_suffix\n");
-	temp = (*shelgon)->current; // Save current token
+	temp = (*shelgon)->current;
 	cmd_word = command_word(shelgon);
 	if (!cmd_word)
 	{
-		(*shelgon)->current = temp; // Restore token position if failed
+		(*shelgon)->current = temp;
 		return (NULL);
 	}
 	temp = (*shelgon)->current;
 	suffix = command_suffix(shelgon);
 	if (!suffix)
 	{
+		//printf("234234\n");
 		(*shelgon)->current = temp;
-		//new_tree = connect_subtree(NULL, cmd_word, NULL); // No suffix, connect cmd_word only
-		new_tree = connect_trees(NULL, cmd_word);
+		return (cmd_word);
 	}
 	else
 	{
