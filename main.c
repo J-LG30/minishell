@@ -25,6 +25,7 @@ void	wait_loop(char **env)
 		token = tokenize(line);
 		shelgon->list_token = token;
 		shelgon->current = token;
+		shelgon->cmd_root = 0;
 		// while (token)
 		// {
 		// 	printf("%i\n", token->type);
@@ -38,12 +39,13 @@ void	wait_loop(char **env)
 		// 	// 	is_pipe = 1;
 		// 	token = token->next;
 		// }
-		shelgon->tree = parser(token, &shelgon);
+		parser(token, &shelgon);
 		if (shelgon->tree)
 		{
 			print_tree(shelgon->tree);
 			check_input(line, env);
 			add_history(line);
+			shelgon->tree = NULL;
 		}
 		else
 			printf("minishell: error with parsing\n");

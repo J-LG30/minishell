@@ -34,8 +34,8 @@ t_ast	*expression_one(t_token *head, t_shelgon **shelgon)
 		return (NULL);
 	}
 	//combined_tree = connect_subtree(pipe_node, command_tree, expression_tree);
-	combined_tree = connect_trees(pipe_node, command_tree);
-	combined_tree = connect_trees(pipe_node, expression_tree);
+	combined_tree = connect_subtree(pipe_node, command_tree, shelgon);
+	combined_tree = connect_subtree(pipe_node, expression_tree, shelgon);
 	if (!combined_tree)
 	{
 		//free pipe node + command_tree + expression tree

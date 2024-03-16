@@ -1,171 +1,79 @@
 #include "../inc/minishell.h"
 
-//command_prefix command_word command_suffix
+//command_word command
 t_ast	*command_one(t_token *head, t_shelgon **shelgon)
 {
-	t_ast	*cmd_prefix;
 	t_ast	*cmd_word;
-	t_ast	*cmd_suffix;
-	t_ast	*full_cmd;
-	t_token	*temp;
+	t_token	*cursor;
 
-	printf("entering command 1 function\n");
-	printf("TYPE OF CURRENT TOKEN: %d\n", (*shelgon)->current->type);
-
-	temp = (*shelgon)->current;
-	printf("1\n");
-	cmd_prefix = command_prefix(shelgon);
-	printf("2\n");
-	if (!cmd_prefix)
-	{
-		//printf("1\n");
-		(*shelgon)->current = temp;
-		return (NULL);
-	}
+	cursor = (*shelgon)->current;
 	cmd_word = command_word(shelgon);
 	if (!cmd_word)
 	{
-		//free prefix ast
-		(*shelgon)->current = temp;
+		(*shelgon)->current = cursor;
 		return (NULL);
 	}
-	cmd_suffix = command_suffix(shelgon);
-	if (!cmd_suffix)
-	{
-		//free prefix and word ast
-		(*shelgon)->current = temp;
-		return (NULL);
-	}
-	if (cmd_prefix && cmd_word && cmd_suffix)
-	{
-		//full_cmd = connect_subtree(cmd_word, cmd_prefix, cmd_suffix);
-		full_cmd = connect_trees(cmd_word, cmd_prefix);
-		full_cmd = connect_trees(cmd_word, cmd_suffix);
-		if (!full_cmd)
-		{
-			(*shelgon)->current = temp;
-			//free cmd_suffix, cmd_word, cmd_prefix
-			return (NULL);
-		}
-		return (full_cmd);
-	}
-	return (NULL);
+        // if ((*shelgon)->cmd_root == 0)
+        // {
+        //         (*shelgon)->tree = cmd_word;
+        //         (*shelgon)->cmd_root = 1;
+        // }
+        // else
+        if ((*shelgon)->cmd_root == 0)
+                (*shelgon)->cmd_root = 1;
+        cmd_word = connect_subtree((*shelgon)->tree, cmd_word, shelgon);
+        create_command(head, shelgon);
+	return (cmd_word);
 }
 
-//command_prefix command_word
+
+//redirectout command
 t_ast	*command_two(t_token *head, t_shelgon **shelgon)
 {
-	t_ast	*cmd_prefix;
-	t_ast	*cmd_word;
-	t_ast	*full_cmd;
-	t_token	*temp;
+	t_ast	*redirectout;
+	t_token	*cursor;
 
-	printf("entering command 2 function\n");
-
-	temp = (*shelgon)->current;
-	cmd_prefix = command_prefix(shelgon);
-	if (!cmd_prefix)
+	cursor = (*shelgon)->current;
+	redirectout = create_redirectout(shelgon);
+	if (!redirectout)
 	{
-		//printf("1\n");
-		(*shelgon)->current = temp;
+		(*shelgon)->current = cursor;
 		return (NULL);
 	}
-	cmd_word = command_word(shelgon);
-	if (!cmd_word)
-	{
-		//free cmd_prefix
-		(*shelgon)->current = temp;
-		return (NULL);
-	}
-	if (cmd_prefix && cmd_word)
-	{
-		//full_cmd = connect_subtree(cmd_word, cmd_prefix, NULL);
-		full_cmd = connect_trees(cmd_word, cmd_prefix);
-		if (!full_cmd)
-		{
-			//free
-			(*shelgon)->current = temp;
-			return (NULL);
-		}
-		return (full_cmd);
-	}
-	return (NULL);
+        redirectout = connect_subtree((*shelgon)->tree, redirectout, shelgon);
+        create_command(head, shelgon);
+	return (redirectout);
 }
 
-//command_word command_suffix
+//redirectin command
 t_ast	*command_three(t_token *head, t_shelgon **shelgon)
 {
-	t_ast	*cmd_word;
-	t_ast	*cmd_suffix;
-	t_ast	*full_cmd;
-	t_token	*temp;
+	t_ast	*redirectin;
+	t_token	*cursor;
 
-	printf("entering command 3 function\n");
-
-	temp = (*shelgon)->current;
-	cmd_word = command_word(shelgon);
-	if (!cmd_word)
+	cursor = (*shelgon)->current;
+	redirectin = create_redirectin(shelgon);
+	if (!redirectin)
 	{
-		(*shelgon)->current = temp;
+		(*shelgon)->current = cursor;
 		return (NULL);
 	}
-	//printf("cmd_word good\n");
-	temp = (*shelgon)->current;
-	cmd_suffix = command_suffix(shelgon); 
-	if (!cmd_suffix)
-	{
-		printf("suffix not good\n");
-		//free word ast
-		(*shelgon)->current = temp;
-		return (NULL);
-	}
-
-	//printf("suffix good\n");
-	if (cmd_word && cmd_suffix)
-	{
-		printf("command+ suffix good\n");
-		//full_cmd = connect_subtree(cmd_word, NULL, cmd_suffix);
-		full_cmd = connect_trees(cmd_word, cmd_suffix);
-		if (!full_cmd)
-		{
-			//free
-			return (NULL);
-		}
-		return (full_cmd);
-
-	}
-	return (NULL);
+        redirectin = connect_subtree((*shelgon)->tree, redirectin, shelgon);
+        create_command(head, shelgon);
+	return (redirectin);
 }
 
-//command_word
-t_ast	*command_four(t_token *head, t_shelgon **shelgon)
-{
-	t_ast	*cmd_word;
-	t_token	*temp;
-
-	printf("entering command 4 function\n");
-
-	temp = (*shelgon)->current;
-	// printf("CURRENT TOKEN: %d\n", (*shelgon)->current->type);
-	// printf("NEXT TOKEN: %d\n", (*shelgon)->current->next->type);
-	if (temp->next->type != END && temp->next->type != PIPE)
-		return (NULL);
-	cmd_word = command_word(shelgon);
-	if (cmd_word)
-		return (cmd_word);
-	printf("its null\n");
-	(*shelgon)->current = temp;
-	return (NULL);
-}
-
-// command → command_prefix command_word command_suffix
-//         | command_prefix command_word
-//         | command_word command_suffix
-//         | command_word
+// command → command_word command
+//			|redirectin command
+//          |redirectout command
 t_ast	*create_command(t_token *head, t_shelgon **shelgon)
 {
-	t_ast	*command_word;
+	t_ast	*cmd_word;
+	t_ast	*redirin;
+	t_ast	*redirout;
+	t_ast	*command;
 	
+        print_tree((*shelgon)->tree);
 	printf("entering create command function\n");
 	command = command_one(head, shelgon);
 	if (command)
@@ -176,8 +84,22 @@ t_ast	*create_command(t_token *head, t_shelgon **shelgon)
 	command = command_three(head, shelgon);
 	if (command)
 		return (command);
-	command = command_four(head, shelgon);
-	if (command)
-		return (command);
 	return (NULL);
 }
+
+// t_ast	find_cmd_root(t_token *head, t_shelgon **shelgon)
+// {
+// 	t_ast	*cmd_word;
+// 	t_token	*cursor;
+
+// 	cmd_word = NULL;
+// 	cursor = (*shelgon)->current;
+// 	while ((*shelgon)->current->type != END)
+// 	{
+// 		cmd_word = command_word(shelgon);
+// 		if (cmd_word)
+// 			break ;
+// 		(*shelgon)->current = (*shelgon)->current->next;
+// 	}
+	
+// }

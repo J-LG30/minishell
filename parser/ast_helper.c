@@ -96,49 +96,96 @@ t_ast	*new_end_node()
 // 	return ;
 // }
 
-t_ast	*connect_trees(t_ast *root, t_ast *subtree)
+t_ast	*connect_subtree(t_ast *root, t_ast *subtree, t_shelgon **shelgon)
 {
-	t_ast	*new;
+	t_ast	*temp;
 
-	if (!root)
+	if (!(*shelgon)->tree)
 	{
-		new = subtree;
-		new->left = NULL;
-		new->right = NULL;
+		(*shelgon)->tree = subtree;
+		subtree->left = NULL;
+		subtree->right = NULL;
 	}
 	else
 	{
-		new = root;
-		//printf("root is valid in connect trees\n");
-		if (subtree->type == REDIR_APP || subtree->type == REDIR_DELIMIT
-			|| subtree->type == REDIR_IN || subtree->type == REDIR_OUT)
+		if (subtree->type == WORD && (*shelgon)->cmd_root == 0)
 		{
-			new->left = subtree;
-			new->right = NULL;
+			printf("PUTTING WORD AS COMMAND\n");
+			temp = (*shelgon)->tree;
+			(*shelgon)->tree = subtree;
+			subtree->left = temp;
+			//subtree->right = NULL;
+			(*shelgon)->cmd_root = 1;
 		}
-		else if (subtree->type == WORD || subtree->type == ENV)
+		else
 		{
-			new->right = subtree;
-			new->left = NULL;
+			printf("!!!!!!!!!!!!!!!\n");
+			temp = (*shelgon)->tree;
+			if (subtree->type == REDIR_APP || subtree->type == REDIR_DELIMIT
+				|| subtree->type == REDIR_IN || subtree->type == REDIR_OUT)
+			{
+				while (temp->left)
+					temp = temp->left;
+				temp->left = subtree;
+				//temp->right = NULL;
+			}
+			else if (subtree->type == WORD || subtree->type == ENV)
+			{
+				while (temp->right)
+					temp = temp->right;
+				temp->right = subtree;
+				//temp->left = NULL;
+			}
 		}
 	}
-	return (new);
+	return ((*shelgon)->tree);
 }
 
-t_ast	*connect_subtree(t_ast *root, t_ast *l_subtree, t_ast *r_subtree)
-{
-	t_ast	*combined_tree;
+// t_ast	*connect_subtree(t_ast *root, t_ast *subtree, t_shelgon **shelgon)
+// {
+// 	t_ast	*new;
+// 	t_ast	*temp;
+// 	t_ast	*cursor;
 
-	if (!root)
-	{
-		combined_tree = l_subtree;
-		combined_tree->right = r_subtree;
-	}
-	else
-	{
-		combined_tree = root;
-		combined_tree->left = l_subtree;
-		combined_tree->right = r_subtree;
-	}
-	return (combined_tree);
-}
+// 	if (!root)
+// 	{
+// 		new = subtree;
+// 		new->left = NULL;
+// 		new->right = NULL;
+// 	}
+// 	else
+// 	{
+// 		if (subtree->type == WORD && (*shelgon)->cmd_root == 0)
+// 		{
+// 			temp = root;
+// 			root = subtree;
+// 			root->left = temp;
+// 		}
+// 		else
+// 		{
+// 			new = root;
+// 			temp = new;
+// 			//printf("root is valid in connect trees\n");
+// 			if (subtree->type == REDIR_APP || subtree->type == REDIR_DELIMIT
+// 				|| subtree->type == REDIR_IN || subtree->type == REDIR_OUT)
+// 			{
+// 				while (temp->left)
+// 					temp = temp->left;
+// 				temp->left = subtree;
+// 				//temp->left->left = NULL;
+// 				//temp->right->right = NULL;
+// 				temp->right = NULL;
+// 			}
+// 			else if (subtree->type == WORD || subtree->type == ENV)
+// 			{
+// 				while (new->right)
+// 					new = new->right;
+// 				temp->right = subtree;
+// 				//temp->left->left = NULL;
+// 				//temp->right->right = NULL;
+// 				temp->left = NULL;
+// 			}
+// 		}
+// 	}
+// 	return (new);
+// }

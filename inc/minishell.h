@@ -42,6 +42,7 @@ typedef	struct t_shelgon
 	t_token	*current;
 	t_ast	*top_root;
 	t_ast	*tree;
+	int		cmd_root;
 }	t_shelgon;
 
 void	execute_command(char *command, char **env);
@@ -62,7 +63,6 @@ t_ast	*new_word_node(t_token *token);
 t_ast	*new_redir_node(t_token *token);
 t_ast	*new_env_node(t_token *token);
 t_ast	*new_end_node();
-t_ast	*connect_subtree(t_ast *root, t_ast *l_subtree, t_ast *r_subtree);
 
 //command productions
 t_ast	*create_command(t_token *head, t_shelgon **shelgon);
@@ -77,5 +77,5 @@ t_ast	*create_redirectin(t_shelgon **shelgon);
 /*DEBUGGING*/
 void	print_tree(t_ast *root);
 
-t_ast	*connect_trees(t_ast *root, t_ast *subtree);
+t_ast	*connect_subtree(t_ast *root, t_ast *subtree, t_shelgon **shelgon);
 

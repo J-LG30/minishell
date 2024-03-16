@@ -29,22 +29,9 @@ N:B word in CAPITALS are tokens w/ that token type. Words in lower case are non-
 expression → command
         | command PIPE expression
 
-command → command_prefix command_word command_suffix
-        | command_prefix command_word
-        | command_word command_suffix
-        | command_word
-
-command_prefix -> redirectin command_prefix
-        | redirectout command_prefix
-        | redirectin 
-        | redirectout
-
-command_suffix -> redirectin command_suffix
-        | redirectout command_suffix
-        | command_word command_suffix
-        | redirectin
-        | redirectout
-        | command_word
+command → redirectin command
+        | redirectout command
+        | command_word command
 
 redirectin -> REDIR_IN command_word
         | REDIR_APP command_word
