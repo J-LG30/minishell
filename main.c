@@ -16,8 +16,14 @@ void	wait_loop(char **env)
 	while (1)
 	{
 		rl_on_new_line();
-		printf("%s minishell > ", "\U0001F975");
-		line = readline("");
+		line = readline("\U0001F975 minishell > ");
+		if (!line)
+			return ;
+		if (ft_strlen(line) == 0)
+		{
+			free(line);
+			continue ;
+		}
 		token = lexer(line);
 		while (token != NULL)
 		{

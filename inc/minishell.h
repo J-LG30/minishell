@@ -12,6 +12,20 @@
 #define S_CHAR 5
 #define ENV 6
 
+typedef struct s_exp
+{
+	struct s_exp	*prev;
+	struct s_exp	*next;
+	char			*data;
+}	t_exp;
+
+typedef struct s_env
+{
+	struct s_env	*prev;
+	struct s_env	*next;
+	char			*data;
+}	t_env;
+
 typedef struct t_token
 {
 	struct	t_token *prev;
@@ -26,3 +40,7 @@ t_token *lexer(char *line);
 /* LEXER FUNCTIONS */
 t_token	*ft_tokenlast(t_token *lst);
 void	ft_tokenadd_back(t_token **lst, t_token *new);
+
+/* ENV FUNCTIONS */
+void	print_list(t_env *arr);
+void	ms_addnode(t_env **arr, char *s);
