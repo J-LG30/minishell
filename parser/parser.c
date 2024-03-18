@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:07 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/17 15:30:04 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:11:20 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_ast	*expression_one(t_token *head, t_shelgon **shelgon)
 	if (!command_tree)
 	{
 		//free pipe node
+		free(pipe_node);
 		(*shelgon)->current = temp;
 		return (NULL);
 	}
@@ -39,6 +40,7 @@ t_ast	*expression_one(t_token *head, t_shelgon **shelgon)
 	expression_tree = create_expression(head, shelgon);
 	if (!expression_tree)
 	{
+		free
 		//free pipe and command tree
 		(*shelgon)->current = temp;
 		return (NULL);

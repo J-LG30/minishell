@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:40:09 by julietteleg       #+#    #+#             */
-/*   Updated: 2024/03/16 23:42:55 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:56:04 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,20 @@ void	free_ast(t_ast	*tree)
 		free_ast(right);
 	}
 	return ;
+}
+
+void	free_tokens(t_token *head)
+{
+	t_token *cursor;
+	cursor = head;
+	
+	while (head->type != END)
+	{
+		if (cursor->value)
+			free(cursor->value);
+		head = head->next;
+		free(cursor);
+		cursor = head;
+	}
+	free(head);
 }

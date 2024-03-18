@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/16 23:43:29 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:52:13 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_token	*ft_new_token();
 t_token	*token_type_exists(t_token *lst, int type);
 int		is_token_type(t_token *token, int type);
 t_token *tokenize(char *line);
+void	free_tokens(t_token *head);
 
 /* PARSER FUNCTIONS*/
 t_ast	*parser(t_token *head, t_shelgon **shelgon);
