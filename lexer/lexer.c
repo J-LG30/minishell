@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
+/*   Updated: 2024/03/17 10:10:43 by jle-goff         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
+//str_token with only WORD
 int	str_token(t_token *token, int type, char *line, int i)
 {
 	int	j;
@@ -7,12 +20,14 @@ int	str_token(t_token *token, int type, char *line, int i)
 	char *new_line;
 
 	j = i + 1;
-	if (type == D_STR)
+	if (line[0] == '"')
 		quote = '"';
-	if (type == S_STR)
+	else if (line[0] == '\'')
 		quote = '\'';
+	else
+		quote = 0;
 	token->type = type;
-	if (type == D_STR || type == S_STR)
+	if (quote == '"' || quote == '\'')
 	{
 		while (line[j])
 		{
@@ -46,6 +61,54 @@ int	str_token(t_token *token, int type, char *line, int i)
 		//error management
 
 }
+
+//str_token that has WORD D_STR AND S_STR
+// int	str_token(t_token *token, int type, char *line, int i)
+// {
+// 	int	j;
+// 	char quote;
+// 	char *new_line;
+
+// 	j = i + 1;
+// 	if (type == D_STR)
+// 		quote = '"';
+// 	if (type == S_STR)
+// 		quote = '\'';
+// 	token->type = type;
+// 	if (type == D_STR || type == S_STR)
+// 	{
+// 		while (line[j])
+// 		{
+// 			if (line[j] == quote)
+// 			{
+// 				token->error = 0;
+// 				break ;
+// 			}
+// 			j++;
+// 		}
+// 		if (token->error != 0)
+// 			token->error = 1;
+// 	}
+// 	if (type == WORD)
+// 	{
+// 		j = i;
+// 		while (line[j] && line[j] != ' ' && line[j] != '|' && line[j] != '<' && line[j] != '>')
+// 			j++;
+// 		//printf("oh%cgod\n", line[j]);
+// 		token->value = ft_substr(line, i, j - i);
+// 		//printf("%c\n", line[j]);
+// 		return (j);
+// 	}
+// 	else
+// 	{
+// 		token->value = ft_substr(line, i + 1, j - i - 1);
+// 		return (j + 1);
+// 	}
+// 	//if (token->value == NULL)
+// 		//do something
+// 		//error management
+
+// }
 
 int	redirect_token(t_token *token, char *line, int i)
 {
@@ -114,8 +177,8 @@ t_token *tokenize(char *line)
 			token->type = PIPE;
 			i++;
 		}
-		else if (line[i] == '$')
-			i = env_token(token, line, i);
+		// else if (line[i] == '$')
+		// 	i = env_token(token, line, i);
 		else
 			i = str_token(token, WORD, line, i);
 		ft_tokenadd_back(&head, token);	

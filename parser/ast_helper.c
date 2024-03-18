@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ast_helper.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/16 23:43:25 by jle-goff          #+#    #+#             */
+/*   Updated: 2024/03/17 15:39:38 by jle-goff         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 t_ast *new_node_init()
@@ -108,13 +120,24 @@ t_ast	*connect_subtree(t_ast *root, t_ast *subtree, t_shelgon **shelgon)
 	}
 	else
 	{
+		if ((*shelgon)->tree && subtree->type == PIPE)
+		{
+			temp = (*shelgon)->tree;
+			while (temp->right && temp->right->type == PIPE)
+				temp = temp->right;
+			temp = subtree;
+			
+		}
+		else if ((*shelgon)->tree->type == PIPE && subtree->type == WORD)
+		{
+			
+		}
 		if (subtree->type == WORD && (*shelgon)->cmd_root == 0)
 		{
 			printf("PUTTING WORD AS COMMAND\n");
 			temp = (*shelgon)->tree;
 			(*shelgon)->tree = subtree;
 			subtree->left = temp;
-			//subtree->right = NULL;
 			(*shelgon)->cmd_root = 1;
 		}
 		else
@@ -127,65 +150,14 @@ t_ast	*connect_subtree(t_ast *root, t_ast *subtree, t_shelgon **shelgon)
 				while (temp->left)
 					temp = temp->left;
 				temp->left = subtree;
-				//temp->right = NULL;
 			}
 			else if (subtree->type == WORD || subtree->type == ENV)
 			{
 				while (temp->right)
 					temp = temp->right;
 				temp->right = subtree;
-				//temp->left = NULL;
 			}
 		}
 	}
 	return ((*shelgon)->tree);
 }
-
-// t_ast	*connect_subtree(t_ast *root, t_ast *subtree, t_shelgon **shelgon)
-// {
-// 	t_ast	*new;
-// 	t_ast	*temp;
-// 	t_ast	*cursor;
-
-// 	if (!root)
-// 	{
-// 		new = subtree;
-// 		new->left = NULL;
-// 		new->right = NULL;
-// 	}
-// 	else
-// 	{
-// 		if (subtree->type == WORD && (*shelgon)->cmd_root == 0)
-// 		{
-// 			temp = root;
-// 			root = subtree;
-// 			root->left = temp;
-// 		}
-// 		else
-// 		{
-// 			new = root;
-// 			temp = new;
-// 			//printf("root is valid in connect trees\n");
-// 			if (subtree->type == REDIR_APP || subtree->type == REDIR_DELIMIT
-// 				|| subtree->type == REDIR_IN || subtree->type == REDIR_OUT)
-// 			{
-// 				while (temp->left)
-// 					temp = temp->left;
-// 				temp->left = subtree;
-// 				//temp->left->left = NULL;
-// 				//temp->right->right = NULL;
-// 				temp->right = NULL;
-// 			}
-// 			else if (subtree->type == WORD || subtree->type == ENV)
-// 			{
-// 				while (new->right)
-// 					new = new->right;
-// 				temp->right = subtree;
-// 				//temp->left->left = NULL;
-// 				//temp->right->right = NULL;
-// 				temp->left = NULL;
-// 			}
-// 		}
-// 	}
-// 	return (new);
-// }

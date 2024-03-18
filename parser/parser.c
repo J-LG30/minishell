@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/16 23:44:07 by jle-goff          #+#    #+#             */
+/*   Updated: 2024/03/17 15:30:04 by jle-goff         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 t_ast	*create_expression(t_token *head, t_shelgon **shelgon);
@@ -10,14 +22,12 @@ t_ast	*expression_one(t_token *head, t_shelgon **shelgon)
 	t_ast	*combined_tree;
 	t_ast 	*expression_tree;
 	t_token	*temp;
-	t_ast	*root;
 
 	temp = (*shelgon)->current;
 	pipe_node = new_pipe_node();
 	if (!pipe_node)
 		return (NULL);
-	(*shelgon)->top_root = pipe_node;
-	root = (*shelgon)->top_root;
+	connect_subtree((*shelgon)->tree, pipe_node, shelgon);
 	command_tree = create_command(head, shelgon);
 	if (!command_tree)
 	{

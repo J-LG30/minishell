@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
+/*   Updated: 2024/03/16 23:43:29 by jle-goff         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -63,6 +75,7 @@ t_ast	*new_word_node(t_token *token);
 t_ast	*new_redir_node(t_token *token);
 t_ast	*new_env_node(t_token *token);
 t_ast	*new_end_node();
+void	free_ast(t_ast	*tree);
 
 //command productions
 t_ast	*create_command(t_token *head, t_shelgon **shelgon);

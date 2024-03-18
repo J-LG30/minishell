@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirections.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/16 23:43:03 by jle-goff          #+#    #+#             */
+/*   Updated: 2024/03/16 23:43:04 by jle-goff         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 // redirectin -> REDIR_IN command_word
@@ -7,6 +19,15 @@ t_ast	*create_redirectin(t_shelgon **shelgon)
 	t_ast	*new;
 
 	printf("entering redirin function\n");
+	if (((*shelgon)->current->type == REDIR_IN && (*shelgon)->current->next->type != WORD)
+		|| ((*shelgon)->current->type == REDIR_APP && (*shelgon)->current->next->type != WORD))
+	{
+		//gotta free first tho
+		free_ast((*shelgon)->tree);
+		(*shelgon)->tree = NULL;
+		printf("DJShell: Syntax error near unexpected token\n");
+		return (NULL);
+	}
 
 	if (((*shelgon)->current->type == REDIR_IN && (*shelgon)->current->next->type == WORD)
 		|| ((*shelgon)->current->type == REDIR_APP && (*shelgon)->current->next->type == WORD))
@@ -26,6 +47,15 @@ t_ast	*create_redirectout(t_shelgon **shelgon)
 	t_ast	*new;
 
 	printf("entering redirout function\n");
+
+	if (((*shelgon)->current->type == REDIR_OUT && (*shelgon)->current->next->type != WORD)
+		|| ((*shelgon)->current->type == REDIR_DELIMIT && (*shelgon)->current->next->type != WORD))
+		{
+			free_ast((*shelgon)->tree);
+			(*shelgon)->tree = NULL;
+			printf("DJShell: Syntax error near unexpected token\n");
+			return (NULL);
+		}
 
 	if (((*shelgon)->current->type == REDIR_OUT && (*shelgon)->current->next->type == WORD)
 		|| ((*shelgon)->current->type == REDIR_DELIMIT && (*shelgon)->current->next->type == WORD))

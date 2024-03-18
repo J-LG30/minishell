@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/03/16 23:44:24 by jle-goff          #+#    #+#              #
+#    Updated: 2024/03/16 23:44:25 by jle-goff         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = minishell
 CC = @cc
 FLAGS = -Wall -Wextra -Werror #-fsanitize=address -static-libsan -g
@@ -5,7 +17,7 @@ LIB = -lreadline
 
 SRCS = main.c exec_command.c lexer/lexer.c lexer/lexer_lst_utils.c \
 		parser/parser.c parser/ast_helper.c parser/command.c parser/command_production.c \
-		parser/redirections.c parser/print_ast.c
+		parser/redirections.c parser/print_ast.c parser/free_ast.c
 
 OBJS = $(SRCS:.c=.o)
 

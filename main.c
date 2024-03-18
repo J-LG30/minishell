@@ -23,6 +23,7 @@ void	wait_loop(char **env)
 		printf("%s minishell > ", "\U0001F975");
 		line = readline("");
 		token = tokenize(line);
+		shelgon->tree = NULL;
 		shelgon->list_token = token;
 		shelgon->current = token;
 		shelgon->cmd_root = 0;
@@ -45,7 +46,7 @@ void	wait_loop(char **env)
 			print_tree(shelgon->tree);
 			check_input(line, env);
 			add_history(line);
-			shelgon->tree = NULL;
+			free_ast(shelgon->tree);
 		}
 		else
 			printf("minishell: error with parsing\n");
