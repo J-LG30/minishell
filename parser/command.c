@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:10 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/16 23:43:11 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:01:22 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ t_ast	*command_one(t_token *head, t_shelgon **shelgon)
         //         (*shelgon)->cmd_root = 1;
         // }
         // else
-        if ((*shelgon)->cmd_root == 0)
+        cmd_word = connect_subtree((*shelgon)->tree, cmd_word, shelgon, RIGHT);
+		print_tree((*shelgon)->tree);
+		if ((*shelgon)->cmd_root != 1)
                 (*shelgon)->cmd_root = 1;
-        cmd_word = connect_subtree((*shelgon)->tree, cmd_word, shelgon);
         create_command(head, shelgon);
 	return (cmd_word);
 }
@@ -54,7 +55,7 @@ t_ast	*command_two(t_token *head, t_shelgon **shelgon)
 		(*shelgon)->current = cursor;
 		return (NULL);
 	}
-        redirectout = connect_subtree((*shelgon)->tree, redirectout, shelgon);
+        redirectout = connect_subtree((*shelgon)->tree, redirectout, shelgon, LEFT);
         create_command(head, shelgon);
 	return (redirectout);
 }
@@ -73,7 +74,7 @@ t_ast	*command_three(t_token *head, t_shelgon **shelgon)
 		(*shelgon)->current = cursor;
 		return (NULL);
 	}
-        redirectin = connect_subtree((*shelgon)->tree, redirectin, shelgon);
+        redirectin = connect_subtree((*shelgon)->tree, redirectin, shelgon, LEFT);
         create_command(head, shelgon);
 	return (redirectin);
 }

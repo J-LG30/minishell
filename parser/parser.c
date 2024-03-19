@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:07 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/17 15:30:04 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:59:34 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ t_ast	*expression_one(t_token *head, t_shelgon **shelgon)
 	pipe_node = new_pipe_node();
 	if (!pipe_node)
 		return (NULL);
-	connect_subtree((*shelgon)->tree, pipe_node, shelgon);
+	connect_subtree((*shelgon)->tree, pipe_node, shelgon, RIGHT);
+	//(*shelgon)->tree = pipe_node;
 	command_tree = create_command(head, shelgon);
 	if (!command_tree)
 	{
@@ -36,6 +37,7 @@ t_ast	*expression_one(t_token *head, t_shelgon **shelgon)
 		return (NULL);
 	}
 	(*shelgon)->current = (*shelgon)->current->next;
+	(*shelgon)->cmd_root = 0;
 	expression_tree = create_expression(head, shelgon);
 	if (!expression_tree)
 	{
@@ -43,16 +45,16 @@ t_ast	*expression_one(t_token *head, t_shelgon **shelgon)
 		(*shelgon)->current = temp;
 		return (NULL);
 	}
-	//combined_tree = connect_subtree(pipe_node, command_tree, expression_tree);
-	combined_tree = connect_subtree(pipe_node, command_tree, shelgon);
-	combined_tree = connect_subtree(pipe_node, expression_tree, shelgon);
-	if (!combined_tree)
-	{
-		//free pipe node + command_tree + expression tree
-		(*shelgon)->current = temp;
-		return (NULL);
-	}
-	return (combined_tree);
+	// combined_tree = connect_subtree(pipe_node, command_tree, expression_tree);
+	// combined_tree = connect_subtree(pipe_node, command_tree, shelgon, LEFT);
+	// combined_tree = connect_subtree(pipe_node, expression_tree, shelgon, RIGHT);
+	// if (!combined_tree)
+	// {
+	// 	//free pipe node + command_tree + expression tree
+	// 	(*shelgon)->current = temp;
+	// 	return (NULL);
+	// }
+	return ((*shelgon)->tree);
 }
 
 //command
@@ -60,6 +62,7 @@ t_ast	*expression_two(t_token *head, t_shelgon **shelgon)
 {
 	t_ast	*command_tree;
 
+	(*shelgon)->cmd_root = 0;
 	command_tree = create_command(head, shelgon);
 	if (!command_tree)
 		return (NULL);

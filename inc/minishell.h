@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/16 23:43:29 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:57:34 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 #define REDIR_APP 9
 #define REDIR_DELIMIT 10
 #define END 11
+
+#define LEFT 20
+#define RIGHT 21
 
 typedef struct t_token
 {
@@ -90,5 +93,5 @@ t_ast	*create_redirectin(t_shelgon **shelgon);
 /*DEBUGGING*/
 void	print_tree(t_ast *root);
 
-t_ast	*connect_subtree(t_ast *root, t_ast *subtree, t_shelgon **shelgon);
+t_ast	*connect_subtree(t_ast *root, t_ast *subtree, t_shelgon **shelgon, int dir);
 

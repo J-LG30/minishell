@@ -26,7 +26,7 @@ void	wait_loop(char **env)
 		shelgon->tree = NULL;
 		shelgon->list_token = token;
 		shelgon->current = token;
-		shelgon->cmd_root = 0;
+		shelgon->cmd_root = -1;
 		// while (token)
 		// {
 		// 	printf("%i\n", token->type);
