@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:07 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/19 19:59:34 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:14:22 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_ast	*expression_one(t_token *head, t_shelgon **shelgon)
 	if (!command_tree)
 	{
 		//free pipe node
+		free(pipe_node);
 		(*shelgon)->current = temp;
 		return (NULL);
 	}
