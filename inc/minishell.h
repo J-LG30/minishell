@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/20 14:50:34 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:58:10 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fcntl.h>
 #include <sys/wait.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -33,6 +34,22 @@
 
 #define LEFT 20
 #define RIGHT 21
+
+typedef struct s_exegg
+{
+	pid_t	pid1;
+	pid_t	pid2;
+	int		fd[2];
+	int		dup_fd[2];
+	int		fd_in;
+	int		old_fd;
+	int		fd_out;
+	int		nb_arg;
+	char	*path;
+	char	*cmd;
+	char	**cpath;
+	char	**cargs;
+}			t_exegg;
 
 typedef struct t_token
 {
