@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/19 22:13:40 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:50:34 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/wait.h>
 #include <readline/readline.h>
+#include <readline/history.h>
 #include "../libft/libft.h"
 
 #define WORD 1
