@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:10 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/20 14:29:07 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:31:58 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_ast	*command_one(t_token *head, t_shelgon **shelgon)
 	t_ast	*cmd_word;
 	t_token	*cursor;
 
-        printf("in command 2\n");
+    printf("in command 1\n");
 	cursor = (*shelgon)->current;
 	cmd_word = command_word(shelgon);
 	if (!cmd_word)
@@ -33,9 +33,11 @@ t_ast	*command_one(t_token *head, t_shelgon **shelgon)
         // }
         // else
         cmd_word = connect_subtree((*shelgon)->tree, cmd_word, shelgon, RIGHT);
-		print_tree((*shelgon)->tree);
-		if ((*shelgon)->cmd_root != 1)
-                (*shelgon)->cmd_root = 1;
+		//print_tree((*shelgon)->tree);
+		//exit (0);
+		printf("%d\n", (*shelgon)->cmd_root);
+		if ((*shelgon)->cmd_root == 0 || (*shelgon)->cmd_root == 2)
+                (*shelgon)->cmd_root += 1;
         create_command(head, shelgon);
 	return (cmd_word);
 }
@@ -56,7 +58,7 @@ t_ast	*command_two(t_token *head, t_shelgon **shelgon)
 		return (NULL);
 	}
         redirectout = connect_subtree((*shelgon)->tree, redirectout, shelgon, LEFT);
-		print_tree((*shelgon)->tree);
+		//print_tree((*shelgon)->tree);
         create_command(head, shelgon);
 	return (redirectout);
 }
@@ -76,7 +78,7 @@ t_ast	*command_three(t_token *head, t_shelgon **shelgon)
 		return (NULL);
 	}
         redirectin = connect_subtree((*shelgon)->tree, redirectin, shelgon, LEFT);
-		print_tree((*shelgon)->tree);
+		//print_tree((*shelgon)->tree);
         create_command(head, shelgon);
 	return (redirectin);
 }
@@ -91,7 +93,7 @@ t_ast	*create_command(t_token *head, t_shelgon **shelgon)
 	t_ast	*redirout;
 	t_ast	*command;
 	
-        //print_tree((*shelgon)->tree);
+    print_tree((*shelgon)->tree);
 	printf("entering create command function\n");
 	command = command_one(head, shelgon);
 	if (command)

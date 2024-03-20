@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:13 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/16 23:44:14 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:58:45 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void print_node_type(int type) {
 }
 
 void print_tree_helper(t_ast *node, int level) 
-{
+{   
     for (int i = 0; i < level; i++) {
 
         printf("    ");

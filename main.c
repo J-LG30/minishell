@@ -32,7 +32,7 @@ void	wait_loop(char **env)
 		shelgon->tree = NULL;
 		shelgon->list_token = token;
 		shelgon->current = token;
-		shelgon->cmd_root = -1;
+		shelgon->top_root = NULL;
 		// while (token)
 		// {
 		// 	printf("%i\n", token->type);
@@ -49,6 +49,18 @@ void	wait_loop(char **env)
 		parser(token, &shelgon);
 		if (shelgon->tree)
 		{
+			// printf("\n\n");
+			// printf("TYPE: %d, VALUE: %s\n", shelgon->tree->type, shelgon->tree->value);
+			// printf("TYPE: %d, VALUE: %s\n", shelgon->tree->right->type, shelgon->tree->right->value);
+			// if (shelgon->tree->right->right == NULL)
+			// 	printf("NULL\n");
+			// else{
+			// 	printf("TYPE: %d, VALUE: %s\n", shelgon->tree->right->left->type, shelgon->tree->right->left->value);
+			// 	printf("TYPE: %d, VALUE: %s\n", shelgon->tree->right->right->type, shelgon->tree->right->right->value);
+			// }
+			// if (shelgon->tree->left == NULL)
+			// 	printf("NULL\n");
+			//exit(0);
 			print_tree(shelgon->tree);
 			check_input(line, env);
 			add_history(line);

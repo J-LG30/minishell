@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:25 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/20 14:34:34 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/20 19:33:53 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,28 +86,6 @@ t_ast	*new_end_node()
 	return (new);
 }
 
-// void	print_tree(t_ast *root)
-// {
-// 	t_ast	*cursor;
-// 	t_ast	*temp;
-
-// 	//printf("entering print tree function\n");
-// 	cursor = root;
-// 	//printf("root node: ");
-// 	if (root)
-// 	{
-// 		printf("Type of node: %d Value of node: %s\n", cursor->type, cursor->value);
-// 		printf("GOING LEFT:");
-// 		print_tree(root->left);
-// 		printf("GOING RIGHT: ");
-// 		print_tree(root->right);
-// 		printf("finished subtree\n");
-// 	}
-// 	else
-// 		printf("(null)\n");
-// 	return ;
-// }
-
 int	is_redir(t_ast *node)
 {
 	if (node->type == REDIR_IN || node->type == REDIR_OUT
@@ -126,30 +104,52 @@ void	add_word_tree(t_ast *subtree, t_shelgon **shelgon)
 	temp = (*shelgon)->tree;
 	if ((*shelgon)->tree->type != PIPE)
 	{
-		if ((*shelgon)->cmd_root == 0)
+		if ((*shelgon)->cmd_root == 2)
 		{	
+			printf("hhhhmmmmmm\n");
 			(*shelgon)->tree = subtree;
 			subtree->left = temp;
+			subtree->right = NULL;
 		}
-		else if ((*shelgon)->cmd_root == 1)
+		else if ((*shelgon)->cmd_root == 3)
 		{
+			printf("yippeeeee\n");
 			while (temp->right)
 				temp = temp->right;
+			printf("kiyaaaaayyy\n");
 			temp->right = subtree;
+			// printf("TYPE: %d, VALUE: %s\n", temp->type, temp->value);
+			// printf("TYPE: %d, VALUE: %s\n", temp->right->type, temp->right->value);
 		}
 	}
 	else
 	{
 		while (temp->right && temp->right->type == PIPE)
 			temp = temp->right;
+		redir_temp = temp->left;
 		if ((*shelgon)->cmd_root == 0)
 		{
-			redir_temp = temp->right;
-			temp->right = subtree;
+			temp->left = subtree;
 			subtree->left = redir_temp;	
 		}
 		else if ((*shelgon)->cmd_root == 1)
 		{
+			temp = temp->left;
+			while (temp->right)
+				temp = temp->right;
+			temp->right = subtree;
+		}
+		else if ((*shelgon)->cmd_root == 2)
+		{
+			redir_temp = temp->right;
+			temp->right = subtree;
+			if (redir_temp->type != WORD)
+				subtree->left = redir_temp;
+		}
+		else if ((*shelgon)->cmd_root == 3)
+		{
+			redir_temp = temp->left;
+			temp = temp->right;
 			while (temp->right)
 				temp = temp->right;
 			temp->right = subtree;
@@ -158,70 +158,60 @@ void	add_word_tree(t_ast *subtree, t_shelgon **shelgon)
 	
 }
 
+/*CMD_ROOT = -1 means the first WORD token encountered in the expression:
+command PIPE expression . It means to attach the word to the left of the pipe.
+
+CMD_ROOT = 0 means that it's not the first WORD token, but it is supposed to be
+the command. That means it should be the right child of the pipe, and the root of
+the other args and redirection operators.
+
+CMD_ROOT = 1 means that it's an argument following the command. It should be attached
+to the right of the command that it follows, from left to right order.*/
 t_ast	*connect_subtree(t_ast *root, t_ast *subtree, t_shelgon **shelgon, int DIR)
 {
     t_ast	*temp;
 
     if (!(*shelgon)->tree)
     {
+		printf("yop\n");
         (*shelgon)->tree = subtree;
         subtree->left = NULL;
         subtree->right = NULL;
     }
+	else if (subtree->type == WORD)
+		add_word_tree(subtree, shelgon);
     else
     {
         temp = (*shelgon)->tree;
+		while (temp->right && temp->right->type == PIPE)
+            temp = temp->right;
         if (subtree->type == PIPE)
-        {
-            while (temp->right && temp->right->type == PIPE)
-                temp = temp->right;
             temp->right = subtree;
-        }
-        else if ((*shelgon)->cmd_root == -1)
+		else
         {
-			temp = (*shelgon)->tree->left;
-            (*shelgon)->tree->left = subtree;
-			subtree->left = temp;	
-        }
-        else
-        {
-            while (temp->right && temp->right->type == PIPE)
-                temp = temp->right;
-			if (subtree->type == WORD)
-				add_word_tree(subtree, shelgon);
-            // if (subtree->type == WORD && (*shelgon)->cmd_root == 0)
-            // {
-            //     temp->right = subtree;
-            //     (*shelgon)->cmd_root = 1;
-            // }
-            else if (subtree->type == REDIR_APP || subtree->type == REDIR_DELIMIT
-                || subtree->type == REDIR_IN || subtree->type == REDIR_OUT)
-            {
-				if ((*shelgon)->cmd_root == -1)
+			if (temp->type == PIPE && ((*shelgon)->cmd_root == 2 || (*shelgon)->cmd_root == 3))
+			{
+				if (!temp->right)
 				{
-					while (temp->left)
-						temp = temp->left;
-					temp->left = subtree;
+					printf("yeet\n");
+					temp->right = subtree;
 				}
 				else
 				{
-					while (temp->right)
-						temp = temp->right;
+					temp = temp->right;
 					while (temp->left)
 						temp = temp->left;
 					temp->left = subtree;
 				}
-            }
-            // else if (subtree->type == WORD || subtree->type == ENV)
-            // {
-            //     if (temp->right)
-            //         temp = temp->right;
-            //     while (temp->right)
-            //         temp = temp->right;
-            //     temp->right = subtree;
-            // }
-        }
-    }
+			}
+			else
+			{
+				while (temp->left)
+					temp = temp->left;
+				temp->left = subtree;
+			}
+		}
+	}
     return ((*shelgon)->tree);
 }
 
