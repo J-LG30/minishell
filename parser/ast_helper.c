@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:25 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/19 22:09:43 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:34:34 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,9 @@ t_ast	*connect_subtree(t_ast *root, t_ast *subtree, t_shelgon **shelgon, int DIR
         }
         else if ((*shelgon)->cmd_root == -1)
         {
-            (*shelgon)->tree->left = subtree;	
+			temp = (*shelgon)->tree->left;
+            (*shelgon)->tree->left = subtree;
+			subtree->left = temp;	
         }
         else
         {
@@ -195,9 +197,20 @@ t_ast	*connect_subtree(t_ast *root, t_ast *subtree, t_shelgon **shelgon, int DIR
             else if (subtree->type == REDIR_APP || subtree->type == REDIR_DELIMIT
                 || subtree->type == REDIR_IN || subtree->type == REDIR_OUT)
             {
-                while (temp->left)
-                    temp = temp->left;
-                temp->left = subtree;
+				if ((*shelgon)->cmd_root == -1)
+				{
+					while (temp->left)
+						temp = temp->left;
+					temp->left = subtree;
+				}
+				else
+				{
+					while (temp->right)
+						temp = temp->right;
+					while (temp->left)
+						temp = temp->left;
+					temp->left = subtree;
+				}
             }
             // else if (subtree->type == WORD || subtree->type == ENV)
             // {

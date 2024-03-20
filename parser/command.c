@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:10 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/19 20:01:22 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:29:07 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_ast	*command_two(t_token *head, t_shelgon **shelgon)
 		return (NULL);
 	}
         redirectout = connect_subtree((*shelgon)->tree, redirectout, shelgon, LEFT);
+		print_tree((*shelgon)->tree);
         create_command(head, shelgon);
 	return (redirectout);
 }
@@ -75,6 +76,7 @@ t_ast	*command_three(t_token *head, t_shelgon **shelgon)
 		return (NULL);
 	}
         redirectin = connect_subtree((*shelgon)->tree, redirectin, shelgon, LEFT);
+		print_tree((*shelgon)->tree);
         create_command(head, shelgon);
 	return (redirectin);
 }

@@ -51,10 +51,10 @@ void	wait_loop(char **env)
 		else
 			printf("minishell: error with parsing\n");
 		free_tokens(token);
-		free(shelgon);
 	}
 	if (token)
 		free_tokens(token);
+	free(shelgon);
 }
 
 int	main(int argc, char **argv, char **env)
