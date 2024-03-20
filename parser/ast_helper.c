@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:25 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/20 19:33:53 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/20 19:37:57 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,15 +158,7 @@ void	add_word_tree(t_ast *subtree, t_shelgon **shelgon)
 	
 }
 
-/*CMD_ROOT = -1 means the first WORD token encountered in the expression:
-command PIPE expression . It means to attach the word to the left of the pipe.
 
-CMD_ROOT = 0 means that it's not the first WORD token, but it is supposed to be
-the command. That means it should be the right child of the pipe, and the root of
-the other args and redirection operators.
-
-CMD_ROOT = 1 means that it's an argument following the command. It should be attached
-to the right of the command that it follows, from left to right order.*/
 t_ast	*connect_subtree(t_ast *root, t_ast *subtree, t_shelgon **shelgon, int DIR)
 {
     t_ast	*temp;
