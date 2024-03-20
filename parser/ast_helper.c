@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:25 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/20 19:37:57 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/20 19:40:09 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ t_ast *new_node_init()
 	new->right = NULL;
 	new->type = -1;
 	new->value = NULL;
-	new->in_fd = -1;
-	new->out_fd = -1;
 	return (new);
 }
 
