@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/20 19:39:47 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/03/22 20:02:09 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,25 @@
 #define LEFT 20
 #define RIGHT 21
 
+typedef struct s_branch
+{
+	struct t_branch	*prev;
+	struct t_branch	*next;
+	char			*cmd;
+	char			*args;
+}	t_branch;
+
 typedef struct s_exegg
 {
-	pid_t	pid1;
-	pid_t	pid2;
-	int		fd[2];
-	int		dup_fd[2];
-	int		fd_in;
-	int		old_fd;
-	int		fd_out;
-	int		nb_arg;
-	char	*path;
-	char	*cmd;
-	char	**cpath;
-	char	**cargs;
+	pid_t		pid1;
+	int			fd[2];
+	int			dup_fd[2];
+	int			fd_in;
+	int			fd_out;
+	char		*in_value;
+	char		*out_value;
+	int			nb_cmds;
+	t_branch	*cmd;
 }			t_exegg;
 
 typedef struct t_token
@@ -65,7 +70,7 @@ typedef struct t_ast
 	struct t_ast	*left;
 	struct t_ast	*right;
 	int				type;
-	char			*value;	
+	char			*value;
 }	t_ast;
 
 typedef	struct t_shelgon

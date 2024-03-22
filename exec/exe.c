@@ -6,32 +6,35 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/03/19 19:09:46 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/03/22 20:00:57 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static int	ft_heredoc(char **av)
+static int	ft_heredoc(t_ast *tree, t_exegg *exe)
 {
 	int		fd[2];
 	char	*res;
 
-	pipe(fd);
-	while (1)
+	if (tree->left->type == REDIR_DELIMIT)
 	{
-		res = get_next_line(0);
-		if (!res)
-			return (-1);
-		if (ft_strncmp(av[2], res, ft_strlen(av[2])) == 0 && 
-			(ft_strlen(av[2]) == ft_strlen(res) - 1))
-			break ;
-		ft_putstr_fd(res, fd[1]);
+		pipe(fd);
+		while (1)
+		{
+			res = get_next_line(0);
+			if (!res)
+				return (-1);
+			if (ft_strncmp(av[2], res, ft_strlen(av[2])) == 0 && 
+				(ft_strlen(av[2]) == ft_strlen(res) - 1))
+				break ;
+			ft_putstr_fd(res, fd[1]);
+			free(res);
+		}
 		free(res);
+		close(fd[1]);
+		return (fd[0]);
 	}
-	free(res);
-	close(fd[1]);
-	return (fd[0]);
 }
 
 static void	which_child(t_exegg *ppx, int ac, char **av, char **envp)
@@ -73,32 +76,57 @@ static void	ft_pipe(t_exegg ppx, int ac, char **av, char **envp)
 	}
 }
 
-static void	ft_normal_open(t_exegg *ppx, int ac, char **av)
+void	find_redir(t_ast *tree, t_exegg *exe)
 {
-	ppx->fd_in = open(stdin, O_RDONLY);
-	ppx->fd_out = open(stdout, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	if (ppx->fd_in < 0 || ppx->fd_out < 0)
+	while (tree->left)
+	{
+		if (tree->left->type == REDIR_IN)
+		{
+			if (exe->fd_in != STDIN_FILENO)
+				close(exe->fd_in);
+			exe->in_value = tree->left->value;
+			exe->fd_in = open(exe->in_value, O_RDONLY);
+		}
+		else if (tree->left->type == REDIR_DELIMIT)
+		{
+			if (exe->fd_in != stdin)
+				close(exe->fd_in);
+			exe->fd_in = ft_heredoc(tree->left->value);
+		}
+		else if (tree->left->type == REDIR_OUT)
+		{
+			if (exe->fd_out != stdout)
+				close(exe->fd_out);
+			exe->out_value = tree->left->value;
+			exe->fd_out = open(exe->out_value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		}
+		else if (tree->left->type == REDIR_APP)
+		{
+			if (exe->fd_out != stdout)
+				close(exe->fd_out);
+			exe->out_value = tree->left->value;
+			exe->fd_out = open(exe->out_value, O_CREAT | O_APPEND | O_WRONLY, 0644);
+		}
+		tree->left = tree->left->left;
+	}
+	if (exe->in_value == STDIN_FILENO)
+		exe->fd_in = open(exe->in_value, O_RDONLY);
+	if (exe->out_value == STDOUT_FILENO)
+		exe->fd_out = open(exe->out_value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	if (exe->fd_in < 0 || exe->fd_out < 0)
 		ft_error(1, NULL);
 }
 
 int	exeggutor(t_ast	*tree)
 {
-	t_exegg	ppx;
+	t_exegg	exe;
 
-	ppx.nb_arg = !(ft_strncmp("here_doc", av[1], -1));
-	if ((ft_strncmp("here_doc", av[1], -1) != 0))
-		ft_normal_open(&ppx, ac, av);
-	else
-	{
-		ppx.fd_in = ft_heredoc(av);
-		if (ppx.fd_in == -1)
-			exit (1);
-		ppx.fd_out = open(av[ac - 1], O_CREAT | O_APPEND | O_WRONLY, 0644);
-	}
+	exe.in_value = STDIN_FILENO;
+	exe.out_value = STDOUT_FILENO;
 	ft_path(&ppx, envp);
-	ppx.nb_arg += 1;
-	while (++ppx.nb_arg < ac - 1)
-		ft_pipe(ppx, ac, av, envp);
-	ft_freedad(&ppx, av);
+	ft_heredoc(tree, &exe);
+	/* while (++ppx.nb_arg < ac - 1)
+		ft_pipe(ppx, ac, av, envp); */
+	//ft_freedad(&ppx, av);
 	return (0);
 }
