@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:13 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/02 18:48:21 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:00:53 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,24 @@ void print_node_type(int type) {
 }
 
 void print_tree_helper(t_ast *node, int level) 
-{   
-    for (int i = 0; i < level; i++) {
+{
+	for (int i = 0; i < level; i++) {
 
-        //printf("    ");
-    }
+	printf("    ");
+	}
 		if (node == NULL) {
-			//printf("null node\n");
+			printf("null node\n");
 			return ;
-    }
-	//printf("Type: ");
-	////print_node_type(node->type);
-   // printf(", Value: %s\n", node->value);
-    //print_tree_helper(node->left, level + 1);
-   // print_tree_helper(node->right, level + 1);
+	}
+	printf("Type: ");
+	print_node_type(node->type);
+	printf(", Value: %s\n", node->value);
+	print_tree_helper(node->left, level + 1);
+	print_tree_helper(node->right, level + 1);
 }
 
 void print_tree(t_ast *root)
 {
-   // printf("Root\n");
-   // print_tree_helper(root, 1);
+	printf("Root\n");
+	print_tree_helper(root, 1);
 }

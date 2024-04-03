@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:03 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/16 23:43:04 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:02:47 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_ast	*create_redirectin(t_shelgon **shelgon)
 {
 	t_ast	*new;
 
-	printf("entering redirin function\n");
+	//printf("entering redirin function\n");
 	if (((*shelgon)->current->type == REDIR_IN && (*shelgon)->current->next->type != WORD)
 		|| ((*shelgon)->current->type == REDIR_APP && (*shelgon)->current->next->type != WORD))
 	{
@@ -46,7 +46,7 @@ t_ast	*create_redirectout(t_shelgon **shelgon)
 {
 	t_ast	*new;
 
-	printf("entering redirout function\n");
+	//printf("entering redirout function\n");
 
 	if (((*shelgon)->current->type == REDIR_OUT && (*shelgon)->current->next->type != WORD)
 		|| ((*shelgon)->current->type == REDIR_DELIMIT && (*shelgon)->current->next->type != WORD))
