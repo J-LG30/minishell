@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:25 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/20 19:40:09 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:47:19 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,17 +104,17 @@ void	add_word_tree(t_ast *subtree, t_shelgon **shelgon)
 	{
 		if ((*shelgon)->cmd_root == 2)
 		{	
-			printf("hhhhmmmmmm\n");
+			//printf("hhhhmmmmmm\n");
 			(*shelgon)->tree = subtree;
 			subtree->left = temp;
 			subtree->right = NULL;
 		}
 		else if ((*shelgon)->cmd_root == 3)
 		{
-			printf("yippeeeee\n");
+			//printf("yippeeeee\n");
 			while (temp->right)
 				temp = temp->right;
-			printf("kiyaaaaayyy\n");
+			//printf("kiyaaaaayyy\n");
 			temp->right = subtree;
 			// printf("TYPE: %d, VALUE: %s\n", temp->type, temp->value);
 			// printf("TYPE: %d, VALUE: %s\n", temp->right->type, temp->right->value);

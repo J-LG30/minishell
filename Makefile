@@ -3,21 +3,22 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
+#    By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/16 23:44:24 by jle-goff          #+#    #+#              #
-#    Updated: 2024/03/16 23:44:25 by jle-goff         ###   ########.fr        #
+#    Updated: 2024/04/02 19:19:34 by davda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = @cc
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address -static-libsan -g
+FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g #-static-libsan
 LIB = -lreadline
 
 SRCS = main.c exec_command.c lexer/lexer.c lexer/lexer_lst_utils.c \
 		parser/parser.c parser/ast_helper.c parser/command.c parser/command_production.c \
-		parser/redirections.c parser/print_ast.c parser/free_ast.c
+		parser/redirections.c parser/print_ast.c parser/free_ast.c exec/child.c exec/exe.c \
+		exec/utils_exec.c
 
 OBJS = $(SRCS:.c=.o)
 

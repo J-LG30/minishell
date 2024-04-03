@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:07 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/20 17:12:40 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:47:53 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,19 @@ t_ast	*create_expression(t_token *head, t_shelgon **shelgon)
 	t_ast	*tree;
 	t_token *temp;
 
-	printf("TYPE OF CURRENT TOKEN: %d\n", (*shelgon)->current->type);
-	printf("in create expression\n");
+	//printf("TYPE OF CURRENT TOKEN: %d\n", (*shelgon)->current->type);
+	//printf("in create expression\n");
 	//temp = (*shelgon)->current;
 	if (token_type_exists((*shelgon)->current, PIPE))
 	{
-		printf("entering expression 1\n");
+		//printf("entering expression 1\n");
 		tree = expression_one(temp, shelgon);
 		if (tree)
 			return (tree);
 	}
 	else
 	{
-		printf("entering expression 2\n");
+		//printf("entering expression 2\n");
 		//(*shelgon)->current = temp;
 		tree = expression_two(temp, shelgon);
 		if (tree)
