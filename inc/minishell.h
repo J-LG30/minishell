@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/03 20:16:12 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 21:04:49 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ void	ft_path(t_exegg *exe);
 void	ft_error(int flg, t_exegg *exe);
 int		ft_heredoc(t_ast *tree);
 t_branch	*msh_lstlast(t_branch *lst);
+void	my_close(int fd);
 
 /*DEBUGGING*/
 void	print_tree(t_ast *root);

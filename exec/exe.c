@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/03 20:22:03 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 21:27:08 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_heredoc(t_ast *tree)
 			free(res);
 		}
 		free(res);
-		close(fd[1]);
+		my_close(fd[1]);
 		return (fd[0]);
 	}
 	return (-1);
@@ -47,7 +47,7 @@ static void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		ft_error(0, exe);
 	if (exe->pid1 == 0)
 	{
-		close(exe->fd[0]);
+		my_close(exe->fd[0]);
 		if (cmds->prev == NULL)
 			fst_child(tree, exe, cmds);
 		else if (cmds->next == NULL)
@@ -58,12 +58,12 @@ static void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	}
 	else
 		if (cmds->prev == NULL && exe->fd_in != STDIN_FILENO)
-			close(exe->fd_in);
+			my_close(exe->fd_in);
 		else if (cmds->next == NULL && exe->fd_out != STDOUT_FILENO)
-			close(exe->fd_out);
-		close(exe->fd[1]);
+			my_close(exe->fd_out);
+		my_close(exe->fd[1]);
 		if (exe->last_fd != STDIN_FILENO)
-			close(exe->last_fd);
+			my_close(exe->last_fd);
 		exe->last_fd = exe->fd[0];
 }
 

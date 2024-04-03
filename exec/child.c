@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/03 20:26:27 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 21:22:19 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,25 @@ static char	*try_cmd(char *cargs, char **cpath)
 	}
 	return (NULL);
 }
+void	my_close(int fd)
+{
+	if (fd != STDIN_FILENO && fd != STDOUT_FILENO)
+		close(fd);
+}
 
 void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	find_redir(tree, exe, cmds);
-	if (exe->fd_in != exe->fd[0] && exe->fd_in != STDIN_FILENO)
+	if (!cmds->next && exe->fd_out == exe->fd[1])
+		exe->fd_out = STDOUT_FILENO;
+	if (exe->fd_in != STDIN_FILENO)
 		exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
-	if (cmds->next)
+	if (exe->fd_out != STDOUT_FILENO)
 		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
-	close(exe->fd[0]);
-	close(cmds->pipe[0]);
-	close(exe->fd_in);
-	close(exe->fd_out);
+	if (exe->fd_in != STDIN_FILENO)
+		my_close(exe->fd_in);
+	if (exe->fd_out != STDOUT_FILENO)
+		my_close(exe->fd_out);
 	if (exe->dup_fd[0] < 0 || exe->dup_fd[1] < 0)
 		ft_error(1, exe);
 	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
@@ -62,12 +69,13 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 
 void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
+	ft_putstr_fd("last\n", 2);
 	find_redir(tree, exe, cmds);
 	if (exe->fd_out != exe->fd[1])
 		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
-	close(exe->fd[1]);
-	close(exe->fd_out);
+	my_close(exe->fd[1]);
+	my_close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)
 		ft_error(0, exe);
 	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
@@ -85,13 +93,14 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 
 void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
+	ft_putstr_fd("middle\n", 2);
 	find_redir(tree, exe, cmds);
 	exe->dup_fd[1] = dup2(exe->fd[0], STDIN_FILENO);
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
-	close(exe->fd[1]);
-	close(exe->fd[0]);
-	close(exe->fd_out);
+	my_close(exe->fd[1]);
+	my_close(exe->fd[0]);
+	my_close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)
 		ft_error(1, exe);
 	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
@@ -128,7 +137,7 @@ t_branch	*node_cmd(t_ast *tree)
 	new->full_cmd = (char **)malloc(sizeof(char *) * (j + 1));
 	if (!new)
 		return (NULL);
-	new->args = (char **)malloc(sizeof(char *) * j);
+	//new->args = (char **)malloc(sizeof(char *) * j);
 	temp = tree;
 	new->cmd = temp->value;
 	new->full_cmd[0] = new->cmd;
@@ -137,12 +146,12 @@ t_branch	*node_cmd(t_ast *tree)
 	new->ref = temp;
 	while (temp->right && temp->right->type == WORD)
 	{
-		new->args[i] = temp->right->value;
+		//new->args[i] = temp->right->value;
 		i++;
-		new->full_cmd[i] = new->args[i - 1];
+		new->full_cmd[i] = temp->right->value;
 		temp = temp->right;
 	}
-	new->args[i] = NULL;
+	//new->args[i] = NULL;
 	new->full_cmd[i + 1] = NULL;
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:34:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/02 19:37:01 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 21:04:12 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	ft_path(t_exegg *exe)
 	i = -1;
 	while (exe->cpath[++i])
 		free(exe->cpath[i]);
-	close(exe->fd[0]);
-	close(exe->fd[1]);
+	my_close(exe->fd[0]);
+	my_close(exe->fd[1]);
 	free(exe->cpath);
 	free(exe->cargs);
 	free(exe->cmd);
