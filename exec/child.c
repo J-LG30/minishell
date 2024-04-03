@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/03 15:26:12 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:01:45 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	close(exe->fd_out);
 	if (exe->dup_fd[0] < 0 || exe->dup_fd[1] < 0)
 		ft_error(1, exe);
-	printf("\ncmds -> %s\n", cmds->full_cmd[0]);
-	printf("\ncmds->args -> %s\n", cmds->args);
 	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 	if (!cmds->cmd)
 	{
@@ -72,14 +70,14 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)
 		ft_error(0, exe);
-	cmds->cmd = try_cmd(cmds->args, exe->cmdpath);
+	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 	if (!cmds->cmd)
 	{
 		//ft_freech(exe);
 		ft_putendl_fd("Error with the command", 2);
 		exit (1);
 	}
-	execve(cmds->cmd, &cmds->args, exe->pkcenter->envr);
+	execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 	ft_putendl_fd("Error executing command", 2);
 	//ft_freech(exe);
 	exit (1);
@@ -95,14 +93,14 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)
 		ft_error(1, exe);
-	cmds->cmd = try_cmd(cmds->args, exe->cmdpath);
+	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 	if (!cmds->cmd)
 	{
 		//ft_freech(exe);
 		ft_putendl_fd("Error with the command", 2);
 		exit (1);
 	}
-	execve(cmds->cmd, &cmds->args, exe->pkcenter->envr);
+	execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 	ft_putendl_fd("Error executing command", 2);
 	//ft_freech(exe);
 	exit (1);
@@ -112,23 +110,39 @@ t_branch	*node_cmd(t_ast *tree)
 {
 	t_branch	*new;
 	t_ast		*temp;
+	int			i;
+	int			j;
 
+	i = 0;
+	j = 1;
 	temp = tree;
 	new = malloc(sizeof(t_branch) * 1);
 	if (!new)
 		return (NULL);
+	while (temp->right && temp->right->type == WORD)
+	{
+		j++;
+		temp = temp->right;
+	}
+	new->full_cmd = (char **)malloc(sizeof(char *) * (j + 1));
+	if (!new)
+		return (NULL);
+	new->args = (char **)malloc(sizeof(char *) * j);
+	temp = tree;
 	new->cmd = temp->value;
+	new->full_cmd[0] = new->cmd;
 	if (tree->left && tree->left->type == REDIR_DELIMIT)
 		new->pipe[0] = ft_heredoc(tree);
-	if (temp->right && temp->right->type == WORD)
-	{
-		new->args = temp->right->value;
-		new->full_cmd = ft_split(ft_strjoin(new->cmd, new->args), ' ');
-	}
-	else
-		new->full_cmd = ft_split(new->cmd, ' ');
-	printf("im here\n");
 	new->ref = temp;
+	while (temp->right && temp->right->type == WORD)
+	{
+		new->args[i] = temp->right->value;
+		i++;
+		new->full_cmd[i] = new->args[i - 1];
+		temp = temp->right;
+	}
+	new->args[i] = NULL;
+	new->full_cmd[i + 1] = NULL;
 	return (new);
 }
 
