@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/03 14:10:22 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:13:16 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_branch
 	int				pipe[1];
 	char			*cmd;
 	char			*args;
+	char			**full_cmd;
 	struct s_ast	*ref;
 }	t_branch;
 
@@ -63,7 +64,6 @@ typedef struct s_exegg
 	char				*in_value;
 	char				*out_value;
 	char				*path;
-	char				*full_cmd;
 	char				**cmdpath;
 	struct s_branch		*cmd;
 	struct s_shelgon	*pkcenter;
