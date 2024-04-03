@@ -1,0 +1,17 @@
+Makefile
+README.md
+exec_command.c
+exec_command.o
+hello
+inc
+lexer
+libft
+main.c
+main.o
+minishell
+minishell.h
+minishell.subject.pdf
+parse_command.c
+parse_command.o
+parser
+test.c

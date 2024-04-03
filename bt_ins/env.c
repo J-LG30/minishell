@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 16:29:27 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/02 18:29:16 by davda-si         ###   ########.fr       */
+/*   Created: 2024/03/22 19:42:32 by davda-si          #+#    #+#             */
+/*   Updated: 2024/04/02 14:52:54 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/minishell.h"
 
-t_list	*ft_lstlast(t_list *lst)
+void	env(int ac, char **av, char **env)
 {
-	t_list	*next;
+	t_env	*arr;
+	int		i;
 
-	if (lst == NULL)
-		return (0);
-	next = lst -> next;
-	while (next != NULL)
+	i = 0;
+	(void)ac;
+	(void)av;
+	arr = NULL;
+	while(env[i])
 	{
-		lst = next;
-		next = lst -> next;
+		ms_addnode(&arr, env[i]);
+		i++;
 	}
-	return (lst);
+	print_list(arr);
 }
