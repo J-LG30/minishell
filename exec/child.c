@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/03 16:01:45 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:26:27 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*try_cmd(char *cargs, char **cpath)
 void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	find_redir(tree, exe, cmds);
-	if (exe->fd_in != exe->fd[0])
+	if (exe->fd_in != exe->fd[0] && exe->fd_in != STDIN_FILENO)
 		exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	if (cmds->next)
 		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
@@ -47,7 +47,7 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	if (exe->dup_fd[0] < 0 || exe->dup_fd[1] < 0)
 		ft_error(1, exe);
 	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
-	if (!cmds->cmd)
+	if (!cmds->cmd) 
 	{
 		//ft_freech(exe);
 		ft_putendl_fd("Error with the command", 2);
@@ -86,6 +86,7 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	find_redir(tree, exe, cmds);
+	exe->dup_fd[1] = dup2(exe->fd[0], STDIN_FILENO);
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
 	close(exe->fd[1]);
@@ -176,6 +177,8 @@ void	get_cmd(t_ast *tree, t_branch **cmds)
 	}
 	cur->next = NULL;
 	temp = tree;
-	if (temp->type == PIPE)
+	if (temp && temp->type == PIPE)
+	{
 		get_cmd(temp->right, cmds);
+	}
 }

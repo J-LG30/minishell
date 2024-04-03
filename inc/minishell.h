@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/03 15:44:50 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:16:12 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_exegg
 	pid_t				pid1;
 	int					fd[2];
 	int					dup_fd[2];
+	int					last_fd;
 	int					fd_in;
 	int					fd_out;
 	char				redir;

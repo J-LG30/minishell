@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/03 16:44:00 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:22:03 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ static void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		ft_error(0, exe);
 	if (exe->pid1 == 0)
 	{
-		// ft_putstr_fd(cmds->cmd, 2);
-		// ft_putstr_fd("\n", 2);
 		close(exe->fd[0]);
 		if (cmds->prev == NULL)
 			fst_child(tree, exe, cmds);
@@ -59,14 +57,14 @@ static void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 			mid_child(tree, exe, cmds);
 	}
 	else
-	{
-		waitpid(exe->pid1, NULL, 0);
-		if (exe->cmd->prev == NULL)
+		if (cmds->prev == NULL && exe->fd_in != STDIN_FILENO)
 			close(exe->fd_in);
-		else if (exe->cmd->next == NULL)
+		else if (cmds->next == NULL && exe->fd_out != STDOUT_FILENO)
 			close(exe->fd_out);
 		close(exe->fd[1]);
-	}
+		if (exe->last_fd != STDIN_FILENO)
+			close(exe->last_fd);
+		exe->last_fd = exe->fd[0];
 }
 
 static void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
@@ -110,7 +108,7 @@ void	find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		temp = temp->left;
 	}
 	if (exe->fd_in == STDIN_FILENO)
-		exe->fd_in = exe->fd[0];
+		exe->fd_in = exe->last_fd;
 	if (exe->fd_out == STDOUT_FILENO)
 		exe->fd_out = exe->fd[1];
 }
@@ -119,6 +117,7 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon)
 {
 	t_exegg		exe;
 	t_branch	*cmds;
+	int			i;
 
 	exe.fd_in = STDIN_FILENO;
 	exe.fd_out = STDOUT_FILENO;
@@ -129,11 +128,15 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon)
 	cmds = NULL;
 	get_cmd(tree, &cmds);
 	ft_path(&exe);
+	i = 0;
+	exe.last_fd = 0;
 	while (cmds)
 	{
 		ft_pipe(tree, &exe, cmds);
 		cmds = cmds->next;
+		i++;
 	}
-	//ft_freedad(&exe, av);
+	while (--i >= 0)
+		wait(NULL);
 	return (0);
 }

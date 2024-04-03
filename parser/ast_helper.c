@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:25 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/03 14:20:10 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:56:47 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	add_word_tree(t_ast *subtree, t_shelgon **shelgon)
 		if ((*shelgon)->cmd_root == 0)
 		{
 			temp->left = subtree;
-			subtree->left = redir_temp;	
+			subtree->left = redir_temp;
 		}
 		else if ((*shelgon)->cmd_root == 1)
 		{
@@ -141,7 +141,7 @@ void	add_word_tree(t_ast *subtree, t_shelgon **shelgon)
 		{
 			redir_temp = temp->right;
 			temp->right = subtree;
-			if (redir_temp->type != WORD)
+			if (redir_temp && redir_temp->type != WORD)
 				subtree->left = redir_temp;
 		}
 		else if ((*shelgon)->cmd_root == 3)
