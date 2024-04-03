@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/03 12:08:35 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:44:00 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	}
 	else
 	{
+		waitpid(exe->pid1, NULL, 0);
 		if (exe->cmd->prev == NULL)
 			close(exe->fd_in);
 		else if (exe->cmd->next == NULL)
