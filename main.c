@@ -24,14 +24,9 @@ static void	save_env(char **envp, t_shelgon *shelgon)
 
 void	wait_loop(char **env)
 {
-<<<<<<< HEAD
-	char	*line;
-	t_token *token;
-=======
 	char		*line;
 	t_token 	*token;
 	t_shelgon	*shelgon;
->>>>>>> tmp
 
 	shelgon = malloc(sizeof(t_shelgon) * 1);
 	if (!shelgon)
@@ -41,25 +36,6 @@ void	wait_loop(char **env)
 		printf("env[%d] = %s\n", i, shelgon->envr[i]); */
 	while (1)
 	{
-<<<<<<< HEAD
-		rl_on_new_line();
-		line = readline("\U0001F975 minishell > ");
-		if (!line)
-			return ;
-		if (ft_strlen(line) == 0)
-		{
-			free(line);
-			continue ;
-		}
-		token = lexer(line);
-		while (token != NULL)
-		{
-			printf("%i\n", token->type);
-			token = token->next;
-		}
-		check_input(line, env);
-		add_history(line);
-=======
 		//rl_on_new_line();
 		line = readline("\U0001F975 minishell > ");
 		if (!line)
@@ -110,7 +86,6 @@ void	wait_loop(char **env)
 		else
 			printf("minishell: error with parsing\n");
 		free_tokens(token);
->>>>>>> tmp
 	}
 	if (token)
 		free_tokens(token);

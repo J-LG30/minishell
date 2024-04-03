@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/02 19:39:04 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:10:22 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,36 +20,25 @@
 #include <readline/history.h>
 #include "../libft/libft.h"
 
-#define COMMAND 1
-#define OPERATOR 2
-#define S_STR 3
-#define D_STR 4
-#define S_CHAR 5
-#define ENV 6
+#define WORD 1
+#define S_STR 2
+#define D_STR 3
+#define S_CHAR 4
+#define ENV 5
+#define PIPE 6
+#define REDIR_IN 7
+#define REDIR_OUT 8
+#define REDIR_APP 9
+#define REDIR_DELIMIT 10
+#define END 11
 
-<<<<<<< HEAD
-typedef struct s_exp
-{
-	struct s_exp	*prev;
-	struct s_exp	*next;
-	char			*data;
-}	t_exp;
+#define LEFT 20
+#define RIGHT 21
 
 typedef struct s_env
 {
 	struct s_env	*prev;
 	struct s_env	*next;
-	char			*data;
-}	t_env;
-=======
-#define LEFT 20
-#define RIGHT 21
->>>>>>> tmp
-
-typedef struct s_env
-{
-	struct t_env	*prev;
-	struct t_env	*next;
 	char			*vr;
 }	t_env;
 
@@ -76,7 +65,7 @@ typedef struct s_exegg
 	char				*path;
 	char				*full_cmd;
 	char				**cmdpath;
-	t_branch			*cmd;
+	struct s_branch		*cmd;
 	struct s_shelgon	*pkcenter;
 }			t_exegg;
 
@@ -86,41 +75,32 @@ typedef struct s_token
 	struct	s_token *next;
 	char            *value;
 	int				type;
+	int				error;
 }   t_token;
 
-<<<<<<< HEAD
-=======
 typedef struct s_ast
 {
 	struct s_ast	*left;
 	struct s_ast	*right;
 	int				type;
-	char			*value;
+	char			*value;	
 }	t_ast;
 
 typedef	struct s_shelgon
 {
-	t_token *list_token;
-	t_token	*current;
-	t_ast	*top_root;
-	t_ast	*tree;
-	char	**envr;
+	struct s_token	*list_token;
+	struct s_token	*current;
+	struct s_ast	*top_root;
+	struct s_ast	*tree;
+	char			**envr;
 	int		cmd_root;
 }	t_shelgon;
 
->>>>>>> tmp
 void	execute_command(char *command, char **env);
-t_token *lexer(char *line);
 
 /* LEXER FUNCTIONS */
 t_token	*ft_tokenlast(t_token *lst);
 void	ft_tokenadd_back(t_token **lst, t_token *new);
-<<<<<<< HEAD
-
-/* ENV FUNCTIONS */
-void	print_list(t_env *arr);
-void	ms_addnode(t_env **arr, char *s);
-=======
 t_token	*ft_new_token();
 t_token	*token_type_exists(t_token *lst, int type);
 int		is_token_type(t_token *token, int type);
@@ -164,5 +144,3 @@ t_branch	*msh_lstlast(t_branch *lst);
 void	print_tree(t_ast *root);
 
 t_ast	*connect_subtree(t_ast *root, t_ast *subtree, t_shelgon **shelgon, int dir);
-
->>>>>>> tmp

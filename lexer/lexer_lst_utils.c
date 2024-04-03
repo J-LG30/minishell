@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_lst_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:32 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/16 23:43:32 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:19:07 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,10 @@ void	ft_tokenadd_back(t_token **lst, t_token *new)
 		else
 		{
 			cursor = ft_tokenlast(*lst);
-			cursor -> next = new;
+			cursor->next = new;
+			new->prev = cursor;
 		}
 	}
-<<<<<<< HEAD
-=======
 }
 
 t_token	*ft_new_token()
@@ -87,5 +86,4 @@ int	is_token_type(t_token *token, int type)
 			return (1);
 	}
 	return (0);
->>>>>>> tmp
 }

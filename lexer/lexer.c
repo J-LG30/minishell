@@ -3,23 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/03/17 10:10:43 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:18:37 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-<<<<<<< HEAD
-t_token *lexer(char *line)
-{
-	int i;
-	int err_flag;
-	t_token *token;
-	t_token *head;
-=======
 //str_token with only WORD
 int	str_token(t_token *token, int type, char *line, int i)
 {
@@ -170,61 +162,31 @@ t_token *tokenize(char *line)
 	int	i;
 	t_token	*token;
 	t_token	*head;
->>>>>>> tmp
 
 	i = 0;
 	head = NULL;
 	while (line[i])
 	{
-<<<<<<< HEAD
-		while (line[i] && line[i] == ' ')
-			i++;
-		err_flag = -1;
-		token = malloc(sizeof(t_token));
-		if (!token)
-			return (0);
-		token->next = NULL;
-		if (line[i] == '|' || line[i] == '>' || line[i] == '<')
-				token->type = OPERATOR;
-		else if (line[i] == '\"')
-=======
 		token = ft_new_token();
 		while(line[i] == ' ')
 			i++;
 		if (line[i] == '<' || line[i] == '>')
 			i = redirect_token(token, line, i);
 		else if (line[i] == '|')
->>>>>>> tmp
 		{
-			token->type = D_STR;
-			while (line[++i])
-			{
-				if (line[i] == '\"')
-				{
-					err_flag = 0;
-					break ;
-				}
-			}
-			if (err_flag == -1)
-			{
-				write (1, "invalid str", 11);
-				exit (1);
-			}
+			token->type = PIPE;
+			i++;
 		}
-<<<<<<< HEAD
-=======
 		// else if (line[i] == '$')
 		// 	i = env_token(token, line, i);
->>>>>>> tmp
 		else
-		{
-			token->type = COMMAND;
-			while (line[i] && line[i] != ' ')
-				i++;
-		}
-		ft_tokenadd_back(&head, token);
+			i = str_token(token, WORD, line, i);
+		ft_tokenadd_back(&head, token);	
 	}
-	token->next = NULL;
+	token = ft_new_token();
+	token->type = END;
+	ft_tokenadd_back(&head, token);
+	head->prev = token;
 	return (head);
 }
 
