@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:25 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/04 15:05:17 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/04 15:07:29 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,6 @@ void	add_word_tree(t_ast *subtree, t_shelgon **shelgon)
 			if (redir_temp && redir_temp->type != WORD)
 				subtree->left = redir_temp;
 				//printf("3\n");
-			}
 			//printf("4\n");
 		}
 		else if ((*shelgon)->cmd_root == 3)
