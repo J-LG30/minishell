@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/03 17:00:08 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/04 15:56:04 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,9 +187,12 @@ t_token *tokenize(char *line)
 		}
 		// else if (line[i] == '$')
 		// 	i = env_token(token, line, i);
-		else
+		else if (line[i])
 			i = str_token(token, WORD, line, i);
-		ft_tokenadd_back(&head, token);	
+		if (token->type == 0)
+			free(token);
+		else
+			ft_tokenadd_back(&head, token);
 	}
 	token = ft_new_token();
 	token->type = END;
