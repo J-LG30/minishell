@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/03 14:18:37 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:00:08 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+// int	unclosed_quotes(t_token *token)
+// {
+// 	int	flag;
+
+// 	flag = 0;
+// 	if (token->value)
+// }
 
 //str_token with only WORD
 int	str_token(t_token *token, int type, char *line, int i)

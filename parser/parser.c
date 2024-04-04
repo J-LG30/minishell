@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:07 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/02 18:47:53 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:59:53 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ t_ast	*expression_one(t_token *head, t_shelgon **shelgon)
 	t_ast	*combined_tree;
 	t_ast 	*expression_tree;
 	t_token	*temp;
+	static int	i = 0;
 
+	i++;
 	(*shelgon)->cmd_root = 0;
 	temp = (*shelgon)->current;
 	pipe_node = new_pipe_node();
