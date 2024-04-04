@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/03 21:22:19 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/04 15:01:41 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 
 void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
-	ft_putstr_fd("last\n", 2);
 	find_redir(tree, exe, cmds);
 	if (exe->fd_out != exe->fd[1])
 		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
@@ -81,13 +80,11 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 	if (!cmds->cmd)
 	{
-		//ft_freech(exe);
 		ft_putendl_fd("Error with the command", 2);
 		exit (1);
 	}
 	execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 	ft_putendl_fd("Error executing command", 2);
-	//ft_freech(exe);
 	exit (1);
 }
 
