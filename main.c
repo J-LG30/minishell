@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/04 15:39:44 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:01:37 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,15 @@ void	wait_loop(char **env)
 			free (line);
 			continue ;
 		}
-		token = tokenize(line);
+		token = tokenize(line, shelgon);
+		if (!token)
+			continue ;
 		temp = token;
-		while (temp)
-		{
-			printf("Token type: %i\n Token value: %s\n", temp->type, temp->value);
-			temp = temp->next;	
-		}
+		// while (temp)
+		// {
+		// 	printf("Token type: %i\n Token value: %s\n Error?: %d\n", temp->type, temp->value, temp->error);
+		// 	temp = temp->next;	
+		// }
 		shelgon->tree = NULL;
 		shelgon->list_token = token;
 		shelgon->current = token;
@@ -71,7 +73,7 @@ void	wait_loop(char **env)
 		parser(token, &shelgon);
 		if (shelgon->tree)
 		{
-			//print_tree(shelgon->tree);
+			print_tree(shelgon->tree);
 			exeggutor(shelgon->tree, shelgon);
 			add_history(line);
 			free_ast(shelgon->tree);

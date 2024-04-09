@@ -6,68 +6,82 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/04 15:56:04 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:59:58 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-// int	unclosed_quotes(t_token *token)
-// {
-// 	int	flag;
-
-// 	flag = 0;
-// 	if (token->value)
-// }
-
 //str_token with only WORD
 int	str_token(t_token *token, int type, char *line, int i)
 {
-	int	j;
-	char quote;
-	char *new_line;
+	int		j;
+	int		quote;
+	char	*new_line;
 
-	j = i + 1;
-	if (line[0] == '"')
-		quote = '"';
-	else if (line[0] == '\'')
-		quote = '\'';
+	//printf("%c\n", line[i]);
+	// j = i + 1;
+	if (line[i] == '"')
+		quote = 2;
+	else if (line[i] == '\'')
+		quote = 1;
 	else
 		quote = 0;
-	token->type = type;
-	if (quote == '"' || quote == '\'')
-	{
-		while (line[j])
+	// if (quote == '"' || quote == '\'')
+	// {
+	// 	while (line[j])
+	// 	{
+	// 		if (line[j] == quote)
+	// 		{
+	// 			token->error = 0;
+	// 			break ;
+	// 		}
+	// 		j++;
+	// 	}
+	// 	if (token->error != 0)
+	// 		token->error = 1;
+	// }
+	token->type = WORD;
+	// if (type == WORD)
+	//{
+		j = i + 1;
+		printf("%i\n", quote);
+		if (quote == 2)
 		{
-			if (line[j] == quote)
-			{
-				token->error = 0;
-				break ;
-			}
-			j++;
+			while (line[j] && line[j] != '"')
+				j++;
+			//printf("%c\n", line[j]);
 		}
-		if (token->error != 0)
-			token->error = 1;
-	}
-	if (type == WORD)
-	{
-		j = i;
-		while (line[j] && line[j] != ' ' && line[j] != '|' && line[j] != '<' && line[j] != '>')
-			j++;
+		if (quote == 1)
+		{
+			while (line[j] && line[j] != '\'')
+				j++;
+		}
+		if (quote == 0)
+		{
+			j--;
+			while (line[j] && line[j] != ' ' && line[j] != '|' && line[j] != '<' && line[j] != '>')
+				j++;
+		}
 		//printf("oh%cgod\n", line[j]);
-		token->value = ft_substr(line, i, j - i);
-		//printf("%c\n", line[j]);
-		return (j);
-	}
-	else
-	{
-		token->value = ft_substr(line, i + 1, j - i - 1);
-		return (j + 1);
-	}
+		token->value = ft_substr(line, i, j - i + 1);
+		// if (unclosed_quotes(token))
+		// 	token->error = 1;
+		// else
+		// 	token->error = 0;
+		if (quote == 2 || quote == 1)
+			return (j + 1);
+		else
+			return (j);
+	//}
+	// else
+	// {
+	// 	token->value = ft_substr(line, i + 1, j - i - 1);
+	// 	return (j + 1);
+	// }
 	//if (token->value == NULL)
 		//do something
 		//error management
-
 }
 
 //str_token that has WORD D_STR AND S_STR
@@ -165,7 +179,7 @@ int	env_token(t_token *token, char *line, int i)
 }
 
 //version of tokenizer with only word tokens for all types of words(w or w/o quotes)
-t_token *tokenize(char *line)
+t_token *tokenize(char *line, t_shelgon *shelgon)
 {
 	int	i;
 	t_token	*token;
@@ -185,14 +199,14 @@ t_token *tokenize(char *line)
 			token->type = PIPE;
 			i++;
 		}
-		// else if (line[i] == '$')
-		// 	i = env_token(token, line, i);
 		else if (line[i])
+		{
 			i = str_token(token, WORD, line, i);
-		if (token->type == 0)
-			free(token);
-		else
-			ft_tokenadd_back(&head, token);
+			if (handle_word(token, shelgon))
+				return (NULL);
+		}
+		ft_tokenadd_back(&head, token);
+		//printf("1\n");
 	}
 	token = ft_new_token();
 	token->type = END;

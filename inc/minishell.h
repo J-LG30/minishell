@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/03 21:04:49 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:02:04 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef	struct s_shelgon
 	struct s_ast	*top_root;
 	struct s_ast	*tree;
 	char			**envr;
-	int		cmd_root;
+	int				cmd_root;
 }	t_shelgon;
 
 void	execute_command(char *command, char **env);
@@ -105,8 +105,12 @@ void	ft_tokenadd_back(t_token **lst, t_token *new);
 t_token	*ft_new_token();
 t_token	*token_type_exists(t_token *lst, int type);
 int		is_token_type(t_token *token, int type);
-t_token *tokenize(char *line);
+t_token *tokenize(char *line, t_shelgon *shelgon);
 void	free_tokens(t_token *head);
+int		unclosed_quotes(t_token *token);
+void	rm_quotes(t_token *token);
+void	expansion(t_token *token, t_shelgon *shelgon);
+int		handle_word(t_token *token, t_shelgon *shelgon);
 
 /* PARSER FUNCTIONS*/
 t_ast	*parser(t_token *head, t_shelgon **shelgon);
