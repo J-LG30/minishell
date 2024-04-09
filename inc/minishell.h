@@ -6,7 +6,11 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/04/09 17:02:04 by jle-goff         ###   ########.fr       */
+=======
+/*   Updated: 2024/04/04 19:44:47 by davda-si         ###   ########.fr       */
+>>>>>>> 7229627c906bc5ff12e52a4ef3331924b0794210
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +148,7 @@ void	ft_path(t_exegg *exe);
 void	ft_error(int flg, t_exegg *exe);
 int		ft_heredoc(t_ast *tree);
 t_branch	*msh_lstlast(t_branch *lst);
-void	my_close(int fd);
+/* void	my_close(int fd); */
 
 /*DEBUGGING*/
 void	print_tree(t_ast *root);
