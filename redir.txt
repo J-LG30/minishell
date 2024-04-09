@@ -15,7 +15,6 @@ lol
 main.c
 main.o
 Makefile
-minired.txt
 minishell
 minishell.h
 minishell.subject.pdf

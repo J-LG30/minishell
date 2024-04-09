@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/04 15:01:41 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:00:00 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ static char	*try_cmd(char *cargs, char **cpath)
 	}
 	return (NULL);
 }
-void	my_close(int fd)
+/* void	close(int fd)
 {
 	if (fd != STDIN_FILENO && fd != STDOUT_FILENO)
 		close(fd);
-}
+} */
 
 void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
@@ -48,11 +48,16 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	if (exe->fd_out != STDOUT_FILENO)
 		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
 	if (exe->fd_in != STDIN_FILENO)
-		my_close(exe->fd_in);
+		close(exe->fd_in);
 	if (exe->fd_out != STDOUT_FILENO)
-		my_close(exe->fd_out);
-	if (exe->dup_fd[0] < 0 || exe->dup_fd[1] < 0)
+		close(exe->fd_out);
+	if ((exe->dup_fd[0] < 0 || exe->dup_fd[1] < 0))
+	{
+		ft_putnbr_fd(exe->dup_fd[0], 2);
+		ft_putnbr_fd(exe->dup_fd[1], 2);
+		ft_putendl_fd("first\n", 2);
 		ft_error(1, exe);
+	}
 	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 	if (!cmds->cmd) 
 	{
@@ -70,13 +75,19 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	find_redir(tree, exe, cmds);
+	/* if (!cmds->next && exe->fd_out == exe->fd[1])
+		exe->fd_out = STDOUT_FILENO; */
 	if (exe->fd_out != exe->fd[1])
 		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
-	my_close(exe->fd[1]);
-	my_close(exe->fd_out);
+	close(exe->fd[1]);
+	if (exe->fd_out != STDOUT_FILENO)
+		close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)
+	{
+		ft_putendl_fd("end\n", 2);
 		ft_error(0, exe);
+	}
 	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 	if (!cmds->cmd)
 	{
@@ -90,14 +101,11 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 
 void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
-	ft_putstr_fd("middle\n", 2);
 	find_redir(tree, exe, cmds);
-	exe->dup_fd[1] = dup2(exe->fd[0], STDIN_FILENO);
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
-	my_close(exe->fd[1]);
-	my_close(exe->fd[0]);
-	my_close(exe->fd_out);
+	close(exe->fd_in);
+	close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)
 		ft_error(1, exe);
 	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
@@ -132,23 +140,22 @@ t_branch	*node_cmd(t_ast *tree)
 		temp = temp->right;
 	}
 	new->full_cmd = (char **)malloc(sizeof(char *) * (j + 1));
-	if (!new)
+	if (!new->full_cmd)
 		return (NULL);
-	//new->args = (char **)malloc(sizeof(char *) * j);
 	temp = tree;
-	new->cmd = temp->value;
-	new->full_cmd[0] = new->cmd;
-	if (tree->left && tree->left->type == REDIR_DELIMIT)
+	if (temp->type == WORD)
+		new->cmd = temp->value;
+	if ((temp && (temp->type == REDIR_DELIMIT)) || (temp->left) && (temp->left->type == REDIR_DELIMIT))
 		new->pipe[0] = ft_heredoc(tree);
+	if (new->cmd)
+		new->full_cmd[0] = new->cmd;
 	new->ref = temp;
 	while (temp->right && temp->right->type == WORD)
 	{
-		//new->args[i] = temp->right->value;
 		i++;
 		new->full_cmd[i] = temp->right->value;
 		temp = temp->right;
 	}
-	//new->args[i] = NULL;
 	new->full_cmd[i + 1] = NULL;
 	return (new);
 }
@@ -162,7 +169,7 @@ void	get_cmd(t_ast *tree, t_branch **cmds)
 	temp = tree;
 	while (temp)
 	{
-		if (temp && temp->type == WORD)
+		if (temp && temp->type == WORD || temp->type == REDIR_DELIMIT)
 		{
 			cur = node_cmd(temp);
 			if (!cur)
@@ -179,12 +186,10 @@ void	get_cmd(t_ast *tree, t_branch **cmds)
 				cur->prev = last;
 			}
 		}
-			temp = temp->left;
+		temp = temp->left;
 	}
 	cur->next = NULL;
 	temp = tree;
 	if (temp && temp->type == PIPE)
-	{
 		get_cmd(temp->right, cmds);
-	}
 }

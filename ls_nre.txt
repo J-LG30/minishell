@@ -12,6 +12,8 @@ inc
 lexer
 libft
 lol
+ls_nre.txt
+ls.txt
 main.c
 main.o
 Makefile

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/04 15:39:44 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:54:59 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	wait_loop(char **env)
 		}
 		token = tokenize(line);
 		temp = token;
-		while (temp)
+		/* while (temp)
 		{
 			printf("Token type: %i\n Token value: %s\n", temp->type, temp->value);
 			temp = temp->next;	
-		}
+		} */
 		shelgon->tree = NULL;
 		shelgon->list_token = token;
 		shelgon->current = token;
