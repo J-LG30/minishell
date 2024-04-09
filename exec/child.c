@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/09 18:00:00 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:07:32 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,17 @@ static char	*try_cmd(char *cargs, char **cpath)
 	com = NULL;
 	while (cpath[i])
 	{
+		ft_putendl_fd("trying the cmd", 2);
+		ft_putendl_fd("cpath[i]", 2);
+		ft_putendl_fd(cpath[i], 2);
 		temp = ft_strjoin(cpath[i], "/");
+		ft_putendl_fd("temp", 2);
+		ft_putendl_fd(temp, 2);
+		ft_putendl_fd("cargs", 2);
+		ft_putendl_fd(cargs, 2);
 		com = ft_strjoin(temp, cargs);
+		ft_putendl_fd("com", 2);
+		ft_putendl_fd(com, 2);
 		free(temp);
 		if (access(com, F_OK) == 0)
 			return (com);
@@ -157,6 +166,8 @@ t_branch	*node_cmd(t_ast *tree)
 		temp = temp->right;
 	}
 	new->full_cmd[i + 1] = NULL;
+	printf("Command: %s\n", new->cmd);
+	printf("Arg: %s\n", new->full_cmd[1]);
 	return (new);
 }
 

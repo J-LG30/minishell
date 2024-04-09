@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/09 17:59:58 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:36:59 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ int	str_token(t_token *token, int type, char *line, int i)
 	// if (type == WORD)
 	//{
 		j = i + 1;
-		printf("%i\n", quote);
+		//printf("%c\n", line[j]);
 		if (quote == 2)
 		{
 			while (line[j] && line[j] != '"')
 				j++;
 			//printf("%c\n", line[j]);
+			j++;
 		}
 		if (quote == 1)
 		{
@@ -59,12 +60,15 @@ int	str_token(t_token *token, int type, char *line, int i)
 		}
 		if (quote == 0)
 		{
-			j--;
+			j = i;
 			while (line[j] && line[j] != ' ' && line[j] != '|' && line[j] != '<' && line[j] != '>')
 				j++;
+			token->value = ft_substr(line, i, j - i);
+			j++;
 		}
 		//printf("oh%cgod\n", line[j]);
-		token->value = ft_substr(line, i, j - i + 1);
+		else
+			token->value = ft_substr(line, i, j - i);
 		// if (unclosed_quotes(token))
 		// 	token->error = 1;
 		// else

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/04/09 18:01:37 by jle-goff         ###   ########.fr       */
-=======
-/*   Updated: 2024/04/09 17:54:59 by davda-si         ###   ########.fr       */
->>>>>>> 7229627c906bc5ff12e52a4ef3331924b0794210
+/*   Updated: 2024/04/09 18:32:54 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +44,8 @@ void	wait_loop(char **env)
 	if (!shelgon)
 		return ;
 	save_env(env, shelgon);
-	/* for (int i = 0; shelgon->envr[i]; i++)
-		printf("env[%d] = %s\n", i, shelgon->envr[i]); */
+	// for (int i = 0; shelgon->envr[i]; i++)
+	// 	printf("env[%d] = %s\n", i, shelgon->envr[i]);
 	while (1)
 	{
 		rl_on_new_line();
@@ -65,19 +61,11 @@ void	wait_loop(char **env)
 		if (!token)
 			continue ;
 		temp = token;
-<<<<<<< HEAD
-		// while (temp)
-		// {
-		// 	printf("Token type: %i\n Token value: %s\n Error?: %d\n", temp->type, temp->value, temp->error);
-		// 	temp = temp->next;	
-		// }
-=======
-		/* while (temp)
+		while (temp)
 		{
 			printf("Token type: %i\n Token value: %s\n", temp->type, temp->value);
 			temp = temp->next;	
-		} */
->>>>>>> 7229627c906bc5ff12e52a4ef3331924b0794210
+		}
 		shelgon->tree = NULL;
 		shelgon->list_token = token;
 		shelgon->current = token;
