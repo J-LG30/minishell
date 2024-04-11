@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/09 19:07:32 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:31:52 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ static char	*try_cmd(char *cargs, char **cpath)
 	com = NULL;
 	while (cpath[i])
 	{
-		ft_putendl_fd("trying the cmd", 2);
-		ft_putendl_fd("cpath[i]", 2);
-		ft_putendl_fd(cpath[i], 2);
+		// ft_putendl_fd("trying the cmd", 2);
+		// ft_putendl_fd("cpath[i]", 2);
+		//ft_putendl_fd(cpath[i], 2);
 		temp = ft_strjoin(cpath[i], "/");
-		ft_putendl_fd("temp", 2);
-		ft_putendl_fd(temp, 2);
-		ft_putendl_fd("cargs", 2);
-		ft_putendl_fd(cargs, 2);
+		//ft_putendl_fd("temp", 2);
+		//ft_putendl_fd(temp, 2);
+		//ft_putendl_fd("cargs", 2);
+		//ft_putendl_fd(cargs, 2);
 		com = ft_strjoin(temp, cargs);
-		ft_putendl_fd("com", 2);
-		ft_putendl_fd(com, 2);
+		//ft_putendl_fd("com", 2);
+		//ft_putendl_fd(com, 2);
 		free(temp);
 		if (access(com, F_OK) == 0)
 			return (com);
