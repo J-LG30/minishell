@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:32:23 by davda-si          #+#    #+#             */
-/*   Updated: 2024/03/13 19:11:13 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:05:56 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_env	*ms_lstadd(char *s)
 	node = malloc(sizeof(t_env));
 	if (node)
 	{
-		node->data = ft_strdup(s);
+		node->vr = ft_strdup(s);
 		node->next = NULL;
 		node->prev = NULL;
 	}
@@ -61,7 +61,7 @@ void	print_list(t_env *arr)
 {
 	while (arr)
 	{
-		printf("%s\n", arr->data);
+		printf("%s\n", arr->vr);
 		arr = arr->next;
 	}
 }

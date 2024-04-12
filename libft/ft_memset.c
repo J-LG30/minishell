@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:18:40 by jle-goff          #+#    #+#             */
-/*   Updated: 2023/04/24 17:14:27 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:10:42 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ void	*ft_memset(void *s, int c, size_t n)
 	return (s);
 }
 
-/*
-int main(void)
+/* int main(void)
 {
 	char str[50] = "What is up dudes.";
 	printf("\nBefore memset(): %s\n", str);
@@ -39,5 +38,4 @@ int main(void)
   
 	printf("After memset():  %s", str);
 	return 0;
-}
-*/
+} */

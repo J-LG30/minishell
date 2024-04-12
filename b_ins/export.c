@@ -6,12 +6,12 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/03/15 16:47:03 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:07:34 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
+/* 
 int	main(int ac, char **av, char **envp)
 {
 	t_exp	*exp;
@@ -40,4 +40,4 @@ int	main(int ac, char **av, char **envp)
 		else
 			ms_addnode(&exp, av[1]);
 	}
-}
+} */

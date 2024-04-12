@@ -6,19 +6,19 @@
 #    By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/09 14:34:52 by davda-si         ###   ########.fr        #
+#    Updated: 2024/04/12 13:50:55 by davda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = @cc
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g #-static-libsan
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g #-static-libsan
 LIB = -lreadline
 
 SRCS = main.c lexer/lexer.c lexer/lexer_lst_utils.c \
 		parser/parser.c parser/ast_helper.c parser/command.c parser/command_production.c \
 		parser/redirections.c parser/print_ast.c parser/free_ast.c exec/child.c exec/exe.c \
-		exec/utils_exec.c
+		exec/utils_exec.c b_ins/env.c b_ins/env_utils.c b_ins/export.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -35,7 +35,7 @@ $(LIBFT_A):
 
 clean:
 	@rm -f $(OBJS)
-	@$(MAKE) --no-print-directory -C $(LIBFT_DIR) clean
+	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
 
 fclean: clean
 	@rm -f $(NAME)

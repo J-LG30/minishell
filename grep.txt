@@ -1,1 +1,17 @@
-hello
+// int	unclosed_quotes(t_token *token)
+// 	int	flag;
+int	str_token(t_token *token, int type, char *line, int i)
+	int	j;
+		//printf("oh%cgod\n", line[j]);
+		//printf("%c\n", line[j]);
+// int	str_token(t_token *token, int type, char *line, int i)
+// 	int	j;
+// 		//printf("oh%cgod\n", line[j]);
+// 		//printf("%c\n", line[j]);
+int	redirect_token(t_token *token, char *line, int i)
+	int	j;
+int	env_token(t_token *token, char *line, int i)
+	int	j;
+	int	i;
+// 	int	i;
+// 		//printf("%c\n", line[i]);

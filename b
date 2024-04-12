@@ -1,6 +1,8 @@
 a
 a.out
+a_test
 a.txt
+b
 b_ins
 b.txt
 cat
@@ -13,6 +15,7 @@ inc
 lexer
 libft
 lol
+ls
 ls_nre.txt
 ls.txt
 main.c
@@ -25,6 +28,13 @@ minishell.subject.pdf
 "new
 oi
 out
+out2
+outf
+outfile_lol
+out_final
+output
+output2
+output_lol
 parse_command.c
 parse_command.o
 parser

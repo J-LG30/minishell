@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/04 19:44:47 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:06:33 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_branch
 	struct s_branch	*next;
 	int				pipe[1];
 	char			*cmd;
-	char			**args;
+	char			*ar;
 	char			**full_cmd;
 	struct s_ast	*ref;
 }	t_branch;
@@ -135,12 +135,17 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
 void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
 void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
 t_branch	*node_cmd(t_ast *tree);
-void	get_cmd(t_ast *tree, t_branch **cmds);
+int	get_cmd(t_ast *tree, t_branch **cmds);
 void	ft_path(t_exegg *exe);
 void	ft_error(int flg, t_exegg *exe);
 int		ft_heredoc(t_ast *tree);
 t_branch	*msh_lstlast(t_branch *lst);
-/* void	my_close(int fd); */
+
+//Built in functions
+void	env(char **envp, int flg);
+void	print_list(t_env *arr);
+void	ms_addnode(t_env **arr, char *s);
+t_env	*ms_lstadd(char *s);
 
 /*DEBUGGING*/
 void	print_tree(t_ast *root);

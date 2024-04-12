@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/09 16:14:56 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:09:23 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_heredoc(t_ast *tree)
 	t_ast	*temp;
 
 	temp = tree;
-	if (temp->type == REDIR_DELIMIT)
+	if (temp && temp->type == REDIR_DELIMIT)
 	{
 		pipe(fd);
 		while (1)
@@ -78,7 +78,6 @@ static void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	else
 	{
 		ft_putendl_fd("pipefd is not valid.", 2);
-		//ft_freedad(&exe);
 		exit (1);
 	}
 }
@@ -88,6 +87,8 @@ void	find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	t_ast	*temp;
 
 	temp = tree;
+	exe->fd_in = STDIN_FILENO;
+	exe->fd_out = STDOUT_FILENO;
 	while (temp)
 	{
 		if (temp->left && temp->left->type == REDIR_IN)
@@ -97,10 +98,13 @@ void	find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds)
 			exe->in_value = temp->left->value;
 			exe->fd_in = open(exe->in_value, O_RDONLY);
 		}
-		else if (temp->left && temp->left->type == REDIR_DELIMIT)
-			exe->fd_in = exe->cmd->pipe[0];
+		else if (temp && temp->left && temp->left->type == REDIR_DELIMIT)
+			exe->fd_in = cmds->pipe[0];
 		else if (temp->left && temp->left->type == REDIR_OUT)
-			exe->fd_out = open(temp->left->value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		{
+			exe->out_value = temp->left->value;
+			exe->fd_out = open(exe->out_value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		}
 		else if (temp->left && temp->left->type == REDIR_APP)
 		{
 			exe->out_value = temp->left->value;
@@ -127,14 +131,18 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon)
 	exe.redir = 'n';
 	exe.pkcenter = shelgon;
 	cmds = NULL;
-	get_cmd(tree, &cmds);
+	exe.last_fd = 0;
+	if (get_cmd(tree, &cmds))
+		return (1);
 	ft_path(&exe);
 	i = 0;
-	exe.last_fd = 0;
 	while (cmds)
 	{
 		if (!cmds->cmd)
-			break ;
+		{
+			printf("died\n");
+			exit(1) ;
+		}
 		ft_pipe(tree, &exe, cmds);
 		cmds = cmds->next;
 		i++;
