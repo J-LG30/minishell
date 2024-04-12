@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/12 18:56:10 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:06:13 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,11 @@ void	wait_loop(char **env)
 		if (!token)
 			continue ;
 		temp = token;
-<<<<<<< HEAD
-		 while (temp)
-		{
-			printf("Token type: %i\n Token value: %s\n", temp->type, temp->value);
-			temp = temp->next;	
-		} 
-=======
 		while (temp)
 		{
 			printf("Token type: %i\n Token value: %s\n", temp->type, temp->value);
 			temp = temp->next;	
 		}
->>>>>>> 418682d4537e940a5129869c07cb83e77646a8ba
 		shelgon->tree = NULL;
 		shelgon->list_token = token;
 		shelgon->current = token;

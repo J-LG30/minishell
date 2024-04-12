@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/12 18:52:25 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:07:24 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,10 +161,10 @@ t_branch	*node_cmd(t_ast *tree)
 	return (new);
 }
 
-static void	only_redir(t_ast *tree, t_exegg *exe)
+/* static void	only_redir(t_ast *tree, t_exegg *exe)
 {
 	
-}
+} */
 
 int	get_cmd(t_ast *tree, t_branch **cmds)
 {
@@ -198,7 +198,7 @@ int	get_cmd(t_ast *tree, t_branch **cmds)
 		else if (temp && temp->type == REDIR_DELIMIT)
 			cur->pipe[0] = ft_heredoc(temp);
 		else if (temp && temp->type != PIPE && temp->type != WORD && temp->type != REDIR_DELIMIT)
-			only_redir(tree, exe);
+			/* only_redir(tree, ); */printf("yo\n");
 		temp = temp->left;
 	}
 	cur->next = NULL;
