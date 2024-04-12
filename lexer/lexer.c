@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/09 19:36:59 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:08:53 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	str_token(t_token *token, int type, char *line, int i)
 			while (line[j] && line[j] != ' ' && line[j] != '|' && line[j] != '<' && line[j] != '>')
 				j++;
 			token->value = ft_substr(line, i, j - i);
-			j++;
 		}
 		//printf("oh%cgod\n", line[j]);
 		else
@@ -191,7 +190,7 @@ t_token *tokenize(char *line, t_shelgon *shelgon)
 
 	i = 0;
 	head = NULL;
-	while (line[i])
+	while (line && line[i])
 	{
 		token = ft_new_token();
 		while(line[i] == ' ')

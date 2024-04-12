@@ -6,11 +6,12 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/12 18:53:28 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:56:10 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/minishell.h"
+int	g_sig;
 
 static void	save_env(char **envp, t_shelgon *shelgon)
 {
@@ -50,6 +51,12 @@ void	wait_loop(char **env)
 	{
 		rl_on_new_line();
 		line = readline("\U0001F975 minishell > ");
+		if (g_sig == SIGINT)
+		{
+			g_sig = 0;
+			free(line);
+			continue ;
+		}
 		if (!line)
 			exit(1);
 		if (ft_strlen(line) == 0)
@@ -97,6 +104,13 @@ void	wait_loop(char **env)
 
 int	main(int argc, char **argv, char **env)
 {
+	struct sigaction	sa;
+	
+	sa.sa_handler = &sig_handler;
+	sa.sa_flags = 0;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGINT, &sa, NULL);
+	
 	(void)argc;
 	(void)argv;
 	wait_loop(env);
