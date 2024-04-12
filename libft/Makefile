@@ -6,7 +6,7 @@
 #    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 19:50:18 by jle-goff          #+#    #+#              #
-#    Updated: 2023/04/24 19:49:44 by jle-goff         ###   ########.fr        #
+#    Updated: 2024/04/09 14:37:12 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS = ft_atoi.c ft_itoa.c ft_memccpy.c ft_split.c ft_strnstr.c \
        ft_toupper.c ft_isdigit.c ft_putchar_fd.c ft_strlcpy.c \
        ft_islower.c ft_putendl_fd.c ft_strlen.c ft_isprint.c \
        ft_putnbr_fd.c ft_strmapi.c ft_isupper.c \
-       ft_putstr_fd.c ft_strncmp.c
+       ft_putstr_fd.c ft_strncmp.c ft_strcmp.c ft_strndup.c \
 
 
 BSRCS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \

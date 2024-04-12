@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/11 13:41:42 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:53:28 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	wait_loop(char **env)
 	if (!shelgon)
 		return ;
 	save_env(env, shelgon);
-	/* for (int i = 0; shelgon->envr[i]; i++)
-		printf("env[%d] = %s\n", i, shelgon->envr[i]); */
+	// for (int i = 0; shelgon->envr[i]; i++)
+	// 	printf("env[%d] = %s\n", i, shelgon->envr[i]);
 	while (1)
 	{
 		rl_on_new_line();
@@ -57,13 +57,23 @@ void	wait_loop(char **env)
 			free (line);
 			continue ;
 		}
-		token = tokenize(line);
+		token = tokenize(line, shelgon);
+		if (!token)
+			continue ;
 		temp = token;
+<<<<<<< HEAD
 		 while (temp)
 		{
 			printf("Token type: %i\n Token value: %s\n", temp->type, temp->value);
 			temp = temp->next;	
 		} 
+=======
+		while (temp)
+		{
+			printf("Token type: %i\n Token value: %s\n", temp->type, temp->value);
+			temp = temp->next;	
+		}
+>>>>>>> 418682d4537e940a5129869c07cb83e77646a8ba
 		shelgon->tree = NULL;
 		shelgon->list_token = token;
 		shelgon->current = token;
