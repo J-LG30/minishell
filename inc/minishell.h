@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/09 18:09:43 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:38:36 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 #include <sys/wait.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <signal.h>
 #include "../libft/libft.h"
+
+#define XOPEN_SOURCE 700
 
 #define WORD 1
 #define S_STR 2
@@ -34,6 +37,8 @@
 
 #define LEFT 20
 #define RIGHT 21
+
+extern int g_sig;
 
 typedef struct s_env
 {
@@ -121,6 +126,9 @@ t_ast	*new_redir_node(t_token *token);
 t_ast	*new_env_node(t_token *token);
 t_ast	*new_end_node();
 void	free_ast(t_ast	*tree);
+
+/*SIGNALS*/
+void	sig_handler(int sig);
 
 //command productions
 t_ast	*create_command(t_token *head, t_shelgon **shelgon);
