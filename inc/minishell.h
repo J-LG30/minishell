@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/15 16:10:14 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:37:13 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_exegg
 	char				*out_value;
 	char				*path;
 	char				**cmdpath;
+	struct s_env		*env;
 	struct s_branch		*cmd;
 	struct s_shelgon	*pkcenter;
 }			t_exegg;
@@ -141,14 +142,14 @@ t_ast	*create_redirectout(t_shelgon **shelgon);
 t_ast	*create_redirectin(t_shelgon **shelgon);
 
 //executor functions
-int		exeggutor(t_ast	*tree, t_shelgon *shelgon);
+int		exeggutor(t_ast	*tree, t_shelgon *shelgon, t_env *env);
 void	find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds);
 void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
 void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
 void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
 t_branch	*node_cmd(t_ast *tree);
 int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe);
-void	ft_path(t_exegg *exe);
+void	ft_path(t_exegg *exe, t_env *env);
 void	ft_error(int flg, t_exegg *exe);
 int		ft_heredoc(t_ast *tree);
 t_branch	*msh_lstlast(t_branch *lst);
@@ -156,7 +157,7 @@ char	**ms_split(char const *s, char c);
 char	*try_cmd(char *cargs, char **cpath);
 
 //Built in functions
-void	env(char **envp, int flg);
+t_env	*env(char **envp, int flg);
 void	print_list(t_env *arr);
 void	ms_addnode(t_env **arr, char *s);
 t_env	*ms_lstadd(char *s);

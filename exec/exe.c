@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/15 16:15:44 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:08:19 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ static void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 
 static void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
-	/* if (cmds->prev == NULL && cmds->next == NULL)
-		only_child(tree, exe, cmds); */
 	if (pipe(exe->fd) == 0)
 		which_child(tree, exe, cmds);
 	else
@@ -136,23 +134,23 @@ void	find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	exe->fd_out = STDOUT_FILENO;
 	while (temp)
 	{
-		if (temp->left && temp->left->type == REDIR_IN)
+		if (temp && temp->type == REDIR_IN)
 		{
 			if (exe->fd_in != STDIN_FILENO)
 				close(exe->fd_in);
 			exe->in_value = temp->left->value;
 			exe->fd_in = open(exe->in_value, O_RDONLY);
 		}
-		else if (temp && temp->left && temp->left->type == REDIR_DELIMIT)
+		else if (temp && temp->type == REDIR_DELIMIT)
 			exe->fd_in = cmds->pipe[0];
-		else if (temp->left && temp->left->type == REDIR_OUT)
+		else if (temp && temp->type == REDIR_OUT)
 		{
-			exe->out_value = temp->left->value;
+			exe->out_value = temp->value;
 			exe->fd_out = open(exe->out_value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		}
-		else if (temp->left && temp->left->type == REDIR_APP)
+		else if (temp && temp->type == REDIR_APP)
 		{
-			exe->out_value = temp->left->value;
+			exe->out_value = temp->value;
 			exe->fd_out = open(exe->out_value, O_CREAT | O_APPEND | O_WRONLY, 0644);
 		}
 		temp = temp->left;
@@ -189,7 +187,7 @@ static void	only_redir(t_ast *tree, t_exegg *exe)
 	}
 }
 
-int	exeggutor(t_ast *tree, t_shelgon *shelgon)
+int	exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env)
 {
 	t_exegg		exe;
 	t_branch	*cmds;
@@ -210,15 +208,10 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon)
 		only_redir(tree, &exe);
 		return (1);
 	}
-	ft_path(&exe);
+	ft_path(&exe, env);
 	i = 0;
 	while (cmds)
 	{
-		if (!cmds->cmd)
-		{
-			printf("died\n");
-			exit(1) ;
-		}
 		ft_pipe(tree, &exe, cmds);
 		cmds = cmds->next;
 		i++;
