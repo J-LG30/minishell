@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/15 16:35:57 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:12:33 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,8 @@ void	wait_loop(char **env)
 	// 	printf("env[%d] = %s\n", i, shelgon->envr[i]);
 	while (1)
 	{
-		write(1, "debug\n", 7);
 		rl_on_new_line();
-		if (g_sig == SIGINT)
-		{
-			write(1, "debug2\n", 8);
-			g_sig = 0;
-			free(line);
-			continue ;
-		}
 		line = readline("\U0001F975 minishell > ");
-		if (g_sig == SIGINT)
-		{
-			write(1, "debug2\n", 8);
-			g_sig = 0;
-			free(line);
-			continue ;
-		}
 		if (!line)
 			exit(1);
 		if (ft_strlen(line) == 0)
@@ -106,11 +91,16 @@ void	wait_loop(char **env)
 int	main(int argc, char **argv, char **env)
 {
 	struct sigaction	sa;
+	struct sigaction	act;
 	
 	sa.sa_handler = &sig_handler;
 	sa.sa_flags = 0;
+	act.sa_handler = SIG_IGN;
+	act.sa_flags = 0;
+	sigemptyset(&act.sa_mask);
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &act, NULL);
 	
 	(void)argc;
 	(void)argv;
