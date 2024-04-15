@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:40:09 by julietteleg       #+#    #+#             */
-/*   Updated: 2024/03/18 14:56:04 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:21:40 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,17 @@ void	free_tokens(t_token *head)
 	t_token *cursor;
 	cursor = head;
 	
-	while (head->type != END)
+	if (!head)
+		return ;
+	while (head && head->type != END && head->next)
 	{
 		if (cursor->value)
 			free(cursor->value);
 		head = head->next;
-		free(cursor);
+		if (cursor)
+			free(cursor);
 		cursor = head;
 	}
-	free(head);
+	if (head)
+		free(head);
 }
