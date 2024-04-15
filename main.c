@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/12 19:06:13 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:35:57 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,19 @@ void	wait_loop(char **env)
 	// 	printf("env[%d] = %s\n", i, shelgon->envr[i]);
 	while (1)
 	{
+		write(1, "debug\n", 7);
 		rl_on_new_line();
+		if (g_sig == SIGINT)
+		{
+			write(1, "debug2\n", 8);
+			g_sig = 0;
+			free(line);
+			continue ;
+		}
 		line = readline("\U0001F975 minishell > ");
 		if (g_sig == SIGINT)
 		{
+			write(1, "debug2\n", 8);
 			g_sig = 0;
 			free(line);
 			continue ;
@@ -106,4 +115,5 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	wait_loop(env);
+	return (0);
 }

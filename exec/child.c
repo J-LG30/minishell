@@ -6,13 +6,13 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/12 19:07:24 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:51:34 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static char	*try_cmd(char *cargs, char **cpath)
+char	*try_cmd(char *cargs, char **cpath)
 {
 	char	*temp;
 	char	*com;
@@ -45,7 +45,7 @@ static char	*try_cmd(char *cargs, char **cpath)
 void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	find_redir(cmds->ref, exe, cmds);
-	if (!cmds->next && exe->fd_out == exe->fd[1])
+	if ((!cmds->next) && exe->fd_out == exe->fd[1])
 		exe->fd_out = STDOUT_FILENO;
 	if (exe->fd_in != STDIN_FILENO)
 		exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
@@ -161,12 +161,7 @@ t_branch	*node_cmd(t_ast *tree)
 	return (new);
 }
 
-/* static void	only_redir(t_ast *tree, t_exegg *exe)
-{
-	
-} */
-
-int	get_cmd(t_ast *tree, t_branch **cmds)
+int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 {
 	t_ast		*temp;
 	t_branch	*cur;
@@ -175,6 +170,7 @@ int	get_cmd(t_ast *tree, t_branch **cmds)
 
 	temp = tree;
 	no_cmds = 1;
+	cur = NULL;
 	while (temp)
 	{
 		if (temp && temp->type == WORD)
@@ -196,14 +192,23 @@ int	get_cmd(t_ast *tree, t_branch **cmds)
 		no_cmds = 0;
 		}
 		else if (temp && temp->type == REDIR_DELIMIT)
+		{
+			cur = malloc(sizeof(t_branch) * 1);
+			if (!cur)
+				return (0);
 			cur->pipe[0] = ft_heredoc(temp);
-		else if (temp && temp->type != PIPE && temp->type != WORD && temp->type != REDIR_DELIMIT)
-			/* only_redir(tree, ); */printf("yo\n");
+		}
+		/* else if (temp && temp->type != PIPE && temp->type != WORD && temp->type != REDIR_DELIMIT)
+		{
+			printf("got in\n");
+			
+		} */
 		temp = temp->left;
 	}
-	cur->next = NULL;
+	if (cur)
+		cur->next = NULL;
 	temp = tree;
 	if (temp && temp->type == PIPE)
-		get_cmd(temp->right, cmds);
+		get_cmd(temp->right, cmds, exe);
 	return (no_cmds);
 }

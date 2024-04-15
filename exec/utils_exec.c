@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:34:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/09 18:56:27 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:10:52 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,76 @@ t_branch	*msh_lstlast(t_branch *lst)
 	printf("f\n");
 	
 	return (lst);
+}
+
+static char	**freethem(char **ss)
+{
+	int	i;
+
+	i = 0;
+	while (ss[i] != 0)
+	{
+		free(ss[i]);
+		i++;
+	}
+	free(ss);
+	return (NULL);
+}
+
+static int	words(char const *s, char c)
+{
+	int	i;
+	int	wc;
+
+	i = 0;
+	wc = 0;
+	while (s[i])
+	{
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+			wc++;
+		i++;
+	}
+	return (wc);
+}
+
+static int	letters(char const *s, char c, int i)
+{
+	int	l;
+
+	l = 0;
+	while (s[i] != c && s[i] != '\0')
+	{
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+			break ;
+		i++;
+		l++;
+	}
+	return (l + 1);
+}
+
+char	**ms_split(char const *s, char c)
+{
+	int		i;
+	int		st;
+	char	**res;
+
+	res = malloc(sizeof(char *) * (words(s, c) + 1));
+	if (!res)
+		return (NULL);
+	st = 0;
+	i = 0;
+	while (s[st] != '\0')
+	{
+		if (s[st] != c)
+		{
+			res[i] = ft_substr(s, st, letters(s, c, st));
+			if (!res[i++])
+				return (freethem(res));
+			st += letters(s, c, st);
+		}
+		else
+			st++;
+	}
+	res[i] = NULL;
+	return (res);
 }
