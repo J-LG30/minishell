@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:32:23 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/12 16:05:56 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:59:32 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static t_env	*ms_lstlast(t_env *lst)
 	}
 	return (ls);
 }
-
 
 t_env	*ms_lstadd(char *s)
 {

@@ -6,27 +6,27 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:34:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/15 16:10:52 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:43:10 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char	*get_path(char **envp)
+static char	*get_path(t_env	*env)
 {
-	int		i;
 	char	*res;
+	t_env	*temp;
 
-	i = 0;
 	res = NULL;
-	while (envp[i])
+	temp = env;
+	while (temp)
 	{
-		if (ft_strlen(envp[i]) >= 5 && ft_strncmp(envp[i], "PATH=", 5) == 0)
+		if ((temp && temp->vr) && (ft_strlen(temp->vr) >= 5 && ft_strncmp(temp->vr, "PATH=", 5) == 0))
 		{
-			res = envp[i] + 5;
+			res = temp->vr + 5;
 			break ;
-		}
-		i++;
+		};
+		temp = temp->next;
 	}
 	if (res == NULL)
 	{
@@ -36,12 +36,12 @@ char	*get_path(char **envp)
 	return (res);
 }
 
-void	ft_path(t_exegg *exe)
+void	ft_path(t_exegg *exe, t_env *env)
 {
-	exe->path = get_path(exe->pkcenter->envr);
+	exe->path = get_path(env);
 	if (!exe->path)
 		exit(1);
-	exe->cmdpath = ft_split(exe->path, ':');
+	exe->cmdpath = ms_split(exe->path, ':');
 }
 
 /* void	ft_freech(t_exegg *exe)

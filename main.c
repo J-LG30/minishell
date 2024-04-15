@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/12 19:06:13 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:51:34 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,19 @@ static void	save_env(char **envp, t_shelgon *shelgon)
 	shelgon->envr[i] = NULL;
 }
 
-void	wait_loop(char **env)
+void	wait_loop(char **envp)
 {
 	char		*line;
 	t_token 	*token;
 	t_shelgon	*shelgon;
 	t_token		*temp;
+	t_env		*envir;
 
 	shelgon = malloc(sizeof(t_shelgon) * 1);
 	if (!shelgon)
 		return ;
-	save_env(env, shelgon);
+	save_env(envp, shelgon);
+	envir = env(envp, 0);
 	// for (int i = 0; shelgon->envr[i]; i++)
 	// 	printf("env[%d] = %s\n", i, shelgon->envr[i]);
 	while (1)
@@ -81,7 +83,7 @@ void	wait_loop(char **env)
 		if (shelgon->tree)
 		{
 			print_tree(shelgon->tree);
-			exeggutor(shelgon->tree, shelgon);
+			exeggutor(shelgon->tree, shelgon, envir);
 			add_history(line);
 			free_ast(shelgon->tree);
 		}
@@ -94,7 +96,7 @@ void	wait_loop(char **env)
 	free(shelgon);
 }
 
-int	main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **envp)
 {
 	struct sigaction	sa;
 	
@@ -105,5 +107,5 @@ int	main(int argc, char **argv, char **env)
 	
 	(void)argc;
 	(void)argv;
-	wait_loop(env);
+	wait_loop(envp);
 }

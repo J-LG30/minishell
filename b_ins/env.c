@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:34:42 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/12 16:06:54 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:39:10 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static void	free_env(t_env *var)
 	free(var);
 }
 
-void	env(char **envp, int flg)
+t_env	*env(char **envp, int flg)
 {
 	t_env	*var;
 	int		i;
 
-	var = malloc(sizeof(t_env));
+	var = malloc(sizeof(t_env) * 1);
 	if (!var)
-		return ;
+		return (NULL);
 	i = 0;
 	var = NULL;
 	while (envp[i])
@@ -39,4 +39,7 @@ void	env(char **envp, int flg)
 	}
 	if (flg)
 		print_list(var);
+	else
+		return (var);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/15 16:51:34 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:08:30 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ char	*try_cmd(char *cargs, char **cpath)
 	com = NULL;
 	while (cpath[i])
 	{
-		// ft_putendl_fd("trying the cmd", 2);
-		// ft_putendl_fd("cpath[i]", 2);
-		//ft_putendl_fd(cpath[i], 2);
+		/* ft_putendl_fd("trying the cmd", 2);
+		ft_putendl_fd("cpath[i]", 2);
+		ft_putendl_fd(cpath[i], 2); */
 		temp = ft_strjoin(cpath[i], "/");
-		//ft_putendl_fd("temp", 2);
-		//ft_putendl_fd(temp, 2);
-		//ft_putendl_fd("cargs", 2);
-		//ft_putendl_fd(cargs, 2);
+		/* ft_putendl_fd("temp", 2);
+		ft_putendl_fd(temp, 2);
+		ft_putendl_fd("cargs", 2);
+		ft_putendl_fd(cargs, 2); */
 		com = ft_strjoin(temp, cargs);
-		//ft_putendl_fd("com", 2);
-		//ft_putendl_fd(com, 2);
+		/* ft_putendl_fd("com", 2);
+		ft_putendl_fd(com, 2); */
 		free(temp);
 		if (access(com, F_OK) == 0)
 			return (com);
@@ -44,8 +44,11 @@ char	*try_cmd(char *cargs, char **cpath)
 
 void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
+	t_ast	*temp;
+
+	temp = tree;
 	find_redir(cmds->ref, exe, cmds);
-	if ((!cmds->next) && exe->fd_out == exe->fd[1])
+	if ((!cmds->next && !(temp && (temp->type == PIPE)) && exe->fd_out == exe->fd[1]))
 		exe->fd_out = STDOUT_FILENO;
 	if (exe->fd_in != STDIN_FILENO)
 		exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
@@ -57,14 +60,17 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		close(exe->fd_out);
 	if (exe->dup_fd[0] < 0 || exe->dup_fd[1] < 0)
 		ft_error(1, exe);
-	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
-	if (!cmds->cmd) 
+	if (cmds->ref && cmds->ref->type == WORD)
 	{
-		ft_putendl_fd("Error with the command", 2);
-		exit (1);
+		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
+		if (!cmds->cmd)
+		{
+			ft_putendl_fd("Error with the command", 2);
+			exit (1);
+		}
 	}
-	/* if (is_builtin(cmds->cmd))
-		run_built(cmds->cmd); */
+	else
+		exit (0);
 	execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 	ft_putendl_fd("Error executing command", 2);
 }
@@ -85,12 +91,17 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		ft_putendl_fd("end\n", 2);
 		ft_error(0, exe);
 	}
-	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
-	if (!cmds->cmd)
+	if (cmds->ref && cmds->ref->type == WORD)
 	{
-		ft_putendl_fd("Error with the command", 2);
-		exit (1);
+		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
+		if (!cmds->cmd)
+		{
+			ft_putendl_fd("Error with the command", 2);
+			exit (1);
+		}
 	}
+	else
+		exit (0);
 	execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 	ft_putendl_fd("Error executing command", 2);
 	exit (1);
@@ -98,20 +109,24 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 
 void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
-	find_redir(tree, exe, cmds);
+	find_redir(cmds->ref, exe, cmds);
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
 	close(exe->fd_in);
 	close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)
 		ft_error(1, exe);
-	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
-	if (!cmds->cmd)
+	if (cmds->ref && cmds->ref->type == WORD)
 	{
-		//ft_freech(exe);
-		ft_putendl_fd("Error with the command", 2);
-		exit (1);
+		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
+		if (!cmds->cmd)
+		{
+			ft_putendl_fd("Error with the command", 2);
+			exit (1);
+		}
 	}
+	else
+		exit (0);
 	execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 	ft_putendl_fd("Error executing command", 2);
 	//ft_freech(exe);
@@ -156,8 +171,6 @@ t_branch	*node_cmd(t_ast *tree)
 		new->pipe[0] = 0;
 	}
 	new->full_cmd[i + 1] = NULL;
-	printf("Command: %s\n", new->cmd);
-	printf("Arg: %s\n", new->full_cmd[1]);
 	return (new);
 }
 
@@ -197,12 +210,37 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 			if (!cur)
 				return (0);
 			cur->pipe[0] = ft_heredoc(temp);
+			cur->ref = temp;
+			if(!(*cmds))
+			{
+				*cmds = cur;
+				cur->prev = NULL;
+			}
+			else
+			{
+				last = msh_lstlast(*cmds);
+				last->next = cur;
+				cur->prev = last;
+			}
 		}
-		/* else if (temp && temp->type != PIPE && temp->type != WORD && temp->type != REDIR_DELIMIT)
+		else if (temp && temp->type != PIPE && temp->type != WORD && temp->type != REDIR_DELIMIT)
 		{
-			printf("got in\n");
-			
-		} */
+			cur = malloc(sizeof(t_branch) * 1);
+			if (!cur)
+				return (0);
+			cur->ref = temp;
+			if(!(*cmds))
+			{
+				*cmds = cur;
+				cur->prev = NULL;
+			}
+			else
+			{
+				last = msh_lstlast(*cmds);
+				last->next = cur;
+				cur->prev = last;
+			}
+		}
 		temp = temp->left;
 	}
 	if (cur)
