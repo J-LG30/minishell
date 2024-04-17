@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:19:12 by jle-goff          #+#    #+#             */
-/*   Updated: 2023/04/18 18:23:24 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:29:22 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (0);
 	start = 0;
 	while (in_set(s1[start], set) == 1 && s1[start] != '\0')
-			start++;
+		start++;
 	end = ft_strlen(s1);
 	while (in_set(s1[end - 1], set) && s1[end - 1] != '\0' && end > start)
 		end--;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_lst_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:32 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/03 14:19:07 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:46:54 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	ft_tokenadd_back(t_token **lst, t_token *new)
 	}
 }
 
-t_token	*ft_new_token()
+//malloc error management
+t_token	*ft_new_token(void)
 {
-	t_token *new;
+	t_token	*new;
 
 	new = malloc(sizeof(t_token));
-	//error management
 	if (!new)
 		return (NULL);
 	new->error = -1;
@@ -57,7 +57,6 @@ t_token	*ft_new_token()
 	new->prev = NULL;
 	new->type = 0;
 	new->value = NULL;
-	//new->current = NULL;
 	return (new);
 }
 

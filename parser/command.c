@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:10 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/03 18:02:15 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:01:51 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ t_ast	*command_one(t_token *head, t_shelgon **shelgon)
 	t_ast	*cmd_word;
 	t_token	*cursor;
 
-	//printf("in command 1\n");
-	//printf("%i\n", (*shelgon)->cmd_root);
 	cursor = (*shelgon)->current;
 	cmd_word = command_word(shelgon);
 	if (!cmd_word)
@@ -27,22 +25,12 @@ t_ast	*command_one(t_token *head, t_shelgon **shelgon)
 		(*shelgon)->current = cursor;
 		return (NULL);
 	}
-        // if ((*shelgon)->cmd_root == 0)
-        // {
-        //         (*shelgon)->tree = cmd_word;
-        //         (*shelgon)->cmd_root = 1;
-        // }
-        // else
 	cmd_word = connect_subtree((*shelgon)->tree, cmd_word, shelgon, RIGHT);
-		//print_tree((*shelgon)->tree);
-		//exit (0);
-		//printf("%d\n", (*shelgon)->cmd_root);
 	if ((*shelgon)->cmd_root == 0 || (*shelgon)->cmd_root == 2)
 		(*shelgon)->cmd_root += 1;
-    create_command(head, shelgon);
+	create_command(head, shelgon);
 	return (cmd_word);
 }
-
 
 //redirectout command
 t_ast	*command_two(t_token *head, t_shelgon **shelgon)
@@ -50,7 +38,6 @@ t_ast	*command_two(t_token *head, t_shelgon **shelgon)
 	t_ast	*redirectout;
 	t_token	*cursor;
 
-	//printf("in command 2\n");
 	cursor = (*shelgon)->current;
 	redirectout = create_redirectout(shelgon);
 	if (!redirectout)
@@ -58,9 +45,8 @@ t_ast	*command_two(t_token *head, t_shelgon **shelgon)
 		(*shelgon)->current = cursor;
 		return (NULL);
 	}
-        redirectout = connect_subtree((*shelgon)->tree, redirectout, shelgon, LEFT);
-		//print_tree((*shelgon)->tree);
-        create_command(head, shelgon);
+	redirectout = connect_subtree((*shelgon)->tree, redirectout, shelgon, LEFT);
+	create_command(head, shelgon);
 	return (redirectout);
 }
 
@@ -70,7 +56,6 @@ t_ast	*command_three(t_token *head, t_shelgon **shelgon)
 	t_ast	*redirectin;
 	t_token	*cursor;
 
-	//printf("in command 3\n");
 	cursor = (*shelgon)->current;
 	redirectin = create_redirectin(shelgon);
 	if (!redirectin)
@@ -78,9 +63,8 @@ t_ast	*command_three(t_token *head, t_shelgon **shelgon)
 		(*shelgon)->current = cursor;
 		return (NULL);
 	}
-        redirectin = connect_subtree((*shelgon)->tree, redirectin, shelgon, LEFT);
-		//print_tree((*shelgon)->tree);
-        create_command(head, shelgon);
+	redirectin = connect_subtree((*shelgon)->tree, redirectin, shelgon, LEFT);
+	create_command(head, shelgon);
 	return (redirectin);
 }
 
@@ -93,8 +77,7 @@ t_ast	*create_command(t_token *head, t_shelgon **shelgon)
 	t_ast	*redirin;
 	t_ast	*redirout;
 	t_ast	*command;
-	
-	//printf("entering create command function\n");
+
 	command = command_one(head, shelgon);
 	if (command)
 		return (command);
@@ -106,20 +89,3 @@ t_ast	*create_command(t_token *head, t_shelgon **shelgon)
 		return (command);
 	return (NULL);
 }
-
-// t_ast	find_cmd_root(t_token *head, t_shelgon **shelgon)
-// {
-// 	t_ast	*cmd_word;
-// 	t_token	*cursor;
-
-// 	cmd_word = NULL;
-// 	cursor = (*shelgon)->current;
-// 	while ((*shelgon)->current->type != END)
-// 	{
-// 		cmd_word = command_word(shelgon);
-// 		if (cmd_word)
-// 			break ;
-// 		(*shelgon)->current = (*shelgon)->current->next;
-// 	}
-	
-// }

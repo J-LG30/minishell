@@ -6,10 +6,11 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:21:12 by jle-goff          #+#    #+#             */
-/*   Updated: 2023/04/24 19:53:37 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:28:55 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {
