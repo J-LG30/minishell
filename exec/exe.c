@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/15 19:08:19 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:10:30 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,17 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env)
 		cmds = cmds->next;
 		i++;
 	}
+	int s;
 	while (--i >= 0)
-		wait(NULL);
+		wait(&s);
+	if (WIFEXITED(s))
+		shelgon->status = WEXITSTATUS(s);
+	else if (WIFSIGNALED(s))
+	{
+		if (WTERMSIG(s) == SIGINT)
+			shelgon->status = 130;
+		else if (WTERMSIG(s) == SIGQUIT)
+			shelgon->status = 131; 
+	}
 	return (0);
 }

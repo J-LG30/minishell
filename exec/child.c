@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/15 19:08:30 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/16 15:54:45 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	}
 	else
 		exit (0);
+	//ft_putendl_fd("debugin", 2);
 	execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 	ft_putendl_fd("Error executing command", 2);
 	exit (1);

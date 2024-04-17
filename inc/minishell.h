@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/15 18:37:13 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:00:11 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@
 #define LEFT 20
 #define RIGHT 21
 
-extern int g_sig;
+#define IN_CHILD 14
+
+volatile extern int g_sig;
 
 typedef struct s_env
 {
@@ -101,6 +103,7 @@ typedef	struct s_shelgon
 	struct s_ast	*tree;
 	char			**envr;
 	int				cmd_root;
+	int				status;
 }	t_shelgon;
 
 void	execute_command(char *command, char **env);
@@ -130,6 +133,9 @@ void	free_ast(t_ast	*tree);
 
 /*SIGNALS*/
 void	sig_handler(int sig);
+void	child_sig_handler(int sig);
+void	set_prompt_handler();
+void	set_child_handler();
 
 //command productions
 t_ast	*create_command(t_token *head, t_shelgon **shelgon);

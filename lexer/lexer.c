@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/12 15:08:53 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:36:32 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	str_token(t_token *token, int type, char *line, int i)
 		{
 			while (line[j] && line[j] != '\'')
 				j++;
+			j++;
 		}
 		if (quote == 0)
 		{
