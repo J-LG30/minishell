@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:34:42 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/15 18:39:10 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:45:12 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,21 @@ t_env	*env(char **envp, int flg)
 	t_env	*var;
 	int		i;
 
-	var = malloc(sizeof(t_env) * 1);
-	if (!var)
-		return (NULL);
-	i = 0;
-	var = NULL;
-	while (envp[i])
-	{
-		ms_addnode(&var, envp[i]);
-		i++;
-	}
 	if (flg)
-		print_list(var);
-	else
+	{
+		var = malloc(sizeof(t_env) * 1);
+		if (!var)
+			return (NULL);
+		i = 0;
+		var = NULL;
+		while (envp[i])
+		{
+			ms_addnode(&var, envp[i]);
+			i++;
+		}
 		return (var);
+	}
+	else
+		print_list(var);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:32:23 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/15 18:59:32 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:11:01 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_env	*ms_lstadd(char *s)
 	if (node)
 	{
 		node->vr = ft_strdup(s);
+		node->cpy = node->vr;
+		node->prnt = 1;
 		node->next = NULL;
 		node->prev = NULL;
 	}
@@ -60,7 +62,8 @@ void	print_list(t_env *arr)
 {
 	while (arr)
 	{
-		printf("%s\n", arr->vr);
+		if (arr->prnt)
+			printf("%s\n", arr->vr);
 		arr = arr->next;
 	}
 }

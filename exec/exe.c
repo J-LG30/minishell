@@ -6,54 +6,11 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/15 19:08:19 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:39:59 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-/* static void	only_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
-{
-	find_redir(cmds->ref, exe, cmds);
-	if (exe->fd_in != STDIN_FILENO)
-		exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
-	if (exe->fd_out != STDOUT_FILENO)
-		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
-	if (exe->fd_in != STDIN_FILENO)
-		close(exe->fd_in);
-	if (exe->fd_out != STDOUT_FILENO)
-		close(exe->fd_out);
-	if (exe->dup_fd[0] < 0 || exe->dup_fd[1] < 0)
-		ft_error(1, exe);
-	cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
-	if (!cmds->cmd) 
-	{
-		ft_putendl_fd("Error with the command", 2);
-		exit (1);
-	}
-	exe->pid1 = fork();
-	if (exe->pid1 < 0)
-	{
-		ft_putendl_fd("dork\n", 2);
-		ft_error(0, exe);
-	}
-
-	if (exe->pid1 == 0)
-	{
-		close(exe->fd[0]);
-		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
-		ft_putendl_fd("Error executing command", 2);
-	}
-	else
-		if (cmds->prev == NULL && exe->fd_in != STDIN_FILENO)
-			close(exe->fd_in);
-		else if (cmds->next == NULL && exe->fd_out != STDOUT_FILENO)
-			close(exe->fd_out);
-		close(exe->fd[1]);
-		if (exe->last_fd != STDIN_FILENO)
-			close(exe->last_fd);
-		exe->last_fd = exe->fd[0];
-} */
 
 int	ft_heredoc(t_ast *tree)
 {

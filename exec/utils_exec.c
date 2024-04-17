@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:34:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/15 18:43:10 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/16 15:48:11 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,39 +43,6 @@ void	ft_path(t_exegg *exe, t_env *env)
 		exit(1);
 	exe->cmdpath = ms_split(exe->path, ':');
 }
-
-/* void	ft_freech(t_exegg *exe)
-{
-	int	i;
-
-	i = -1;
-	while (cmds->args[++i])
-		free(exe->cargs[i]);
-	i = -1;
-	while (exe->cpath[++i])
-		free(exe->cpath[i]);
-	close(exe->fd[0]);
-	close(exe->fd[1]);
-	free(exe->cpath);
-	free(exe->cargs);
-	free(exe->cmd);
-} */
-
-/* void	ft_freedad(t_exegg *exe, char **av)
-{
-	int	i;
-
-	i = (!(ft_strncmp("here_doc", av[1], -1))) + 2;
-	while (i < exe->nb_arg)
-	{
-		wait(NULL);
-		i++;
-	}
-	i = -1;
-	while (exe->cpath[++i])
-		free(exe->cpath[i]);
-	free(exe->cpath);
-} */
 
 void	ft_error(int flg, t_exegg *exe)
 {
@@ -186,4 +153,24 @@ char	**ms_split(char const *s, char c)
 	}
 	res[i] = NULL;
 	return (res);
+}
+
+int	is_btin(char *cmds)
+{
+	if (ft_strncmp(cmds, "echo", ft_strlen(cmds)) == 0)
+		return (1);
+	else if (ft_strncmp(cmds, "pwd", ft_strlen(cmds)) == 0)
+		return (1);
+	else if (ft_strncmp(cmds, "cd", ft_strlen(cmds)) == 0)
+		return (1);
+	else if (ft_strncmp(cmds, "export", ft_strlen(cmds)) == 0)
+		return (1);
+	else if (ft_strncmp(cmds, "env", ft_strlen(cmds)) == 0)
+		return (1);
+	else if (ft_strncmp(cmds, "unset", ft_strlen(cmds)) == 0)
+		return (1);
+	else if (ft_strncmp(cmds, "exit", ft_strlen(cmds)) == 0)
+		return (1);
+	else
+		return (0);
 }

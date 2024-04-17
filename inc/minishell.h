@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/15 18:37:13 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:16:03 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_env
 	struct s_env	*prev;
 	struct s_env	*next;
 	char			*vr;
+	char			*cpy;
+	int				prnt;
 }	t_env;
 
 typedef struct s_branch
@@ -157,6 +159,7 @@ char	**ms_split(char const *s, char c);
 char	*try_cmd(char *cargs, char **cpath);
 
 //Built in functions
+int		is_btin(char *cmds);
 t_env	*env(char **envp, int flg);
 void	print_list(t_env *arr);
 void	ms_addnode(t_env **arr, char *s);
@@ -164,5 +167,4 @@ t_env	*ms_lstadd(char *s);
 
 /*DEBUGGING*/
 void	print_tree(t_ast *root);
-
 t_ast	*connect_subtree(t_ast *root, t_ast *subtree, t_shelgon **shelgon, int dir);
