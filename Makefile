@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+         #
+#    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/15 19:09:25 by davda-si         ###   ########.fr        #
+#    Updated: 2024/04/17 15:20:58 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = @cc
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address #-static-libsan
+FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address #-static-libsan
 LIB = -lreadline
 
 SRCS = 	main.c lexer/lexer.c lexer/lexer_lst_utils.c lexer/quotes.c \

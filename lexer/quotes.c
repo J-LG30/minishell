@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/09 17:58:20 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:23:07 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	unclosed_quotes(t_token *token)
 
 	i = 0;
 	closed = -1;
-	//printf("%s\n", token->value);
+	printf("%s\n", token->value);
 	if (token->value[0] != '\'' && token->value[0] != '"')
 		return (0);
 	while (token->value[i]
@@ -118,7 +118,12 @@ int	handle_word(t_token *token, t_shelgon *shelgon)
 	if (token->type != WORD)
 		rm_quotes(token);
 	//printf("%s\n", token->value);
-	if (token->type != S_STR)
+	if (token->type != S_STR && !ft_strcmp(token->value, "$?"))
+	{
+		free(token->value);
+		token->value = ft_itoa(shelgon->status);
+	}
+	else if (token->type != S_STR)
 		expansion(token, shelgon);
 	token->type = WORD;
 	return (0);
