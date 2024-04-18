@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/17 17:35:25 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:06:24 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int			handle_word(t_token *token, t_shelgon *shelgon);
 /* PARSER FUNCTIONS*/
 t_ast		*parser(t_token *head, t_shelgon **shelgon);
 t_ast		*new_node_init(void);
-t_ast		*new_pipe_node(void);
+t_ast		*new_pipe_node(t_token *token);
 t_ast		*new_word_node(t_token *token);
 t_ast		*new_redir_node(t_token *token);
 t_ast		*new_env_node(t_token *token);

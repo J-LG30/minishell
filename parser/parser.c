@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:07 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/17 17:12:05 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:30:34 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_ast	*expression_one(t_token *head, t_shelgon **shelgon)
 
 	(*shelgon)->cmd_root = 0;
 	temp = (*shelgon)->current;
-	pipe_node = new_pipe_node();
+	pipe_node = new_pipe_node(temp);
 	if (!pipe_node)
 		return (NULL);
 	connect_subtree((*shelgon)->tree, pipe_node, shelgon, RIGHT);
@@ -35,6 +35,7 @@ t_ast	*expression_one(t_token *head, t_shelgon **shelgon)
 	{
 		free(pipe_node);
 		(*shelgon)->current = temp;
+		ft_putstr_fd("minishell: syntax error near unexpected token '|'\n", 2);
 		return (NULL);
 	}
 	(*shelgon)->current = (*shelgon)->current->next;

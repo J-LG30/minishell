@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:34:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/15 18:43:10 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:56:23 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,20 @@ t_branch	*msh_lstlast(t_branch *lst)
 {
 	t_branch	*next;
 
-	printf("a\n");
+	//printf("a\n");
 	if (lst == NULL)
 		return (0);
-	printf("b\n");
+	//printf("b\n");
 	next = lst -> next;
-	printf("c\n");
+	//printf("c\n");
 	while (next != NULL)
 	{
-		printf("d\n");
+		//printf("d\n");
 		lst = next;
 		next = lst -> next;
-		printf("e\n");
+		//printf("e\n");
 	}
-	printf("f\n");
+	//printf("f\n");
 	
 	return (lst);
 }

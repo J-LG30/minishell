@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/17 16:00:25 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:30:14 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,10 @@ void	wait_loop(char **envp)
 	shelgon->status = 0;
 	save_env(envp, shelgon);
 	envir = env(envp, 0);
-	// for (int i = 0; shelgon->envr[i]; i++)
-	// 	printf("env[%d] = %s\n", i, shelgon->envr[i]);
 	while (1)
 	{	
 		set_prompt_handler();
 		rl_on_new_line();
-		//line = readline("\U0001F975 minishell$ ");
 		line = readline("(੭｡╹▿╹｡)੭$ ");
 		set_child_handler();
 		if (!line)
@@ -64,6 +61,7 @@ void	wait_loop(char **envp)
 			free (line);
 			continue ;
 		}
+		add_history(line);
 		token = tokenize(line, shelgon);
 		if (!token)
 			continue ;
@@ -77,16 +75,12 @@ void	wait_loop(char **envp)
 		shelgon->list_token = token;
 		shelgon->current = token;
 		shelgon->top_root = NULL;
-		parser(token, &shelgon);
-		if (shelgon->tree)
+		if (parser(token, &shelgon))
 		{
 			//print_tree(shelgon->tree);
 			exeggutor(shelgon->tree, shelgon, envir);
-			add_history(line);
 			free_ast(shelgon->tree);
 		}
-		else
-			printf("minishell: error with parsing\n");
 		free_tokens(token);
 	}
 	if (token)

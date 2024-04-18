@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:25 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/17 16:53:23 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:07:49 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ t_ast	*new_node_init(void)
 	return (new);
 }
 
-t_ast	*new_pipe_node(void)
+t_ast	*new_pipe_node(t_token *temp)
 {
 	t_ast	*new;
 
+	//if (temp->prev)
 	new = new_node_init();
 	if (!new)
 		return (NULL);

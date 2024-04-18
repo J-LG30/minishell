@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/17 16:46:25 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:58:01 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,9 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 //print error message
 int	handle_word(t_token *token, t_shelgon *shelgon)
 {
-	printf("%s\n", token->value);
 	if (unclosed_quotes(token))
 	{
-		printf("Error: Unclosed quotes\n");
+		ft_putstr_fd("Error: Unclosed quotes\n", 2);
 		return (1);
 	}
 	if (token->type != WORD)

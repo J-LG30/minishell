@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:03 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/17 17:10:40 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:21:23 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@ t_ast	*create_redirectin(t_shelgon **shelgon)
 	int		type;
 
 	type = (*shelgon)->current->type;
-	if (type == REDIR_IN && type != WORD || type == REDIR_APP && type != WORD)
+	if (((*shelgon)->current->type == REDIR_IN && (*shelgon)->current->next->type != WORD)
+		|| ((*shelgon)->current->type == REDIR_APP && (*shelgon)->current->next->type != WORD))
 	{
 		free_ast((*shelgon)->tree);
 		(*shelgon)->tree = NULL;
-		printf("DJShell: Syntax error near unexpected token\n");
+		ft_putstr_fd("minishell: syntax error near unexpected token 'newline'\n", 2);
 		return (NULL);
 	}
-	if (type == REDIR_IN && type == WORD || type == REDIR_APP && type == WORD)
+	if (((*shelgon)->current->type == REDIR_IN && (*shelgon)->current->next->type == WORD)
+		|| ((*shelgon)->current->type == REDIR_APP && (*shelgon)->current->next->type == WORD))
 	{
 		new = new_redir_node((*shelgon)->current);
 		(*shelgon)->current = (*shelgon)->current->next->next;
@@ -42,16 +44,19 @@ t_ast	*create_redirectout(t_shelgon **shelgon)
 {
 	t_ast	*new;
 	int		type;
+	int		next;
 
 	type = (*shelgon)->current->type;
-	if (type == REDIR_OUT && type != WORD || type == REDIR_DELIMIT && type != WORD)
+	if (((*shelgon)->current->type == REDIR_OUT && (*shelgon)->current->next->type != WORD)
+		|| ((*shelgon)->current->type == REDIR_DELIMIT && (*shelgon)->current->next->type != WORD))
 	{
 		free_ast((*shelgon)->tree);
 		(*shelgon)->tree = NULL;
-		printf("DJShell: Syntax error near unexpected token\n");
+		ft_putstr_fd("minishell: syntax error near unexpected token 'newline'\n", 2);
 		return (NULL);
 	}
-	if (type == REDIR_OUT && type == WORD || type == REDIR_DELIMIT && type == WORD)
+	if (((*shelgon)->current->type == REDIR_OUT && (*shelgon)->current->next->type == WORD)
+		|| ((*shelgon)->current->type == REDIR_DELIMIT && (*shelgon)->current->next->type == WORD))
 	{
 		new = new_redir_node((*shelgon)->current);
 		(*shelgon)->current = (*shelgon)->current->next->next;
