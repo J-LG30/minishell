@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/18 12:58:01 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/19 14:23:04 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,102 @@ int	unclosed_quotes(t_token *token)
 	return (0);
 }
 
-//MALLOC error at return
+int	which_quote(t_token *token)
+{
+	int quote;
+	int	i;
+
+	i = 0;
+	while (token->value[i])
+	{
+		if (token->value[i] == '\'')
+		{
+			quote = 1;
+			return (1);
+		}
+		if (token->value[i] == '"')
+		{
+			quote = 2;
+			return (2);
+		}
+		i++;
+	}
+	return (0);
+}
+
 void	rm_quotes(t_token *token)
 {
 	char	*new_val;
+	char	q;
+	int		i;
+	int		size;
+	int		flag;
 
-	if (token->type == D_STR)
-		new_val = ft_strtrim(token->value, "\"");
-	else if (token->type == S_STR)
-		new_val = ft_strtrim(token->value, "'");
-	if (!new_val)
-		return ;
-	free(token->value);
-	token->value = new_val;
+	//quote = which_quote(token->value);
+	//size = 0;
+	i = 0;
+	flag = 0;
+	while (token->value[i])
+	{
+		if (token->value[i] != q && flag == 0)
+		
+		if (token->value[i] == '"' || token->value[i] == '"')
+		{
+			flag = 1;
+			q = token->value[i];
+		}
+		
+		i++;
+	}
 }
+
+//MALLOC error at return
+// void	rm_quotes(t_token *token)
+// {
+// 	char	*new_val;
+// 	int		size;
+// 	int		i;
+// 	int		j;
+
+// 	if (token->type == D_STR)
+// 		new_val = ft_strtrim(token->value, "\"");
+// 	else if (token->type == S_STR)
+// 		new_val = ft_strtrim(token->value, "'");
+// 	if (!new_val)
+// 		return ;
+// 	free(token->value);
+// 	token->value = new_val;
+	//printf("in rm quote\n");
+	// size = 0;
+	// i = 0;
+	// //printf("1\n");
+	// while (token->value[i])
+	// {
+	// 	if (token->value[i] != '\'' && token->value[i] != '"')
+	// 		size++;
+	// 	i++;
+	// }
+	// new_val = malloc(sizeof(char) * (size + 1));
+	// if (!new_val)
+	// 	return ;
+	// j = 0;
+	// i = 0;
+	// while (size > 0)
+	// {
+	// 	if (token->value[i] != '\'' && token->value[i] != '"')
+	// 	{
+	// 		new_val[j] = token->value[i];
+	// 		//printf("%c", new_val[j]);
+	// 		j++;
+	// 		size--;
+	// 	}
+	// 	i++;
+	// }
+	// new_val[j] = '\0';
+	// free(token->value);
+	// //printf("%s\n", new_val);
+	// token->value = new_val;
+//}
 
 //might remove a token if it cant expand instead we shall see
 void	expansion(t_token *token, t_shelgon *shelgon)
@@ -107,15 +189,16 @@ int	handle_word(t_token *token, t_shelgon *shelgon)
 		ft_putstr_fd("Error: Unclosed quotes\n", 2);
 		return (1);
 	}
-	if (token->type != WORD)
-		rm_quotes(token);
+	rm_quotes(token);
 	if (token->type != S_STR && !ft_strcmp(token->value, "$?"))
 	{
 		free(token->value);
 		token->value = ft_itoa(shelgon->status);
 	}
 	else if (token->type != S_STR)
+	{
 		expansion(token, shelgon);
+	}
 	token->type = WORD;
 	return (0);
 }

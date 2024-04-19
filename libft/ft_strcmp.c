@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:04:37 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/17 17:29:42 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:42:02 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_strcmp(char *str1, char *str2)
 	i = 0;
 	if (!str1 || !str2)
 		return (0);
-	while (str1[i] && str2[2] && str1[i] == str2[i])
+	while (str1[i] && str2[i] && str1[i] == str2[i])
 		i++;
 	return (str1[i] - str2[i]);
 }

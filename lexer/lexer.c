@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/17 16:41:44 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:55:17 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,10 @@ int	str_token(t_token *token, int type, char *line, int i)
 	if (quote == 0)
 	{
 		j = i;
-		while (line[j] && line[j] != ' ' && line[j]
-			!= '|' && line[j] != '<' && line[j] != '>')
+		while (line[j] && line[j] != ' ' && line[j] != '|' && line[j] != '<' && line[j] != '>')
 			j++;
-		{
-			token->value = ft_substr(line, i, j - i);
-		}
 	}
-	else
-		token->value = ft_substr(line, i, j - i);
+	token->value = ft_substr(line, i, j - i);
 	if (quote == 2 || quote == 1)
 		return (j + 1);
 	else
