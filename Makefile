@@ -6,13 +6,13 @@
 #    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/19 17:02:50 by jle-goff         ###   ########.fr        #
+#    Updated: 2024/04/19 17:37:22 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = @cc
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address -static-libsan
+FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address -static-libsan
 LIB = -lreadline
 
 SRCS = 	main.c lexer/lexer.c lexer/lexer_lst_utils.c lexer/quotes.c \

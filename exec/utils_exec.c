@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:34:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/18 12:56:23 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:51:32 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	ft_error(int flg, t_exegg *exe)
 	exit(1);
 }
 
+//ISSUE: SOS: IF THERES A BUG CHECK HERE ISSUE WITH THE WHILE NEXT
 t_branch	*msh_lstlast(t_branch *lst)
 {
 	t_branch	*next;
