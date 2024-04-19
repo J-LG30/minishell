@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/19 14:23:04 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/19 16:54:16 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,30 @@
 
 int	unclosed_quotes(t_token *token)
 {
-	int	flag;
-	int	i;
-	int	closed;
+	int		flag;
+	int		i;
+	int		closed;
+	char	q;
 
 	i = 0;
 	closed = -1;
-	if (token->value[0] != '\'' && token->value[0] != '"')
-		return (0);
-	while (token->value[i]
-		&& (token->value[i] != '\'' && token->value[i] != '"'))
+	while (token->value[i])
 	{
-		i++;
-	}
-	if (token->value[i] == '"')
-		token->type = D_STR;
-	else if (token->value[i] == '\'')
-		token->type = S_STR;
-	while (token->value[++i])
-	{
-		if (token->type == D_STR && token->value[i] == '"')
-			closed *= -1;
-		else if (token->type == S_STR && token->value[i] == '\'')
-			closed *= -1;
+		while (token->value && token->value[i] != '\'' && token->value[i] != '"')
+			i++;
+		if (!token->value[i])
+			break ;
+		if (token->value[i] == '"')
+			q = token->value[i];
+		else if (token->value[i] == '\'')
+			q = token->value[i];
+		while (token->value[++i])
+		{
+			if (token->type == D_STR && token->value[i] == '"')
+				closed *= -1;
+			else if (token->type == S_STR && token->value[i] == '\'')
+				closed *= -1;
+		}
 	}
 	if (closed == -1 && (token->type == D_STR || token->type == S_STR))
 		return (1);
@@ -66,30 +67,63 @@ int	which_quote(t_token *token)
 	return (0);
 }
 
-void	rm_quotes(t_token *token)
+//flag == 1 means inside a quoted str, dont remove any quotes
+int	size_wo_quotes(t_token *token)
 {
 	char	*new_val;
 	char	q;
 	int		i;
 	int		size;
-	int		flag;
+	int		j;
 
-	//quote = which_quote(token->value);
-	//size = 0;
 	i = 0;
-	flag = 0;
+	size = 0;
+	q = '\0';
 	while (token->value[i])
 	{
-		if (token->value[i] != q && flag == 0)
-		
-		if (token->value[i] == '"' || token->value[i] == '"')
-		{
-			flag = 1;
+		if ((token->value[i] == '\'' || token->value[i] == '"') && q == '\0')
 			q = token->value[i];
-		}
-		
+		else if (token->value[i] == q)
+			q = '\0';
+		else if (token->value[i] != q)
+			size++;
 		i++;
 	}
+	return (size);
+}
+
+void	rm_quotes(t_token *token)
+{
+	int		size;
+	char	*new_val;
+	int		i;
+	int		j;
+	char	q;
+
+	size = size_wo_quotes(token);
+	new_val = malloc(sizeof(char) * (size + 1));
+	if (!new_val)
+		return ;
+	i = 0;
+	j = 0;
+	q = '\0';
+	while (j < size)
+	{
+		if ((token->value[i] == '\'' || token->value[i] == '"') && q == '\0')
+			q = token->value[i];
+		else if (token->value[i] == q)
+			q = '\0';
+		else if (token->value[i] != q)
+		{	
+			new_val[j] = token->value[i];
+			j++;	
+		}
+		i++;
+	}
+	new_val[j] = '\0';
+	free(token->value);
+	token->value = new_val;
+	
 }
 
 //MALLOC error at return
@@ -184,11 +218,11 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 //print error message
 int	handle_word(t_token *token, t_shelgon *shelgon)
 {
-	if (unclosed_quotes(token))
-	{
-		ft_putstr_fd("Error: Unclosed quotes\n", 2);
-		return (1);
-	}
+	// if (unclosed_quotes(token))
+	// {
+	// 	ft_putstr_fd("Error: Unclosed quotes\n", 2);
+	// 	return (1);
+	// }
 	rm_quotes(token);
 	if (token->type != S_STR && !ft_strcmp(token->value, "$?"))
 	{
