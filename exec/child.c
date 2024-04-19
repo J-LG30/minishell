@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/17 17:41:11 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:50:29 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 			exit (1);
 		}
 	}
-	else
-		exit (0);
 	if (is_btin(cmds->full_cmd[0]))
-		run_btin(cmds, tree);
+		run_btin(tree, exe, cmds);
 	else
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
