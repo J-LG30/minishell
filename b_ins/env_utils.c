@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:32:23 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/16 19:11:01 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:40:25 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,26 @@ void	ms_addnode(t_env **arr, char *s)
 	t_env	*temp;
 
 	node = ms_lstadd(s);
+	printf("%s\n", s);
+	if (!node)
+		return ;
+	if (*arr == NULL)
+		(*arr) = node;
+	else
+	{
+		temp = ms_lstlast(*arr);
+		node->prev = temp;
+		temp->next = node;
+	}
+}
+
+void	ms_addexp(t_env **arr, char *s)
+{
+	t_env	*node;
+	t_env	*temp;
+
+	node = ms_lstadd(s);
+	node->prnt = 0;
 	if (!node)
 		return ;
 	if (*arr == NULL)
@@ -60,10 +80,13 @@ void	ms_addnode(t_env **arr, char *s)
 
 void	print_list(t_env *arr)
 {
-	while (arr)
+	t_env	*tmp;
+
+	tmp = arr;
+	while (tmp)
 	{
-		if (arr->prnt)
-			printf("%s\n", arr->vr);
-		arr = arr->next;
+		if (tmp->vr && tmp->prnt)
+			printf("%s\n", tmp->vr);
+		tmp = tmp->next;
 	}
 }
