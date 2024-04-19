@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/19 15:23:22 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:30:51 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	wait_loop(char **envp)
 		temp = token;
 		while (temp)
 		{
-			printf("Token type: %i\n Token value: %s\n", temp->type, temp->value);
+			//printf("Token type: %i\n Token value: %s\n", temp->type, temp->value);
 			//printf("space check\n");
 			temp = temp->next;	
 		}

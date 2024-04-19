@@ -6,49 +6,59 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/18 20:55:17 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:52:21 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 //str_token with only WORD
+	// if (quote == 2)
+	// {
+	// 	while (line[j] && line[j] != '"')
+	// 		j++;
+	// 	j++;
+	// }
+	// if (quote == 1)
+	// {
+	// 	while (line[j] && line[j] != '\'')
+	// 		j++;
+	// 	j++;
+	// }
+	// if (line[i] == '"')
+	// 	quote = 2;
+	// else if (line[i] == '\'')
+	// 	quote = 1;
+	// else
 int	str_token(t_token *token, int type, char *line, int i)
 {
 	int		j;
-	int		quote;
+	char	c;
 	char	*new_line;
+	int		flag;
 
-	if (line[i] == '"')
-		quote = 2;
-	else if (line[i] == '\'')
-		quote = 1;
-	else
-		quote = 0;
+//&& line[j] != ' ' 
 	token->type = WORD;
-	j = i + 1;
-	if (quote == 2)
+	j = i;
+	flag = 0;
+	c = '\0';
+	while (line[j])
 	{
-		while (line[j] && line[j] != '"')
-			j++;
+		if (flag == 0 && (line[j] == '"' || line[j] == '\''))
+		{
+			flag = 1;
+			c = line[j];
+		}
+		else if (flag == 1 && line[j] == c)
+			flag = 0;
+		if (flag == 0 && (line[j] == ' ' || line[j] == '|' || line[j] == '<' && line[j] == '>'))
+			break ;
 		j++;
-	}
-	if (quote == 1)
-	{
-		while (line[j] && line[j] != '\'')
-			j++;
-		j++;
-	}
-	if (quote == 0)
-	{
-		j = i;
-		while (line[j] && line[j] != ' ' && line[j] != '|' && line[j] != '<' && line[j] != '>')
-			j++;
 	}
 	token->value = ft_substr(line, i, j - i);
-	if (quote == 2 || quote == 1)
-		return (j + 1);
-	else
+	// if (quote == 2 || quote == 1)
+	// 	return (j + 1);
+	// else
 		return (j);
 }
 

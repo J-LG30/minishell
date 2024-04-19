@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/19 16:54:16 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:53:02 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,31 @@ int	unclosed_quotes(t_token *token)
 	int		closed;
 	char	q;
 
+	//printf("%s\n", token->value);
 	i = 0;
-	closed = -1;
+	closed = 1;
 	while (token->value[i])
 	{
-		while (token->value && token->value[i] != '\'' && token->value[i] != '"')
-			i++;
-		if (!token->value[i])
-			break ;
-		if (token->value[i] == '"')
-			q = token->value[i];
-		else if (token->value[i] == '\'')
-			q = token->value[i];
-		while (token->value[++i])
+		q = '\0';
+		if (token->value[i] == '\'' || token->value[i] == '"')
 		{
-			if (token->type == D_STR && token->value[i] == '"')
-				closed *= -1;
-			else if (token->type == S_STR && token->value[i] == '\'')
-				closed *= -1;
+			closed *= -1;
+			if (token->value[i] == '"')
+				q = token->value[i];
+			else if (token->value[i] == '\'')
+				q = token->value[i];
+			while (token->value[++i])
+			{
+				if (token->value[i] == q)
+				{
+					closed *= -1;
+					break ;
+				}
+			}
 		}
+		i++;
 	}
-	if (closed == -1 && (token->type == D_STR || token->type == S_STR))
+	if (closed == -1 && q != '\0')
 		return (1);
 	return (0);
 }
@@ -218,21 +222,21 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 //print error message
 int	handle_word(t_token *token, t_shelgon *shelgon)
 {
-	// if (unclosed_quotes(token))
-	// {
-	// 	ft_putstr_fd("Error: Unclosed quotes\n", 2);
-	// 	return (1);
-	// }
+	if (unclosed_quotes(token))
+	{
+		ft_putstr_fd("Error: Unclosed quotes\n", 2);
+		return (1);
+	}
 	rm_quotes(token);
 	if (token->type != S_STR && !ft_strcmp(token->value, "$?"))
 	{
 		free(token->value);
 		token->value = ft_itoa(shelgon->status);
 	}
-	else if (token->type != S_STR)
-	{
-		expansion(token, shelgon);
-	}
+	// else if (token->type != S_STR)
+	// {
+	// 	expansion(token, shelgon);
+	// }
 	token->type = WORD;
 	return (0);
 }
