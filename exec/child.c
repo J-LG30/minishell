@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/18 14:50:29 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:09:27 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,8 @@ t_branch	*node_cmd(t_ast *tree)
 	i = 0;
 	j = 1;
 	temp = tree;
-	new = malloc(sizeof(t_branch) * 1);
+	//new = malloc(sizeof(t_branch) * 1);
+	new = ft_calloc(1, sizeof(t_branch));
 	if (!new)
 		return (NULL);
 	if (temp->type == WORD)
@@ -206,11 +207,12 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 				last->next = cur;
 				cur->prev = last;
 			}
-		no_cmds = 0;
+			no_cmds = 0;
 		}
 		else if (temp && temp->type == REDIR_DELIMIT)
 		{
-			cur = malloc(sizeof(t_branch) * 1);
+			//cur = malloc(sizeof(t_branch) * 1);
+			cur = ft_calloc(1, sizeof(t_branch));
 			if (!cur)
 				return (0);
 			cur->pipe[0] = ft_heredoc(temp);
@@ -229,7 +231,8 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 		}
 		else if (temp && temp->type != PIPE && temp->type != WORD && temp->type != REDIR_DELIMIT)
 		{
-			cur = malloc(sizeof(t_branch) * 1);
+			// cur = malloc(sizeof(t_branch) * 1);
+			cur = ft_calloc(1, sizeof(t_branch));
 			if (!cur)
 				return (0);
 			cur->ref = temp;

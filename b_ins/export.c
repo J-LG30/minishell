@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/19 14:22:22 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/19 16:28:27 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	parse_arg(char *str)
 	return (1);
 }
 
-static int	args_exist(char *str, t_env *env)
+/* static int	args_exist(char *str, t_env *env)
 {
 	t_env	*tmp;
 	t_env	*new;
@@ -104,7 +104,7 @@ static int	args_exist(char *str, t_env *env)
 			
 		}
 	}
-}
+} */
 
 static void	add_export(char **args, t_shelgon *shell)
 {
@@ -118,7 +118,7 @@ static void	add_export(char **args, t_shelgon *shell)
 	{
 		j = -1;
 		flg = 0;
-		if (parse_arg(args[i]) && args_exist(args[i], shell->env))
+		if (parse_arg(args[i]) /* args_exist(args[i], shell->env) */)
 		{
 			while (++j < ft_strlen(args[i]))
 			{
@@ -128,7 +128,7 @@ static void	add_export(char **args, t_shelgon *shell)
 					flg = 1;
 				}
 			}
-			if (!flg);
+			if (!flg)
 				ms_addexp(&shell->env, args[i]);
 		}
 		i++;
@@ -141,4 +141,5 @@ void	export(t_branch *cmds, t_shelgon *shell)
 		print_exp(shell);
 	else
 		add_export(cmds->full_cmd, shell);
+	exit(0);
 }

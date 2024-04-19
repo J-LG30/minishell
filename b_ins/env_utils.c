@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:32:23 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/18 20:40:25 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:40:02 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	ms_addnode(t_env **arr, char *s)
 	t_env	*temp;
 
 	node = ms_lstadd(s);
-	printf("%s\n", s);
 	if (!node)
 		return ;
 	if (*arr == NULL)

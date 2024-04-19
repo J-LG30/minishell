@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/17 17:44:04 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/19 16:23:12 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env)
 	t_exegg		exe;
 	t_branch	*cmds;
 	int			i;
-
+	
 	exe.fd_in = STDIN_FILENO;
 	exe.fd_out = STDOUT_FILENO;
 	exe.dup_fd[0] = STDIN_FILENO;

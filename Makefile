@@ -6,13 +6,13 @@
 #    By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/18 16:33:50 by davda-si         ###   ########.fr        #
+#    Updated: 2024/04/19 17:07:38 by davda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = @cc
-FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address #-static-libsan
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address #-static-libsan
 LIB = -lreadline
 
 SRCS = 	main.c lexer/lexer.c lexer/lexer_lst_utils.c lexer/quotes.c \
@@ -45,3 +45,5 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+#valgrind --suppressions=readline.supp --track-fds=all --leak-check=full --show-leak-kinds=all --track-origins=yes  ./minishell

@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/18 15:43:25 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:16:49 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ typedef	struct s_shelgon
 	char			**envr;
 	int				cmd_root;
 	int				status;
-	t_env			*env;
+	struct s_env	*env;
 }	t_shelgon;
 
 void	execute_command(char *command, char **env);

@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:34:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/18 15:42:08 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/19 16:49:50 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,17 @@ void	ft_error(int flg, t_exegg *exe)
 
 t_branch	*msh_lstlast(t_branch *lst)
 {
-	t_branch	*next;
+	t_branch	*ls;
 
-	printf("a\n");
-	if (lst == NULL)
-		return (0);
-	printf("b\n");
-	next = lst -> next;
-	printf("c\n");
-	while (next != NULL)
+	ls = lst;
+	if (ls != NULL)
 	{
-		printf("d\n");
-		lst = next;
-		next = lst -> next;
-		printf("e\n");
+		while (ls)
+			ls = ls->next;
 	}
-	printf("f\n");
-	
-	return (lst);
+	else
+		return (NULL);
+	return (ls);
 }
 
 static char	**freethem(char **ss)
