@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:32:23 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/19 15:40:02 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:30:49 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	ms_addnode(t_env **arr, char *s)
 	else
 	{
 		temp = ms_lstlast(*arr);
-		node->prev = temp;
 		temp->next = node;
+		node->prev = temp;
 	}
 }
 

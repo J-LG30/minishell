@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:34:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/19 16:49:50 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:00:54 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_branch	*msh_lstlast(t_branch *lst)
 	ls = lst;
 	if (ls != NULL)
 	{
-		while (ls)
+		while (ls && ls->next)
 			ls = ls->next;
 	}
 	else

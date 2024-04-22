@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/19 17:09:27 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:01:45 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 	t_branch	*cur;
 	t_branch	*last;
 	int			no_cmds;
+	static int	i = 0;
 
 	temp = tree;
 	no_cmds = 1;
@@ -207,6 +208,7 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 				last->next = cur;
 				cur->prev = last;
 			}
+			i++;
 			no_cmds = 0;
 		}
 		else if (temp && temp->type == REDIR_DELIMIT)
@@ -229,26 +231,26 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 				cur->prev = last;
 			}
 		}
-		else if (temp && temp->type != PIPE && temp->type != WORD && temp->type != REDIR_DELIMIT)
-		{
-			// cur = malloc(sizeof(t_branch) * 1);
-			cur = ft_calloc(1, sizeof(t_branch));
-			if (!cur)
-				return (0);
-			cur->ref = temp;
-			if(!(*cmds))
-			{
-				*cmds = cur;
-				cur->prev = NULL;
-			}
-			else
-			{
-				last = msh_lstlast(*cmds);
-				last->next = cur;
-				cur->prev = last;
-			}
-		}
 		temp = temp->left;
+	}
+	if (temp && temp->type != PIPE && temp->type != WORD && temp->type != REDIR_DELIMIT)
+	{
+		// cur = malloc(sizeof(t_branch) * 1);
+		cur = ft_calloc(1, sizeof(t_branch));
+		if (!cur)
+			return (0);
+		cur->ref = temp;
+		if(!(*cmds))
+		{
+			*cmds = cur;
+			cur->prev = NULL;
+		}
+		else
+		{
+			last = msh_lstlast(*cmds);
+			last->next = cur;
+			cur->prev = last;
+		}
 	}
 	if (cur)
 		cur->next = NULL;

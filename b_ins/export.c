@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/19 16:28:27 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:48:02 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,5 @@ void	export(t_branch *cmds, t_shelgon *shell)
 		print_exp(shell);
 	else
 		add_export(cmds->full_cmd, shell);
-	exit(0);
+	return ;
 }
