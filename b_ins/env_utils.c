@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:32:23 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/15 18:59:32 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:16:20 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,25 @@ t_env	*ms_lstadd(char *s)
 		node->prev = NULL;
 	}
 	return (node);
+}
+
+void	ms_addexp(t_env **arr, char *s)
+{
+	t_env	*node;
+	t_env	*temp;
+
+	node = ms_lstadd(s);
+	node->prnt = 0;
+	if (!node)
+		return ;
+	if (*arr == NULL)
+		(*arr) = node;
+	else
+	{
+		temp = ms_lstlast(*arr);
+		node->prev = temp;
+		temp->next = node;
+	}
 }
 
 void	ms_addnode(t_env **arr, char *s)

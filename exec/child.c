@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/19 17:35:10 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:17:27 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		close(exe->fd_out);
 	if (exe->dup_fd[0] < 0 || exe->dup_fd[1] < 0)
 		ft_error(1, exe);
-	if (cmds->ref && cmds->ref->type == WORD)
+	if (cmds->ref && cmds->ref->type == WORD && !is_btin(cmds->full_cmd[0]))
 	{
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 		if (!cmds->cmd)
@@ -69,10 +69,13 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 			exit (1);
 		}
 	}
+	if (is_btin(cmds->full_cmd[0]))
+		run_btin(tree, exe, cmds);
 	else
-		exit (0);
-	execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
-	ft_putendl_fd("Error executing command", 2);
+	{
+		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
+		ft_putendl_fd("Error executing command", 2);
+	}
 }
 
 void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)

@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/19 19:30:51 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:20:35 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,13 @@ void	wait_loop(char **envp)
 	t_token 	*token;
 	t_shelgon	*shelgon;
 	t_token		*temp;
-	t_env		*envir;
 
 	shelgon = malloc(sizeof(t_shelgon) * 1);
 	if (!shelgon)
 		return ;
 	shelgon->status = 0;
 	save_env(envp, shelgon);
-	envir = env(envp, 0);
+	shelgon->env = env(shelgon, envp, 1);
 	while (1)
 	{	
 		set_prompt_handler();
@@ -79,7 +78,7 @@ void	wait_loop(char **envp)
 		if (parser(token, &shelgon))
 		{
 			//print_tree(shelgon->tree);
-			exeggutor(shelgon->tree, shelgon, envir);
+			exeggutor(shelgon->tree, shelgon, shelgon->env);
 			free_ast(shelgon->tree);
 		}
 		free_tokens(token);

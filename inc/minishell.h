@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/18 13:06:24 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:15:34 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_env
 	struct s_env	*prev;
 	struct s_env	*next;
 	char			*vr;
+	char			*cpy;
+	int				prnt;
 }	t_env;
 
 typedef struct s_branch
@@ -104,6 +106,7 @@ typedef struct s_shelgon
 	char			**envr;
 	int				cmd_root;
 	int				status;
+	struct s_env	*env;
 }	t_shelgon;
 
 //void	execute_command(char *command, char **env);
@@ -163,10 +166,14 @@ char		**ms_split(char const *s, char c);
 char		*try_cmd(char *cargs, char **cpath);
 
 //Built in functions
-t_env		*env(char **envp, int flg);
-void		print_list(t_env *arr);
-void		ms_addnode(t_env **arr, char *s);
-t_env		*ms_lstadd(char *s);
+int		is_btin(char *cmds);
+void	run_btin(t_ast *tree, t_exegg *exe, t_branch *cmds);
+t_env	*env(t_shelgon *shell, char **envp, int flg);
+void	print_list(t_env *arr);
+void	ms_addnode(t_env **arr, char *s);
+void	ms_addexp(t_env **arr, char *s);
+t_env	*ms_lstadd(char *s);
+void	export(t_branch *cmds, t_shelgon *shell);
 
 /*DEBUGGING*/
 void		print_tree(t_ast *root);

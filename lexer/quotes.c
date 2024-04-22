@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/19 19:53:02 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:10:03 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,89 @@ void	rm_quotes(t_token *token)
 	// token->value = new_val;
 //}
 
+//j is the index to env str with var, or -1 if n/a, or 0 if its $? special case
+int	var_status(char *str, char **env)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	if (str[0] == '_')
+		return (-1);
+	while (ft_isalnum(str[i]) || str[i] == '_')
+		i++;
+	j = 0;
+	while (env[j])
+	{
+		if (!ft_strncmp(str, env[j], i) && env[j][i] == '=')
+			return (j);
+		if (!ft_strncmp(str, "$?", i))
+			return (0);
+		j++;
+	}
+	return (-1);
+}
+
+char	*expanded(char *line, char *tok_str, int index)
+{
+	int		i;
+	int		j;
+	char	*new;
+	char	*trim_l;
+
+	i = 0;
+	trim_l = ft_strchr(line, '=');
+	if (!trim_l)
+		return (NULL);
+	trim_l++;
+	while (line[i] && line[i] != '=')
+		i++;
+	//printf("%s\n", trim_l);
+	// printf("clam\n");
+	// if (!line[i])
+	// 	return (NULL);
+	// j = i;
+	// while (line[j])
+	// 	j++;
+	new = malloc(sizeof(char) * (ft_strlen(tok_str) + ft_strlen(trim_l) - i + 2));
+	if (!new)
+		return (NULL);
+	ft_memset(new, '0', ft_strlen(tok_str) + ft_strlen(trim_l) - i + 2);
+	new[ft_strlen(tok_str) + ft_strlen(trim_l) - i + 1] = '\0';
+	//printf("%s\n", new);
+	//printf("%i\n", index);
+	ft_strlcpy(new, tok_str, index);
+	printf("%s\n", new);
+	// printf("%s\n", trim_l);
+	// printf("%zu\n", ft_strlen(trim_l));
+	ft_strlcat(new, trim_l, ft_strlen(trim_l));
+	printf("%s\n", new);
+	tok_str = ft_strchr(tok_str, '$');
+	// while (ft_isalnum(tok_str[i]) || tok_str[i] == '_')
+	// 	i++;
+	while (i-- > 0)
+		tok_str++;
+	ft_strlcat(new, tok_str, ft_strlen(tok_str));
+	// while (tok_str[j])
+	// {
+	// 	if (j >= index)
+	// 	{
+	// 		while (line[i])
+	// 		{
+	// 			new[j] = line[i];
+	// 			i++;
+	// 			j++;
+	// 		}
+	// 	}
+	// 	new[j] = tok_str[j];
+	// 	j++;
+	// }
+	// new[j] = '\0';
+	printf("%s\n", new);
+	return (new);
+	
+}
+
 //might remove a token if it cant expand instead we shall see
 void	expansion(t_token *token, t_shelgon *shelgon)
 {
@@ -185,39 +268,82 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 	int		j;
 	char	**env;
 	char	*new_val;
-	char	*temp;
+	int		expand;
 
 	env = shelgon->envr;
 	j = 0;
+	expand = 1;
 	while (token->value[j])
 	{
-		if (token->value[j] == '$')
+		if (token->value[j] == '\'')
+			expand *= -1;
+		else if (token->value[j] == '$' && expand)
 		{
-			i = 0;
-			while (env[i])
+			i = var_status(&token->value[j + 1], env);
+			if (i == -1)
+				return ;
+			if (i > 0)
 			{
-				temp = &token->value[j + 1];
-				if (!ft_strncmp(temp, env[i], ft_strlen(temp))
-					&& env[i][ft_strlen(temp)] == '=')
-				{
-					new_val = malloc(sizeof(char)
-							* (ft_strlen(env[i]) - ft_strlen(temp)));
-					j = ft_strlen(temp);
-					temp = &env[i][j + 1];
-					ft_strlcpy(new_val, temp, ft_strlen(temp) + 1);
-					free(token->value);
-					token->value = new_val;
+				//printf("%i\n");
+				if (j - 1 > 0)
+					new_val = expanded(env[i], token->value, j + 1);
+				else
+					new_val = expanded(env[i], token->value, j + 1);
+				if (!new_val)
 					return ;
-				}
-				i++;
+				free(token->value);
+				token->value = new_val;
 			}
-			free(token->value);
-			token->value = malloc(sizeof(char) * 1);
-			token->value[0] = '\0';
+	
 		}
 		j++;
 	}
 }
+
+// //might remove a token if it cant expand instead we shall see
+// void	expansion(t_token *token, t_shelgon *shelgon)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	**env;
+// 	char	*new_val;
+// 	char	*temp;
+// 	int		expand;
+
+// 	env = shelgon->envr;
+// 	j = 0;
+// 	expand = 1;
+// 	while (token->value[j])
+// 	{
+// 		if (token->value[j] == '\'')
+// 			expand *= -1;
+// 		else if (token->value[j] == '$' && expand)
+// 		{
+// 			i = 0;
+// 			while (env[i])
+// 			{
+// 				temp = &token->value[j + 1];
+// 				if (!ft_strncmp(temp, env[i], ft_strlen(temp))
+// 					&& env[i][ft_strlen(temp)] == '=')
+// 				{
+// 					new_val = malloc(sizeof(char)
+// 							* (ft_strlen(env[i]) - ft_strlen(temp)));
+// 					j = ft_strlen(temp);
+// 					temp = &env[i][j + 1];
+// 					ft_strlcpy(new_val, temp, ft_strlen(temp) + 1);
+// 					free(token->value);
+// 					token->value = new_val;
+// 					return ;
+// 				}
+// 				i++;
+// 			}
+// 			free(token->value);
+// 			token->value = malloc(sizeof(char) * 1);
+// 			token->value[0] = '\0';
+// 		}
+// 		j++;
+// 	}
+// }
 
 //print error message
 int	handle_word(t_token *token, t_shelgon *shelgon)
@@ -227,16 +353,17 @@ int	handle_word(t_token *token, t_shelgon *shelgon)
 		ft_putstr_fd("Error: Unclosed quotes\n", 2);
 		return (1);
 	}
-	rm_quotes(token);
-	if (token->type != S_STR && !ft_strcmp(token->value, "$?"))
-	{
-		free(token->value);
-		token->value = ft_itoa(shelgon->status);
-	}
+	// if (token->type != S_STR && !ft_strcmp(token->value, "$?"))
+	// {
+	// 	free(token->value);
+	// 	token->value = ft_itoa(shelgon->status);
+	// }
 	// else if (token->type != S_STR)
 	// {
-	// 	expansion(token, shelgon);
+	expansion(token, shelgon);
+	// printf("%s\n", token->value);
 	// }
+	rm_quotes(token);
 	token->type = WORD;
 	return (0);
 }
