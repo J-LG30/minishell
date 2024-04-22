@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/22 15:48:02 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/22 17:58:17 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,30 +81,36 @@ static int	parse_arg(char *str)
 	return (1);
 }
 
-/* static int	args_exist(char *str, t_env *env)
+static int	args_exist(char *str, t_env *env)
 {
 	t_env	*tmp;
 	t_env	*new;
 	int		i;
 	int		flg;
 
-	tmp = env;
 	i = 0;
 	flg = 0;
-	while (str[i])
-	{
-		if (str[i] == '=')
-			flg = 1;
+	tmp = env;
+	while (str[i] && str[i] != '=')
 		i++;
-	}
+	if (str[i] == '=')
+		flg = 1;
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->vr, str, ft_strlen(str)) && flg)
+		if (tmp && (ft_strncmp(str, tmp->vr, i) == 0) && flg)
 		{
-			
+			free(tmp->vr);
+			free(tmp->cpy);
+			tmp->vr = ft_strdup(str);
+			tmp->cpy = ft_strdup(str);
+			return (0);
 		}
+		else if (tmp && tmp->vr && (ft_strncmp(str, tmp->vr, i) == 0) && !(flg))
+			return (0);
+		tmp = tmp->next;
 	}
-} */
+	return (1);
+}
 
 static void	add_export(char **args, t_shelgon *shell)
 {
@@ -118,7 +124,7 @@ static void	add_export(char **args, t_shelgon *shell)
 	{
 		j = -1;
 		flg = 0;
-		if (parse_arg(args[i]) /* args_exist(args[i], shell->env) */)
+		if (parse_arg(args[i]) && args_exist(args[i], shell->env))
 		{
 			while (++j < ft_strlen(args[i]))
 			{
