@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+         #
+#    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/19 17:07:38 by davda-si         ###   ########.fr        #
+#    Updated: 2024/04/23 17:50:30 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = @cc
 FLAGS = -Wall -Wextra -Werror -g -fsanitize=address #-static-libsan
 LIB = -lreadline
 
-SRCS = 	main.c lexer/lexer.c lexer/lexer_lst_utils.c lexer/quotes.c \
+SRCS = 	main.c lexer/lexer.c lexer/lexer_lst_utils.c lexer/quotes.c parser/connect_tree.c \
 		parser/parser.c parser/ast_helper.c parser/command.c parser/command_production.c \
 		parser/redirections.c parser/print_ast.c parser/free_ast.c exec/child.c exec/exe.c \
 		b_ins/env.c b_ins/env_utils.c b_ins/export.c \
@@ -26,7 +26,15 @@ OBJS = $(SRCS:.c=.o)
 LIBFT_DIR = libft
 LIBFT_A = $(LIBFT_DIR)/libft.a
 
+#version for my mac
+#LIB_DIR = -L /usr/local/opt/readline/lib
+
 all: $(NAME)
+
+#version for my mac
+
+#$(NAME): $(OBJS) $(LIBFT_A)
+#	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o $(@) $(LIB) $(LIB_DIR) -I /usr/local/opt/readline/include
 
 $(NAME): $(OBJS) $(LIBFT_A)
 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o $(@) $(LIB)

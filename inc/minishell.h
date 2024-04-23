@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/19 17:16:49 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:37:04 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,43 +112,43 @@ typedef	struct s_shelgon
 void	execute_command(char *command, char **env);
 
 /* LEXER FUNCTIONS */
-t_token	*ft_tokenlast(t_token *lst);
-void	ft_tokenadd_back(t_token **lst, t_token *new);
-t_token	*ft_new_token();
-t_token	*token_type_exists(t_token *lst, int type);
-int		is_token_type(t_token *token, int type);
-t_token *tokenize(char *line, t_shelgon *shelgon);
-void	free_tokens(t_token *head);
-int		unclosed_quotes(t_token *token);
-void	rm_quotes(t_token *token);
-void	expansion(t_token *token, t_shelgon *shelgon);
-int		handle_word(t_token *token, t_shelgon *shelgon);
+t_token		*ft_tokenlast(t_token *lst);
+void		ft_tokenadd_back(t_token **lst, t_token *new);
+t_token		*ft_new_token(void);
+t_token		*token_type_exists(t_token *lst, int type);
+int			is_token_type(t_token *token, int type);
+t_token		*tokenize(char *line, t_shelgon *shelgon);
+void		free_tokens(t_token *head);
+int			unclosed_quotes(t_token *token);
+void		rm_quotes(t_token *token);
+void		expansion(t_token *token, t_shelgon *shelgon);
+int			handle_word(t_token *token, t_shelgon *shelgon);
 
 /* PARSER FUNCTIONS*/
-t_ast	*parser(t_token *head, t_shelgon **shelgon);
-t_ast 	*new_node_init();
-t_ast	*new_pipe_node();
-t_ast	*new_word_node(t_token *token);
-t_ast	*new_redir_node(t_token *token);
-t_ast	*new_env_node(t_token *token);
-t_ast	*new_end_node();
-void	free_ast(t_ast	*tree);
+t_ast		*parser(t_token *head, t_shelgon **shelgon);
+t_ast		*new_node_init(void);
+t_ast		*new_pipe_node(t_token *token);
+t_ast		*new_word_node(t_token *token);
+t_ast		*new_redir_node(t_token *token);
+t_ast		*new_env_node(t_token *token);
+t_ast		*new_end_node(void);
+void		free_ast(t_ast	*tree);
 
 /*SIGNALS*/
-void	sig_handler(int sig);
-void	child_sig_handler(int sig);
-void	set_prompt_handler();
-void	set_child_handler();
+void		sig_handler(int sig);
+void		child_sig_handler(int sig);
+void		set_prompt_handler(void);
+void		set_child_handler(void);
 
 //command productions
-t_ast	*create_command(t_token *head, t_shelgon **shelgon);
-t_ast   *command_word(t_shelgon **shelgon);
-t_ast   *command_prefix(t_shelgon **shelgon);
-t_ast   *command_suffix(t_shelgon **shelgon);
+t_ast		*create_command(t_token *head, t_shelgon **shelgon);
+t_ast		*command_word(t_shelgon **shelgon);
+t_ast		*command_prefix(t_shelgon **shelgon);
+t_ast		*command_suffix(t_shelgon **shelgon);
 
 //redirection productions
-t_ast	*create_redirectout(t_shelgon **shelgon);
-t_ast	*create_redirectin(t_shelgon **shelgon);
+t_ast		*create_redirectout(t_shelgon **shelgon);
+t_ast		*create_redirectin(t_shelgon **shelgon);
 
 //executor functions
 int		exeggutor(t_ast	*tree, t_shelgon *shelgon, t_env *env);
