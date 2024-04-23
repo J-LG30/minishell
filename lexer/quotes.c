@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/22 20:10:03 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:20:53 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ char	*expanded(char *line, char *tok_str, int index)
 	int		j;
 	char	*new;
 	char	*trim_l;
+	size_t	size;
 
 	i = 0;
 	trim_l = ft_strchr(line, '=');
@@ -215,32 +216,23 @@ char	*expanded(char *line, char *tok_str, int index)
 	trim_l++;
 	while (line[i] && line[i] != '=')
 		i++;
-	//printf("%s\n", trim_l);
-	// printf("clam\n");
-	// if (!line[i])
-	// 	return (NULL);
-	// j = i;
-	// while (line[j])
-	// 	j++;
-	new = malloc(sizeof(char) * (ft_strlen(tok_str) + ft_strlen(trim_l) - i + 2));
+	size = ft_strlen(tok_str) + ft_strlen(trim_l) - i + 2;
+	new = malloc(sizeof(char) * size);
 	if (!new)
 		return (NULL);
-	ft_memset(new, '0', ft_strlen(tok_str) + ft_strlen(trim_l) - i + 2);
-	new[ft_strlen(tok_str) + ft_strlen(trim_l) - i + 1] = '\0';
+	ft_memset(new, 'a', size);
+	new[size - 1] = '\0';
 	//printf("%s\n", new);
-	//printf("%i\n", index);
 	ft_strlcpy(new, tok_str, index);
-	printf("%s\n", new);
-	// printf("%s\n", trim_l);
-	// printf("%zu\n", ft_strlen(trim_l));
-	ft_strlcat(new, trim_l, ft_strlen(trim_l));
-	printf("%s\n", new);
-	tok_str = ft_strchr(tok_str, '$');
+	//printf("%s\n", new);
+	//printf("%zu\n", ft_strlen(trim_l) + 1);
+	ft_strlcat(new, trim_l, size);
+	//printf("%s\n", new);
 	// while (ft_isalnum(tok_str[i]) || tok_str[i] == '_')
 	// 	i++;
-	while (i-- > 0)
+	while (index + i-- > 0)
 		tok_str++;
-	ft_strlcat(new, tok_str, ft_strlen(tok_str));
+	ft_strlcat(new, tok_str, size);
 	// while (tok_str[j])
 	// {
 	// 	if (j >= index)
@@ -256,9 +248,33 @@ char	*expanded(char *line, char *tok_str, int index)
 	// 	j++;
 	// }
 	// new[j] = '\0';
-	printf("%s\n", new);
+	// printf("%s\n", new);
 	return (new);
 	
+}
+
+char	*ft_rm_substr(char *str, int start, int end)
+{
+	char	*new;
+	int		i;
+	int		j;
+
+	new = malloc(sizeof(char) * (ft_strlen(str) - (end - start) + 1));
+	if (!new)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (i < start || i > end)
+		{
+			new[j] = str[i];
+			j++;
+		}
+		i++;
+	}
+	new[j] = '\0';
+	return (new);
 }
 
 //might remove a token if it cant expand instead we shall see
@@ -281,20 +297,25 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 		{
 			i = var_status(&token->value[j + 1], env);
 			if (i == -1)
-				return ;
-			if (i > 0)
 			{
-				//printf("%i\n");
-				if (j - 1 > 0)
-					new_val = expanded(env[i], token->value, j + 1);
-				else
-					new_val = expanded(env[i], token->value, j + 1);
+				i = j + 1;
+				while(ft_isalnum(token->value[i]) || token->value[i] == '_')
+					i++;
+				new_val = ft_rm_substr(token->value, j, i - 1);
+				printf("%s\n", new_val);
+				free(token->value);
+				token->value = new_val;
+				j = (j + 1 - i);
+			}
+			else if (i > 0)
+			{
+				//printf("str index: %c\n", 		token->value[j + 1]);
+				new_val = expanded(env[i], token->value, j + 1);
 				if (!new_val)
 					return ;
 				free(token->value);
 				token->value = new_val;
 			}
-	
 		}
 		j++;
 	}
@@ -364,6 +385,7 @@ int	handle_word(t_token *token, t_shelgon *shelgon)
 	// printf("%s\n", token->value);
 	// }
 	rm_quotes(token);
+	//printf("%s\n", token->value);
 	token->type = WORD;
 	return (0);
 }
