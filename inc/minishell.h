@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/19 17:16:49 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:42:47 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,13 +167,14 @@ char	*try_cmd(char *cargs, char **cpath);
 
 //Built in functions
 int		is_btin(char *cmds);
-void	run_btin(t_ast *tree, t_exegg *exe, t_branch *cmds);
-t_env	*env(t_shelgon *shell, char **envp, int flg);
+void	run_btin(t_ast *tree, t_exegg *exe, t_branch *cmds, int flg);
+t_env	*env(t_shelgon *shell, char **envp, int flg, int rexit);
 void	print_list(t_env *arr);
 void	ms_addnode(t_env **arr, char *s);
 void	ms_addexp(t_env **arr, char *s);
 t_env	*ms_lstadd(char *s);
-void	export(t_branch *cmds, t_shelgon *shell);
+void	export(t_branch *cmds, t_shelgon *shell, int flg);
+void	echo(char **cmds, int flg);
 
 /*DEBUGGING*/
 void	print_tree(t_ast *root);

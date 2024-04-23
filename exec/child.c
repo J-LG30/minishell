@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/22 16:01:45 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:32:45 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		}
 	}
 	if (is_btin(cmds->full_cmd[0]))
-		run_btin(tree, exe, cmds);
+		run_btin(tree, exe, cmds, 0);
 	else
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
@@ -94,7 +94,7 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		ft_putendl_fd("end\n", 2);
 		ft_error(0, exe);
 	}
-	if (cmds->ref && cmds->ref->type == WORD)
+	if (cmds->ref && cmds->ref->type == WORD && !(is_btin(cmds->full_cmd[0])))
 	{
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 		if (!cmds->cmd)
@@ -103,11 +103,13 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 			exit (1);
 		}
 	}
+	if (is_btin(cmds->full_cmd[0]))
+		run_btin(tree, exe, cmds, 0);
 	else
-		exit (0);
-	//ft_putendl_fd("debugin", 2);
-	execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
-	ft_putendl_fd("Error executing command", 2);
+	{
+		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
+		ft_putendl_fd("Error executing command", 2);
+	}
 	exit (1);
 }
 
@@ -120,7 +122,7 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)
 		ft_error(1, exe);
-	if (cmds->ref && cmds->ref->type == WORD)
+	if (cmds->ref && cmds->ref->type == WORD && !(is_btin(cmds->full_cmd[0])))
 	{
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 		if (!cmds->cmd)
@@ -129,10 +131,13 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 			exit (1);
 		}
 	}
+	if (is_btin(cmds->full_cmd[0]))
+		run_btin(tree, exe, cmds, 0);
 	else
-		exit (0);
-	execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
-	ft_putendl_fd("Error executing command", 2);
+	{
+		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
+		ft_putendl_fd("Error executing command", 2);
+	}
 	//ft_freech(exe);
 	exit (1);
 }

@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:04:37 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/22 17:24:28 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:07:41 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_strcmp(char *str1, char *str2)
 	i = 0;
 	if (!str1 || !str2)
 		return (0);
-	while (str1[i] && str2[2] && str1[i] == str2[i])
+	while (str1[i] && str2[i] && str1[i] == str2[i])
 		i++;
 	return (str1[i] - str2[i]);
 }

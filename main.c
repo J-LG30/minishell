@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/19 15:57:52 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:37:05 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	wait_loop(char **envp)
 		return ;
 	shelgon->status = 0;
 	save_env(envp, shelgon);
-	shelgon->env = env(shelgon, envp, 1);
+	shelgon->env = env(shelgon, envp, 1, 1);
 	// for (int i = 0; shelgon->envr[i]; i++)
 	// 	printf("env[%d] = %s\n", i, shelgon->envr[i]);
 	while (1)

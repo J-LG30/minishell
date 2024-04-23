@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/22 17:58:17 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:32:56 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	parse_arg(char *str)
 	int	i;
 
 	i = 0;
-	if (ft_isdigit(str[0]))
+	if (ft_isdigit(str[0]) || !ft_isalpha(str[0]))
 		return (0);
 	while (str[i])
 	{
@@ -141,11 +141,13 @@ static void	add_export(char **args, t_shelgon *shell)
 	}
 }
 
-void	export(t_branch *cmds, t_shelgon *shell)
+void	export(t_branch *cmds, t_shelgon *shell, int flg)
 {
 	if (!cmds->full_cmd[1])
 		print_exp(shell);
 	else
 		add_export(cmds->full_cmd, shell);
-	return ;
+	if (flg)
+		return ;
+	exit(1);
 }
