@@ -6,7 +6,7 @@
 #    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/22 19:57:02 by jle-goff         ###   ########.fr        #
+#    Updated: 2024/04/23 16:22:38 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,9 @@ NAME = minishell
 CC = @cc
 FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address -static-libsan
 LIB = -lreadline
+
+#version for my mac
+LIB_DIR = -L /usr/local/opt/readline/lib
 
 SRCS = 	main.c lexer/lexer.c lexer/lexer_lst_utils.c lexer/quotes.c \
 		parser/parser.c parser/ast_helper.c parser/connect_tree.c \
@@ -29,8 +32,12 @@ LIBFT_A = $(LIBFT_DIR)/libft.a
 
 all: $(NAME)
 
+#version for my mac
 $(NAME): $(OBJS) $(LIBFT_A)
-	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o $(@) $(LIB)
+	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o $(@) $(LIB) $(LIB_DIR) -I /usr/local/opt/readline/include
+
+# $(NAME): $(OBJS) $(LIBFT_A)
+# 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o $(@) $(LIB)
 
 $(LIBFT_A):
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)
