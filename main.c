@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/24 11:57:21 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/24 16:29:17 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	wait_loop(char **envp)
 		}
 		free_tokens(token);
 	}
-	free(shelgon);
+	free_shelgon(shelgon);
 }
 
 int	main(int argc, char **argv, char **envp)
