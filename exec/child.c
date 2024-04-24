@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/24 15:28:11 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/24 16:37:19 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,8 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	find_redir(cmds->ref, exe, cmds);
-	ft_putendl_fd("Got in", 2);
-	if (exe->fd_out == exe->fd[1] || cmds->next->ref->type != WORD)
-	{
+	if (exe->fd_out == exe->fd[1] || (cmds->next && cmds->next->ref->type != WORD))
 		exe->fd_out = STDOUT_FILENO;
-	}
 	if (exe->fd_out != STDOUT_FILENO)
 		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);

@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:06:50 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/24 15:49:22 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/24 18:44:40 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,10 @@ void	echo(char **cmds, int rexit)
 	int	flg;
 
 	i = 0;
+	if (!cmds[1])
+		ft_putchar_fd('\n', 2);
 	if (check_args(cmds))
 	{
-		printf("\n");
 		if (rexit)
 			return ;
 		exit (0);

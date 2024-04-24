@@ -3,14 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/24 15:41:15 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/24 18:44:53 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static void	only_redir(t_ast *tree, t_exegg *exe)
+{
+	t_ast	*temp;
+
+	temp = tree;
+	exe->fd_in = STDIN_FILENO;
+	exe->fd_out = STDOUT_FILENO;
+	if (temp && temp->type == REDIR_IN)
+	{
+		if (exe->fd_in != STDIN_FILENO)
+			close(exe->fd_in);
+		exe->in_value = temp->value;
+		exe->fd_in = open(exe->in_value, O_RDONLY);
+	}
+	else if (temp && temp->type == REDIR_OUT)
+	{
+		exe->out_value = temp->value;
+		exe->fd_out = open(exe->out_value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	}
+	else if (temp && temp->type == REDIR_APP)
+	{
+		exe->out_value = temp->value;
+		exe->fd_out = open(exe->out_value, O_CREAT | O_APPEND | O_WRONLY, 0644);
+	}
+}
 
 int	ft_heredoc(t_ast *tree)
 {
@@ -73,9 +99,31 @@ static void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 
 static void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
-	if (is_btin(cmds->full_cmd[0]) && (!cmds->next) && (!cmds->prev))
+	int	saved_fileout[2];
+	if (is_btin(cmds->full_cmd[0]) && (!cmds->next || cmds->next->ref->type != WORD) && (!cmds->prev))
 	{
+		saved_fileout[0] = STDIN_FILENO;
+		saved_fileout[1] = STDOUT_FILENO;
+		find_redir(tree, exe, cmds);
+		if (((!cmds->next || cmds->next->ref->type != WORD) && !(tree && (tree->type == PIPE)) && exe->fd_out == saved_fileout[1]))
+			exe->fd_out = STDOUT_FILENO;
+		if (exe->fd_in != STDIN_FILENO)
+			exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
+		if (exe->fd_out != STDOUT_FILENO)
+			exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
+		if (exe->fd_in != STDIN_FILENO)
+			close(exe->fd_in);
+		if (exe->fd_out != STDOUT_FILENO)
+			close(exe->fd_out);
 		run_btin(tree, exe, cmds, 1);
+		if (cmds->prev == NULL && exe->fd_in != STDIN_FILENO)
+			close(exe->fd_in);
+		else if ((cmds->next == NULL || (cmds->next && cmds->next->ref->type != WORD)) && exe->fd_out != STDOUT_FILENO)
+			close(exe->fd_out);
+		if (exe->last_fd != STDIN_FILENO)
+			close(exe->last_fd);
+		dup2(exe->fd_out, saved_fileout[0]);
+		dup2(exe->fd_in, saved_fileout[1]);
 		return ;
 	}
 	else if (pipe(exe->fd) == 0)
@@ -123,32 +171,6 @@ void	find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		exe->fd_out = exe->fd[1];
 }
 
-static void	only_redir(t_ast *tree, t_exegg *exe)
-{
-	t_ast	*temp;
-
-	temp = tree;
-	exe->fd_in = STDIN_FILENO;
-	exe->fd_out = STDOUT_FILENO;
-	if (temp && temp->type == REDIR_IN)
-	{
-		if (exe->fd_in != STDIN_FILENO)
-			close(exe->fd_in);
-		exe->in_value = temp->value;
-		exe->fd_in = open(exe->in_value, O_RDONLY);
-	}
-	else if (temp && temp->type == REDIR_OUT)
-	{
-		exe->out_value = temp->value;
-		exe->fd_out = open(exe->out_value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	}
-	else if (temp && temp->type == REDIR_APP)
-	{
-		exe->out_value = temp->value;
-		exe->fd_out = open(exe->out_value, O_CREAT | O_APPEND | O_WRONLY, 0644);
-	}
-}
-
 int	exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env)
 {
 	t_exegg		exe;
@@ -183,9 +205,7 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env)
 	}
 	int s;
 	while (--i >= 0)
-	{
 		wait(&s);
-	}
 	if (WIFEXITED(s))
 		shelgon->status = WEXITSTATUS(s);
 	else if (WIFSIGNALED(s))
@@ -195,6 +215,6 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env)
 		else if (WTERMSIG(s) == SIGQUIT)
 			shelgon->status = 131; 
 	}
-	free_exegg(&exe);
+	//free_exegg(&exe);
 	return (0);
 }
