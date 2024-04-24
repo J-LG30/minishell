@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/23 15:34:00 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/24 12:08:14 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	if (is_btin(cmds->full_cmd[0]) && (!cmds->next) && (!cmds->prev))
 	{
-		printf("got here only btin\n");
+		//printf("got here only btin\n");
 		run_btin(tree, exe, cmds, 1);
 		return ;
 	}

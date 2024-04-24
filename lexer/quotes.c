@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/23 17:49:18 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/24 12:40:34 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,33 +201,43 @@ int	var_status(char *str, char **env)
 	return (-1);
 }
 
-char	*expanded(char *line, char *tok_str, int index)
+char	*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index, int flag)
 {
 	int		i;
 	int		j;
 	char	*new;
 	char	*trim_l;
-	size_t	size;
-
+	int		size;
 	i = 0;
-	trim_l = ft_strchr(line, '=');
+	
+	if (flag)
+	{	
+		trim_l = ft_strchr(line, '=');
+		if (!trim_l)
+			return (NULL);
+		trim_l++;
+		while (line[i] && line[i] != '=')
+			i++;
+	}
+	else
+	{
+		trim_l = ft_itoa(shelgon->status);
+		i++;
+	}
 	if (!trim_l)
 		return (NULL);
-	trim_l++;
-	while (line[i] && line[i] != '=')
-		i++;
-	size = ft_strlen(tok_str) + ft_strlen(trim_l) - i + 2;
+	size = ft_strlen(tok_str) + ft_strlen(trim_l) - i + 1;
 	new = malloc(sizeof(char) * size);
 	if (!new)
 		return (NULL);
 	ft_memset(new, 'a', size);
 	new[size - 1] = '\0';
-	printf("%s\n", new);
+	//printf("%s\n", new);
 	ft_strlcpy(new, tok_str, index);
-	printf("%s\n", new);
-	printf("%zu\n", ft_strlen(trim_l) + 1);
+	//printf("%s\n", new);
+	//printf("%zu\n", ft_strlen(trim_l) + 1);
 	ft_strlcat(new, trim_l, size);
-	printf("%s\n", new);
+	//printf("%s\n", new);
 	// while (ft_isalnum(tok_str[i]) || tok_str[i] == '_')
 	// 	i++;
 	while (index + i-- > 0)
@@ -248,7 +258,9 @@ char	*expanded(char *line, char *tok_str, int index)
 	// 	j++;
 	// }
 	// new[j] = '\0';
-	printf("%s\n", new);
+	//printf("%s\n", new);
+	if (!flag)
+		free(trim_l);
 	return (new);
 	
 }
@@ -302,15 +314,15 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 				while(ft_isalnum(token->value[i]) || token->value[i] == '_')
 					i++;
 				new_val = ft_rm_substr(token->value, j, i - 1);
-				printf("%s\n", new_val);
+				//printf("%s\n", new_val);
 				free(token->value);
 				token->value = new_val;
 				j--;
 			}
-			else if (i > 0)
+			else
 			{
-				//printf("str index: %c\n", 		token->value[j + 1]);
-				new_val = expanded(env[i], token->value, j + 1);
+				//printf("str index: %c\n", 		token->value[j + 1])
+				new_val = expanded(shelgon, env[i], token->value, j + 1, i);
 				if (!new_val)
 					return ;
 				free(token->value);
@@ -318,7 +330,7 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 			}
 		}
 		j++;
-		printf("%c\n", token->value[j]);
+		//printf("%c\n", token->value[j]);
 	}
 }
 
