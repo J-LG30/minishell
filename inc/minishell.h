@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/23 15:42:47 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:06:08 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,8 @@ void	ms_addexp(t_env **arr, char *s);
 t_env	*ms_lstadd(char *s);
 void	export(t_branch *cmds, t_shelgon *shell, int flg);
 void	echo(char **cmds, int flg);
+void	pwd(int flg);
+void	cd(char *arg, int flg);
 
 /*DEBUGGING*/
 void	print_tree(t_ast *root);

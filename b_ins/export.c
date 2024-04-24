@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/23 16:32:56 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:34:26 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ static int	args_exist(char *str, t_env *env)
 			free(tmp->cpy);
 			tmp->vr = ft_strdup(str);
 			tmp->cpy = ft_strdup(str);
+			tmp->prnt = 1;
 			return (0);
 		}
 		else if (tmp && tmp->vr && (ft_strncmp(str, tmp->vr, i) == 0) && !(flg))

@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:06:50 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/23 18:30:21 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:16:25 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static void	print_it(char **cmds, int flg, int i)
 	if (flg == 1 || flg == 2)
 		printf("\n");
 }
+//FIX SEGFAULT IF: echo -n -n
 
 void	echo(char **cmds, int rexit)
 {
