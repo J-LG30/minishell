@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 14:04:37 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/23 14:07:41 by davda-si         ###   ########.fr       */
+/*   Created: 2024/04/23 18:35:42 by davda-si          #+#    #+#             */
+/*   Updated: 2024/04/23 18:52:30 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/minishell.h"
 
-int	ft_strcmp(char *str1, char *str2)
+void	pwd(int flg)
 {
-	int	i;
+	char	*cwd;
 
-	i = 0;
-	if (!str1 || !str2)
-		return (0);
-	while (str1[i] && str2[i] && str1[i] == str2[i])
-		i++;
-	return (str1[i] - str2[i]);
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		ft_putendl_fd("ERROR MESSAGE", 2);
+	else
+		printf("%s\n", cwd);
+	if (flg)
+		return ;
+	exit (1);
 }

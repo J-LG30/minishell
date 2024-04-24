@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:34:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/18 15:42:08 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:07:37 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,17 @@ void	ft_error(int flg, t_exegg *exe)
 
 t_branch	*msh_lstlast(t_branch *lst)
 {
-	t_branch	*next;
+	t_branch	*ls;
 
-	printf("a\n");
-	if (lst == NULL)
-		return (0);
-	printf("b\n");
-	next = lst -> next;
-	printf("c\n");
-	while (next != NULL)
+	ls = lst;
+	if (ls != NULL)
 	{
-		printf("d\n");
-		lst = next;
-		next = lst -> next;
-		printf("e\n");
+		while (ls && ls->next)
+			ls = ls->next;
 	}
-	printf("f\n");
-	
-	return (lst);
+	else
+		return (NULL);
+	return (ls);
 }
 
 static char	**freethem(char **ss)
@@ -157,38 +150,38 @@ char	**ms_split(char const *s, char c)
 
 int	is_btin(char *cmds)
 {
-	/* if (ft_strncmp(cmds, "echo", ft_strlen(cmds)) == 0)
-		return (1); */
-	if (ft_strncmp(cmds, "pwd", ft_strlen(cmds)) == 0)
+	if (ft_strcmp(cmds, "echo") == 0)
 		return (1);
-	else if (ft_strncmp(cmds, "cd", ft_strlen(cmds)) == 0)
+	if (ft_strcmp(cmds, "pwd") == 0)
 		return (1);
-	else if (ft_strncmp(cmds, "export", ft_strlen(cmds)) == 0)
+	else if (ft_strcmp(cmds, "cd") == 0)
 		return (1);
-	else if (ft_strncmp(cmds, "env", ft_strlen(cmds)) == 0)
+	else if (ft_strcmp(cmds, "export") == 0)
 		return (1);
-	else if (ft_strncmp(cmds, "unset", ft_strlen(cmds)) == 0)
+	else if (ft_strcmp(cmds, "env") == 0)
 		return (1);
-	else if (ft_strncmp(cmds, "exit", ft_strlen(cmds)) == 0)
+	else if (ft_strcmp(cmds, "unset") == 0)
+		return (1);
+	else if (ft_strcmp(cmds, "exit") == 0)
 		return (1);
 	else
 		return (0);
 }
 
-void	run_btin(t_ast *tree, t_exegg *exe, t_branch *cmds)
+void	run_btin(t_ast *tree, t_exegg *exe, t_branch *cmds, int flg)
 {
-	/* if (ft_strncmp(cmds->full_cmd[0], "echo", ft_strlen(cmds->full_cmd[0])) == 0)
-		return ; */
-	if (ft_strncmp(cmds->full_cmd[0], "pwd", ft_strlen(cmds->full_cmd[0])) == 0)
+	if (ft_strcmp(cmds->full_cmd[0], "echo") == 0)
+		echo(cmds->full_cmd, flg);
+	if (ft_strcmp(cmds->full_cmd[0], "pwd") == 0)
+		pwd(flg);
+	else if (ft_strcmp(cmds->full_cmd[0], "cd") == 0)
+		cd(cmds->full_cmd[1], flg);
+	else if (ft_strcmp(cmds->full_cmd[0], "export") == 0)
+		export(cmds, exe->pkcenter, flg);
+	else if (ft_strcmp(cmds->full_cmd[0], "env") == 0)
+		env(exe->pkcenter, exe->pkcenter->envr, 0, flg);
+	else if (ft_strcmp(cmds->full_cmd[0], "unset") == 0)
 		return ;
-	else if (ft_strncmp(cmds->full_cmd[0], "cd", ft_strlen(cmds->full_cmd[0])) == 0)
-		return ;
-	else if (ft_strncmp(cmds->full_cmd[0], "export", ft_strlen(cmds->full_cmd[0])) == 0)
-		export(cmds, exe->pkcenter);
-	else if (ft_strncmp(cmds->full_cmd[0], "env", ft_strlen(cmds->full_cmd[0])) == 0)
-		env(exe->pkcenter, exe->pkcenter->envr, 0);
-	else if (ft_strncmp(cmds->full_cmd[0], "unset", ft_strlen(cmds->full_cmd[0])) == 0)
-		return ;
-	else if (ft_strncmp(cmds->full_cmd[0], "exit", ft_strlen(cmds->full_cmd[0])) == 0)
+	else if (ft_strcmp(cmds->full_cmd[0], "exit") == 0)
 		return ;
 }

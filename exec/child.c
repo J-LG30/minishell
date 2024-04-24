@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/18 14:50:29 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:32:45 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		}
 	}
 	if (is_btin(cmds->full_cmd[0]))
-		run_btin(tree, exe, cmds);
+		run_btin(tree, exe, cmds, 0);
 	else
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
@@ -94,7 +94,7 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		ft_putendl_fd("end\n", 2);
 		ft_error(0, exe);
 	}
-	if (cmds->ref && cmds->ref->type == WORD)
+	if (cmds->ref && cmds->ref->type == WORD && !(is_btin(cmds->full_cmd[0])))
 	{
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 		if (!cmds->cmd)
@@ -103,11 +103,13 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 			exit (1);
 		}
 	}
+	if (is_btin(cmds->full_cmd[0]))
+		run_btin(tree, exe, cmds, 0);
 	else
-		exit (0);
-	//ft_putendl_fd("debugin", 2);
-	execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
-	ft_putendl_fd("Error executing command", 2);
+	{
+		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
+		ft_putendl_fd("Error executing command", 2);
+	}
 	exit (1);
 }
 
@@ -120,7 +122,7 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)
 		ft_error(1, exe);
-	if (cmds->ref && cmds->ref->type == WORD)
+	if (cmds->ref && cmds->ref->type == WORD && !(is_btin(cmds->full_cmd[0])))
 	{
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 		if (!cmds->cmd)
@@ -129,10 +131,13 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 			exit (1);
 		}
 	}
+	if (is_btin(cmds->full_cmd[0]))
+		run_btin(tree, exe, cmds, 0);
 	else
-		exit (0);
-	execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
-	ft_putendl_fd("Error executing command", 2);
+	{
+		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
+		ft_putendl_fd("Error executing command", 2);
+	}
 	//ft_freech(exe);
 	exit (1);
 }
@@ -147,7 +152,8 @@ t_branch	*node_cmd(t_ast *tree)
 	i = 0;
 	j = 1;
 	temp = tree;
-	new = malloc(sizeof(t_branch) * 1);
+	//new = malloc(sizeof(t_branch) * 1);
+	new = ft_calloc(1, sizeof(t_branch));
 	if (!new)
 		return (NULL);
 	if (temp->type == WORD)
@@ -184,6 +190,7 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 	t_branch	*cur;
 	t_branch	*last;
 	int			no_cmds;
+	static int	i = 0;
 
 	temp = tree;
 	no_cmds = 1;
@@ -206,11 +213,13 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 				last->next = cur;
 				cur->prev = last;
 			}
-		no_cmds = 0;
+			i++;
+			no_cmds = 0;
 		}
 		else if (temp && temp->type == REDIR_DELIMIT)
 		{
-			cur = malloc(sizeof(t_branch) * 1);
+			//cur = malloc(sizeof(t_branch) * 1);
+			cur = ft_calloc(1, sizeof(t_branch));
 			if (!cur)
 				return (0);
 			cur->pipe[0] = ft_heredoc(temp);
@@ -227,25 +236,26 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 				cur->prev = last;
 			}
 		}
-		else if (temp && temp->type != PIPE && temp->type != WORD && temp->type != REDIR_DELIMIT)
-		{
-			cur = malloc(sizeof(t_branch) * 1);
-			if (!cur)
-				return (0);
-			cur->ref = temp;
-			if(!(*cmds))
-			{
-				*cmds = cur;
-				cur->prev = NULL;
-			}
-			else
-			{
-				last = msh_lstlast(*cmds);
-				last->next = cur;
-				cur->prev = last;
-			}
-		}
 		temp = temp->left;
+	}
+	if (temp && temp->type != PIPE && temp->type != WORD && temp->type != REDIR_DELIMIT)
+	{
+		// cur = malloc(sizeof(t_branch) * 1);
+		cur = ft_calloc(1, sizeof(t_branch));
+		if (!cur)
+			return (0);
+		cur->ref = temp;
+		if(!(*cmds))
+		{
+			*cmds = cur;
+			cur->prev = NULL;
+		}
+		else
+		{
+			last = msh_lstlast(*cmds);
+			last->next = cur;
+			cur->prev = last;
+		}
 	}
 	if (cur)
 		cur->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/17 17:44:04 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:34:00 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,13 @@ static void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 
 static void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
-	if (pipe(exe->fd) == 0)
+	if (is_btin(cmds->full_cmd[0]) && (!cmds->next) && (!cmds->prev))
+	{
+		printf("got here only btin\n");
+		run_btin(tree, exe, cmds, 1);
+		return ;
+	}
+	else if (pipe(exe->fd) == 0)
 		which_child(tree, exe, cmds);
 	else
 	{
@@ -149,7 +155,7 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env)
 	t_exegg		exe;
 	t_branch	*cmds;
 	int			i;
-
+	
 	exe.fd_in = STDIN_FILENO;
 	exe.fd_out = STDOUT_FILENO;
 	exe.dup_fd[0] = STDIN_FILENO;

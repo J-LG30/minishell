@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:32:23 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/18 20:40:25 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:35:00 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_env	*ms_lstadd(char *s)
 	if (node)
 	{
 		node->vr = ft_strdup(s);
-		node->cpy = node->vr;
+		node->cpy = ft_strdup(s);
 		node->prnt = 1;
 		node->next = NULL;
 		node->prev = NULL;
@@ -46,7 +46,6 @@ void	ms_addnode(t_env **arr, char *s)
 	t_env	*temp;
 
 	node = ms_lstadd(s);
-	printf("%s\n", s);
 	if (!node)
 		return ;
 	if (*arr == NULL)
@@ -54,8 +53,8 @@ void	ms_addnode(t_env **arr, char *s)
 	else
 	{
 		temp = ms_lstlast(*arr);
-		node->prev = temp;
 		temp->next = node;
+		node->prev = temp;
 	}
 }
 

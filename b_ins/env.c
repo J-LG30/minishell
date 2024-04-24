@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:34:42 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/18 16:40:50 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:32:44 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,10 @@ static void	free_env(t_env *var)
 	free(var);
 }
 
-t_env	*env(t_shelgon *shell, char **envp, int flg)
+t_env	*env(t_shelgon *shell, char **envp, int flg, int retexit)
 {
 	t_env	*var;
 	int		i;
-	char	*test;
 
 	if (flg)
 	{
@@ -44,5 +43,7 @@ t_env	*env(t_shelgon *shell, char **envp, int flg)
 	}
 	else
 		print_list(shell->env);
-	return (NULL);
+	if (retexit)
+		return (NULL);
+	exit (0);
 }
