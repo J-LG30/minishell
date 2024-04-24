@@ -6,13 +6,14 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/23 15:37:05 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:57:21 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/minishell.h"
 volatile int	g_sig;
 
+extern int	rl_on_new_line(void);
 static void	save_env(char **envp, t_shelgon *shelgon)
 {
 	int	i;
@@ -53,7 +54,6 @@ void	wait_loop(char **envp)
 	{	
 		set_prompt_handler();
 		rl_on_new_line();
-		//line = readline("\U0001F975 minishell$ ");
 		line = readline("(੭｡╹▿╹｡)੭$ ");
 		add_history(line);
 		set_child_handler();
@@ -77,19 +77,14 @@ void	wait_loop(char **envp)
 		shelgon->list_token = token;
 		shelgon->current = token;
 		shelgon->top_root = NULL;
-		parser(token, &shelgon);
-		if (shelgon->tree)
+		if (parser(token, &shelgon))
 		{
 			//print_tree(shelgon->tree);
 			exeggutor(shelgon->tree, shelgon, shelgon->env);
 			free_ast(shelgon->tree);
 		}
-		else
-			printf("minishell: error with parsing\n");
 		free_tokens(token);
 	}
-	if (token)
-		free_tokens(token);
 	free(shelgon);
 }
 
