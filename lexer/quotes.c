@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/24 14:37:58 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/24 17:00:15 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	unclosed_quotes(t_token *token)
 		return (1);
 	return (0);
 }
+
 
 int	which_quote(t_token *token)
 {

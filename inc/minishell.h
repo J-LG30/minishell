@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/24 15:40:48 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/24 16:22:20 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,6 @@ int		ft_heredoc(t_ast *tree);
 t_branch	*msh_lstlast(t_branch *lst);
 char	**ms_split(char const *s, char c);
 char	*try_cmd(char *cargs, char **cpath);
-void	free_exegg(t_exegg *exe);
 
 //Built in functions
 int		is_btin(char *cmds);
@@ -179,6 +178,10 @@ void	export(t_branch *cmds, t_shelgon *shell, int flg);
 void	echo(char **cmds, int flg);
 void	pwd(int flg);
 void	cd(char *arg, int flg);
+
+/*FREEING*/
+void	free_shelgon(t_shelgon *sh);
+void	free_exegg(t_exegg *exe);
 
 /*DEBUGGING*/
 void	print_tree(t_ast *root);
