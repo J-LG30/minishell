@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/24 12:40:34 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:37:58 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,19 +183,27 @@ int	var_status(char *str, char **env)
 {
 	int	i;
 	int	j;
+	int	exit;
 
 	i = 0;
 	if (str[0] == '_')
-		return (-1);
+		return (-2);
+	if (str[0] == '?')
+		return (0);
 	while (ft_isalnum(str[i]) || str[i] == '_')
 		i++;
+	if (i == 0)
+		return (-2);
 	j = 0;
 	while (env[j])
 	{
 		if (!ft_strncmp(str, env[j], i) && env[j][i] == '=')
 			return (j);
-		if (!ft_strncmp(str, "$?", i))
-			return (0);
+		// else if (ft_strncmp(str, "$?", 2))
+		// {
+		// 	printf("yoshi\n");
+		// 	return (0);
+		// }
 		j++;
 	}
 	return (-1);
@@ -304,9 +312,15 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 	while (token->value[j])
 	{
 		if (token->value[j] == '\'')
-			expand *= -1;
-		else if (token->value[j] == '$' && expand)
 		{
+			//printf("haha\n");
+			expand *= -1;
+			//printf("%i\n", expand);
+		}
+		else if (token->value[j] == '$' && expand > 0)
+		{
+			// printf("oop\n");
+			//printf("%s\n", &token->value[j + 1]);
 			i = var_status(&token->value[j + 1], env);
 			if (i == -1)
 			{
@@ -319,7 +333,7 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 				token->value = new_val;
 				j--;
 			}
-			else
+			else if (i >= 0)
 			{
 				//printf("str index: %c\n", 		token->value[j + 1])
 				new_val = expanded(shelgon, env[i], token->value, j + 1, i);
@@ -398,6 +412,7 @@ int	handle_word(t_token *token, t_shelgon *shelgon)
 	// printf("%s\n", token->value);
 	// }
 	rm_quotes(token);
+	//rm_quotes(token);
 	//printf("%s\n", token->value);
 	token->type = WORD;
 	return (0);

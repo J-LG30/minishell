@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/23 15:32:45 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:28:11 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 
 	temp = tree;
 	find_redir(cmds->ref, exe, cmds);
-	if ((!cmds->next && !(temp && (temp->type == PIPE)) && exe->fd_out == exe->fd[1]))
+	if (((!cmds->next || cmds->next->ref->type != WORD) && !(temp && (temp->type == PIPE)) && exe->fd_out == exe->fd[1]))
 		exe->fd_out = STDOUT_FILENO;
 	if (exe->fd_in != STDIN_FILENO)
 		exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
@@ -65,8 +65,8 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 		if (!cmds->cmd)
 		{
-			ft_putendl_fd("Error with the command", 2);
-			exit (1);
+			ft_putendl_fd("command not found", 2);
+			exit (127);
 		}
 	}
 	if (is_btin(cmds->full_cmd[0]))
@@ -81,8 +81,11 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	find_redir(cmds->ref, exe, cmds);
-	if (exe->fd_out == exe->fd[1])
+	ft_putendl_fd("Got in", 2);
+	if (exe->fd_out == exe->fd[1] || cmds->next->ref->type != WORD)
+	{
 		exe->fd_out = STDOUT_FILENO;
+	}
 	if (exe->fd_out != STDOUT_FILENO)
 		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
@@ -99,8 +102,8 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 		if (!cmds->cmd)
 		{
-			ft_putendl_fd("Error with the command", 2);
-			exit (1);
+			ft_putendl_fd("command not found", 2);
+			exit (127);
 		}
 	}
 	if (is_btin(cmds->full_cmd[0]))
@@ -127,8 +130,8 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 		if (!cmds->cmd)
 		{
-			ft_putendl_fd("Error with the command", 2);
-			exit (1);
+			ft_putendl_fd("command not found", 2);
+			exit (127);
 		}
 	}
 	if (is_btin(cmds->full_cmd[0]))
@@ -218,10 +221,10 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 		}
 		else if (temp && temp->type == REDIR_DELIMIT)
 		{
-			//cur = malloc(sizeof(t_branch) * 1);
 			cur = ft_calloc(1, sizeof(t_branch));
 			if (!cur)
 				return (0);
+			ft_memset(cur, 0, 0);
 			cur->pipe[0] = ft_heredoc(temp);
 			cur->ref = temp;
 			if(!(*cmds))
@@ -244,6 +247,7 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 		cur = ft_calloc(1, sizeof(t_branch));
 		if (!cur)
 			return (0);
+		ft_memset(cur, 0, 0);
 		cur->ref = temp;
 		if(!(*cmds))
 		{

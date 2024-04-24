@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/24 11:55:16 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:40:48 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,17 @@ typedef struct s_exegg
 	struct s_env		*env;
 	struct s_branch		*cmd;
 	struct s_shelgon	*pkcenter;
-}			t_exegg;
+}	t_exegg;
 
 typedef struct s_token
 {
 	struct	s_token *prev;
 	struct	s_token *next;
 	char            *value;
+	char			*copy;
 	int				type;
 	int				error;
-}   t_token;
+}	t_token;
 
 typedef struct s_ast
 {
@@ -164,6 +165,7 @@ int		ft_heredoc(t_ast *tree);
 t_branch	*msh_lstlast(t_branch *lst);
 char	**ms_split(char const *s, char c);
 char	*try_cmd(char *cargs, char **cpath);
+void	free_exegg(t_exegg *exe);
 
 //Built in functions
 int		is_btin(char *cmds);
