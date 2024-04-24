@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:25 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/23 17:33:12 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:40:32 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ t_ast	*new_redir_node(t_token *token)
 	if (!new)
 		return (NULL);
 	new->type = token->type;
-	new->value = token->next->value;
+	if (token->type == REDIR_DELIMIT)
+		new->value = token->next->copy;
+	else
+		new->value = token->next->value;
 	return (new);
 }
 

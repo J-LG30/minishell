@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/23 17:30:11 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/24 14:25:00 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	str_token(t_token *token, int type, char *line, int i)
 		j++;
 	}
 	token->value = ft_substr(line, i, j - i);
+	token->copy = ft_strdup(token->value);
 	// if (quote == 2 || quote == 1)
 	// 	return (j + 1);
 	// else

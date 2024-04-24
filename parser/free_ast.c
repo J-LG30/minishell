@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:40:09 by julietteleg       #+#    #+#             */
-/*   Updated: 2024/04/23 17:32:05 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/24 15:49:37 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,40 @@ void	free_tokens(t_token *head)
 	}
 	if (head)
 		free(head);
+}
+
+void	free_env(t_env *env)
+{
+	t_env	*cursor;
+
+	if (!env)
+		return ;
+	cursor = env;
+	while (env && env->next)
+	{
+		if (cursor->vr)
+			free(cursor->vr);
+		if (cursor->cpy)
+			free(cursor->cpy);
+		env = env->next;
+		if (cursor)
+			free(cursor);
+		cursor = env;
+	}
+	if (env)
+		free(env);
+}
+
+void	free_exegg(t_exegg *exe)
+{
+	int	i;
+
+	i = -1;
+	if (!exe)
+		return ;
+	while (exe->cmdpath && exe->cmdpath[++i])
+		free(exe->cmdpath[i]);
+	if (exe->path)
+		free(exe->path);
+	free_env(exe->env);
 }
