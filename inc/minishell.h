@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/24 16:22:20 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/25 16:32:49 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ void	export(t_branch *cmds, t_shelgon *shell, int flg);
 void	echo(char **cmds, int flg);
 void	pwd(int flg);
 void	cd(char *arg, int flg);
+void	unset(t_shelgon *shell, char **cmds, int flg);
 
 /*FREEING*/
 void	free_shelgon(t_shelgon *sh);
