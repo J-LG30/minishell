@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/23 18:34:26 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:29:45 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,25 @@ static void	print_exp(t_shelgon *shell)
 	}
 }
 
-static int	parse_arg(char *str)
+static int	parse_arg(char *str, t_shelgon *shell)
 {
 	int	i;
 
 	i = 0;
 	if (ft_isdigit(str[0]) || !ft_isalpha(str[0]))
+	{
+		shell->status = 1;
+		ft_putendl_fd("export: not a valid identifier", 2);
 		return (0);
+	}
 	while (str[i])
 	{
 		if ((!(ft_isalnum(str[i])) && !(str[i] == '_') && !(str[i] == '=')))
-			return (0);
+		{
+		shell->status = 1;
+		ft_putendl_fd("export: not a valid identifier", 2);
+		return (0);
+		}
 		i++;
 	}
 	return (1);
@@ -125,7 +133,7 @@ static void	add_export(char **args, t_shelgon *shell)
 	{
 		j = -1;
 		flg = 0;
-		if (parse_arg(args[i]) && args_exist(args[i], shell->env))
+		if (parse_arg(args[i], shell) && args_exist(args[i], shell->env))
 		{
 			while (++j < ft_strlen(args[i]))
 			{
@@ -148,6 +156,7 @@ void	export(t_branch *cmds, t_shelgon *shell, int flg)
 		print_exp(shell);
 	else
 		add_export(cmds->full_cmd, shell);
+	shell->status = 0;
 	if (flg)
 		return ;
 	exit(1);
