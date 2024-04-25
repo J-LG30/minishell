@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:40:09 by julietteleg       #+#    #+#             */
-/*   Updated: 2024/04/24 16:36:29 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:42:56 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ void	free_branch(t_branch *branch)
 	}
 	if (branch)
 		free(branch);
-	
 }
 void	free_exegg(t_exegg *exe)
 {
@@ -139,5 +138,5 @@ void	free_exegg(t_exegg *exe)
 		free(exe->cmdpath[i]);
 		i++;
 	}
-	free_branch(exe->cmd);
+	//free_branch(exe->cmd);
 }
