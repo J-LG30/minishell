@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/24 16:29:17 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/25 19:12:17 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,12 @@ void	wait_loop(char **envp)
 		add_history(line);
 		set_child_handler();
 		if (!line)
+		{
+			printf("CTRL D?\n");
+			//free_tokens(token); 
+			//free_shelgon(shelgon);
 			exit(1);
+		}
 		if (ft_strlen(line) == 0)
 		{
 			free (line);
@@ -83,9 +88,9 @@ void	wait_loop(char **envp)
 			exeggutor(shelgon->tree, shelgon, shelgon->env);
 			free_ast(shelgon->tree);
 		}
-		free_tokens(token);
+		//free_tokens(token);
 	}
-	free_shelgon(shelgon);
+	//free_shelgon(shelgon);
 }
 
 int	main(int argc, char **argv, char **envp)

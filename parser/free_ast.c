@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:40:09 by julietteleg       #+#    #+#             */
-/*   Updated: 2024/04/24 16:36:29 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/25 19:11:47 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ void	free_tokens(t_token *head)
 		return ;
 	while (head && head->type != END && head->next)
 	{
-		if (cursor->value)
-			free(cursor->value);
-		if (cursor->copy)
-			free(cursor->copy);
+		cursor = head;
+		if (head->value)
+			free(head->value);
+		if (head->copy)
+			free(head->copy);
 		head = head->next;
 		if (cursor)
 			free(cursor);
-		cursor = head;
 	}
 	if (head)
 		free(head);
@@ -102,22 +102,6 @@ void	free_branch(t_branch *branch)
 	cursor = branch;
 	while (branch && branch->next)
 	{
-		i = 0;
-		if (cursor->cmd)
-			free(cursor->cmd);
-		while (cursor->args && cursor->args[i])
-		{
-			free(cursor->args[i]);
-			i++;
-		}
-		if (cursor->args)
-			free(cursor->args);
-		i = 0;
-		while (cursor->full_cmd && cursor->full_cmd[i])
-		{
-			free(cursor->full_cmd[i]);
-			i++;
-		}
 		branch = branch->next;
 		if (cursor)
 			free(cursor);
@@ -125,8 +109,8 @@ void	free_branch(t_branch *branch)
 	}
 	if (branch)
 		free(branch);
-	
 }
+
 void	free_exegg(t_exegg *exe)
 {
 	int	i;
@@ -139,5 +123,16 @@ void	free_exegg(t_exegg *exe)
 		free(exe->cmdpath[i]);
 		i++;
 	}
+	free(exe->cmdpath);
 	free_branch(exe->cmd);
+}
+
+void	free_all(t_shelgon *shelgon, t_exegg *exe, int flag)
+{
+	if (flag == WRONG_CMD)
+	{
+		free_exegg(exe);
+		//free_env(shelgon->env);
+		free_shelgon(shelgon);
+	}
 }

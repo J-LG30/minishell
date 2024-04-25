@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/24 16:37:19 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:57:41 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		if (!cmds->cmd)
 		{
 			ft_putendl_fd("command not found", 2);
+			free_all(exe->pkcenter, exe, WRONG_CMD);
 			exit (127);
 		}
 	}

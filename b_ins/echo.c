@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:06:50 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/24 18:44:40 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:52:28 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,15 @@ static int	check_args(char **cmds)
 }
 //FIX SEGFAULT IF: echo -n -n test
 
-void	echo(char **cmds, int rexit)
+void	echo(char **cmds, int rexit, t_shelgon *shelgon)
 {
 	int	i;
 	int	flg;
 
+	shelgon->status = 0;
 	i = 0;
 	if (!cmds[1])
-		ft_putchar_fd('\n', 2);
+		ft_putchar_fd('\n', 1);
 	if (check_args(cmds))
 	{
 		if (rexit)

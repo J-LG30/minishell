@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:32 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/23 17:30:40 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:36:11 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_token	*ft_new_token(void)
 	new->prev = NULL;
 	new->type = 0;
 	new->value = NULL;
+	new->copy = NULL;
 	return (new);
 }
 

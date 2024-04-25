@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/25 16:32:49 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/25 19:57:43 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@
 
 #define IN_CHILD 14
 
+#define ANGRY "(╯°□ °)╯︵ ┻━┻"
+
+#define WRONG_CMD 2
+
 volatile extern int g_sig;
 
 typedef struct s_env
@@ -57,7 +61,6 @@ typedef struct s_branch
 	struct s_branch	*next;
 	int				pipe[1];
 	char			*cmd;
-	char			**args;
 	char			**full_cmd;
 	struct s_ast	*ref;
 }	t_branch;
@@ -175,14 +178,17 @@ void	ms_addnode(t_env **arr, char *s);
 void	ms_addexp(t_env **arr, char *s);
 t_env	*ms_lstadd(char *s);
 void	export(t_branch *cmds, t_shelgon *shell, int flg);
-void	echo(char **cmds, int flg);
-void	pwd(int flg);
-void	cd(char *arg, int flg);
+void	echo(char **cmds, int flg, t_shelgon *shelgon);
+void	pwd(int flg, t_shelgon *shelgon);
+void	cd(char *arg, int flg, t_shelgon *shelgon);
+void	ft_exit(t_shelgon *shelgon, t_branch *cmds, t_exegg *exe);
 void	unset(t_shelgon *shell, char **cmds, int flg);
 
 /*FREEING*/
 void	free_shelgon(t_shelgon *sh);
 void	free_exegg(t_exegg *exe);
+void	free_env(t_env *env);
+void	free_all(t_shelgon *shelgon, t_exegg *exe, int flag);
 
 /*DEBUGGING*/
 void	print_tree(t_ast *root);
