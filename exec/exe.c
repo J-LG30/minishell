@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 15:43:02 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:50:48 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		if (cmds->next)
 			exe->last_fd = exe->fd[0];
 		else
-			close (exe->fd[0]);
+			close(exe->fd[0]);
 }
 
 static void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)

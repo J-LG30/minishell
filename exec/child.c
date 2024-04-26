@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 15:42:36 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:13:48 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	if (cmds->full_cmd[0][0] == '/' || (cmds->full_cmd[0][0] == '.' && cmds->full_cmd[0][1] == '/'))
 		execve(cmds->full_cmd[0], cmds->full_cmd, exe->pkcenter->envr);
 	if (((!cmds->next || cmds->next->ref->type != WORD) && !(temp && (temp->type == PIPE)) && exe->fd_out == exe->fd[1]))
+	{
 		exe->fd_out = STDOUT_FILENO;
+		close(exe->fd[1]);
+	}
 	if (exe->fd_in != STDIN_FILENO)
 		exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	if (exe->fd_out != STDOUT_FILENO)
