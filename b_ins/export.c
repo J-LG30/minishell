@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/25 17:29:45 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:16:57 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,5 +159,6 @@ void	export(t_branch *cmds, t_shelgon *shell, int flg)
 	shell->status = 0;
 	if (flg)
 		return ;
-	exit(1);
+	free_all(shell, shell->exe, BTIN);
+	exit(0);
 }

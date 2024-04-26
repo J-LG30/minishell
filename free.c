@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:40:09 by julietteleg       #+#    #+#             */
-/*   Updated: 2024/04/26 16:53:43 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:13:37 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	free_branch(t_branch *branch)
 	if (!branch)
 		return ;
 	cursor = branch;
-	while (branch && branch->next)
+	while (branch)
 	{
 		free(branch->full_cmd);
 		branch = branch->next;
@@ -127,11 +127,12 @@ void	free_exegg(t_exegg *exe)
 		i++;
 	}
 	free(exe->cmdpath);
+	free(exe);
 }
 
 void	free_all(t_shelgon *shelgon, t_exegg *exe, int flag)
 {
-		if (flag == WRONG_CMD || flag == BTIN)
-			free_exegg(exe);
-		free_shelgon(shelgon);
+	if (flag == WRONG_CMD || flag == BTIN)
+		free_exegg(exe);	
+	free_shelgon(shelgon);
 }

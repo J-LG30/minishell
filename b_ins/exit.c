@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:14:10 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/25 16:14:10 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:15:21 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ void	ft_exit(t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 		ft_putendl_fd("exit (¬_¬)ﾉ", 2);
 	}
 	//printf("Status: %i\n", status);
-	free_shelgon(shelgon);
-	free_exegg(exe);
+	free_all(shelgon, shelgon->exe, BTIN);
 	exit(status);
 	//printf("did i not exit\n");
 }

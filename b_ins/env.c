@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:34:42 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 15:17:54 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:15:11 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ t_env	*env(t_shelgon *shell, char **envp, int flg, int retexit)
 	shell->status = 0;
 	if (retexit)
 		return (NULL);
+	free_all(shell, shell->exe, BTIN);
 	exit (0);
 }
