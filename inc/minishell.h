@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/26 16:59:49 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:36:01 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 #define ANGRY "(╯°□ °)╯︵ ┻━┻"
 
 #define WRONG_CMD 2
+#define BTIN 3
 
 volatile extern int g_sig;
 
@@ -107,6 +108,7 @@ typedef	struct s_shelgon
 	struct s_token	*current;
 	struct s_ast	*top_root;
 	struct s_ast	*tree;
+	struct s_exegg	*exe;
 	char			**envr;
 	int				cmd_root;
 	int				status;

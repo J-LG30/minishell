@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 16:34:17 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:35:37 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 		ft_putendl_fd("Error executing command", 2);
-		free_all(exe->pkcenter, exe, WRONG_CMD);
+		//free_all(exe->pkcenter, exe, WRONG_CMD);
 	}
 }
 
@@ -123,7 +123,7 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 		ft_putendl_fd("Error executing command", 2);
-		free_all(exe->pkcenter, exe, WRONG_CMD);
+		//free_all(exe->pkcenter, exe, WRONG_CMD);
 	}
 	exit (1);
 }
@@ -156,7 +156,7 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 		ft_putendl_fd("Error executing command", 2);
-		free_all(exe->pkcenter, exe, WRONG_CMD);
+		//free_all(exe->pkcenter, exe, WRONG_CMD);
 	}
 	exit (1);
 }

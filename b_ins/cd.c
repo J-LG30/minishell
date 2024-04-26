@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:56:02 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/25 17:43:15 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:14:08 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void	cd(char *arg, int flg, t_shelgon *shelgon)
 	}
 	if (flg)
 		return ;
+	free_all(shelgon, shelgon->exe, BTIN);
 	exit (0);
 }

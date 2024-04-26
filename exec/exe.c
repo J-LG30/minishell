@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 16:14:40 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:09:07 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,35 +175,39 @@ void	find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds)
 
 int	exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env)
 {
-	t_exegg		exe;
+	t_exegg		*exe;
 	t_branch	*cmds;
 	int			i;
 	int s;
 	
+	exe = malloc(sizeof(t_exegg) * 1);
+	if (!exe)
+		return (1);
+	shelgon->exe = exe;
 	s = 0;
-	exe.fd_in = STDIN_FILENO;
-	exe.fd_out = STDOUT_FILENO;
-	exe.dup_fd[0] = STDIN_FILENO;
-	exe.dup_fd[1] = STDOUT_FILENO;
-	exe.fd[0] = STDIN_FILENO;
-	exe.fd[1] = STDOUT_FILENO;
-	exe.redir = 'n';
-	exe.pkcenter = shelgon;
+	exe->fd_in = STDIN_FILENO;
+	exe->fd_out = STDOUT_FILENO;
+	exe->dup_fd[0] = STDIN_FILENO;
+	exe->dup_fd[1] = STDOUT_FILENO;
+	exe->fd[0] = STDIN_FILENO;
+	exe->fd[1] = STDOUT_FILENO;
+	exe->redir = 'n';
+	exe->pkcenter = shelgon;
 	cmds = NULL;
-	exe.last_fd = 0;
-	if (get_cmd(tree, &cmds, &exe))
+	exe->last_fd = 0;
+	if (get_cmd(tree, &cmds, exe))
 	{
-		only_redir(tree, &exe);
+		only_redir(tree, exe);
 		return (1);
 	}
-	exe.cmd = cmds;
-	ft_path(&exe, env);
+	exe->cmd = cmds;
+	ft_path(exe, env);
 	i = 0;
 	while (cmds)
 	{
 		if (cmds->ref->type == WORD)
 		{
-			ft_pipe(tree, &exe, cmds);
+			ft_pipe(tree, exe, cmds);
 			i++;
 		}
 		cmds = cmds->next;
@@ -219,6 +223,6 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env)
 		else if (WTERMSIG(s) == SIGQUIT)
 			shelgon->status = 131; 
 	}
-	free_exegg(&exe);
+	free_exegg(exe);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 15:55:17 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:56:59 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	wait_loop(char **envp)
 	if (!shelgon)
 		return ;
 	shelgon->status = 0;
+	shelgon->exe = NULL;
 	save_env(envp, shelgon);
 	shelgon->env = env(shelgon, envp, 1, 1);
 	// for (int i = 0; shelgon->envr[i]; i++)

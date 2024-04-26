@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 19:02:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 17:30:00 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:35:23 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	unset(t_shelgon *shell, char **cmds, int flg)
 	}
 	if (flg)
 		return ;
-	exit (1);
+	free_all(shell, shell->exe, BTIN);
+	exit (0);
 }

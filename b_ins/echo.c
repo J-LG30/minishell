@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:06:50 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 13:02:34 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:11:41 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	echo(char **cmds, int rexit, t_shelgon *shelgon)
 	{
 		if (rexit)
 			return ;
+		free_all(shelgon, shelgon->exe, BTIN);
 		exit (1);
 	}
 	if (cmds[1][0] == '-' && cmds[2])
@@ -105,5 +106,6 @@ void	echo(char **cmds, int rexit, t_shelgon *shelgon)
 	print_it(cmds, flg, i);
 	if (rexit)
 		return ;
+	free_all(shelgon, shelgon->exe, BTIN);
 	exit (0);
 }

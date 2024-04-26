@@ -6,7 +6,7 @@
 #    By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/26 16:47:38 by davda-si         ###   ########.fr        #
+#    Updated: 2024/04/26 17:34:46 by davda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,4 +57,4 @@ re: fclean all
 
 .PHONY: all clean fclean re
 
-#valgrind --suppressions=readline.supp --track-fds=all --leak-check=full --show-leak-kinds=all --track-origins=yes  ./minishell
+#valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-origins=yes  ./minishell
