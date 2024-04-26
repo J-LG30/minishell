@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/26 15:41:25 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:53:00 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 #define ANGRY "(╯°□ °)╯︵ ┻━┻"
 
 #define WRONG_CMD 2
+#define BTIN 3
 
 volatile extern int g_sig;
 
