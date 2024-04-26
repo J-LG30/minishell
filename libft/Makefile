@@ -6,13 +6,13 @@
 #    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 19:50:18 by jle-goff          #+#    #+#              #
-#    Updated: 2024/04/09 14:37:12 by jle-goff         ###   ########.fr        #
+#    Updated: 2024/04/26 12:06:02 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CC = @cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 SRCS = ft_atoi.c ft_itoa.c ft_memccpy.c ft_split.c ft_strnstr.c \
        ft_bzero.c ft_memchr.c ft_strchr.c ft_strrchr.c ft_calloc.c \

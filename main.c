@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/25 19:12:17 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:29:45 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	wait_loop(char **envp)
 	// 	printf("env[%d] = %s\n", i, shelgon->envr[i]);
 	while (1)
 	{	
+		shelgon->tree = NULL;
+		shelgon->list_token = NULL;
 		set_prompt_handler();
 		rl_on_new_line();
 		line = readline("(੭｡╹▿╹｡)੭$ ");
@@ -59,10 +61,8 @@ void	wait_loop(char **envp)
 		set_child_handler();
 		if (!line)
 		{
-			printf("CTRL D?\n");
-			//free_tokens(token); 
-			//free_shelgon(shelgon);
-			exit(1);
+			free_all(shelgon, NULL, 1);
+			exit(0);
 		}
 		if (ft_strlen(line) == 0)
 		{
@@ -88,9 +88,9 @@ void	wait_loop(char **envp)
 			exeggutor(shelgon->tree, shelgon, shelgon->env);
 			free_ast(shelgon->tree);
 		}
-		//free_tokens(token);
+		free_tokens(token);
 	}
-	//free_shelgon(shelgon);
+	free_shelgon(shelgon);
 }
 
 int	main(int argc, char **argv, char **envp)

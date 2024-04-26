@@ -6,7 +6,7 @@
 #    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/25 19:06:35 by jle-goff         ###   ########.fr        #
+#    Updated: 2024/04/26 15:18:04 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,12 @@ CC = @cc
 FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address #-static-libsan
 LIB = -lreadline
 
-SRCS = 	main.c lexer/lexer.c lexer/lexer_lst_utils.c lexer/quotes.c parser/connect_tree.c \
+#ASAN_OPTIONS=symbolize=1
+#ASAN_SYMBOLIZER_PATH=$(shell which llvm-symbolizer)
+
+SRCS = 	main.c free.c lexer/lexer.c lexer/lexer_lst_utils.c lexer/quotes.c parser/connect_tree.c \
 		parser/parser.c parser/ast_helper.c parser/command.c parser/command_production.c \
-		parser/redirections.c parser/print_ast.c parser/free_ast.c exec/child.c exec/exe.c \
+		parser/redirections.c parser/print_ast.c exec/child.c exec/exe.c \
 		b_ins/env.c b_ins/env_utils.c b_ins/export.c b_ins/echo.c b_ins/pwd.c b_ins/cd.c\
 		b_ins/exit.c exec/utils_exec.c signals/signals.c
 

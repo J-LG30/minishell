@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:32:23 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/22 16:35:00 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:17:27 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_env	*ms_lstadd(char *s)
 {
 	t_env	*node;
 	node = malloc(sizeof(t_env));
+	if (!node)
+		return (NULL);
 	if (node)
 	{
 		node->vr = ft_strdup(s);

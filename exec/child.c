@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/25 18:57:41 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:07:26 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 		ft_putendl_fd("Error executing command", 2);
+		free_all(exe->pkcenter, exe, WRONG_CMD);
 	}
 }
 
@@ -101,6 +102,7 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		if (!cmds->cmd)
 		{
 			ft_putendl_fd("command not found", 2);
+			free_all(exe->pkcenter, exe, WRONG_CMD);
 			exit (127);
 		}
 	}
@@ -110,6 +112,7 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 		ft_putendl_fd("Error executing command", 2);
+		free_all(exe->pkcenter, exe, WRONG_CMD);
 	}
 	exit (1);
 }
@@ -129,6 +132,7 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		if (!cmds->cmd)
 		{
 			ft_putendl_fd("command not found", 2);
+			free_all(exe->pkcenter, exe, WRONG_CMD);
 			exit (127);
 		}
 	}
@@ -138,6 +142,7 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 		ft_putendl_fd("Error executing command", 2);
+		free_all(exe->pkcenter, exe, WRONG_CMD);
 	}
 	//ft_freech(exe);
 	exit (1);

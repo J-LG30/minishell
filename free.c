@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_ast.c                                         :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:40:09 by julietteleg       #+#    #+#             */
-/*   Updated: 2024/04/25 19:11:47 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:36:36 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "inc/minishell.h"
 
 void	free_env(t_env *env);
 
-void	free_shelgon(t_shelgon *sh)
-{
-	int	i;
-
-	i = 0;
-	while (sh->envr && sh->envr[i])
-	{
-		free(sh->envr[i]);
-		i++;
-	}
-	if (sh->envr)
-		free(sh->envr);
-	free_env(sh->env);
-	free(sh);
-}
 //recursively free ast. probably will have to update it
 void	free_ast(t_ast	*tree)
 {
@@ -77,7 +62,7 @@ void	free_env(t_env *env)
 	if (!env)
 		return ;
 	cursor = env;
-	while (env && env->next)
+	while (env)
 	{
 		if (cursor->vr)
 			free(cursor->vr);
@@ -88,8 +73,24 @@ void	free_env(t_env *env)
 			free(cursor);
 		cursor = env;
 	}
-	if (env)
-		free(env);
+}
+
+void	free_shelgon(t_shelgon *sh)
+{
+	int	i;
+
+	i = 0;
+	free_tokens(sh->list_token);
+	free_ast(sh->tree);
+	while (sh->envr && sh->envr[i])
+	{
+		free(sh->envr[i]);
+		i++;
+	}
+	if (sh->envr)
+		free(sh->envr);
+	free_env(sh->env);
+	free(sh);
 }
 
 void	free_branch(t_branch *branch)
@@ -100,11 +101,12 @@ void	free_branch(t_branch *branch)
 	if (!branch)
 		return ;
 	cursor = branch;
+	free(branch->full_cmd);
 	while (branch && branch->next)
 	{
-		branch = branch->next;
 		if (cursor)
 			free(cursor);
+		branch = branch->next;
 		cursor = branch;
 	}
 	if (branch)
@@ -118,21 +120,18 @@ void	free_exegg(t_exegg *exe)
 	i = 0;
 	if (!exe)
 		return ;
+	free_branch(exe->cmd);
 	while (exe->cmdpath && exe->cmdpath[i])
 	{
 		free(exe->cmdpath[i]);
 		i++;
 	}
 	free(exe->cmdpath);
-	free_branch(exe->cmd);
 }
 
 void	free_all(t_shelgon *shelgon, t_exegg *exe, int flag)
 {
-	if (flag == WRONG_CMD)
-	{
-		free_exegg(exe);
-		//free_env(shelgon->env);
+		if (flag == WRONG_CMD)
+			free_exegg(exe);
 		free_shelgon(shelgon);
-	}
 }
