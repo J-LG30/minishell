@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 15:29:45 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:41:59 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	save_env(char **envp, t_shelgon *shelgon)
 
 	i = 0;
 	if (envp == NULL)
-		return ;
+		
 	while (envp[i])
 		i++;
 	shelgon->envr = (char **)malloc(sizeof(char *) * (i + 1));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:06:50 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/25 17:52:28 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:02:34 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	echo(char **cmds, int rexit, t_shelgon *shelgon)
 	{
 		if (rexit)
 			return ;
-		exit (0);
+		exit (1);
 	}
 	if (cmds[1][0] == '-' && cmds[2])
 		flg = check_flag(cmds);

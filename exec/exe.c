@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 15:45:30 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:48:50 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		ft_putendl_fd("dork\n", 2);
 		ft_error(0, exe);
 	}
-
 	if (exe->pid1 == 0)
 	{
 		close(exe->fd[0]);
@@ -94,7 +93,10 @@ static void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		close(exe->fd[1]);
 		if (exe->last_fd != STDIN_FILENO)
 			close(exe->last_fd);
-		exe->last_fd = exe->fd[0];
+		if (cmds->next)
+			exe->last_fd = exe->fd[0];
+		else
+			close (exe->fd[0]);
 }
 
 static void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
