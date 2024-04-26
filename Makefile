@@ -6,13 +6,13 @@
 #    By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/25 19:56:58 by davda-si         ###   ########.fr        #
+#    Updated: 2024/04/26 15:27:59 by davda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = @cc
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address #-static-libsan
+FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address #-static-libsan
 LIB = -lreadline
 
 SRCS = 	main.c lexer/lexer.c lexer/lexer_lst_utils.c lexer/quotes.c parser/connect_tree.c \
