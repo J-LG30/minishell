@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 16:13:48 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:34:17 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,10 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	if (exe->fd_out != STDOUT_FILENO)
 		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
+	if (exe->fd_in != STDIN_FILENO)
+		close(exe->fd_in);
 	close(exe->fd[1]);
+	close(exe->fd[0]);
 	if (exe->fd_out != STDOUT_FILENO)
 		close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)
@@ -112,7 +115,10 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		}
 	}
 	if (is_btin(cmds->full_cmd[0]))
+	{
 		run_btin(tree, exe, cmds, 0);
+		//free_all(exe->pkcenter, exe, WRONG_CMD);
+	}
 	else
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
@@ -142,14 +148,16 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		}
 	}
 	if (is_btin(cmds->full_cmd[0]))
+	{
 		run_btin(tree, exe, cmds, 0);
+		//free_all(exe->pkcenter, exe, WRONG_CMD);
+	}
 	else
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 		ft_putendl_fd("Error executing command", 2);
 		free_all(exe->pkcenter, exe, WRONG_CMD);
 	}
-	//ft_freech(exe);
 	exit (1);
 }
 

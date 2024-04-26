@@ -6,11 +6,25 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 19:02:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/25 19:54:22 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:30:00 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	ft_strrem(char *str1, char *str2)
+{
+	int	i;
+
+	i = 0;
+	if (!str1 || !str2)
+		return (0);
+	while (str1[i] && str2[i] && str1[i] == str2[i])
+		i++;
+	if (!str2[i] && (ft_strlen(str1) > ft_strlen(str2)) && str1[i] == '=')
+		return (0);
+	return (str1[i] - str2[i]);
+}
 
 void	unset(t_shelgon *shell, char **cmds, int flg)
 {
@@ -27,7 +41,7 @@ void	unset(t_shelgon *shell, char **cmds, int flg)
 	{
 		while (tmp)
 		{
-			if (tmp && (ft_strcmp(tmp->vr, cmds[i]) == 0 || ft_strcmp(tmp->cpy, cmds[i]) == 0))
+			if (tmp && (ft_strrem(tmp->cpy, cmds[i]) == 0))
 			{
 				if (!tmp->next)
 					cur = tmp;
@@ -38,7 +52,7 @@ void	unset(t_shelgon *shell, char **cmds, int flg)
 				if (tmp->next)
 					tmp->next->prev = tmp->prev;
 				free(tmp->cpy);
-				if (tmp->vr)
+				if (tmp->vr && ft_strcmp(tmp->cpy, tmp->vr) == 0)
 					free(tmp->vr);
 				free(tmp);
 				tmp = cur;

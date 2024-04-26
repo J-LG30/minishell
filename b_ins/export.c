@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/25 17:29:45 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/26 17:01:21 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static int	args_exist(char *str, t_env *env)
 		flg = 1;
 	while (tmp)
 	{
-		if (tmp && (ft_strncmp(str, tmp->vr, i) == 0) && flg)
+		if (tmp && (ft_strcmp(str, tmp->vr) == 0) && flg)
 		{
 			free(tmp->vr);
 			free(tmp->cpy);
@@ -114,7 +114,7 @@ static int	args_exist(char *str, t_env *env)
 			tmp->prnt = 1;
 			return (0);
 		}
-		else if (tmp && tmp->vr && (ft_strncmp(str, tmp->vr, i) == 0) && !(flg))
+		else if (tmp && tmp->vr && (ft_strcmp(str, tmp->vr) == 0) && !(flg))
 			return (0);
 		tmp = tmp->next;
 	}
