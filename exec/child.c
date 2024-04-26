@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 17:35:37 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/26 20:11:07 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,16 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 
 	temp = tree;
 	find_redir(cmds->ref, exe, cmds);
+	ft_putendl_fd("1", 2);
 	if (cmds->full_cmd[0][0] == '/' || (cmds->full_cmd[0][0] == '.' && cmds->full_cmd[0][1] == '/'))
 		execve(cmds->full_cmd[0], cmds->full_cmd, exe->pkcenter->envr);
+	ft_putendl_fd("2", 2);
 	if (((!cmds->next || cmds->next->ref->type != WORD) && !(temp && (temp->type == PIPE)) && exe->fd_out == exe->fd[1]))
 	{
 		exe->fd_out = STDOUT_FILENO;
 		close(exe->fd[1]);
 	}
+	ft_putendl_fd("3", 2);
 	if (exe->fd_in != STDIN_FILENO)
 		exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	if (exe->fd_out != STDOUT_FILENO)
@@ -80,6 +83,7 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	else
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
+		ft_putendl_fd("5", 2);
 		ft_putendl_fd("Error executing command", 2);
 		//free_all(exe->pkcenter, exe, WRONG_CMD);
 	}
@@ -242,6 +246,7 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 				return (0);
 			ft_memset(cur, 0, 0);
 			cur->pipe[0] = ft_heredoc(temp);
+			set_child_handler();
 			cur->ref = temp;
 			if(!(*cmds))
 			{

@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 17:09:07 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/26 20:08:33 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	ft_heredoc(t_ast *tree)
 	t_ast	*temp;
 
 	temp = tree;
+	set_prompt_handler();
 	if (temp && temp->type == REDIR_DELIMIT)
 	{
 		pipe(fd);
@@ -52,7 +53,12 @@ int	ft_heredoc(t_ast *tree)
 		{
 			res = readline("> ");
 			if (!res)
+			{
+				
+				ft_putendl_fd("(╯°□ °)╯︵ ┻━┻: warning: here-document at line 1 delimited by end-of-file", 2);
+				rl_on_new_line();
 				return (-1);
+			}
 			if (ft_strncmp(temp->value, res, ft_strlen(temp->value)) == 0 && 
 				(ft_strlen(temp->value) == ft_strlen(res)))
 				break ;
@@ -139,9 +145,11 @@ static void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
 
 void	find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
-	t_ast	*temp;
+	t_ast		*temp;
+	t_branch	*com;
 
 	temp = tree;
+	com = cmds;
 	exe->fd_in = STDIN_FILENO;
 	exe->fd_out = STDOUT_FILENO;
 	while (temp)
@@ -153,8 +161,6 @@ void	find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds)
 			exe->in_value = temp->value;
 			exe->fd_in = open(exe->in_value, O_RDONLY);
 		}
-		else if (temp && temp->type == REDIR_DELIMIT)
-			exe->fd_in = cmds->next->pipe[0];
 		else if (temp && temp->type == REDIR_OUT)
 		{
 			exe->out_value = temp->value;
@@ -164,6 +170,15 @@ void	find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		{
 			exe->out_value = temp->value;
 			exe->fd_out = open(exe->out_value, O_CREAT | O_APPEND | O_WRONLY, 0644);
+		}
+		while (com && temp && temp->left && temp->type == REDIR_DELIMIT)
+		{
+			ft_putendl_fd("in redir delimit thing", 2);
+			if (com && com->ref && com->ref->type == REDIR_DELIMIT)
+				exe->fd_in = com->next->pipe[0];
+			if (com->next)
+				com = com->next;
+			temp = temp->left;
 		}
 		temp = temp->left;
 	}
