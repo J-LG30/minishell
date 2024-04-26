@@ -6,13 +6,13 @@
 #    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/26 15:41:03 by jle-goff         ###   ########.fr        #
+#    Updated: 2024/04/26 15:42:23 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = @cc
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address #-static-libsan
+FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address #-static-libsan
 LIB = -lreadline
 
 #ASAN_OPTIONS=symbolize=1
