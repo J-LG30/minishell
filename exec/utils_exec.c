@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:34:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/25 17:56:13 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/25 19:57:08 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ void	run_btin(t_ast *tree, t_exegg *exe, t_branch *cmds, int flg)
 	else if (ft_strcmp(cmds->full_cmd[0], "env") == 0)
 		env(exe->pkcenter, exe->pkcenter->envr, 0, flg);
 	else if (ft_strcmp(cmds->full_cmd[0], "unset") == 0)
-		return ;
+		unset(exe->pkcenter, cmds->full_cmd, flg);
 	else if (ft_strcmp(cmds->full_cmd[0], "exit") == 0)
 		ft_exit(exe->pkcenter, cmds, exe);
 	return ;

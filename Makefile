@@ -6,13 +6,13 @@
 #    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/26 15:18:04 by jle-goff         ###   ########.fr        #
+#    Updated: 2024/04/26 15:41:03 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = @cc
-FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address #-static-libsan
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address #-static-libsan
 LIB = -lreadline
 
 #ASAN_OPTIONS=symbolize=1
@@ -22,7 +22,7 @@ SRCS = 	main.c free.c lexer/lexer.c lexer/lexer_lst_utils.c lexer/quotes.c parse
 		parser/parser.c parser/ast_helper.c parser/command.c parser/command_production.c \
 		parser/redirections.c parser/print_ast.c exec/child.c exec/exe.c \
 		b_ins/env.c b_ins/env_utils.c b_ins/export.c b_ins/echo.c b_ins/pwd.c b_ins/cd.c\
-		b_ins/exit.c exec/utils_exec.c signals/signals.c
+		b_ins/exit.c b_ins/unset.c exec/utils_exec.c signals/signals.c
 
 OBJS = $(SRCS:.c=.o)
 
