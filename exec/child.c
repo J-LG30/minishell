@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 20:11:07 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:15:03 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,12 @@ char	*try_cmd(char *cargs, char **cpath)
 
 	i = 0;
 	com = NULL;
+	if (!cpath)
+		return (NULL);
 	while (cpath[i])
 	{
-		/* ft_putendl_fd("trying the cmd", 2);
-		ft_putendl_fd("cpath[i]", 2);
-		ft_putendl_fd(cpath[i], 2); */
 		temp = ft_strjoin(cpath[i], "/");
-		/* ft_putendl_fd("temp", 2);
-		ft_putendl_fd(temp, 2);
-		ft_putendl_fd("cargs", 2);
-		ft_putendl_fd(cargs, 2); */
 		com = ft_strjoin(temp, cargs);
-		/* ft_putendl_fd("com", 2);
-		ft_putendl_fd(com, 2); */
 		free(temp);
 		if (access(com, F_OK) == 0)
 			return (com);
@@ -48,16 +41,13 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 
 	temp = tree;
 	find_redir(cmds->ref, exe, cmds);
-	ft_putendl_fd("1", 2);
 	if (cmds->full_cmd[0][0] == '/' || (cmds->full_cmd[0][0] == '.' && cmds->full_cmd[0][1] == '/'))
 		execve(cmds->full_cmd[0], cmds->full_cmd, exe->pkcenter->envr);
-	ft_putendl_fd("2", 2);
 	if (((!cmds->next || cmds->next->ref->type != WORD) && !(temp && (temp->type == PIPE)) && exe->fd_out == exe->fd[1]))
 	{
 		exe->fd_out = STDOUT_FILENO;
 		close(exe->fd[1]);
 	}
-	ft_putendl_fd("3", 2);
 	if (exe->fd_in != STDIN_FILENO)
 		exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	if (exe->fd_out != STDOUT_FILENO)

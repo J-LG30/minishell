@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 20:08:33 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/27 13:51:00 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,14 +171,14 @@ void	find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds)
 			exe->out_value = temp->value;
 			exe->fd_out = open(exe->out_value, O_CREAT | O_APPEND | O_WRONLY, 0644);
 		}
-		while (com && temp && temp->left && temp->type == REDIR_DELIMIT)
+		else if (temp && temp->type == REDIR_DELIMIT)
 		{
-			ft_putendl_fd("in redir delimit thing", 2);
-			if (com && com->ref && com->ref->type == REDIR_DELIMIT)
-				exe->fd_in = com->next->pipe[0];
-			if (com->next)
+			while (com)
+			{
+				if (com->ref && com->ref->type == REDIR_DELIMIT)
+					exe->fd_in = com->pipe[0];
 				com = com->next;
-			temp = temp->left;
+			}
 		}
 		temp = temp->left;
 	}

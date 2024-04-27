@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 16:56:59 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:07:01 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ volatile int	g_sig;
 extern int	rl_on_new_line(void);
 static void	save_env(char **envp, t_shelgon *shelgon)
 {
-	int	i;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	if (envp == NULL)
@@ -29,7 +30,14 @@ static void	save_env(char **envp, t_shelgon *shelgon)
 		return ;
 	while (envp[i])
 	{
-		shelgon->envr[i] = ft_strdup(envp[i]);
+		if (ft_strncmp(envp[i], "SHLVL=", 6) == 0)
+		{
+			tmp = ft_itoa(ft_atoi(envp[i] + 6) + 1);
+			shelgon->envr[i] = ft_strjoin("SHLVL=", tmp);
+			free(tmp);
+		}
+		else
+			shelgon->envr[i] = ft_strdup(envp[i]);
 		i++;
 	}
 	shelgon->envr[i] = NULL;

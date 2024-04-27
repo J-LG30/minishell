@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:34:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/25 19:57:08 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/27 13:59:41 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ static char	*get_path(t_env	*env)
 		temp = temp->next;
 	}
 	if (res == NULL)
-	{
-		ft_putendl_fd("Path not found", 2);
 		return (NULL);
-	}
 	return (res);
 }
 
@@ -40,7 +37,10 @@ void	ft_path(t_exegg *exe, t_env *env)
 {
 	exe->path = get_path(env);
 	if (!exe->path)
-		exit(1);
+	{
+		exe->cmdpath = NULL;
+		return ;
+	}
 	exe->cmdpath = ms_split(exe->path, ':');
 }
 
