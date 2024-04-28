@@ -6,38 +6,18 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/24 14:25:00 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/28 15:10:42 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-//str_token with only WORD
-	// if (quote == 2)
-	// {
-	// 	while (line[j] && line[j] != '"')
-	// 		j++;
-	// 	j++;
-	// }
-	// if (quote == 1)
-	// {
-	// 	while (line[j] && line[j] != '\'')
-	// 		j++;
-	// 	j++;
-	// }
-	// if (line[i] == '"')
-	// 	quote = 2;
-	// else if (line[i] == '\'')
-	// 	quote = 1;
-	// else
 int	str_token(t_token *token, int type, char *line, int i)
 {
 	int		j;
 	char	c;
-	char	*new_line;
 	int		flag;
 
-//&& line[j] != ' ' 
 	token->type = WORD;
 	j = i;
 	flag = 0;
@@ -51,16 +31,14 @@ int	str_token(t_token *token, int type, char *line, int i)
 		}
 		else if (flag == 1 && line[j] == c)
 			flag = 0;
-		if (flag == 0 && (line[j] == ' ' || line[j] == '|' || line[j] == '<' && line[j] == '>'))
+		if (flag == 0 && (line[j] == ' ' || line[j] == '|' || line[j] == '<'
+				&& line[j] == '>'))
 			break ;
 		j++;
 	}
 	token->value = ft_substr(line, i, j - i);
 	token->copy = ft_strdup(token->value);
-	// if (quote == 2 || quote == 1)
-	// 	return (j + 1);
-	// else
-		return (j);
+	return (j);
 }
 
 int	redirect_token(t_token *token, char *line, int i)
@@ -88,19 +66,20 @@ int	redirect_token(t_token *token, char *line, int i)
 	return (0);
 }
 
-//check for other whitespaces
-int	env_token(t_token *token, char *line, int i)
+void	add_last(t_token *head)
 {
-	int	j;
+	t_token	*token;
 
-	j = i + 1;
-	token->type = ENV;
-	while (line[j] && line[j] != '|' && line[j] != '<' && line[j] != '>')
-		j++;
-	token->value = ft_substr(line, i + 1, j - i - 1);
-	while (line[j] && line[j] != ' ')
-		j++;
-	return (j);
+	token = ft_new_token();
+	token->type = END;
+	ft_tokenadd_back(&head, token);
+	head->prev = token;
+}
+
+int	pipe_token(t_token *token, int i)
+{
+	token->type = PIPE;
+	return (i + 1);
 }
 
 t_token	*tokenize(char *line, t_shelgon *shelgon)
@@ -119,10 +98,7 @@ t_token	*tokenize(char *line, t_shelgon *shelgon)
 		if (line[i] == '<' || line[i] == '>')
 			i = redirect_token(token, line, i);
 		else if (line[i] == '|')
-		{
-			token->type = PIPE;
-			i++;
-		}
+			i = pipe_token(token, i);
 		else if (line[i])
 		{
 			i = str_token(token, WORD, line, i);
@@ -131,9 +107,6 @@ t_token	*tokenize(char *line, t_shelgon *shelgon)
 		}
 		ft_tokenadd_back(&head, token);
 	}
-	token = ft_new_token();
-	token->type = END;
-	ft_tokenadd_back(&head, token);
-	head->prev = token;
+	add_last(head);
 	return (head);
 }

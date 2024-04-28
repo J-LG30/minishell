@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:40:09 by julietteleg       #+#    #+#             */
-/*   Updated: 2024/04/26 17:13:37 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/28 14:55:26 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,43 +91,6 @@ void	free_shelgon(t_shelgon *sh)
 		free(sh->envr);
 	free_env(sh->env);
 	free(sh);
-}
-
-void	free_branch(t_branch *branch)
-{
-	t_branch	*cursor;
-	int			i;
-
-	if (!branch)
-		return ;
-	cursor = branch;
-	while (branch)
-	{
-		free(branch->full_cmd);
-		branch = branch->next;
-		if (cursor)
-			free(cursor);
-		cursor = branch;
-	}
-	if (branch)
-		free(branch);
-}
-
-void	free_exegg(t_exegg *exe)
-{
-	int	i;
-
-	i = 0;
-	if (!exe)
-		return ;
-	free_branch(exe->cmd);
-	while (exe->cmdpath && exe->cmdpath[i])
-	{
-		free(exe->cmdpath[i]);
-		i++;
-	}
-	free(exe->cmdpath);
-	free(exe);
 }
 
 void	free_all(t_shelgon *shelgon, t_exegg *exe, int flag)
