@@ -6,14 +6,16 @@
 /*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/27 14:07:01 by david            ###   ########.fr       */
+/*   Updated: 2024/04/28 20:38:56 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/minishell.h"
+
 volatile int	g_sig;
 
 extern int	rl_on_new_line(void);
+
 static void	save_env(char **envp, t_shelgon *shelgon)
 {
 	int		i;
@@ -46,7 +48,7 @@ static void	save_env(char **envp, t_shelgon *shelgon)
 void	wait_loop(char **envp)
 {
 	char		*line;
-	t_token 	*token;
+	t_token		*token;
 	t_shelgon	*shelgon;
 	t_token		*temp;
 
