@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/27 14:07:01 by david            ###   ########.fr       */
+/*   Updated: 2024/04/28 19:56:11 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	wait_loop(char **envp)
 	shelgon->exe = NULL;
 	save_env(envp, shelgon);
 	shelgon->env = env(shelgon, envp, 1, 1);
-	// for (int i = 0; shelgon->envr[i]; i++)
-	// 	printf("env[%d] = %s\n", i, shelgon->envr[i]);
 	while (1)
 	{	
 		shelgon->tree = NULL;

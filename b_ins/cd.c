@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:56:02 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 17:14:08 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/28 19:55:39 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	cd(char *arg, int flg, t_shelgon *shelgon)
 		ft_putendl_fd(": No such file or directory", 2);
 		shelgon->status = 1;
 	}
+	else
+		shelgon->status = 0;
 	if (flg)
 		return ;
 	free_all(shelgon, shelgon->exe, BTIN);

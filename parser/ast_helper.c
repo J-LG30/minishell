@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:25 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/24 14:40:32 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/28 15:56:35 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_ast	*new_pipe_node(t_token *temp)
 {
 	t_ast	*new;
 
-	//if (temp->prev)
 	new = new_node_init();
 	if (!new)
 		return (NULL);
@@ -66,18 +65,6 @@ t_ast	*new_redir_node(t_token *token)
 		new->value = token->next->value;
 	return (new);
 }
-
-// t_ast	*new_env_node(t_token *token)
-// {
-// 	t_ast	*new;
-
-// 	new = new_node_init();
-// 	if (!new)
-// 		return (NULL);
-// 	new->type = ENV;
-// 	new->value = token->value;
-// 	return (new);
-// }
 
 t_ast	*new_end_node(void)
 {

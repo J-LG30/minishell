@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:07 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/25 17:46:18 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/28 15:57:43 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_ast	*expression_one(t_token *head, t_shelgon **shelgon)
 	command_tree = create_command(head, shelgon);
 	if (!command_tree)
 	{
-		//free(pipe_node);
 		(*shelgon)->current = temp;
 		ft_putstr_fd("minishell: syntax error near unexpected token '|'\n", 2);
 		return (NULL);

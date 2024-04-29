@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 15:10:00 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/26 15:09:23 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:24:33 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 extern void rl_replace_line (const char *, int);
+
 void	child_handler(int sig)
 {
-	//write(1, "\n", 1);
 	rl_on_new_line();
 }
 

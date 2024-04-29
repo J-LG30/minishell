@@ -6,43 +6,46 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/28 15:32:54 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:10:56 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include <fcntl.h>
-#include <readline/history.h>
-#include <readline/readline.h>
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/wait.h>
-#include <unistd.h>
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-#define XOPEN_SOURCE 700
-#define WORD 1
-#define S_STR 2
-#define D_STR 3
-#define S_CHAR 4
-#define ENV 5
-#define PIPE 6
-#define REDIR_IN 7
-#define REDIR_OUT 8
-#define REDIR_APP 9
-#define REDIR_DELIMIT 10
-#define END 11
+# include "../libft/libft.h"
+# include <fcntl.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/wait.h>
+# include <unistd.h>
 
-#define LEFT 20
-#define RIGHT 21
+# define XOPEN_SOURCE 700
+# define WORD 1
+# define S_STR 2
+# define D_STR 3
+# define S_CHAR 4
+# define ENV 5
+# define PIPE 6
+# define REDIR_IN 7
+# define REDIR_OUT 8
+# define REDIR_APP 9
+# define REDIR_DELIMIT 10
+# define END 11
 
-#define IN_CHILD 14
+# define LEFT 20
+# define RIGHT 21
 
-#define ANGRY "(╯°□ °)╯︵ ┻━┻"
+# define IN_CHILD 14
 
-#define WRONG_CMD 2
-#define BTIN 3
+# define ANGRY "(╯°□ °)╯︵ ┻━┻"
+
+# define WRONG_CMD 2
+# define BTIN 3
 
 volatile extern int		g_sig;
 
@@ -200,3 +203,4 @@ void					free_ast(t_ast *tree);
 void					print_tree(t_ast *root);
 t_ast					*connect_subtree(t_ast *root, t_ast *subtree,
 							t_shelgon **shelgon, int dir);
+#endif

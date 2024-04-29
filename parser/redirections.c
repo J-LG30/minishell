@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:03 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/23 17:31:50 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:04:39 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,20 @@
 t_ast	*create_redirectin(t_shelgon **shelgon)
 {
 	t_ast	*new;
-	int		type;
+	t_token	*cur;
 
-	type = (*shelgon)->current->type;
-	if (((*shelgon)->current->type == REDIR_IN && (*shelgon)->current->next->type != WORD)
-		|| ((*shelgon)->current->type == REDIR_APP && (*shelgon)->current->next->type != WORD))
+	cur = (*shelgon)->current;
+	if ((cur->type == REDIR_IN && cur->next->type != WORD)
+		|| (cur->type == REDIR_APP && cur->next->type != WORD))
 	{
 		free_ast((*shelgon)->tree);
 		(*shelgon)->tree = NULL;
-		ft_putstr_fd("minishell: syntax error near unexpected token 'newline'\n", 2);
+		ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: ", 2);
+		ft_putstr_fd("syntax error near unexpected token 'newline'\n", 2);
 		return (NULL);
 	}
-	if (((*shelgon)->current->type == REDIR_IN && (*shelgon)->current->next->type == WORD)
-		|| ((*shelgon)->current->type == REDIR_APP && (*shelgon)->current->next->type == WORD))
+	if ((cur->type == REDIR_IN && cur->next->type == WORD)
+		|| (cur->type == REDIR_APP && cur->next->type == WORD))
 	{
 		new = new_redir_node((*shelgon)->current);
 		(*shelgon)->current = (*shelgon)->current->next->next;
@@ -43,20 +44,20 @@ t_ast	*create_redirectin(t_shelgon **shelgon)
 t_ast	*create_redirectout(t_shelgon **shelgon)
 {
 	t_ast	*new;
-	int		type;
-	int		next;
+	t_token	*cur;
 
-	type = (*shelgon)->current->type;
-	if (((*shelgon)->current->type == REDIR_OUT && (*shelgon)->current->next->type != WORD)
-		|| ((*shelgon)->current->type == REDIR_DELIMIT && (*shelgon)->current->next->type != WORD))
+	cur = (*shelgon)->current;
+	if ((cur->type == REDIR_OUT && cur->next->type != WORD)
+		|| (cur->type == REDIR_DELIMIT && cur->next->type != WORD))
 	{
 		free_ast((*shelgon)->tree);
 		(*shelgon)->tree = NULL;
-		ft_putstr_fd("minishell: syntax error near unexpected token 'newline'\n", 2);
+		ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: ", 2);
+		ft_putstr_fd("syntax error near unexpected token 'newline'\n", 2);
 		return (NULL);
 	}
-	if (((*shelgon)->current->type == REDIR_OUT && (*shelgon)->current->next->type == WORD)
-		|| ((*shelgon)->current->type == REDIR_DELIMIT && (*shelgon)->current->next->type == WORD))
+	if ((cur->type == REDIR_OUT && cur->next->type == WORD)
+		|| (cur->type == REDIR_DELIMIT && cur->next->type == WORD))
 	{
 		new = new_redir_node((*shelgon)->current);
 		(*shelgon)->current = (*shelgon)->current->next->next;

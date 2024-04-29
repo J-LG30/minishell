@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:40:09 by julietteleg       #+#    #+#             */
-/*   Updated: 2024/04/28 14:55:26 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:11:43 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ void	free_shelgon(t_shelgon *sh)
 void	free_all(t_shelgon *shelgon, t_exegg *exe, int flag)
 {
 	if (flag == WRONG_CMD || flag == BTIN)
-		free_exegg(exe);	
+		free_exegg(exe);
 	free_shelgon(shelgon);
 }

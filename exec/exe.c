@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/27 13:51:00 by david            ###   ########.fr       */
+/*   Updated: 2024/04/28 20:38:12 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,13 +193,13 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env)
 	t_exegg		*exe;
 	t_branch	*cmds;
 	int			i;
-	int s;
-	
+	int			s;
+	int			flag;
+
 	exe = malloc(sizeof(t_exegg) * 1);
 	if (!exe)
 		return (1);
 	shelgon->exe = exe;
-	s = 0;
 	exe->fd_in = STDIN_FILENO;
 	exe->fd_out = STDOUT_FILENO;
 	exe->dup_fd[0] = STDIN_FILENO;
@@ -227,11 +227,16 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env)
 		}
 		cmds = cmds->next;
 	}
+	flag = 0;
+	s = 0;
 	while (--i >= 0)
-		wait(&s);
-	if (WIFEXITED(s))
+	{
+		if (wait(&s) == -1)
+			flag = 1;
+	}
+	if (WIFEXITED(s) != 0 && flag == 0)
 		shelgon->status = WEXITSTATUS(s);
-	else if (WIFSIGNALED(s))
+	else if (WIFSIGNALED(s) && flag == 0)
 	{
 		if (WTERMSIG(s) == SIGINT)
 			shelgon->status = 130;
