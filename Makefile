@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: david <david@student.42.fr>                +#+  +:+       +#+         #
+#    By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/28 23:31:03 by david            ###   ########.fr        #
+#    Updated: 2024/04/29 17:56:19 by davda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = @cc
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address #-static-libsan
+FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address #-static-libsan
 LIB = -lreadline
 
 #ASAN_OPTIONS=symbolize=1
@@ -20,7 +20,7 @@ LIB = -lreadline
 
 SRCS = 	main.c free.c free2.c lexer/lexer.c lexer/lexer_lst_utils.c lexer/quotes.c\
 		lexer/expansion.c parser/connect_tree.c parser/parser.c parser/ast_helper.c\
-		parser/command.c parser/command_production.c \
+		parser/command.c parser/command_production.c print_branch.c\
 		parser/redirections.c parser/print_ast.c exec/child.c exec/exe.c\
 		b_ins/env.c b_ins/env_utils.c b_ins/export.c b_ins/echo.c b_ins/pwd.c b_ins/cd.c\
 		b_ins/exit.c b_ins/unset.c exec/utils_exec.c exec/utils_exec2.c signals/signals.c\
@@ -39,7 +39,8 @@ all: $(NAME)
 #version for my mac
 
 $(NAME): $(OBJS) $(LIBFT_A)
-	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o $(@) $(LIB) $(LIB_DIR) -I /usr/local/opt/readline/include
+	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o  $(@) $(LIB) -lreadline
+#-I /usr/local/opt/readline/include
 
 # $(NAME): $(OBJS) $(LIBFT_A)
 # 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o $(@) $(LIB)

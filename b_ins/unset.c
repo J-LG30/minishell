@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 19:02:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/27 14:14:16 by david            ###   ########.fr       */
+/*   Updated: 2024/04/29 17:57:28 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,31 @@ int	ft_strrem(char *str1, char *str2)
 	return (str1[i] - str2[i]);
 }
 
+int	do_unset(t_env *tmp, t_env *cur, t_shelgon *shell, char *cmds)
+{
+	if (tmp && (ft_strrem(tmp->cpy, cmds) == 0))
+	{
+		if (cur && !tmp->next)
+			cur = tmp;
+		else if (shell && shell->env && !tmp->prev)
+			shell->env = tmp->next;
+		if (tmp->prev)
+			tmp->prev->next = tmp->next;
+		if (tmp->next)
+			tmp->next->prev = tmp->prev;
+		if (tmp && tmp->cpy && tmp->vr && ft_strcmp(tmp->cpy, tmp->vr) == 0)
+			free(tmp->vr);
+		free(tmp->cpy);
+		free(tmp);
+		tmp = cur;
+		return (1);
+	}
+	return (0);
+}
+
 void	unset(t_shelgon *shell, char **cmds, int flg)
 {
-	int	i;
+	int		i;
 	t_env	*cur;
 	t_env	*tmp;
 	t_env	*head;
@@ -37,26 +59,12 @@ void	unset(t_shelgon *shell, char **cmds, int flg)
 	cur = shell->env;
 	head = shell->env;
 	tmp = shell->env;
-	while (cmds[i])
+	while (cmds && cmds[i])
 	{
 		while (tmp)
 		{
-			if (tmp && (ft_strrem(tmp->cpy, cmds[i]) == 0))
-			{
-				if (!tmp->next)
-					cur = tmp;
-				else if (!tmp->prev)
-					shell->env = tmp->next;
-				if (tmp->prev)
-					tmp->prev->next = tmp->next;
-				if (tmp->next)
-					tmp->next->prev = tmp->prev;
-				free(tmp->cpy);
-				if (tmp->vr && ft_strcmp(tmp->cpy, tmp->vr) == 0)
-					free(tmp->vr);
-				free(tmp);
-				tmp = cur;
-			}
+			if (do_unset(tmp, cur, shell, cmds[i]) == 1)
+				break ;
 			tmp = tmp->next;
 		}
 		tmp = head;

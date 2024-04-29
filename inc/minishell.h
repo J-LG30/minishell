@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/29 09:35:11 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:56:37 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,9 @@ t_ast					*create_redirectin(t_shelgon **shelgon);
 int						exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env);
 void					find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds);
 void					which_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
+void					ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds);
+int						pipe_it(t_ast *tree, t_shelgon *shelgon, t_branch *cmds,
+							t_exegg *exe);
 void					fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
 void					lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
 void					mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
