@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: david <david@student.42.fr>                +#+  +:+       +#+         #
+#    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/28 23:31:03 by david            ###   ########.fr        #
+#    Updated: 2024/04/29 16:56:58 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = @cc
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address #-static-libsan
+FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address #-static-libsan
 LIB = -lreadline
 
 #ASAN_OPTIONS=symbolize=1

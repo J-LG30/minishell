@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 15:10:00 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/28 16:24:33 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:25:25 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ extern void rl_replace_line (const char *, int);
 
 void	child_handler(int sig)
 {
+	g_sig = sig;
+	if (sig == SIGQUIT)
+		write(2, "Quit (core dumped)", 19);
 	rl_on_new_line();
 }
 
@@ -27,15 +30,46 @@ void	prompt_handler(int sig)
 	rl_redisplay();
 }
 
+void	heredoc_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		g_sig = 1;
+		write(1, "\n", 1);
+		close(STDIN_FILENO);
+	}
+}
+
+void	set_heredoc_handler(void)
+{
+	struct sigaction	sa;
+	struct sigaction	act;
+
+	sa.sa_flags = 0;
+	sa.sa_handler = &heredoc_handler;
+	act.sa_flags = 0;
+	act.sa_handler = SIG_IGN;
+	sigemptyset(&sa.sa_mask);
+	sigemptyset(&act.sa_mask);
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &act, NULL);
+	sigaction(SIGTERM, &act, NULL);
+}
+
 void	set_child_handler(void)
 {
 	struct sigaction	sa;
+	struct sigaction	act;
 
+	act.sa_flags = 0;
+	act.sa_handler = SIG_IGN;
 	sa.sa_handler = &child_handler;
 	sa.sa_flags = SA_RESTART;
 	sigemptyset(&sa.sa_mask);
+	sigemptyset(&act.sa_mask);
 	sigaction(SIGQUIT, &sa, NULL);
 	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGTERM, &act, NULL);
 }
 
 void	set_prompt_handler(void)
@@ -51,4 +85,5 @@ void	set_prompt_handler(void)
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &act, NULL);
+	sigaction(SIGTERM, &act, NULL);
 }

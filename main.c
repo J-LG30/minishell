@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/29 09:35:56 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:52:05 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	wait_loop(char **envp)
 		set_child_handler();
 		if (!line)
 		{
-			free_all(shelgon, NULL, 1);
+			free_all(shelgon, NULL, CTRL_D);
 			exit(0);
 		}
 		if (ft_strlen(line) == 0)
@@ -106,5 +106,6 @@ int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
+	g_sig = 0;
 	wait_loop(envp);
 }

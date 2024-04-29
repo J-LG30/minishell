@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:56:46 by david             #+#    #+#             */
-/*   Updated: 2024/04/28 22:27:56 by david            ###   ########.fr       */
+/*   Updated: 2024/04/29 16:42:24 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static int	err_heredoc(void)
+static int	err_heredoc(int *fd)
 {
 	ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: warning", 2);
-	ft_putendl_fd(": here-document at line 1 delimited by end-of-file", 2);
+	ft_putendl_fd(": here-document delimited by end-of-file", 2);
 	rl_on_new_line();
-	return (-1);
+	close(fd[1]);
+	return (fd[0]);
 }
 
 int	ft_heredoc(t_ast *tree)
@@ -25,17 +26,23 @@ int	ft_heredoc(t_ast *tree)
 	int		fd[2];
 	char	*res;
 	t_ast	*temp;
+	int		std_in;
 
+	std_in = dup(STDIN_FILENO);
 	temp = tree;
-	set_prompt_handler();
 	if (temp && temp->type == REDIR_DELIMIT)
 	{
 		pipe(fd);
 		while (1)
 		{
 			res = readline("> ");
+			if (g_sig == 1)
+			{
+				dup2(std_in, STDIN_FILENO);
+				return (-2);
+			}
 			if (!res)
-				return (err_heredoc());
+				return (err_heredoc(fd));
 			if (ft_strncmp(temp->value, res, ft_strlen(temp->value)) == 0
 				&& (ft_strlen(temp->value) == ft_strlen(res)))
 				break ;

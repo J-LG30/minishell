@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/29 09:35:11 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:52:14 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 
 # define WRONG_CMD 2
 # define BTIN 3
+# define CTRL_D 1
 
 volatile extern int		g_sig;
 
@@ -147,7 +148,7 @@ void					sig_handler(int sig);
 void					child_sig_handler(int sig);
 void					set_prompt_handler(void);
 void					set_child_handler(void);
-
+void					set_heredoc_handler(void);
 // command productions
 t_ast					*create_command(t_token *head, t_shelgon **shelgon);
 t_ast					*command_word(t_shelgon **shelgon);

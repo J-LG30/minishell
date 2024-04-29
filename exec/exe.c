@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/29 09:37:22 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:19:34 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,14 @@ static void	save_exe(t_shelgon *shelgon, t_exegg *exe)
 	exe->redir = 'n';
 	exe->pkcenter = shelgon;
 	exe->last_fd = 0;
+	exe->cmdpath = NULL;
 }
 
 static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 {
 	int	i;
 	int	s;
+	int	flag;
 
 	i = 0;
 	s = 0;
@@ -120,9 +122,13 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env)
 	if (!exe)
 		return (1);
 	save_exe(shelgon, exe);
-	if (get_cmd(tree, &cmds, exe))
+	i = get_cmd(tree, &cmds, exe);
+	exe->cmd = cmds;
+	if (i || i == -1)
 	{
-		only_redir(tree, exe);
+		if (i)
+			only_redir(tree, exe);
+		free_exegg(exe);
 		return (1);
 	}
 	exe->cmd = cmds;

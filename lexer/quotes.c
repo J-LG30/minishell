@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/28 15:44:47 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:08:01 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,15 @@ int	unclosed_quotes(t_token *token)
 		{
 			closed *= -1;
 			q = token->value[i];
-			while (token->value[++i] && closed == -1)
+			while (token->value[i] && closed == -1)
 			{
 				if (token->value[i] == q)
 					closed *= -1;
+				i++;
 			}
 		}
+		if (!token->value[i])
+			break ;
 		i++;
 	}
 	if (closed == -1 && q != '\0')

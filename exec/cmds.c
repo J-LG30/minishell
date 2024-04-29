@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 23:22:13 by david             #+#    #+#             */
-/*   Updated: 2024/04/28 23:40:35 by david            ###   ########.fr       */
+/*   Updated: 2024/04/29 16:11:03 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,13 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 			if (!cur)
 				return (0);
 			ft_memset(cur, 0, 0);
+			set_heredoc_handler();
 			cur->pipe[0] = ft_heredoc(temp);
+			set_prompt_handler();
+			if (cur->pipe[0] == -2)
+			{
+				return (-1);
+			}
 			set_child_handler();
 			cur->ref = temp;
 			if(!(*cmds))
