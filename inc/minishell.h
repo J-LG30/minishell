@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/28 16:10:56 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/29 09:35:11 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,17 +161,20 @@ t_ast					*create_redirectin(t_shelgon **shelgon);
 // executor functions
 int						exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env);
 void					find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds);
+void					which_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
 void					fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
 void					lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
 void					mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
-t_branch				*node_cmd(t_ast *tree);
 int						get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe);
-void					ft_path(t_exegg *exe, t_env *env);
-void					ft_error(int flg, t_exegg *exe);
-int						ft_heredoc(t_ast *tree);
-t_branch				*msh_lstlast(t_branch *lst);
-char					**ms_split(char const *s, char c);
+void					only_redir(t_ast *tree, t_exegg *exe);
 char					*try_cmd(char *cargs, char **cpath);
+void					ft_path(t_exegg *exe, t_env *env);
+char					**ms_split(char const *s, char c);
+void					ft_error(int flg, t_exegg *exe);
+t_branch				*msh_lstlast(t_branch *lst);
+int						ft_heredoc(t_ast *tree);
+t_branch				*node_cmd(t_ast *tree);
+char					*get_path(t_env	*env);
 
 // Built in functions
 int						is_btin(char *cmds);
