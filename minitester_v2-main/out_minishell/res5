@@ -1,0 +1,560 @@
+==3206699== Memcheck, a memory error detector
+==3206699== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3206699== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3206699== Command: ../minishell
+==3206699==
+==3206699== Invalid read of size 1
+==3206699==    at 0x4020C2: unclosed_quotes (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206699==    by 0x4024D8: handle_word (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206699==    by 0x401E21: tokenize (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206699==    by 0x401381: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206699==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206699==  Address 0x4b6baf3 is 0 bytes after a block of size 3 alloc'd
+==3206699==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206699==    by 0x407C6C: ft_substr (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206699==    by 0x401B45: str_token (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206699==    by 0x401E11: tokenize (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206699==    by 0x401381: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206699==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206699==
+5
+Error executing command
+Error executing command
+Error executing command
+==3206701==
+==3206701== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3206701==
+==3206701== HEAP SUMMARY:
+==3206701==     in use at exit: 224,734 bytes in 540 blocks
+==3206701==   total heap usage: 754 allocs, 214 frees, 248,393 bytes allocated
+==3206701==
+==3206701== 2 bytes in 2 blocks are still reachable in loss record 1 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x402389: rm_quotes (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x402517: handle_word (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x401E21: tokenize (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x401381: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 8 bytes in 1 blocks are still reachable in loss record 2 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x407DDD: ft_strjoin (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40151B: save_env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4012CE: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 8 bytes in 2 blocks are still reachable in loss record 5 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x407A60: ft_strdup (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x401B5D: str_token (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x401E11: tokenize (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x401381: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 16 bytes in 1 blocks are still reachable in loss record 14 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x4071C8: node_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4073E7: get_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x404595: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 16 bytes in 1 blocks are still reachable in loss record 15 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x4071C8: node_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4073E7: get_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40766A: get_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x404595: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 17 bytes in 1 blocks are still reachable in loss record 16 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x407DDD: ft_strjoin (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40706A: try_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x404006: lst_child (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x406ECF: which_child (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x404336: ft_pipe (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40711C: pipe_it (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4046BA: exeg (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4045E5: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 32 bytes in 1 blocks are still reachable in loss record 23 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x4032C1: new_node_init (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x403330: new_pipe_node (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x403065: expression_one (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40319B: create_expression (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40327C: parser (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4013D9: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 32 bytes in 1 blocks are still reachable in loss record 24 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x4032C1: new_node_init (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x403380: new_word_node (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4037CC: command_word (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4034C7: command_one (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40358C: create_command (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4030AB: expression_one (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40319B: create_expression (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40327C: parser (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4013D9: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 32 bytes in 1 blocks are still reachable in loss record 25 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x4032C1: new_node_init (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x403380: new_word_node (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4037CC: command_word (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4034C7: command_one (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40358C: create_command (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40322A: expression_two (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4031C9: create_expression (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x403111: expression_one (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40319B: create_expression (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40327C: parser (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4013D9: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206701==
+==3206702== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3206702==
+==3206701== 40 bytes in 1 blocks are still reachable in loss record 26 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702== HEAP SUMMARY:
+==3206702==     in use at exit: 224,751 bytes in 541 blocks
+==3206702==   total heap usage: 758 allocs, 217 frees, 248,467 bytes allocated
+==3206702==
+==3206701==    by 0x401F61: ft_new_token (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x401CB0: add_last (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x401E61: tokenize (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x401381: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 48 bytes in 1 blocks are still reachable in loss record 30 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x4079FD: ft_calloc (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x407170: node_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4073E7: get_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x404595: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 48 bytes in 1 blocks are still reachable in loss record 31 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x4079FD: ft_calloc (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x407170: node_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4073E7: get_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40766A: get_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x404595: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 64 bytes in 1 blocks are still reachable in loss record 32 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x401295: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 88 bytes in 1 blocks are still reachable in loss record 34 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x405F2D: ms_split (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x406265: ft_path (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4045D0: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 96 bytes in 1 blocks are still reachable in loss record 38 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x40455C: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 118 bytes in 10 blocks are still reachable in loss record 39 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x407C6C: ft_substr (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x405FB3: ms_split (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x406265: ft_path (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4045D0: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 120 bytes in 3 blocks are still reachable in loss record 40 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x401F61: ft_new_token (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x401D58: tokenize (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x401381: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 576 bytes in 1 blocks are still reachable in loss record 44 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x40147E: save_env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4012CE: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 2,840 bytes in 71 blocks are still reachable in loss record 61 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x404885: ms_lstadd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x404928: ms_addnode (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4047F6: env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4012E2: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 4,084 bytes in 70 blocks are still reachable in loss record 66 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x407A60: ft_strdup (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x40154D: save_env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4012CE: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 4,092 bytes in 71 blocks are still reachable in loss record 67 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x407A60: ft_strdup (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4048B5: ms_lstadd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x404928: ms_addnode (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4047F6: env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4012E2: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== 4,092 bytes in 71 blocks are still reachable in loss record 68 of 89
+==3206701==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206701==    by 0x407A60: ft_strdup (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4048C9: ms_lstadd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x404928: ms_addnode (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4047F6: env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4012E2: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206701==
+==3206701== LEAK SUMMARY:
+==3206701==    definitely lost: 0 bytes in 0 blocks
+==3206701==    indirectly lost: 0 bytes in 0 blocks
+==3206701==      possibly lost: 0 bytes in 0 blocks
+==3206701==    still reachable: 16,469 bytes in 314 blocks
+==3206701==         suppressed: 208,265 bytes in 226 blocks
+==3206701==
+==3206701== For lists of detected and suppressed errors, rerun with: -s
+==3206701== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==3206702== 2 bytes in 2 blocks are still reachable in loss record 1 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x402389: rm_quotes (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x402517: handle_word (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x401E21: tokenize (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x401381: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 8 bytes in 1 blocks are still reachable in loss record 2 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x407DDD: ft_strjoin (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40151B: save_env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4012CE: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 8 bytes in 2 blocks are still reachable in loss record 5 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x407A60: ft_strdup (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x401B5D: str_token (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x401E11: tokenize (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x401381: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 16 bytes in 1 blocks are still reachable in loss record 14 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x4071C8: node_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4073E7: get_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x404595: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 16 bytes in 1 blocks are still reachable in loss record 15 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x4071C8: node_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4073E7: get_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40766A: get_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x404595: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 17 bytes in 1 blocks are still reachable in loss record 16 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x407DDD: ft_strjoin (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40706A: try_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x403DB0: fst_child (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x406E94: which_child (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x404336: ft_pipe (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40711C: pipe_it (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4046BA: exeg (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4045E5: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 17 bytes in 1 blocks are still reachable in loss record 17 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x407DDD: ft_strjoin (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40706A: try_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x404006: lst_child (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x406ECF: which_child (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x404336: ft_pipe (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40711C: pipe_it (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4046BA: exeg (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4045E5: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 32 bytes in 1 blocks are still reachable in loss record 24 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x4032C1: new_node_init (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x403330: new_pipe_node (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x403065: expression_one (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40319B: create_expression (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40327C: parser (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4013D9: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 32 bytes in 1 blocks are still reachable in loss record 25 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x4032C1: new_node_init (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x403380: new_word_node (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4037CC: command_word (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4034C7: command_one (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40358C: create_command (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4030AB: expression_one (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40319B: create_expression (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40327C: parser (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4013D9: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 32 bytes in 1 blocks are still reachable in loss record 26 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x4032C1: new_node_init (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x403380: new_word_node (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4037CC: command_word (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4034C7: command_one (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40358C: create_command (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40322A: expression_two (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4031C9: create_expression (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x403111: expression_one (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40319B: create_expression (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40327C: parser (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4013D9: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 40 bytes in 1 blocks are still reachable in loss record 27 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x401F61: ft_new_token (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x401CB0: add_last (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x401E61: tokenize (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x401381: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 48 bytes in 1 blocks are still reachable in loss record 31 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x4079FD: ft_calloc (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x407170: node_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4073E7: get_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x404595: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 48 bytes in 1 blocks are still reachable in loss record 32 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x4079FD: ft_calloc (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x407170: node_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4073E7: get_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40766A: get_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x404595: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 64 bytes in 1 blocks are still reachable in loss record 33 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x401295: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 88 bytes in 1 blocks are still reachable in loss record 35 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x405F2D: ms_split (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x406265: ft_path (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4045D0: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 96 bytes in 1 blocks are still reachable in loss record 39 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x40455C: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 118 bytes in 10 blocks are still reachable in loss record 40 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x407C6C: ft_substr (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x405FB3: ms_split (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x406265: ft_path (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4045D0: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 120 bytes in 3 blocks are still reachable in loss record 41 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x401F61: ft_new_token (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x401D58: tokenize (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x401381: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 576 bytes in 1 blocks are still reachable in loss record 45 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x40147E: save_env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4012CE: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 2,840 bytes in 71 blocks are still reachable in loss record 62 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x404885: ms_lstadd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x404928: ms_addnode (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4047F6: env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4012E2: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 4,084 bytes in 70 blocks are still reachable in loss record 67 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x407A60: ft_strdup (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x40154D: save_env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4012CE: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 4,092 bytes in 71 blocks are still reachable in loss record 68 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x407A60: ft_strdup (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4048B5: ms_lstadd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x404928: ms_addnode (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4047F6: env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4012E2: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== 4,092 bytes in 71 blocks are still reachable in loss record 69 of 90
+==3206702==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206702==    by 0x407A60: ft_strdup (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4048C9: ms_lstadd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x404928: ms_addnode (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4047F6: env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4012E2: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206702==
+==3206702== LEAK SUMMARY:
+==3206702==    definitely lost: 0 bytes in 0 blocks
+==3206702==    indirectly lost: 0 bytes in 0 blocks
+==3206702==      possibly lost: 0 bytes in 0 blocks
+==3206702==    still reachable: 16,486 bytes in 315 blocks
+==3206702==         suppressed: 208,265 bytes in 226 blocks
+==3206702==
+==3206702== For lists of detected and suppressed errors, rerun with: -s
+==3206702== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==3206700==
+==3206700== Process terminating with default action of signal 13 (SIGPIPE)
+==3206700==    at 0x49DA887: write (write.c:26)
+==3206700==    by 0x4950EEC: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==3206700==    by 0x49529E0: new_do_write (fileops.c:448)
+==3206700==    by 0x49529E0: _IO_new_do_write (fileops.c:425)
+==3206700==    by 0x49529E0: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==3206700==    by 0x49504D7: _IO_file_sync@@GLIBC_2.2.5 (fileops.c:798)
+==3206700==    by 0x49451A9: fflush (iofflush.c:40)
+==3206700==    by 0x489E4E6: rl_redisplay (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==3206700==    by 0x4889458: readline_internal_setup (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==3206700==    by 0x4893CF8: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==3206700==    by 0x40131D: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==
+==3206700== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3206700==
+==3206700== HEAP SUMMARY:
+==3206700==     in use at exit: 233,285 bytes in 538 blocks
+==3206700==   total heap usage: 757 allocs, 219 frees, 248,453 bytes allocated
+==3206700==
+==3206700== 8 bytes in 1 blocks are still reachable in loss record 1 of 89
+==3206700==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206700==    by 0x407DDD: ft_strjoin (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x40151B: save_env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4012CE: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==
+==3206700== 17 bytes in 1 blocks are definitely lost in loss record 16 of 89
+==3206700==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206700==    by 0x407DDD: ft_strjoin (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x40706A: try_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x403DB0: fst_child (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x406E94: which_child (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x404336: ft_pipe (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x40711C: pipe_it (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4046BA: exeg (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4045E5: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==
+==3206700== 64 bytes in 1 blocks are still reachable in loss record 29 of 89
+==3206700==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206700==    by 0x401295: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==
+==3206700== 576 bytes in 1 blocks are still reachable in loss record 41 of 89
+==3206700==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206700==    by 0x40147E: save_env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4012CE: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==
+==3206700== 2,840 bytes in 71 blocks are still reachable in loss record 59 of 89
+==3206700==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206700==    by 0x404885: ms_lstadd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x404928: ms_addnode (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4047F6: env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4012E2: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==
+==3206700== 4,084 bytes in 70 blocks are still reachable in loss record 65 of 89
+==3206700==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206700==    by 0x407A60: ft_strdup (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x40154D: save_env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4012CE: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==
+==3206700== 4,092 bytes in 71 blocks are still reachable in loss record 66 of 89
+==3206700==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206700==    by 0x407A60: ft_strdup (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4048B5: ms_lstadd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x404928: ms_addnode (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4047F6: env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4012E2: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==
+==3206700== 4,092 bytes in 71 blocks are still reachable in loss record 67 of 89
+==3206700==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206700==    by 0x407A60: ft_strdup (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4048C9: ms_lstadd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x404928: ms_addnode (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4047F6: env (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4012E2: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206700==
+==3206700== LEAK SUMMARY:
+==3206700==    definitely lost: 17 bytes in 1 blocks
+==3206700==    indirectly lost: 0 bytes in 0 blocks
+==3206700==      possibly lost: 0 bytes in 0 blocks
+==3206700==    still reachable: 15,756 bytes in 286 blocks
+==3206700==         suppressed: 217,512 bytes in 251 blocks
+==3206700==
+==3206700== For lists of detected and suppressed errors, rerun with: -s
+==3206700== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==3206699==
+==3206699== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3206699==
+==3206699== HEAP SUMMARY:
+==3206699==     in use at exit: 208,377 bytes in 232 blocks
+==3206699==   total heap usage: 796 allocs, 564 frees, 249,311 bytes allocated
+==3206699==
+==3206699== LEAK SUMMARY:
+==3206699==    definitely lost: 0 bytes in 0 blocks
+==3206699==    indirectly lost: 0 bytes in 0 blocks
+==3206699==      possibly lost: 0 bytes in 0 blocks
+==3206699==    still reachable: 0 bytes in 0 blocks
+==3206699==         suppressed: 208,377 bytes in 232 blocks
+==3206699==
+==3206699== For lists of detected and suppressed errors, rerun with: -s
+==3206699== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)

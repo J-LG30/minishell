@@ -1,0 +1,22 @@
+==3207200== Memcheck, a memory error detector
+==3207200== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3207200== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3207200== Command: ../minishell
+==3207200==
+(╯°□ °)╯︵ ┻━┻: cd: too: No such file or directory
+==3207200== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3207200==
+==3207200== HEAP SUMMARY:
+==3207200==     in use at exit: 208,325 bytes in 228 blocks
+==3207200==   total heap usage: 761 allocs, 533 frees, 248,549 bytes allocated
+==3207200==
+==3207200== LEAK SUMMARY:
+==3207200==    definitely lost: 0 bytes in 0 blocks
+==3207200==    indirectly lost: 0 bytes in 0 blocks
+==3207200==      possibly lost: 0 bytes in 0 blocks
+==3207200==    still reachable: 0 bytes in 0 blocks
+==3207200==         suppressed: 208,325 bytes in 228 blocks
+==3207200==
+==3207200== For lists of detected and suppressed errors, rerun with: -s
+==3207200== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+1

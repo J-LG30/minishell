@@ -1,0 +1,65 @@
+==3206665== Memcheck, a memory error detector
+==3206665== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3206665== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3206665== Command: ../minishell
+==3206665==
+==3206665== Invalid read of size 1
+==3206665==    at 0x4020C2: unclosed_quotes (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206665==    by 0x4024D8: handle_word (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206665==    by 0x401E21: tokenize (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206665==    by 0x401381: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206665==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206665==  Address 0x4b6baf3 is 0 bytes after a block of size 3 alloc'd
+==3206665==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206665==    by 0x407C6C: ft_substr (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206665==    by 0x401B45: str_token (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206665==    by 0x401E11: tokenize (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206665==    by 0x401381: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206665==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206665==
+5
+Error executing command
+==3206666==
+==3206666== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3206666==
+==3206666== HEAP SUMMARY:
+==3206666==     in use at exit: 208,380 bytes in 233 blocks
+==3206666==   total heap usage: 790 allocs, 557 frees, 249,150 bytes allocated
+==3206666==
+==3206666== 17 bytes in 1 blocks are definitely lost in loss record 8 of 68
+==3206666==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3206666==    by 0x407DDD: ft_strjoin (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206666==    by 0x40706A: try_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206666==    by 0x403DB0: fst_child (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206666==    by 0x406E94: which_child (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206666==    by 0x404336: ft_pipe (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206666==    by 0x40711C: pipe_it (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206666==    by 0x4046BA: exeg (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206666==    by 0x4045E5: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206666==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206666==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
+==3206666==
+==3206666== LEAK SUMMARY:
+==3206666==    definitely lost: 17 bytes in 1 blocks
+==3206666==    indirectly lost: 0 bytes in 0 blocks
+==3206666==      possibly lost: 0 bytes in 0 blocks
+==3206666==    still reachable: 0 bytes in 0 blocks
+==3206666==         suppressed: 208,363 bytes in 232 blocks
+==3206666==
+==3206666== For lists of detected and suppressed errors, rerun with: -s
+==3206666== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 1 from 1)
+==3206665== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3206665==
+==3206665== HEAP SUMMARY:
+==3206665==     in use at exit: 208,287 bytes in 228 blocks
+==3206665==   total heap usage: 745 allocs, 517 frees, 248,180 bytes allocated
+==3206665==
+==3206665== LEAK SUMMARY:
+==3206665==    definitely lost: 0 bytes in 0 blocks
+==3206665==    indirectly lost: 0 bytes in 0 blocks
+==3206665==      possibly lost: 0 bytes in 0 blocks
+==3206665==    still reachable: 0 bytes in 0 blocks
+==3206665==         suppressed: 208,287 bytes in 228 blocks
+==3206665==
+==3206665== For lists of detected and suppressed errors, rerun with: -s
+==3206665== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)

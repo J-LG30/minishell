@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/29 17:19:34 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/29 18:05:56 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	built_red(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	dup2(exe->fd_in, saved_file[1]);
 }
 
-static void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
+void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	if (is_btin(cmds->full_cmd[0])
 		&& (!cmds->next || cmds->next->ref->type != WORD) && (!cmds->prev))
@@ -93,6 +93,7 @@ static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 	}
 	flag = 0;
 	s = 0;
+	i = pipe_it(tree, shelgon, cmds, exe);
 	while (--i >= 0)
 	{
 		if (wait(&s) == -1)

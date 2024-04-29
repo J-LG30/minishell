@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:14:10 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/28 20:48:57 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:51:43 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	too_many_args(char **full_cmd)
 	while (full_cmd[i])
 		i++;
 	if (i > 2)
-	{	
+	{
 		ft_putendl_fd("(╯°□ °)╯︵ ┻━┻: exit: too many arguments", 2);
 		return (1);
 	}

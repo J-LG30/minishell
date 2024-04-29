@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:30:45 by david             #+#    #+#             */
-/*   Updated: 2024/04/28 23:20:52 by david            ###   ########.fr       */
+/*   Updated: 2024/04/29 13:58:17 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,21 @@ char	*try_cmd(char *cargs, char **cpath)
 		i++;
 	}
 	return (NULL);
+}
+
+int	pipe_it(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
+{
+	int i;
+
+	i = 0;
+	while (cmds)
+	{
+		if (cmds->ref->type == WORD)
+		{
+			ft_pipe(tree, exe, cmds);
+			i++;
+		}
+		cmds = cmds->next;
+	}
+	return (i);
 }
