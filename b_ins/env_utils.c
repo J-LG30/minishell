@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:32:23 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 15:17:27 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/29 20:25:01 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static t_env	*ms_lstlast(t_env *lst)
 t_env	*ms_lstadd(char *s)
 {
 	t_env	*node;
+
 	node = malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);

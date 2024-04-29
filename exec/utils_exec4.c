@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:30:45 by david             #+#    #+#             */
-/*   Updated: 2024/04/29 13:58:17 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/29 20:50:27 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,13 @@ char	*try_cmd(char *cargs, char **cpath)
 
 	i = 0;
 	com = NULL;
-	if (!cpath)
+	if (!cpath || !cargs)
 		return (NULL);
 	while (cpath[i])
 	{
 		temp = ft_strjoin(cpath[i], "/");
+		if (!temp)
+			return (NULL);
 		com = ft_strjoin(temp, cargs);
 		free(temp);
 		if (access(com, F_OK) == 0)

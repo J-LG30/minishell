@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:06:50 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 17:11:41 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/29 20:21:53 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,16 @@ static int	start_print(char **cmds, int flg)
 static void	print_it(char **cmds, int flg, int i)
 {
 	if (flg == 1 || flg == 2)
+	{
 		while (cmds[i])
 		{
 			printf("%s", cmds[i++]);
 			if (cmds[i])
 				printf(" ");
 		}
+	}
 	else if (flg == 0)
+	{
 		while (cmds[i])
 		{
 			if (cmds[i])
@@ -63,6 +66,7 @@ static void	print_it(char **cmds, int flg, int i)
 			if (cmds[i])
 				printf(" ");
 		}
+	}
 	if (flg == 1 || flg == 2)
 		printf("\n");
 }
@@ -86,7 +90,6 @@ void	echo(char **cmds, int rexit, t_shelgon *shelgon)
 	int	flg;
 
 	shelgon->status = 0;
-	i = 0;
 	if (!cmds[1])
 		ft_putchar_fd('\n', 1);
 	if (check_args(cmds))

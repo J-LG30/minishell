@@ -1,23 +1,23 @@
-==3207531== Memcheck, a memory error detector
-==3207531== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3207531== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3207531== Command: ../minishell
-==3207531==
-==3207531== Warning: invalid file descriptor -1 in syscall close()
-==3207531== Warning: invalid file descriptor -1 in syscall close()
-==3207531==
-==3207531== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3207531==
-==3207531== HEAP SUMMARY:
-==3207531==     in use at exit: 208,401 bytes in 232 blocks
-==3207531==   total heap usage: 804 allocs, 572 frees, 249,469 bytes allocated
-==3207531==
-==3207531== LEAK SUMMARY:
-==3207531==    definitely lost: 0 bytes in 0 blocks
-==3207531==    indirectly lost: 0 bytes in 0 blocks
-==3207531==      possibly lost: 0 bytes in 0 blocks
-==3207531==    still reachable: 0 bytes in 0 blocks
-==3207531==         suppressed: 208,401 bytes in 232 blocks
-==3207531==
-==3207531== For lists of detected and suppressed errors, rerun with: -s
-==3207531== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==3238495== Memcheck, a memory error detector
+==3238495== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3238495== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3238495== Command: ../minishell
+==3238495==
+==3238495== Warning: invalid file descriptor -1 in syscall close()
+==3238495== Warning: invalid file descriptor -1 in syscall close()
+==3238495==
+==3238495== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3238495==
+==3238495== HEAP SUMMARY:
+==3238495==     in use at exit: 208,401 bytes in 232 blocks
+==3238495==   total heap usage: 804 allocs, 572 frees, 249,457 bytes allocated
+==3238495==
+==3238495== LEAK SUMMARY:
+==3238495==    definitely lost: 0 bytes in 0 blocks
+==3238495==    indirectly lost: 0 bytes in 0 blocks
+==3238495==      possibly lost: 0 bytes in 0 blocks
+==3238495==    still reachable: 0 bytes in 0 blocks
+==3238495==         suppressed: 208,401 bytes in 232 blocks
+==3238495==
+==3238495== For lists of detected and suppressed errors, rerun with: -s
+==3238495== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

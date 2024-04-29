@@ -1,36 +1,22 @@
-==3207471== Memcheck, a memory error detector
-==3207471== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3207471== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3207471== Command: ../minishell
-==3207471==
-==3207471== Invalid read of size 1
-==3207471==    at 0x4020C2: unclosed_quotes (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3207471==    by 0x4024D8: handle_word (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3207471==    by 0x401E21: tokenize (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3207471==    by 0x401381: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3207471==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3207471==  Address 0x4b6bce3 is 0 bytes after a block of size 19 alloc'd
-==3207471==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3207471==    by 0x407C6C: ft_substr (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3207471==    by 0x401B45: str_token (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3207471==    by 0x401E11: tokenize (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3207471==    by 0x401381: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3207471==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3207471==
+==3238431== Memcheck, a memory error detector
+==3238431== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3238431== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3238431== Command: ../minishell
+==3238431==
 agora 'mais' fdd
-==3207471== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3207471==
-==3207471== HEAP SUMMARY:
-==3207471==     in use at exit: 208,329 bytes in 228 blocks
-==3207471==   total heap usage: 751 allocs, 523 frees, 248,397 bytes allocated
-==3207471==
-==3207471== LEAK SUMMARY:
-==3207471==    definitely lost: 0 bytes in 0 blocks
-==3207471==    indirectly lost: 0 bytes in 0 blocks
-==3207471==      possibly lost: 0 bytes in 0 blocks
-==3207471==    still reachable: 0 bytes in 0 blocks
-==3207471==         suppressed: 208,329 bytes in 228 blocks
-==3207471==
-==3207471== For lists of detected and suppressed errors, rerun with: -s
-==3207471== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+==3238431== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3238431==
+==3238431== HEAP SUMMARY:
+==3238431==     in use at exit: 208,329 bytes in 228 blocks
+==3238431==   total heap usage: 751 allocs, 523 frees, 248,385 bytes allocated
+==3238431==
+==3238431== LEAK SUMMARY:
+==3238431==    definitely lost: 0 bytes in 0 blocks
+==3238431==    indirectly lost: 0 bytes in 0 blocks
+==3238431==      possibly lost: 0 bytes in 0 blocks
+==3238431==    still reachable: 0 bytes in 0 blocks
+==3238431==         suppressed: 208,329 bytes in 228 blocks
+==3238431==
+==3238431== For lists of detected and suppressed errors, rerun with: -s
+==3238431== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 0

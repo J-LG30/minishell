@@ -1,22 +1,22 @@
-==3207393== Memcheck, a memory error detector
-==3207393== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3207393== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3207393== Command: ../minishell
-==3207393==
+==3238349== Memcheck, a memory error detector
+==3238349== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3238349== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3238349== Command: ../minishell
+==3238349==
 rm: cannot remove 'test1': No such file or directory
-==3207393==
-==3207393== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3207393==
-==3207393== HEAP SUMMARY:
-==3207393==     in use at exit: 208,467 bytes in 236 blocks
-==3207393==   total heap usage: 841 allocs, 605 frees, 250,312 bytes allocated
-==3207393==
-==3207393== LEAK SUMMARY:
-==3207393==    definitely lost: 0 bytes in 0 blocks
-==3207393==    indirectly lost: 0 bytes in 0 blocks
-==3207393==      possibly lost: 0 bytes in 0 blocks
-==3207393==    still reachable: 0 bytes in 0 blocks
-==3207393==         suppressed: 208,467 bytes in 236 blocks
-==3207393==
-==3207393== For lists of detected and suppressed errors, rerun with: -s
-==3207393== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==3238349==
+==3238349== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3238349==
+==3238349== HEAP SUMMARY:
+==3238349==     in use at exit: 208,323 bytes in 234 blocks
+==3238349==   total heap usage: 840 allocs, 606 frees, 250,285 bytes allocated
+==3238349==
+==3238349== LEAK SUMMARY:
+==3238349==    definitely lost: 0 bytes in 0 blocks
+==3238349==    indirectly lost: 0 bytes in 0 blocks
+==3238349==      possibly lost: 0 bytes in 0 blocks
+==3238349==    still reachable: 0 bytes in 0 blocks
+==3238349==         suppressed: 208,323 bytes in 234 blocks
+==3238349==
+==3238349== For lists of detected and suppressed errors, rerun with: -s
+==3238349== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

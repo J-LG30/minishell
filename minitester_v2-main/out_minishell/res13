@@ -1,51 +1,50 @@
-==3206804== Memcheck, a memory error detector
-==3206804== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3206804== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3206804== Command: ../minishell
-==3206804==
+==3237693== Memcheck, a memory error detector
+==3237693== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3237693== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3237693== Command: ../minishell
+==3237693==
 5
 Error executing command
-==3206808==
-==3206808== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3206808==
-==3206808== HEAP SUMMARY:
-==3206808==     in use at exit: 208,384 bytes in 233 blocks
-==3206808==   total heap usage: 791 allocs, 558 frees, 249,160 bytes allocated
-==3206808==
-==3206808== 17 bytes in 1 blocks are definitely lost in loss record 8 of 68
-==3206808==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3206808==    by 0x407DDD: ft_strjoin (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3206808==    by 0x40706A: try_cmd (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3206808==    by 0x403DB0: fst_child (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3206808==    by 0x406E94: which_child (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3206808==    by 0x404336: ft_pipe (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3206808==    by 0x40711C: pipe_it (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3206808==    by 0x4046BA: exeg (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3206808==    by 0x4045E5: exeggutor (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3206808==    by 0x4013FC: wait_loop (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3206808==    by 0x4015AB: main (in /home/davda-si/Desktop/common_core/minishell/minishell_v2/minishell)
-==3206808==
-==3206808== LEAK SUMMARY:
-==3206808==    definitely lost: 17 bytes in 1 blocks
-==3206808==    indirectly lost: 0 bytes in 0 blocks
-==3206808==      possibly lost: 0 bytes in 0 blocks
-==3206808==    still reachable: 0 bytes in 0 blocks
-==3206808==         suppressed: 208,367 bytes in 232 blocks
-==3206808==
-==3206808== For lists of detected and suppressed errors, rerun with: -s
-==3206808== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
-==3206804== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3206804==
-==3206804== HEAP SUMMARY:
-==3206804==     in use at exit: 208,291 bytes in 228 blocks
-==3206804==   total heap usage: 746 allocs, 518 frees, 248,190 bytes allocated
-==3206804==
-==3206804== LEAK SUMMARY:
-==3206804==    definitely lost: 0 bytes in 0 blocks
-==3206804==    indirectly lost: 0 bytes in 0 blocks
-==3206804==      possibly lost: 0 bytes in 0 blocks
-==3206804==    still reachable: 0 bytes in 0 blocks
-==3206804==         suppressed: 208,291 bytes in 228 blocks
-==3206804==
-==3206804== For lists of detected and suppressed errors, rerun with: -s
-==3206804== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==3237694== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3237694==
+==3237694== HEAP SUMMARY:
+==3237694==     in use at exit: 208,308 bytes in 229 blocks
+==3237694==   total heap usage: 750 allocs, 521 frees, 248,252 bytes allocated
+==3237694==
+==3237694== 17 bytes in 1 blocks are definitely lost in loss record 10 of 68
+==3237694==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3237694==    by 0x4081BD: ft_strjoin (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3237694==    by 0x40742A: try_cmd (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3237694==    by 0x403E40: fst_child (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3237694==    by 0x407254: which_child (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3237694==    by 0x4043C6: ft_pipe (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3237694==    by 0x4047A3: exeg (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3237694==    by 0x4046A2: exeggutor (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3237694==    by 0x401369: wait_loop (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3237694==    by 0x4014B6: main (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3237694==
+==3237694== LEAK SUMMARY:
+==3237694==    definitely lost: 17 bytes in 1 blocks
+==3237694==    indirectly lost: 0 bytes in 0 blocks
+==3237694==      possibly lost: 0 bytes in 0 blocks
+==3237694==    still reachable: 0 bytes in 0 blocks
+==3237694==         suppressed: 208,291 bytes in 228 blocks
+==3237694==
+==3237694== For lists of detected and suppressed errors, rerun with: -s
+==3237694== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==3237693==
+==3237693== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3237693==
+==3237693== HEAP SUMMARY:
+==3237693==     in use at exit: 208,367 bytes in 232 blocks
+==3237693==   total heap usage: 787 allocs, 555 frees, 249,074 bytes allocated
+==3237693==
+==3237693== LEAK SUMMARY:
+==3237693==    definitely lost: 0 bytes in 0 blocks
+==3237693==    indirectly lost: 0 bytes in 0 blocks
+==3237693==      possibly lost: 0 bytes in 0 blocks
+==3237693==    still reachable: 0 bytes in 0 blocks
+==3237693==         suppressed: 208,367 bytes in 232 blocks
+==3237693==
+==3237693== For lists of detected and suppressed errors, rerun with: -s
+==3237693== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

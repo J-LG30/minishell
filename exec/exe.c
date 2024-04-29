@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/29 18:05:56 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/29 20:24:08 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,7 @@ static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 	int	s;
 	int	flag;
 
-	i = 0;
 	s = 0;
-	while (cmds)
-	{
-		if (cmds->ref->type == WORD)
-		{
-			ft_pipe(tree, exe, cmds);
-			i++;
-		}
-		cmds = cmds->next;
-	}
 	flag = 0;
 	s = 0;
 	i = pipe_it(tree, shelgon, cmds, exe);
