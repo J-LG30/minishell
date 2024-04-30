@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:40:09 by julietteleg       #+#    #+#             */
-/*   Updated: 2024/04/29 09:34:32 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:14:52 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ void	free_tokens(t_token *head)
 	cursor = head;
 	if (!head)
 		return ;
-	while (head && head->type != END && head->next)
+	while (head && head->type != END)
 	{
-		cursor = head;
 		if (head->value)
 			free(head->value);
 		if (head->copy)
@@ -50,6 +49,7 @@ void	free_tokens(t_token *head)
 		head = head->next;
 		if (cursor)
 			free(cursor);
+		cursor = head;
 	}
 	if (head)
 		free(head);

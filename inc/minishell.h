@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/30 13:51:53 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:48:12 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_ast
 	struct s_ast		*right;
 	int					type;
 	char				*value;
+	int					heredoc;
 }						t_ast;
 
 typedef struct s_shelgon

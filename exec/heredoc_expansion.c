@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:57:51 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/30 13:52:46 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:53:51 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ char	*check_heredoc(char *line, t_shelgon *shelgon)
 
 	env = shelgon->env;
 	j = 0;
+	new_val = line;
+	
 	while (line[j])
 	{
 		if (line[j] == '$')

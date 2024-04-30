@@ -6,7 +6,7 @@
 #    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/30 13:49:48 by jle-goff         ###   ########.fr        #
+#    Updated: 2024/04/30 15:08:41 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,18 +33,18 @@ LIBFT_DIR = libft
 LIBFT_A = $(LIBFT_DIR)/libft.a
 
 #version for my mac
-LIB_DIR = -L /usr/local/opt/readline/lib
+#LIB_DIR = -L /usr/local/opt/readline/lib
 
 all: $(NAME)
 
 #version for my mac
 
-$(NAME): $(OBJS) $(LIBFT_A)
-	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o  $(@) $(LIB) -lreadline $(LIB_DIR)
+#$(NAME): $(OBJS) $(LIBFT_A)
+#	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o  $(@) $(LIB) -lreadline $(LIB_DIR)
 #-I /usr/local/opt/readline/include
 
-# $(NAME): $(OBJS) $(LIBFT_A)
-# 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o $(@) $(LIB)
+$(NAME): $(OBJS) $(LIBFT_A)
+	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o $(@) $(LIB)
 
 $(LIBFT_A):
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)

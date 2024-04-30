@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:25 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/28 15:56:35 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:52:43 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_ast	*new_node_init(void)
 	new->right = NULL;
 	new->type = -1;
 	new->value = NULL;
+	new->heredoc = 0;
 	return (new);
 }
 
@@ -54,15 +55,27 @@ t_ast	*new_word_node(t_token *token)
 t_ast	*new_redir_node(t_token *token)
 {
 	t_ast	*new;
+	int		i;
+	int		flag;
 
 	new = new_node_init();
 	if (!new)
 		return (NULL);
 	new->type = token->type;
+	i = 0;
+	flag = 0;
 	if (token->type == REDIR_DELIMIT)
-		new->value = token->next->copy;
-	else
-		new->value = token->next->value;
+	{
+		while (token->next->copy[i])
+		{
+			if (token->next->copy[i] == '\'' || token->next->copy[i] == '"')
+				flag = 1;
+			i++;
+		}
+		if (flag == 0)
+			new->heredoc = 1;
+	}
+	new->value = token->next->value;
 	return (new);
 }
 

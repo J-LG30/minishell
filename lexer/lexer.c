@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/30 13:21:49 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:15:29 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,11 @@ t_token	*tokenize(char *line, t_shelgon *shelgon)
 		{
 			i = str_token(token, WORD, line, i);
 			if (handle_word(token, shelgon))
+			{	
+				ft_tokenadd_back(&head, token);
+				free_tokens(head);
 				return (NULL);
+			}
 		}
 		ft_tokenadd_back(&head, token);
 	}
