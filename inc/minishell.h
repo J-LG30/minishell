@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/29 20:31:21 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:11:27 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ void					ft_exit(t_shelgon *shelgon, t_branch *cmds,
 void					unset(t_shelgon *shell, char **cmds, int flg);
 int						ft_strrem(char *str1, char *str2);
 void					print_exp(t_shelgon *shell);
-void					sort_exp(t_shelgon *shell);
+char					**sort_exp(t_shelgon *shell, char **copy);
 
 /*FREEING*/
 void					free_shelgon(t_shelgon *sh);

@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/29 20:45:21 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:10:30 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	wait_loop(t_shelgon *shelgon, char *line, t_token *token, t_token *temp)
 		shelgon->top_root = NULL;
 		if (parser(token, &shelgon))
 		{
-			print_tree(shelgon->tree);
+			//print_tree(shelgon->tree);
 			exeggutor(shelgon->tree, shelgon, shelgon->env);
 			free_ast(shelgon->tree);
 		}

@@ -1,50 +1,38 @@
-==3237567== Memcheck, a memory error detector
-==3237567== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3237567== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3237567== Command: ../minishell
-==3237567==
-5
-Error executing command
-==3237573== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3237573==
-==3237573== HEAP SUMMARY:
-==3237573==     in use at exit: 208,160 bytes in 227 blocks
-==3237573==   total heap usage: 748 allocs, 521 frees, 248,227 bytes allocated
-==3237573==
-==3237573== 17 bytes in 1 blocks are definitely lost in loss record 10 of 66
-==3237573==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3237573==    by 0x4081BD: ft_strjoin (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237573==    by 0x40742A: try_cmd (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237573==    by 0x403E40: fst_child (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237573==    by 0x407254: which_child (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237573==    by 0x4043C6: ft_pipe (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237573==    by 0x4047A3: exeg (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237573==    by 0x4046A2: exeggutor (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237573==    by 0x401369: wait_loop (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237573==    by 0x4014B6: main (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237573==
-==3237573== LEAK SUMMARY:
-==3237573==    definitely lost: 17 bytes in 1 blocks
-==3237573==    indirectly lost: 0 bytes in 0 blocks
-==3237573==      possibly lost: 0 bytes in 0 blocks
-==3237573==    still reachable: 0 bytes in 0 blocks
-==3237573==         suppressed: 208,143 bytes in 226 blocks
-==3237573==
-==3237573== For lists of detected and suppressed errors, rerun with: -s
-==3237573== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
-==3237567==
-==3237567== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3237567==
-==3237567== HEAP SUMMARY:
-==3237567==     in use at exit: 208,219 bytes in 230 blocks
-==3237567==   total heap usage: 785 allocs, 555 frees, 249,049 bytes allocated
-==3237567==
-==3237567== LEAK SUMMARY:
-==3237567==    definitely lost: 0 bytes in 0 blocks
-==3237567==    indirectly lost: 0 bytes in 0 blocks
-==3237567==      possibly lost: 0 bytes in 0 blocks
-==3237567==    still reachable: 0 bytes in 0 blocks
-==3237567==         suppressed: 208,219 bytes in 230 blocks
-==3237567==
-==3237567== For lists of detected and suppressed errors, rerun with: -s
-==3237567== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==3945054== Memcheck, a memory error detector
+==3945054== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3945054== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3945054== Command: ../minishell
+==3945054==
+command not found
+==3945055==
+==3945055== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3945055==
+==3945055== HEAP SUMMARY:
+==3945055==     in use at exit: 208,107 bytes in 224 blocks
+==3945055==   total heap usage: 739 allocs, 515 frees, 248,054 bytes allocated
+==3945055==
+==3945055== LEAK SUMMARY:
+==3945055==    definitely lost: 0 bytes in 0 blocks
+==3945055==    indirectly lost: 0 bytes in 0 blocks
+==3945055==      possibly lost: 0 bytes in 0 blocks
+==3945055==    still reachable: 0 bytes in 0 blocks
+==3945055==         suppressed: 208,107 bytes in 224 blocks
+==3945055==
+==3945055== For lists of detected and suppressed errors, rerun with: -s
+==3945055== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3945054==
+==3945054== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3945054==
+==3945054== HEAP SUMMARY:
+==3945054==     in use at exit: 208,219 bytes in 230 blocks
+==3945054==   total heap usage: 785 allocs, 555 frees, 249,052 bytes allocated
+==3945054==
+==3945054== LEAK SUMMARY:
+==3945054==    definitely lost: 0 bytes in 0 blocks
+==3945054==    indirectly lost: 0 bytes in 0 blocks
+==3945054==      possibly lost: 0 bytes in 0 blocks
+==3945054==    still reachable: 0 bytes in 0 blocks
+==3945054==         suppressed: 208,219 bytes in 230 blocks
+==3945054==
+==3945054== For lists of detected and suppressed errors, rerun with: -s
+==3945054== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:30:45 by david             #+#    #+#             */
-/*   Updated: 2024/04/29 20:50:27 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:11:31 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*try_cmd(char *cargs, char **cpath)
 
 	i = 0;
 	com = NULL;
-	if (!cpath || !cargs)
+	if (!cpath || !cargs || !cargs[i])
 		return (NULL);
 	while (cpath[i])
 	{

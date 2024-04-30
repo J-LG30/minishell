@@ -1,21 +1,21 @@
-==3238007== Memcheck, a memory error detector
-==3238007== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3238007== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3238007== Command: ../minishell
-==3238007==
-==3238007== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3238007==
-==3238007== HEAP SUMMARY:
-==3238007==     in use at exit: 208,323 bytes in 228 blocks
-==3238007==   total heap usage: 750 allocs, 522 frees, 248,340 bytes allocated
-==3238007==
-==3238007== LEAK SUMMARY:
-==3238007==    definitely lost: 0 bytes in 0 blocks
-==3238007==    indirectly lost: 0 bytes in 0 blocks
-==3238007==      possibly lost: 0 bytes in 0 blocks
-==3238007==    still reachable: 0 bytes in 0 blocks
-==3238007==         suppressed: 208,323 bytes in 228 blocks
-==3238007==
-==3238007== For lists of detected and suppressed errors, rerun with: -s
-==3238007== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3945532== Memcheck, a memory error detector
+==3945532== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3945532== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3945532== Command: ../minishell
+==3945532==
+==3945532== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3945532==
+==3945532== HEAP SUMMARY:
+==3945532==     in use at exit: 208,323 bytes in 228 blocks
+==3945532==   total heap usage: 750 allocs, 522 frees, 248,337 bytes allocated
+==3945532==
+==3945532== LEAK SUMMARY:
+==3945532==    definitely lost: 0 bytes in 0 blocks
+==3945532==    indirectly lost: 0 bytes in 0 blocks
+==3945532==      possibly lost: 0 bytes in 0 blocks
+==3945532==    still reachable: 0 bytes in 0 blocks
+==3945532==         suppressed: 208,323 bytes in 228 blocks
+==3945532==
+==3945532== For lists of detected and suppressed errors, rerun with: -s
+==3945532== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 0

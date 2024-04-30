@@ -1,32 +1,32 @@
-==3237635== Memcheck, a memory error detector
-==3237635== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3237635== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3237635== Command: ../minishell
-==3237635==
+==3945119== Memcheck, a memory error detector
+==3945119== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3945119== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3945119== Command: ../minishell
+==3945119==
 minishell: syntax error near unexpected token '|'
-==3237635==
-==3237635== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3237635==
-==3237635== HEAP SUMMARY:
-==3237635==     in use at exit: 208,393 bytes in 233 blocks
-==3237635==   total heap usage: 769 allocs, 536 frees, 248,689 bytes allocated
-==3237635==
-==3237635== 32 bytes in 1 blocks are definitely lost in loss record 16 of 69
-==3237635==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3237635==    by 0x403351: new_node_init (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237635==    by 0x4033C0: new_pipe_node (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237635==    by 0x4030F5: expression_one (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237635==    by 0x40322B: create_expression (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237635==    by 0x40330C: parser (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237635==    by 0x401346: wait_loop (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237635==    by 0x4014B6: main (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3237635==
-==3237635== LEAK SUMMARY:
-==3237635==    definitely lost: 32 bytes in 1 blocks
-==3237635==    indirectly lost: 0 bytes in 0 blocks
-==3237635==      possibly lost: 0 bytes in 0 blocks
-==3237635==    still reachable: 0 bytes in 0 blocks
-==3237635==         suppressed: 208,361 bytes in 232 blocks
-==3237635==
-==3237635== For lists of detected and suppressed errors, rerun with: -s
-==3237635== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+==3945119==
+==3945119== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3945119==
+==3945119== HEAP SUMMARY:
+==3945119==     in use at exit: 208,393 bytes in 233 blocks
+==3945119==   total heap usage: 769 allocs, 536 frees, 248,686 bytes allocated
+==3945119==
+==3945119== 32 bytes in 1 blocks are definitely lost in loss record 16 of 69
+==3945119==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3945119==    by 0x403351: new_node_init (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3945119==    by 0x4033C0: new_pipe_node (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3945119==    by 0x4030F5: expression_one (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3945119==    by 0x40322B: create_expression (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3945119==    by 0x40330C: parser (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3945119==    by 0x401346: wait_loop (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3945119==    by 0x4014B6: main (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
+==3945119==
+==3945119== LEAK SUMMARY:
+==3945119==    definitely lost: 32 bytes in 1 blocks
+==3945119==    indirectly lost: 0 bytes in 0 blocks
+==3945119==      possibly lost: 0 bytes in 0 blocks
+==3945119==    still reachable: 0 bytes in 0 blocks
+==3945119==         suppressed: 208,361 bytes in 232 blocks
+==3945119==
+==3945119== For lists of detected and suppressed errors, rerun with: -s
+==3945119== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)

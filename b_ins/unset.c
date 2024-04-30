@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 19:02:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/29 17:57:28 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:50:20 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_strrem(char *str1, char *str2)
 
 int	do_unset(t_env *tmp, t_env *cur, t_shelgon *shell, char *cmds)
 {
-	if (tmp && (ft_strrem(tmp->cpy, cmds) == 0))
+	if (tmp && ((ft_strrem(tmp->cpy, cmds) == 0) && (ft_strrem(tmp->vr, cmds) == 0)))
 	{
 		if (cur && !tmp->next)
 			cur = tmp;
@@ -38,8 +38,7 @@ int	do_unset(t_env *tmp, t_env *cur, t_shelgon *shell, char *cmds)
 			tmp->prev->next = tmp->next;
 		if (tmp->next)
 			tmp->next->prev = tmp->prev;
-		if (tmp && tmp->cpy && tmp->vr && ft_strcmp(tmp->cpy, tmp->vr) == 0)
-			free(tmp->vr);
+		free(tmp->vr);
 		free(tmp->cpy);
 		free(tmp);
 		tmp = cur;
