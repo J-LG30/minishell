@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/30 17:47:01 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 20:35:11 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static char	*wait_helper(t_shelgon *shel, char *l, t_token *tok, t_token *tmp)
 	set_prompt_handler();
 	rl_on_new_line();
 	l = readline("(੭｡╹▿╹｡)੭$ ");
+	if (g_sig != 0)
+		g_sig = 0;
 	add_history(l);
 	set_child_handler();
 	if (!l)
