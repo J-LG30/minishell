@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/29 17:06:01 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 09:57:15 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	str_token(t_token *token, int type, char *line, int i)
 	c = '\0';
 	while (line[j])
 	{
+		printf("Char: %c\n", line[j]);
 		if (flag == 0 && (line[j] == '"' || line[j] == '\''))
 		{
 			flag = 1;
@@ -32,10 +33,11 @@ int	str_token(t_token *token, int type, char *line, int i)
 		else if (flag == 1 && line[j] == c)
 			flag = 0;
 		if (flag == 0 && (line[j] == ' ' || line[j] == '|' || line[j] == '<'
-				&& line[j] == '>'))
+				|| line[j] == '>'))
 			break ;
 		j++;
 	}
+	printf("out of loop\n");
 	token->value = ft_substr(line, i, j - i);
 	token->copy = ft_strdup(token->value);
 	return (j);

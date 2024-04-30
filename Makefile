@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+         #
+#    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/29 20:29:31 by davda-si         ###   ########.fr        #
+#    Updated: 2024/04/30 09:26:19 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ all: $(NAME)
 #version for my mac
 
 $(NAME): $(OBJS) $(LIBFT_A)
-	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o  $(@) $(LIB) -lreadline
+	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o  $(@) $(LIB) -lreadline $(LIB_DIR)
 #-I /usr/local/opt/readline/include
 
 # $(NAME): $(OBJS) $(LIBFT_A)
