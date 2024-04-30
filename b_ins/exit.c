@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:14:10 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/29 16:51:43 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/30 20:47:44 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	check_error(char **full_cmd, t_shelgon *shelgon)
 	return (0);
 }
 
-void	ft_exit(t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
+void	ft_exit(t_shelgon *shelgon, t_branch *cmds, t_exegg *exe, int flg)
 {
 	char	**full_cmd;
 	int		status;
@@ -90,20 +90,21 @@ void	ft_exit(t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 	i = 0;
 	full_cmd = cmds->full_cmd;
 	status = check_error(full_cmd, shelgon);
-	if (status == 1)
+	if (status == 1 && flg == 1)
 		return ;
-	if (!full_cmd[1])
+	if (!full_cmd[1] && status != 1)
 	{
 		status = shelgon->status;
 		ft_putendl_fd("exit (¬_¬)ﾉ", 2);
 	}
-	else if (status != 255)
+	else if (status != 255 && status != 1)
 	{
 		status = ft_mod_atoi(full_cmd[1]);
 		if (status < 0)
 			status += 256;
 		ft_putendl_fd("exit (¬_¬)ﾉ", 2);
 	}
-	free_all(shelgon, shelgon->exe, BTIN);
+	if (status != 1 || flg == 0)
+		free_all(shelgon, shelgon->exe, BTIN);
 	exit(status);
 }

@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:49:57 by david             #+#    #+#             */
-/*   Updated: 2024/04/29 14:11:18 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 20:41:53 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	run_btin(t_ast *tree, t_exegg *exe, t_branch *cmds, int flg)
 	else if (ft_strcmp(cmds->full_cmd[0], "unset") == 0)
 		unset(exe->pkcenter, cmds->full_cmd, flg);
 	else if (ft_strcmp(cmds->full_cmd[0], "exit") == 0)
-		ft_exit(exe->pkcenter, cmds, exe);
+		ft_exit(exe->pkcenter, cmds, exe, flg);
 	return ;
 }
 
