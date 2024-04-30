@@ -1,82 +1,71 @@
-==3945216== Memcheck, a memory error detector
-==3945216== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3945216== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3945216== Command: ../minishell
-==3945216==
+==3989328== Memcheck, a memory error detector
+==3989328== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3989328== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3989328== Command: ../minishell
+==3989328==
+(੭｡╹▿╹｡)੭$ $var | $var
+WAHAHAHAHAHAHAHA
+WAHAHAHAHAHAHAHA
 command not found
+DSDSsdf
+though you hafda
 command not found
-==3945217==
-==3945217== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3945217==
-==3945217== HEAP SUMMARY:
-==3945217==     in use at exit: 208,285 bytes in 227 blocks
-==3945217==   total heap usage: 751 allocs, 524 frees, 248,314 bytes allocated
-==3945217==
-==3945217== 16 bytes in 1 blocks are definitely lost in loss record 11 of 68
-==3945217==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3945217==    by 0x407368: node_cmd (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945217==    by 0x407587: get_cmd (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945217==    by 0x40782E: get_cmd (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945217==    by 0x404625: exeggutor (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945217==    by 0x401369: wait_loop (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945217==    by 0x4014B6: main (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945217==
-==3945217== LEAK SUMMARY:
-==3945217==    definitely lost: 16 bytes in 1 blocks
-==3945217==    indirectly lost: 0 bytes in 0 blocks
-==3945217==      possibly lost: 0 bytes in 0 blocks
-==3945217==    still reachable: 0 bytes in 0 blocks
-==3945217==         suppressed: 208,269 bytes in 226 blocks
-==3945217==
-==3945217== For lists of detected and suppressed errors, rerun with: -s
-==3945217== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
-==3945218==
-==3945218== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3945218==
-==3945218== HEAP SUMMARY:
-==3945218==     in use at exit: 208,285 bytes in 227 blocks
-==3945218==   total heap usage: 751 allocs, 524 frees, 248,314 bytes allocated
-==3945218==
-==3945218== 16 bytes in 1 blocks are definitely lost in loss record 11 of 68
-==3945218==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3945218==    by 0x407368: node_cmd (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945218==    by 0x407587: get_cmd (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945218==    by 0x40782E: get_cmd (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945218==    by 0x404625: exeggutor (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945218==    by 0x401369: wait_loop (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945218==    by 0x4014B6: main (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945218==
-==3945218== LEAK SUMMARY:
-==3945218==    definitely lost: 16 bytes in 1 blocks
-==3945218==    indirectly lost: 0 bytes in 0 blocks
-==3945218==      possibly lost: 0 bytes in 0 blocks
-==3945218==    still reachable: 0 bytes in 0 blocks
-==3945218==         suppressed: 208,269 bytes in 226 blocks
-==3945218==
-==3945218== For lists of detected and suppressed errors, rerun with: -s
-==3945218== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
-==3945216==
-==3945216== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3945216==
-==3945216== HEAP SUMMARY:
-==3945216==     in use at exit: 208,397 bytes in 233 blocks
-==3945216==   total heap usage: 797 allocs, 564 frees, 249,312 bytes allocated
-==3945216==
-==3945216== 16 bytes in 1 blocks are definitely lost in loss record 9 of 69
-==3945216==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3945216==    by 0x407368: node_cmd (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945216==    by 0x407587: get_cmd (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945216==    by 0x40782E: get_cmd (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945216==    by 0x404625: exeggutor (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945216==    by 0x401369: wait_loop (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945216==    by 0x4014B6: main (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945216==
-==3945216== LEAK SUMMARY:
-==3945216==    definitely lost: 16 bytes in 1 blocks
-==3945216==    indirectly lost: 0 bytes in 0 blocks
-==3945216==      possibly lost: 0 bytes in 0 blocks
-==3945216==    still reachable: 0 bytes in 0 blocks
-==3945216==         suppressed: 208,381 bytes in 232 blocks
-==3945216==
-==3945216== For lists of detected and suppressed errors, rerun with: -s
-==3945216== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+DSDSsdf
+though you hafda
+TOKEN VALUE: $var
+TOKEN VALUE: $var
+==3989349==
+==3989349== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3989349==
+==3989349== HEAP SUMMARY:
+==3989349==     in use at exit: 208,269 bytes in 226 blocks
+==3989349==   total heap usage: 739 allocs, 513 frees, 247,429 bytes allocated
+==3989349==
+==3989349== LEAK SUMMARY:
+==3989349==    definitely lost: 0 bytes in 0 blocks
+==3989349==    indirectly lost: 0 bytes in 0 blocks
+==3989349==      possibly lost: 0 bytes in 0 blocks
+==3989349==    still reachable: 0 bytes in 0 blocks
+==3989349==         suppressed: 208,269 bytes in 226 blocks
+==3989349==
+==3989349== For lists of detected and suppressed errors, rerun with: -s
+==3989349== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3989350==
+==3989350== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3989350==
+==3989350== HEAP SUMMARY:
+==3989350==     in use at exit: 208,269 bytes in 226 blocks
+==3989350==   total heap usage: 739 allocs, 513 frees, 247,429 bytes allocated
+==3989350==
+==3989350== LEAK SUMMARY:
+==3989350==    definitely lost: 0 bytes in 0 blocks
+==3989350==    indirectly lost: 0 bytes in 0 blocks
+==3989350==      possibly lost: 0 bytes in 0 blocks
+==3989350==    still reachable: 0 bytes in 0 blocks
+==3989350==         suppressed: 208,269 bytes in 226 blocks
+==3989350==
+==3989350== For lists of detected and suppressed errors, rerun with: -s
+==3989350== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+DSDSsdf
+though you hafda
+TOKEN VALUE: $var
+TOKEN VALUE: $var
+WAHAHAHAHAHAHAHA
+DSDSsdf
+though you hafda
+==3989328==
+==3989328== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3989328==
+==3989328== HEAP SUMMARY:
+==3989328==     in use at exit: 208,381 bytes in 232 blocks
+==3989328==   total heap usage: 785 allocs, 553 frees, 248,451 bytes allocated
+==3989328==
+==3989328== LEAK SUMMARY:
+==3989328==    definitely lost: 0 bytes in 0 blocks
+==3989328==    indirectly lost: 0 bytes in 0 blocks
+==3989328==      possibly lost: 0 bytes in 0 blocks
+==3989328==    still reachable: 0 bytes in 0 blocks
+==3989328==         suppressed: 208,381 bytes in 232 blocks
+==3989328==
+==3989328== For lists of detected and suppressed errors, rerun with: -s
+==3989328== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

@@ -1,22 +1,29 @@
-==3945625== Memcheck, a memory error detector
-==3945625== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3945625== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3945625== Command: ../minishell
-==3945625==
+==3989731== Memcheck, a memory error detector
+==3989731== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3989731== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3989731== Command: ../minishell
+==3989731==
+(੭｡╹▿╹｡)੭$ cd ./path_not_found
+WAHAHAHAHAHAHAHA
 (╯°□ °)╯︵ ┻━┻: cd: ./path_not_found: No such file or directory
-==3945625== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3945625==
-==3945625== HEAP SUMMARY:
-==3945625==     in use at exit: 208,177 bytes in 226 blocks
-==3945625==   total heap usage: 749 allocs, 523 frees, 248,317 bytes allocated
-==3945625==
-==3945625== LEAK SUMMARY:
-==3945625==    definitely lost: 0 bytes in 0 blocks
-==3945625==    indirectly lost: 0 bytes in 0 blocks
-==3945625==      possibly lost: 0 bytes in 0 blocks
-==3945625==    still reachable: 0 bytes in 0 blocks
-==3945625==         suppressed: 208,177 bytes in 226 blocks
-==3945625==
-==3945625== For lists of detected and suppressed errors, rerun with: -s
-==3945625== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+DSDSsdf
+though you hafda
+TOKEN VALUE: cd
+TOKEN VALUE: ./path_not_found
+(੭｡╹▿╹｡)੭$ ==3989731==
+==3989731== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3989731==
+==3989731== HEAP SUMMARY:
+==3989731==     in use at exit: 208,321 bytes in 228 blocks
+==3989731==   total heap usage: 738 allocs, 510 frees, 247,439 bytes allocated
+==3989731==
+==3989731== LEAK SUMMARY:
+==3989731==    definitely lost: 0 bytes in 0 blocks
+==3989731==    indirectly lost: 0 bytes in 0 blocks
+==3989731==      possibly lost: 0 bytes in 0 blocks
+==3989731==    still reachable: 0 bytes in 0 blocks
+==3989731==         suppressed: 208,321 bytes in 228 blocks
+==3989731==
+==3989731== For lists of detected and suppressed errors, rerun with: -s
+==3989731== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 0

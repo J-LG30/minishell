@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 23:22:13 by david             #+#    #+#             */
-/*   Updated: 2024/04/30 13:48:41 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:41:41 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_branch	*node_cmd(t_ast *tree)
 	{
 		new->cmd = temp->value;
 		j = count_cmds(temp);
-		new->full_cmd = (char **)malloc(sizeof(char *) * (j + 1));
+		new->full_cmd = (char **)malloc(sizeof(char*) * (j + 1));
 		if (!new->full_cmd)
 			return (NULL);
 		temp = tree;

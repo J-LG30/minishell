@@ -1,23 +1,33 @@
-==3945321== Memcheck, a memory error detector
-==3945321== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3945321== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3945321== Command: ../minishell
-==3945321==
+==3989467== Memcheck, a memory error detector
+==3989467== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3989467== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3989467== Command: ../minishell
+==3989467==
+(੭｡╹▿╹｡)੭$ cat echo 5
+WAHAHAHAHAHAHAHA
 cat: echo: No such file or directory
 cat: 5: No such file or directory
-==3945321==
-==3945321== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3945321==
-==3945321== HEAP SUMMARY:
-==3945321==     in use at exit: 208,379 bytes in 232 blocks
-==3945321==   total heap usage: 796 allocs, 564 frees, 249,263 bytes allocated
-==3945321==
-==3945321== LEAK SUMMARY:
-==3945321==    definitely lost: 0 bytes in 0 blocks
-==3945321==    indirectly lost: 0 bytes in 0 blocks
-==3945321==      possibly lost: 0 bytes in 0 blocks
-==3945321==    still reachable: 0 bytes in 0 blocks
-==3945321==         suppressed: 208,379 bytes in 232 blocks
-==3945321==
-==3945321== For lists of detected and suppressed errors, rerun with: -s
-==3945321== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+DSDSsdf
+though you hafda
+TOKEN VALUE: cat
+TOKEN VALUE: echo
+TOKEN VALUE: 5
+WAHAHAHAHAHAHAHA
+DSDSsdf
+though you hafda
+==3989467==
+==3989467== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3989467==
+==3989467== HEAP SUMMARY:
+==3989467==     in use at exit: 208,379 bytes in 232 blocks
+==3989467==   total heap usage: 784 allocs, 552 frees, 248,402 bytes allocated
+==3989467==
+==3989467== LEAK SUMMARY:
+==3989467==    definitely lost: 0 bytes in 0 blocks
+==3989467==    indirectly lost: 0 bytes in 0 blocks
+==3989467==      possibly lost: 0 bytes in 0 blocks
+==3989467==    still reachable: 0 bytes in 0 blocks
+==3989467==         suppressed: 208,379 bytes in 232 blocks
+==3989467==
+==3989467== For lists of detected and suppressed errors, rerun with: -s
+==3989467== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

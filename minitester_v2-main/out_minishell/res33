@@ -1,21 +1,30 @@
-==3945457== Memcheck, a memory error detector
-==3945457== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3945457== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3945457== Command: ../minishell
-==3945457==
-==3945457==
-==3945457== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3945457==
-==3945457== HEAP SUMMARY:
-==3945457==     in use at exit: 208,379 bytes in 232 blocks
-==3945457==   total heap usage: 792 allocs, 560 frees, 249,209 bytes allocated
-==3945457==
-==3945457== LEAK SUMMARY:
-==3945457==    definitely lost: 0 bytes in 0 blocks
-==3945457==    indirectly lost: 0 bytes in 0 blocks
-==3945457==      possibly lost: 0 bytes in 0 blocks
-==3945457==    still reachable: 0 bytes in 0 blocks
-==3945457==         suppressed: 208,379 bytes in 232 blocks
-==3945457==
-==3945457== For lists of detected and suppressed errors, rerun with: -s
-==3945457== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==3989589== Memcheck, a memory error detector
+==3989589== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3989589== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3989589== Command: ../minishell
+==3989589==
+(੭｡╹▿╹｡)੭$ cat < test
+WAHAHAHAHAHAHAHA
+DSDSsdf
+though you hafda
+TOKEN VALUE: cat
+TOKEN VALUE: test
+WAHAHAHAHAHAHAHA
+DSDSsdf
+though you hafda
+==3989589==
+==3989589== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3989589==
+==3989589== HEAP SUMMARY:
+==3989589==     in use at exit: 208,379 bytes in 232 blocks
+==3989589==   total heap usage: 780 allocs, 548 frees, 248,340 bytes allocated
+==3989589==
+==3989589== LEAK SUMMARY:
+==3989589==    definitely lost: 0 bytes in 0 blocks
+==3989589==    indirectly lost: 0 bytes in 0 blocks
+==3989589==      possibly lost: 0 bytes in 0 blocks
+==3989589==    still reachable: 0 bytes in 0 blocks
+==3989589==         suppressed: 208,379 bytes in 232 blocks
+==3989589==
+==3989589== For lists of detected and suppressed errors, rerun with: -s
+==3989589== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

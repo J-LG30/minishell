@@ -1,21 +1,32 @@
-==3945683== Memcheck, a memory error detector
-==3945683== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3945683== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3945683== Command: ../minishell
-==3945683==
-==3945683== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3945683==
-==3945683== HEAP SUMMARY:
-==3945683==     in use at exit: 208,335 bytes in 228 blocks
-==3945683==   total heap usage: 786 allocs, 558 frees, 248,959 bytes allocated
-==3945683==
-==3945683== LEAK SUMMARY:
-==3945683==    definitely lost: 0 bytes in 0 blocks
-==3945683==    indirectly lost: 0 bytes in 0 blocks
-==3945683==      possibly lost: 0 bytes in 0 blocks
-==3945683==    still reachable: 0 bytes in 0 blocks
-==3945683==         suppressed: 208,335 bytes in 228 blocks
-==3945683==
-==3945683== For lists of detected and suppressed errors, rerun with: -s
-==3945683== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3989780== Memcheck, a memory error detector
+==3989780== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3989780== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3989780== Command: ../minishell
+==3989780==
+(੭｡╹▿╹｡)੭$ export a=a b=b c=c d=d e=e
+WAHAHAHAHAHAHAHA
+DSDSsdf
+though you hafda
+TOKEN VALUE: export
+TOKEN VALUE: a=a
+TOKEN VALUE: b=b
+TOKEN VALUE: c=c
+TOKEN VALUE: d=d
+TOKEN VALUE: e=e
+(੭｡╹▿╹｡)੭$ ==3989780==
+==3989780== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3989780==
+==3989780== HEAP SUMMARY:
+==3989780==     in use at exit: 208,335 bytes in 228 blocks
+==3989780==   total heap usage: 774 allocs, 546 frees, 248,098 bytes allocated
+==3989780==
+==3989780== LEAK SUMMARY:
+==3989780==    definitely lost: 0 bytes in 0 blocks
+==3989780==    indirectly lost: 0 bytes in 0 blocks
+==3989780==      possibly lost: 0 bytes in 0 blocks
+==3989780==    still reachable: 0 bytes in 0 blocks
+==3989780==         suppressed: 208,335 bytes in 228 blocks
+==3989780==
+==3989780== For lists of detected and suppressed errors, rerun with: -s
+==3989780== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 1

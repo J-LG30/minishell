@@ -1,22 +1,27 @@
-==3945978== Memcheck, a memory error detector
-==3945978== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3945978== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3945978== Command: ../minishell
-==3945978==
+==3990060== Memcheck, a memory error detector
+==3990060== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3990060== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3990060== Command: ../minishell
+==3990060==
+(੭｡╹▿╹｡)੭$ $var >
 (╯°□ °)╯︵ ┻━┻: syntax error near unexpected token 'newline'
-==3945978==
-==3945978== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3945978==
-==3945978== HEAP SUMMARY:
-==3945978==     in use at exit: 208,371 bytes in 232 blocks
-==3945978==   total heap usage: 775 allocs, 543 frees, 248,845 bytes allocated
-==3945978==
-==3945978== LEAK SUMMARY:
-==3945978==    definitely lost: 0 bytes in 0 blocks
-==3945978==    indirectly lost: 0 bytes in 0 blocks
-==3945978==      possibly lost: 0 bytes in 0 blocks
-==3945978==    still reachable: 0 bytes in 0 blocks
-==3945978==         suppressed: 208,371 bytes in 232 blocks
-==3945978==
-==3945978== For lists of detected and suppressed errors, rerun with: -s
-==3945978== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+TOKEN VALUE: $var
+WAHAHAHAHAHAHAHA
+DSDSsdf
+though you hafda
+==3990060==
+==3990060== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3990060==
+==3990060== HEAP SUMMARY:
+==3990060==     in use at exit: 208,371 bytes in 232 blocks
+==3990060==   total heap usage: 763 allocs, 531 frees, 247,968 bytes allocated
+==3990060==
+==3990060== LEAK SUMMARY:
+==3990060==    definitely lost: 0 bytes in 0 blocks
+==3990060==    indirectly lost: 0 bytes in 0 blocks
+==3990060==      possibly lost: 0 bytes in 0 blocks
+==3990060==    still reachable: 0 bytes in 0 blocks
+==3990060==         suppressed: 208,371 bytes in 232 blocks
+==3990060==
+==3990060== For lists of detected and suppressed errors, rerun with: -s
+==3990060== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

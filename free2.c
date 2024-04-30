@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:31:54 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/29 20:19:07 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:41:07 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@ void	free_branch(t_branch *branch)
 {
 	t_branch	*cursor;
 	int			i;
+	static int y = 0;
 
 	if (!branch)
 		return ;
 	cursor = branch;
-	free(cursor->full_cmd);
 	while (branch)
 	{
+		if (cursor->full_cmd)
+			free(cursor->full_cmd);
 		branch = branch->next;
 		if (cursor)
 			free(cursor);

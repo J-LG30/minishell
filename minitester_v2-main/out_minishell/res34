@@ -1,22 +1,30 @@
-==3945473== Memcheck, a memory error detector
-==3945473== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3945473== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3945473== Command: ../minishell
-==3945473==
+==3989601== Memcheck, a memory error detector
+==3989601== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3989601== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3989601== Command: ../minishell
+==3989601==
+(੭｡╹▿╹｡)੭$ export "" test=a
+WAHAHAHAHAHAHAHA
 export: not a valid identifier
-==3945473== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3945473==
-==3945473== HEAP SUMMARY:
-==3945473==     in use at exit: 208,315 bytes in 228 blocks
-==3945473==   total heap usage: 758 allocs, 530 frees, 248,449 bytes allocated
-==3945473==
-==3945473== LEAK SUMMARY:
-==3945473==    definitely lost: 0 bytes in 0 blocks
-==3945473==    indirectly lost: 0 bytes in 0 blocks
-==3945473==      possibly lost: 0 bytes in 0 blocks
-==3945473==    still reachable: 0 bytes in 0 blocks
-==3945473==         suppressed: 208,315 bytes in 228 blocks
-==3945473==
-==3945473== For lists of detected and suppressed errors, rerun with: -s
-==3945473== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+DSDSsdf
+though you hafda
+TOKEN VALUE: export
+TOKEN VALUE: ""
+TOKEN VALUE: test=a
+(੭｡╹▿╹｡)੭$ ==3989601==
+==3989601== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3989601==
+==3989601== HEAP SUMMARY:
+==3989601==     in use at exit: 208,315 bytes in 228 blocks
+==3989601==   total heap usage: 746 allocs, 518 frees, 247,564 bytes allocated
+==3989601==
+==3989601== LEAK SUMMARY:
+==3989601==    definitely lost: 0 bytes in 0 blocks
+==3989601==    indirectly lost: 0 bytes in 0 blocks
+==3989601==      possibly lost: 0 bytes in 0 blocks
+==3989601==    still reachable: 0 bytes in 0 blocks
+==3989601==         suppressed: 208,315 bytes in 228 blocks
+==3989601==
+==3989601== For lists of detected and suppressed errors, rerun with: -s
+==3989601== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 0

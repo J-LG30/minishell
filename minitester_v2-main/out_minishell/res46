@@ -1,21 +1,29 @@
-==3945617== Memcheck, a memory error detector
-==3945617== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3945617== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3945617== Command: ../minishell
-==3945617==
-==3945617== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3945617==
-==3945617== HEAP SUMMARY:
-==3945617==     in use at exit: 208,323 bytes in 228 blocks
-==3945617==   total heap usage: 761 allocs, 533 frees, 248,525 bytes allocated
-==3945617==
-==3945617== LEAK SUMMARY:
-==3945617==    definitely lost: 0 bytes in 0 blocks
-==3945617==    indirectly lost: 0 bytes in 0 blocks
-==3945617==      possibly lost: 0 bytes in 0 blocks
-==3945617==    still reachable: 0 bytes in 0 blocks
-==3945617==         suppressed: 208,323 bytes in 228 blocks
-==3945617==
-==3945617== For lists of detected and suppressed errors, rerun with: -s
-==3945617== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3989723== Memcheck, a memory error detector
+==3989723== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3989723== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3989723== Command: ../minishell
+==3989723==
+(੭｡╹▿╹｡)੭$ export cookie OLDPWD
+WAHAHAHAHAHAHAHA
+DSDSsdf
+though you hafda
+TOKEN VALUE: export
+TOKEN VALUE: cookie
+TOKEN VALUE: OLDPWD
+(੭｡╹▿╹｡)੭$ ==3989723==
+==3989723== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3989723==
+==3989723== HEAP SUMMARY:
+==3989723==     in use at exit: 208,323 bytes in 228 blocks
+==3989723==   total heap usage: 749 allocs, 521 frees, 247,640 bytes allocated
+==3989723==
+==3989723== LEAK SUMMARY:
+==3989723==    definitely lost: 0 bytes in 0 blocks
+==3989723==    indirectly lost: 0 bytes in 0 blocks
+==3989723==      possibly lost: 0 bytes in 0 blocks
+==3989723==    still reachable: 0 bytes in 0 blocks
+==3989723==         suppressed: 208,323 bytes in 228 blocks
+==3989723==
+==3989723== For lists of detected and suppressed errors, rerun with: -s
+==3989723== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 1

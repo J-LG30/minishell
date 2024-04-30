@@ -1,23 +1,32 @@
-==3945666== Memcheck, a memory error detector
-==3945666== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3945666== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3945666== Command: ../minishell
-==3945666==
+==3989769== Memcheck, a memory error detector
+==3989769== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3989769== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3989769== Command: ../minishell
+==3989769==
+(੭｡╹▿╹｡)੭$ export ...cookie? $OLDPWD
+WAHAHAHAHAHAHAHA
 export: not a valid identifier
 export: not a valid identifier
-==3945666== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3945666==
-==3945666== HEAP SUMMARY:
-==3945666==     in use at exit: 208,333 bytes in 228 blocks
-==3945666==   total heap usage: 757 allocs, 529 frees, 248,577 bytes allocated
-==3945666==
-==3945666== LEAK SUMMARY:
-==3945666==    definitely lost: 0 bytes in 0 blocks
-==3945666==    indirectly lost: 0 bytes in 0 blocks
-==3945666==      possibly lost: 0 bytes in 0 blocks
-==3945666==    still reachable: 0 bytes in 0 blocks
-==3945666==         suppressed: 208,333 bytes in 228 blocks
-==3945666==
-==3945666== For lists of detected and suppressed errors, rerun with: -s
-==3945666== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+DSDSsdf
+though you hafda
+TOKEN VALUE: export
+TOKEN VALUE: ...cookie?
+TOKEN VALUE: $OLDPWD
+in expanded
+(੭｡╹▿╹｡)੭$ ==3989769==
+==3989769== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3989769==
+==3989769== HEAP SUMMARY:
+==3989769==     in use at exit: 208,333 bytes in 228 blocks
+==3989769==   total heap usage: 745 allocs, 517 frees, 247,654 bytes allocated
+==3989769==
+==3989769== LEAK SUMMARY:
+==3989769==    definitely lost: 0 bytes in 0 blocks
+==3989769==    indirectly lost: 0 bytes in 0 blocks
+==3989769==      possibly lost: 0 bytes in 0 blocks
+==3989769==    still reachable: 0 bytes in 0 blocks
+==3989769==         suppressed: 208,333 bytes in 228 blocks
+==3989769==
+==3989769== For lists of detected and suppressed errors, rerun with: -s
+==3989769== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 0

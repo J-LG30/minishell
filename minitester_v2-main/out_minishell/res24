@@ -1,21 +1,38 @@
-==3945351== Memcheck, a memory error detector
-==3945351== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3945351== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3945351== Command: ../minishell
-==3945351==
-==3945351== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3945351==
-==3945351== HEAP SUMMARY:
-==3945351==     in use at exit: 208,341 bytes in 228 blocks
-==3945351==   total heap usage: 801 allocs, 573 frees, 249,212 bytes allocated
-==3945351==
-==3945351== LEAK SUMMARY:
-==3945351==    definitely lost: 0 bytes in 0 blocks
-==3945351==    indirectly lost: 0 bytes in 0 blocks
-==3945351==      possibly lost: 0 bytes in 0 blocks
-==3945351==    still reachable: 0 bytes in 0 blocks
-==3945351==         suppressed: 208,341 bytes in 228 blocks
-==3945351==
-==3945351== For lists of detected and suppressed errors, rerun with: -s
-==3945351== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3989492== Memcheck, a memory error detector
+==3989492== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3989492== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3989492== Command: ../minishell
+==3989492==
+(੭｡╹▿╹｡)੭$ unset "" . : , ! \ + = - _ _a
+WAHAHAHAHAHAHAHA
+DSDSsdf
+though you hafda
+TOKEN VALUE: unset
+TOKEN VALUE: ""
+TOKEN VALUE: .
+TOKEN VALUE: :
+TOKEN VALUE: ,
+TOKEN VALUE: !
+TOKEN VALUE: \
+TOKEN VALUE: +
+TOKEN VALUE: =
+TOKEN VALUE: -
+TOKEN VALUE: _
+TOKEN VALUE: _a
+(੭｡╹▿╹｡)੭$ ==3989492==
+==3989492== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3989492==
+==3989492== HEAP SUMMARY:
+==3989492==     in use at exit: 208,341 bytes in 228 blocks
+==3989492==   total heap usage: 789 allocs, 561 frees, 248,399 bytes allocated
+==3989492==
+==3989492== LEAK SUMMARY:
+==3989492==    definitely lost: 0 bytes in 0 blocks
+==3989492==    indirectly lost: 0 bytes in 0 blocks
+==3989492==      possibly lost: 0 bytes in 0 blocks
+==3989492==    still reachable: 0 bytes in 0 blocks
+==3989492==         suppressed: 208,341 bytes in 228 blocks
+==3989492==
+==3989492== For lists of detected and suppressed errors, rerun with: -s
+==3989492== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 0

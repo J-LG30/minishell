@@ -1,44 +1,49 @@
-==3945384== Memcheck, a memory error detector
-==3945384== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3945384== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3945384== Command: ../minishell
-==3945384==
-==3945384==
-==3945384== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3945384==
-==3945384== HEAP SUMMARY:
-==3945384==     in use at exit: 208,433 bytes in 234 blocks
-==3945384==   total heap usage: 774 allocs, 540 frees, 248,781 bytes allocated
-==3945384==
-==3945384== 32 bytes in 1 blocks are indirectly lost in loss record 16 of 70
-==3945384==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3945384==    by 0x403351: new_node_init (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x403410: new_word_node (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x40385C: command_word (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x403557: command_one (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x40361C: create_command (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x40313B: expression_one (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x40322B: create_expression (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x40330C: parser (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x401346: wait_loop (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x4014B6: main (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==
-==3945384== 64 (32 direct, 32 indirect) bytes in 1 blocks are definitely lost in loss record 21 of 70
-==3945384==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3945384==    by 0x403351: new_node_init (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x4033C0: new_pipe_node (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x4030F5: expression_one (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x40322B: create_expression (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x40330C: parser (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x401346: wait_loop (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==    by 0x4014B6: main (in /home/davda-si/Desktop/common_core/minishell/final_ver/minishell)
-==3945384==
-==3945384== LEAK SUMMARY:
-==3945384==    definitely lost: 32 bytes in 1 blocks
-==3945384==    indirectly lost: 32 bytes in 1 blocks
-==3945384==      possibly lost: 0 bytes in 0 blocks
-==3945384==    still reachable: 0 bytes in 0 blocks
-==3945384==         suppressed: 208,369 bytes in 232 blocks
-==3945384==
-==3945384== For lists of detected and suppressed errors, rerun with: -s
-==3945384== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)
+==3989520== Memcheck, a memory error detector
+==3989520== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3989520== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3989520== Command: ../minishell
+==3989520==
+(੭｡╹▿╹｡)੭$ test|
+TOKEN VALUE: test
+WAHAHAHAHAHAHAHA
+DSDSsdf
+though you hafda
+==3989520==
+==3989520== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3989520==
+==3989520== HEAP SUMMARY:
+==3989520==     in use at exit: 208,449 bytes in 234 blocks
+==3989520==   total heap usage: 762 allocs, 528 frees, 247,912 bytes allocated
+==3989520==
+==3989520== 40 bytes in 1 blocks are indirectly lost in loss record 17 of 70
+==3989520==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3989520==    by 0x403461: new_node_init (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x403530: new_word_node (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x4039FC: command_word (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x4036F7: command_one (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x4037BC: create_command (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x40324B: expression_one (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x40333B: create_expression (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x40341C: parser (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x401346: wait_loop (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x4014B6: main (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==
+==3989520== 80 (40 direct, 40 indirect) bytes in 1 blocks are definitely lost in loss record 23 of 70
+==3989520==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3989520==    by 0x403461: new_node_init (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x4034E0: new_pipe_node (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x403205: expression_one (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x40333B: create_expression (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x40341C: parser (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x401346: wait_loop (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==    by 0x4014B6: main (in /home/jle-goff/core/MINISHELL/final/minishell)
+==3989520==
+==3989520== LEAK SUMMARY:
+==3989520==    definitely lost: 40 bytes in 1 blocks
+==3989520==    indirectly lost: 40 bytes in 1 blocks
+==3989520==      possibly lost: 0 bytes in 0 blocks
+==3989520==    still reachable: 0 bytes in 0 blocks
+==3989520==         suppressed: 208,369 bytes in 232 blocks
+==3989520==
+==3989520== For lists of detected and suppressed errors, rerun with: -s
+==3989520== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 1 from 1)

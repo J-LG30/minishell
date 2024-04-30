@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/30 15:13:02 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:42:02 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	unclosed_quotes(t_token *token)
 
 	i = 0;
 	closed = 1;
-	printf("TOKEN VALUE: %s\n", token->value);
 	while (token->value[i])
 	{
 		q = '\0';
