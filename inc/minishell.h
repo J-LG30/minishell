@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/30 15:11:27 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:54:19 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_ast
 	struct s_ast		*right;
 	int					type;
 	char				*value;
+	int					heredoc;
 }						t_ast;
 
 typedef struct s_shelgon
@@ -131,7 +132,12 @@ void					free_tokens(t_token *head);
 int						unclosed_quotes(t_token *token);
 char					*rm_quotes(t_token *token);
 void					expansion(t_token *token, t_shelgon *shelgon);
+int						var_status(char *str, t_env *env);
 int						handle_word(t_token *token, t_shelgon *shelgon);
+char					*ft_rm_substr(char *str, int start, int end);
+t_env					*return_index(t_env *head, int index);
+char					*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index,
+							int flag);
 
 /* PARSER FUNCTIONS*/
 t_ast					*parser(t_token *head, t_shelgon **shelgon);
@@ -176,9 +182,10 @@ void					ft_path(t_exegg *exe, t_env *env);
 char					**ms_split(char const *s, char c);
 void					ft_error(int flg, t_exegg *exe);
 t_branch				*msh_lstlast(t_branch *lst);
-int						ft_heredoc(t_ast *tree);
+int						ft_heredoc(t_ast *tree, t_shelgon *shelgon);
 t_branch				*node_cmd(t_ast *tree);
 char					*get_path(t_env	*env);
+char					*check_heredoc(char *line, t_shelgon *shelgon);
 
 // Built in functions
 int						is_btin(char *cmds);

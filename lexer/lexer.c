@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/29 17:06:01 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:15:29 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	str_token(t_token *token, int type, char *line, int i)
 		else if (flag == 1 && line[j] == c)
 			flag = 0;
 		if (flag == 0 && (line[j] == ' ' || line[j] == '|' || line[j] == '<'
-				&& line[j] == '>'))
+				|| line[j] == '>'))
 			break ;
 		j++;
 	}
@@ -103,7 +103,11 @@ t_token	*tokenize(char *line, t_shelgon *shelgon)
 		{
 			i = str_token(token, WORD, line, i);
 			if (handle_word(token, shelgon))
+			{	
+				ft_tokenadd_back(&head, token);
+				free_tokens(head);
 				return (NULL);
+			}
 		}
 		ft_tokenadd_back(&head, token);
 	}

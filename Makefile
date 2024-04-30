@@ -6,7 +6,7 @@
 #    By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/30 15:15:14 by davda-si         ###   ########.fr        #
+#    Updated: 2024/04/30 16:53:56 by davda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRCS = 	main.c free.c free2.c lexer/lexer.c lexer/lexer_lst_utils.c lexer/quotes
 		parser/redirections.c parser/print_ast.c exec/child.c exec/exe.c\
 		b_ins/env.c b_ins/env_utils.c b_ins/export.c b_ins/echo.c b_ins/pwd.c b_ins/cd.c\
 		b_ins/exit.c b_ins/unset.c exec/utils_exec.c exec/utils_exec2.c signals/signals.c\
-		exec/utils_exec3.c exec/utils_exec4.c exec/cmds.c b_ins/export_utils.c\
+		exec/utils_exec3.c exec/utils_exec4.c exec/cmds.c b_ins/export_utils.c \
+		exec/heredoc_expansion.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -32,18 +33,18 @@ LIBFT_DIR = libft
 LIBFT_A = $(LIBFT_DIR)/libft.a
 
 #version for my mac
-LIB_DIR = -L /usr/local/opt/readline/lib
+#LIB_DIR = -L /usr/local/opt/readline/lib
 
 all: $(NAME)
 
 #version for my mac
 
-$(NAME): $(OBJS) $(LIBFT_A)
-	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o  $(@) $(LIB) -lreadline
+#$(NAME): $(OBJS) $(LIBFT_A)
+#	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o  $(@) $(LIB) -lreadline $(LIB_DIR)
 #-I /usr/local/opt/readline/include
 
-# $(NAME): $(OBJS) $(LIBFT_A)
-# 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o $(@) $(LIB)
+$(NAME): $(OBJS) $(LIBFT_A)
+	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o $(@) $(LIB)
 
 $(LIBFT_A):
 	@$(MAKE) --no-print-directory -C $(LIBFT_DIR)

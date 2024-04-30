@@ -6,18 +6,19 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:12:20 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/28 15:55:11 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 13:25:20 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 // j is the index to env str with var, or -1 if n/a, or 0 if its $? special case
-int	var_status(char *str, char **env)
+int	var_status(char *str, t_env *env)
 {
-	int	i;
-	int	j;
-	int	exit;
+	int		i;
+	int		j;
+	int		exit;
+	t_env	*temp;
 
 	i = 0;
 	if (str[0] == '_')
@@ -29,11 +30,13 @@ int	var_status(char *str, char **env)
 	if (i == 0)
 		return (-2);
 	j = 0;
-	while (env[j])
+	temp = env;
+	while (temp)
 	{
-		if (!ft_strncmp(str, env[j], i) && env[j][i] == '=')
+		if (!ft_strncmp(str, temp->vr, i) && temp->vr[i] == '=')
 			return (j);
 		j++;
+		temp = temp->next;
 	}
 	return (-1);
 }
@@ -47,6 +50,7 @@ char	*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index,
 	char	*trim_l;
 	int		size;
 
+	printf("in expanded\n");
 	i = 0;
 	if (flag)
 	{
@@ -104,9 +108,27 @@ char	*ft_rm_substr(char *str, int start, int end)
 	return (new);
 }
 
+t_env	*return_index(t_env *head, int index)
+{
+	int		i;
+	t_env	*temp;
+
+	i = 0;
+	temp = head;
+	while (temp)
+	{
+		if (i == index)
+			return (temp);
+		i++;
+		temp = temp->next;
+	}
+	return (NULL);
+}
+
 int	expand_util_cases(t_token *token, int i, int j, t_shelgon *shelgon)
 {
 	char	*new_val;
+	t_env	*env;
 
 	if (i == -1)
 	{
@@ -120,7 +142,8 @@ int	expand_util_cases(t_token *token, int i, int j, t_shelgon *shelgon)
 	}
 	else if (i >= 0)
 	{
-		new_val = expanded(shelgon, shelgon->envr[i], token->value, j + 1, i);
+		env = return_index(shelgon->env, i);
+		new_val = expanded(shelgon, env->vr, token->value, j + 1, i);
 		if (!new_val)
 			return (0);
 		free(token->value);
@@ -134,11 +157,11 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 {
 	int		i;
 	int		j;
-	char	**env;
+	t_env	*env;
 	char	*new_val;
 	int		expand;
 
-	env = shelgon->envr;
+	env = shelgon->env;
 	j = 0;
 	expand = 1;
 	while (token->value[j])

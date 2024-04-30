@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:56:46 by david             #+#    #+#             */
-/*   Updated: 2024/04/29 16:42:24 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:54:10 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	err_heredoc(int *fd)
 	return (fd[0]);
 }
 
-int	ft_heredoc(t_ast *tree)
+int	ft_heredoc(t_ast *tree, t_shelgon *shelgon)
 {
 	int		fd[2];
 	char	*res;
@@ -36,6 +36,8 @@ int	ft_heredoc(t_ast *tree)
 		while (1)
 		{
 			res = readline("> ");
+			if (temp->heredoc)
+				res = check_heredoc(res, shelgon);
 			if (g_sig == 1)
 			{
 				dup2(std_in, STDIN_FILENO);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:13 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/29 20:52:21 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/30 09:27:39 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* #include "../inc/minishell.h"
+ #include "../inc/minishell.h"
 
 void print_node_type(int type) {
     switch (type) {
@@ -58,4 +58,4 @@ void print_tree(t_ast *root)
 {
 	printf("Root\n");
 	print_tree_helper(root, 1);
-} */
+} 
