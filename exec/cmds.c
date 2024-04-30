@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 23:22:13 by david             #+#    #+#             */
-/*   Updated: 2024/04/29 16:11:03 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 13:48:41 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 				return (0);
 			ft_memset(cur, 0, 0);
 			set_heredoc_handler();
-			cur->pipe[0] = ft_heredoc(temp);
+			cur->pipe[0] = ft_heredoc(temp, exe->pkcenter);
 			set_prompt_handler();
 			if (cur->pipe[0] == -2)
 			{
