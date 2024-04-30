@@ -1,28 +1,22 @@
-==3989904== Memcheck, a memory error detector
-==3989904== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3989904== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3989904== Command: ../minishell
-==3989904==
-(੭｡╹▿╹｡)੭$ echo "$var""Makefile"
+==3992839== Memcheck, a memory error detector
+==3992839== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3992839== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3992839== Command: ../minishell
+==3992839==
 (╯°□ °)╯︵ ┻━┻: Error: Unclosed quotes
-TOKEN VALUE: echo
-TOKEN VALUE: "$var""Makefile"
-WAHAHAHAHAHAHAHA
-DSDSsdf
-though you hafda
-==3989904==
-==3989904== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3989904==
-==3989904== HEAP SUMMARY:
-==3989904==     in use at exit: 208,401 bytes in 232 blocks
-==3989904==   total heap usage: 762 allocs, 530 frees, 247,890 bytes allocated
-==3989904==
-==3989904== LEAK SUMMARY:
-==3989904==    definitely lost: 0 bytes in 0 blocks
-==3989904==    indirectly lost: 0 bytes in 0 blocks
-==3989904==      possibly lost: 0 bytes in 0 blocks
-==3989904==    still reachable: 0 bytes in 0 blocks
-==3989904==         suppressed: 208,401 bytes in 232 blocks
-==3989904==
-==3989904== For lists of detected and suppressed errors, rerun with: -s
-==3989904== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==3992839==
+==3992839== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3992839==
+==3992839== HEAP SUMMARY:
+==3992839==     in use at exit: 208,401 bytes in 232 blocks
+==3992839==   total heap usage: 762 allocs, 530 frees, 247,890 bytes allocated
+==3992839==
+==3992839== LEAK SUMMARY:
+==3992839==    definitely lost: 0 bytes in 0 blocks
+==3992839==    indirectly lost: 0 bytes in 0 blocks
+==3992839==      possibly lost: 0 bytes in 0 blocks
+==3992839==    still reachable: 0 bytes in 0 blocks
+==3992839==         suppressed: 208,401 bytes in 232 blocks
+==3992839==
+==3992839== For lists of detected and suppressed errors, rerun with: -s
+==3992839== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

@@ -1,49 +1,38 @@
-==3989136== Memcheck, a memory error detector
-==3989136== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3989136== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3989136== Command: ../minishell
-==3989136==
-(੭｡╹▿╹｡)੭$ '$PWD'
-WAHAHAHAHAHAHAHA
+==3992204== Memcheck, a memory error detector
+==3992204== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3992204== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3992204== Command: ../minishell
+==3992204==
 command not found
-DSDSsdf
-though you hafda
-TOKEN VALUE: '$PWD'
-==3989164==
-==3989164== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3989164==
-==3989164== HEAP SUMMARY:
-==3989164==     in use at exit: 208,259 bytes in 226 blocks
-==3989164==   total heap usage: 748 allocs, 522 frees, 247,484 bytes allocated
-==3989164==
-==3989164== LEAK SUMMARY:
-==3989164==    definitely lost: 0 bytes in 0 blocks
-==3989164==    indirectly lost: 0 bytes in 0 blocks
-==3989164==      possibly lost: 0 bytes in 0 blocks
-==3989164==    still reachable: 0 bytes in 0 blocks
-==3989164==         suppressed: 208,259 bytes in 226 blocks
-==3989164==
-==3989164== For lists of detected and suppressed errors, rerun with: -s
-==3989164== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-DSDSsdf
-though you hafda
-TOKEN VALUE: '$PWD'
-WAHAHAHAHAHAHAHA
-DSDSsdf
-though you hafda
-==3989136==
-==3989136== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3989136==
-==3989136== HEAP SUMMARY:
-==3989136==     in use at exit: 208,371 bytes in 232 blocks
-==3989136==   total heap usage: 774 allocs, 542 frees, 248,210 bytes allocated
-==3989136==
-==3989136== LEAK SUMMARY:
-==3989136==    definitely lost: 0 bytes in 0 blocks
-==3989136==    indirectly lost: 0 bytes in 0 blocks
-==3989136==      possibly lost: 0 bytes in 0 blocks
-==3989136==    still reachable: 0 bytes in 0 blocks
-==3989136==         suppressed: 208,371 bytes in 232 blocks
-==3989136==
-==3989136== For lists of detected and suppressed errors, rerun with: -s
-==3989136== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==3992210==
+==3992210== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3992210==
+==3992210== HEAP SUMMARY:
+==3992210==     in use at exit: 208,259 bytes in 226 blocks
+==3992210==   total heap usage: 748 allocs, 522 frees, 247,484 bytes allocated
+==3992210==
+==3992210== LEAK SUMMARY:
+==3992210==    definitely lost: 0 bytes in 0 blocks
+==3992210==    indirectly lost: 0 bytes in 0 blocks
+==3992210==      possibly lost: 0 bytes in 0 blocks
+==3992210==    still reachable: 0 bytes in 0 blocks
+==3992210==         suppressed: 208,259 bytes in 226 blocks
+==3992210==
+==3992210== For lists of detected and suppressed errors, rerun with: -s
+==3992210== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3992204==
+==3992204== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3992204==
+==3992204== HEAP SUMMARY:
+==3992204==     in use at exit: 208,371 bytes in 232 blocks
+==3992204==   total heap usage: 774 allocs, 542 frees, 248,210 bytes allocated
+==3992204==
+==3992204== LEAK SUMMARY:
+==3992204==    definitely lost: 0 bytes in 0 blocks
+==3992204==    indirectly lost: 0 bytes in 0 blocks
+==3992204==      possibly lost: 0 bytes in 0 blocks
+==3992204==    still reachable: 0 bytes in 0 blocks
+==3992204==         suppressed: 208,371 bytes in 232 blocks
+==3992204==
+==3992204== For lists of detected and suppressed errors, rerun with: -s
+==3992204== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

@@ -1,29 +1,22 @@
-==3989682== Memcheck, a memory error detector
-==3989682== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3989682== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3989682== Command: ../minishell
-==3989682==
-(੭｡╹▿╹｡)੭$ cd $var
-WAHAHAHAHAHAHAHA
+==3992565== Memcheck, a memory error detector
+==3992565== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3992565== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3992565== Command: ../minishell
+==3992565==
 (╯°□ °)╯︵ ┻━┻: cd: : No such file or directory
-DSDSsdf
-though you hafda
-TOKEN VALUE: cd
-TOKEN VALUE: $var
-(੭｡╹▿╹｡)੭$ ==3989682==
-==3989682== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3989682==
-==3989682== HEAP SUMMARY:
-==3989682==     in use at exit: 208,297 bytes in 228 blocks
-==3989682==   total heap usage: 739 allocs, 511 frees, 247,377 bytes allocated
-==3989682==
-==3989682== LEAK SUMMARY:
-==3989682==    definitely lost: 0 bytes in 0 blocks
-==3989682==    indirectly lost: 0 bytes in 0 blocks
-==3989682==      possibly lost: 0 bytes in 0 blocks
-==3989682==    still reachable: 0 bytes in 0 blocks
-==3989682==         suppressed: 208,297 bytes in 228 blocks
-==3989682==
-==3989682== For lists of detected and suppressed errors, rerun with: -s
-==3989682== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3992565== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3992565==
+==3992565== HEAP SUMMARY:
+==3992565==     in use at exit: 208,297 bytes in 228 blocks
+==3992565==   total heap usage: 739 allocs, 511 frees, 247,377 bytes allocated
+==3992565==
+==3992565== LEAK SUMMARY:
+==3992565==    definitely lost: 0 bytes in 0 blocks
+==3992565==    indirectly lost: 0 bytes in 0 blocks
+==3992565==      possibly lost: 0 bytes in 0 blocks
+==3992565==    still reachable: 0 bytes in 0 blocks
+==3992565==         suppressed: 208,297 bytes in 228 blocks
+==3992565==
+==3992565== For lists of detected and suppressed errors, rerun with: -s
+==3992565== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 0

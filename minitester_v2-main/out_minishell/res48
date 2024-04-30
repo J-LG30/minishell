@@ -1,31 +1,22 @@
-==3989739== Memcheck, a memory error detector
-==3989739== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3989739== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3989739== Command: ../minishell
-==3989739==
-(੭｡╹▿╹｡)੭$ cd too many arguments
-WAHAHAHAHAHAHAHA
+==3992661== Memcheck, a memory error detector
+==3992661== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3992661== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3992661== Command: ../minishell
+==3992661==
 (╯°□ °)╯︵ ┻━┻: cd: too: No such file or directory
-DSDSsdf
-though you hafda
-TOKEN VALUE: cd
-TOKEN VALUE: too
-TOKEN VALUE: many
-TOKEN VALUE: arguments
-(੭｡╹▿╹｡)੭$ ==3989739==
-==3989739== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3989739==
-==3989739== HEAP SUMMARY:
-==3989739==     in use at exit: 208,325 bytes in 228 blocks
-==3989739==   total heap usage: 749 allocs, 521 frees, 247,657 bytes allocated
-==3989739==
-==3989739== LEAK SUMMARY:
-==3989739==    definitely lost: 0 bytes in 0 blocks
-==3989739==    indirectly lost: 0 bytes in 0 blocks
-==3989739==      possibly lost: 0 bytes in 0 blocks
-==3989739==    still reachable: 0 bytes in 0 blocks
-==3989739==         suppressed: 208,325 bytes in 228 blocks
-==3989739==
-==3989739== For lists of detected and suppressed errors, rerun with: -s
-==3989739== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3992661== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3992661==
+==3992661== HEAP SUMMARY:
+==3992661==     in use at exit: 208,325 bytes in 228 blocks
+==3992661==   total heap usage: 749 allocs, 521 frees, 247,657 bytes allocated
+==3992661==
+==3992661== LEAK SUMMARY:
+==3992661==    definitely lost: 0 bytes in 0 blocks
+==3992661==    indirectly lost: 0 bytes in 0 blocks
+==3992661==      possibly lost: 0 bytes in 0 blocks
+==3992661==    still reachable: 0 bytes in 0 blocks
+==3992661==         suppressed: 208,325 bytes in 228 blocks
+==3992661==
+==3992661== For lists of detected and suppressed errors, rerun with: -s
+==3992661== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 1

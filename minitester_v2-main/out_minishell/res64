@@ -1,30 +1,22 @@
-==3989932== Memcheck, a memory error detector
-==3989932== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3989932== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3989932== Command: ../minishell
-==3989932==
-(੭｡╹▿╹｡)੭$ exit exit 1
-WAHAHAHAHAHAHAHA
+==3992870== Memcheck, a memory error detector
+==3992870== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3992870== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3992870== Command: ../minishell
+==3992870==
 (╯°□ °)╯︵ ┻━┻: exit: too many arguments
-DSDSsdf
-though you hafda
-TOKEN VALUE: exit
-TOKEN VALUE: exit
-TOKEN VALUE: 1
-(੭｡╹▿╹｡)੭$ ==3989932==
-==3989932== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3989932==
-==3989932== HEAP SUMMARY:
-==3989932==     in use at exit: 208,305 bytes in 228 blocks
-==3989932==   total heap usage: 743 allocs, 515 frees, 247,487 bytes allocated
-==3989932==
-==3989932== LEAK SUMMARY:
-==3989932==    definitely lost: 0 bytes in 0 blocks
-==3989932==    indirectly lost: 0 bytes in 0 blocks
-==3989932==      possibly lost: 0 bytes in 0 blocks
-==3989932==    still reachable: 0 bytes in 0 blocks
-==3989932==         suppressed: 208,305 bytes in 228 blocks
-==3989932==
-==3989932== For lists of detected and suppressed errors, rerun with: -s
-==3989932== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3992870== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3992870==
+==3992870== HEAP SUMMARY:
+==3992870==     in use at exit: 208,305 bytes in 228 blocks
+==3992870==   total heap usage: 743 allocs, 515 frees, 247,487 bytes allocated
+==3992870==
+==3992870== LEAK SUMMARY:
+==3992870==    definitely lost: 0 bytes in 0 blocks
+==3992870==    indirectly lost: 0 bytes in 0 blocks
+==3992870==      possibly lost: 0 bytes in 0 blocks
+==3992870==    still reachable: 0 bytes in 0 blocks
+==3992870==         suppressed: 208,305 bytes in 228 blocks
+==3992870==
+==3992870== For lists of detected and suppressed errors, rerun with: -s
+==3992870== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 0

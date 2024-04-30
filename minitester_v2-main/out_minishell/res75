@@ -1,29 +1,22 @@
-==3990042== Memcheck, a memory error detector
-==3990042== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3990042== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3990042== Command: ../minishell
-==3990042==
-(੭｡╹▿╹｡)੭$ echo "agora 'mais' fdd"
-WAHAHAHAHAHAHAHA
-DSDSsdf
-though you hafda
-TOKEN VALUE: echo
-TOKEN VALUE: "agora 'mais' fdd"
+==3993037== Memcheck, a memory error detector
+==3993037== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3993037== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3993037== Command: ../minishell
+==3993037==
 agora 'mais' fdd
-(੭｡╹▿╹｡)੭$ ==3990042==
-==3990042== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3990042==
-==3990042== HEAP SUMMARY:
-==3990042==     in use at exit: 208,329 bytes in 228 blocks
-==3990042==   total heap usage: 739 allocs, 511 frees, 247,489 bytes allocated
-==3990042==
-==3990042== LEAK SUMMARY:
-==3990042==    definitely lost: 0 bytes in 0 blocks
-==3990042==    indirectly lost: 0 bytes in 0 blocks
-==3990042==      possibly lost: 0 bytes in 0 blocks
-==3990042==    still reachable: 0 bytes in 0 blocks
-==3990042==         suppressed: 208,329 bytes in 228 blocks
-==3990042==
-==3990042== For lists of detected and suppressed errors, rerun with: -s
-==3990042== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3993037== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3993037==
+==3993037== HEAP SUMMARY:
+==3993037==     in use at exit: 208,329 bytes in 228 blocks
+==3993037==   total heap usage: 739 allocs, 511 frees, 247,489 bytes allocated
+==3993037==
+==3993037== LEAK SUMMARY:
+==3993037==    definitely lost: 0 bytes in 0 blocks
+==3993037==    indirectly lost: 0 bytes in 0 blocks
+==3993037==      possibly lost: 0 bytes in 0 blocks
+==3993037==    still reachable: 0 bytes in 0 blocks
+==3993037==         suppressed: 208,329 bytes in 228 blocks
+==3993037==
+==3993037== For lists of detected and suppressed errors, rerun with: -s
+==3993037== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 0

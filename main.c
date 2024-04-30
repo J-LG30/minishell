@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/30 16:53:46 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:47:01 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void	wait_loop(t_shelgon *shelgon, char *line, t_token *token, t_token *temp)
 		{
 			//print_tree(shelgon->tree);
 			exeggutor(shelgon->tree, shelgon, shelgon->env);
-			free_ast(shelgon->tree);
 		}
+		free_ast(shelgon->tree);
 		free_tokens(token);
 	}
 	free_shelgon(shelgon);

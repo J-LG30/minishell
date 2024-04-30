@@ -1,29 +1,22 @@
-==3989856== Memcheck, a memory error detector
-==3989856== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3989856== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3989856== Command: ../minishell
-==3989856==
-(੭｡╹▿╹｡)੭$ export $var=test
-WAHAHAHAHAHAHAHA
+==3992798== Memcheck, a memory error detector
+==3992798== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3992798== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3992798== Command: ../minishell
+==3992798==
 export: not a valid identifier
-DSDSsdf
-though you hafda
-TOKEN VALUE: export
-TOKEN VALUE: $var=test
-(੭｡╹▿╹｡)੭$ ==3989856==
-==3989856== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3989856==
-==3989856== HEAP SUMMARY:
-==3989856==     in use at exit: 208,315 bytes in 228 blocks
-==3989856==   total heap usage: 739 allocs, 511 frees, 247,427 bytes allocated
-==3989856==
-==3989856== LEAK SUMMARY:
-==3989856==    definitely lost: 0 bytes in 0 blocks
-==3989856==    indirectly lost: 0 bytes in 0 blocks
-==3989856==      possibly lost: 0 bytes in 0 blocks
-==3989856==    still reachable: 0 bytes in 0 blocks
-==3989856==         suppressed: 208,315 bytes in 228 blocks
-==3989856==
-==3989856== For lists of detected and suppressed errors, rerun with: -s
-==3989856== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3992798== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3992798==
+==3992798== HEAP SUMMARY:
+==3992798==     in use at exit: 208,315 bytes in 228 blocks
+==3992798==   total heap usage: 739 allocs, 511 frees, 247,427 bytes allocated
+==3992798==
+==3992798== LEAK SUMMARY:
+==3992798==    definitely lost: 0 bytes in 0 blocks
+==3992798==    indirectly lost: 0 bytes in 0 blocks
+==3992798==      possibly lost: 0 bytes in 0 blocks
+==3992798==    still reachable: 0 bytes in 0 blocks
+==3992798==         suppressed: 208,315 bytes in 228 blocks
+==3992798==
+==3992798== For lists of detected and suppressed errors, rerun with: -s
+==3992798== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 0

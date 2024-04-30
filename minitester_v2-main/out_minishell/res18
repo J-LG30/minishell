@@ -1,29 +1,22 @@
-==3989421== Memcheck, a memory error detector
-==3989421== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3989421== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3989421== Command: ../minishell
-==3989421==
-(੭｡╹▿╹｡)੭$ echo "Hello | World!"
-WAHAHAHAHAHAHAHA
-DSDSsdf
-though you hafda
-TOKEN VALUE: echo
-TOKEN VALUE: "Hello | World!"
+==3992292== Memcheck, a memory error detector
+==3992292== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3992292== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3992292== Command: ../minishell
+==3992292==
 Hello | World!
-(੭｡╹▿╹｡)੭$ ==3989421==
-==3989421== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3989421==
-==3989421== HEAP SUMMARY:
-==3989421==     in use at exit: 208,325 bytes in 228 blocks
-==3989421==   total heap usage: 739 allocs, 511 frees, 247,479 bytes allocated
-==3989421==
-==3989421== LEAK SUMMARY:
-==3989421==    definitely lost: 0 bytes in 0 blocks
-==3989421==    indirectly lost: 0 bytes in 0 blocks
-==3989421==      possibly lost: 0 bytes in 0 blocks
-==3989421==    still reachable: 0 bytes in 0 blocks
-==3989421==         suppressed: 208,325 bytes in 228 blocks
-==3989421==
-==3989421== For lists of detected and suppressed errors, rerun with: -s
-==3989421== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3992292== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3992292==
+==3992292== HEAP SUMMARY:
+==3992292==     in use at exit: 208,325 bytes in 228 blocks
+==3992292==   total heap usage: 739 allocs, 511 frees, 247,479 bytes allocated
+==3992292==
+==3992292== LEAK SUMMARY:
+==3992292==    definitely lost: 0 bytes in 0 blocks
+==3992292==    indirectly lost: 0 bytes in 0 blocks
+==3992292==      possibly lost: 0 bytes in 0 blocks
+==3992292==    still reachable: 0 bytes in 0 blocks
+==3992292==         suppressed: 208,325 bytes in 228 blocks
+==3992292==
+==3992292== For lists of detected and suppressed errors, rerun with: -s
+==3992292== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 0

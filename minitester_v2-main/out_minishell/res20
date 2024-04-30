@@ -1,28 +1,23 @@
-==3989443== Memcheck, a memory error detector
-==3989443== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3989443== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3989443== Command: ../minishell
-==3989443==
-(੭｡╹▿╹｡)੭$ >|cat
+==3992311== Memcheck, a memory error detector
+==3992311== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3992311== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3992311== Command: ../minishell
+==3992311==
 (╯°□ °)╯︵ ┻━┻: syntax error near unexpected token 'newline'
 minishell: syntax error near unexpected token '|'
-TOKEN VALUE: cat
-WAHAHAHAHAHAHAHA
-DSDSsdf
-though you hafda
-==3989443==
-==3989443== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3989443==
-==3989443== HEAP SUMMARY:
-==3989443==     in use at exit: 208,369 bytes in 232 blocks
-==3989443==   total heap usage: 762 allocs, 530 frees, 247,909 bytes allocated
-==3989443==
-==3989443== LEAK SUMMARY:
-==3989443==    definitely lost: 0 bytes in 0 blocks
-==3989443==    indirectly lost: 0 bytes in 0 blocks
-==3989443==      possibly lost: 0 bytes in 0 blocks
-==3989443==    still reachable: 0 bytes in 0 blocks
-==3989443==         suppressed: 208,369 bytes in 232 blocks
-==3989443==
-==3989443== For lists of detected and suppressed errors, rerun with: -s
-==3989443== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==3992311==
+==3992311== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3992311==
+==3992311== HEAP SUMMARY:
+==3992311==     in use at exit: 208,369 bytes in 232 blocks
+==3992311==   total heap usage: 762 allocs, 530 frees, 247,909 bytes allocated
+==3992311==
+==3992311== LEAK SUMMARY:
+==3992311==    definitely lost: 0 bytes in 0 blocks
+==3992311==    indirectly lost: 0 bytes in 0 blocks
+==3992311==      possibly lost: 0 bytes in 0 blocks
+==3992311==    still reachable: 0 bytes in 0 blocks
+==3992311==         suppressed: 208,369 bytes in 232 blocks
+==3992311==
+==3992311== For lists of detected and suppressed errors, rerun with: -s
+==3992311== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

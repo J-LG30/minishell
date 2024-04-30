@@ -1,29 +1,22 @@
-==3990034== Memcheck, a memory error detector
-==3990034== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3990034== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3990034== Command: ../minishell
-==3990034==
-(੭｡╹▿╹｡)੭$ echo '"abc"'
-WAHAHAHAHAHAHAHA
-DSDSsdf
-though you hafda
-TOKEN VALUE: echo
-TOKEN VALUE: '"abc"'
+==3993028== Memcheck, a memory error detector
+==3993028== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3993028== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3993028== Command: ../minishell
+==3993028==
 "abc"
-(੭｡╹▿╹｡)੭$ ==3990034==
-==3990034== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3990034==
-==3990034== HEAP SUMMARY:
-==3990034==     in use at exit: 208,307 bytes in 228 blocks
-==3990034==   total heap usage: 738 allocs, 510 frees, 247,402 bytes allocated
-==3990034==
-==3990034== LEAK SUMMARY:
-==3990034==    definitely lost: 0 bytes in 0 blocks
-==3990034==    indirectly lost: 0 bytes in 0 blocks
-==3990034==      possibly lost: 0 bytes in 0 blocks
-==3990034==    still reachable: 0 bytes in 0 blocks
-==3990034==         suppressed: 208,307 bytes in 228 blocks
-==3990034==
-==3990034== For lists of detected and suppressed errors, rerun with: -s
-==3990034== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3993028== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3993028==
+==3993028== HEAP SUMMARY:
+==3993028==     in use at exit: 208,307 bytes in 228 blocks
+==3993028==   total heap usage: 738 allocs, 510 frees, 247,402 bytes allocated
+==3993028==
+==3993028== LEAK SUMMARY:
+==3993028==    definitely lost: 0 bytes in 0 blocks
+==3993028==    indirectly lost: 0 bytes in 0 blocks
+==3993028==      possibly lost: 0 bytes in 0 blocks
+==3993028==    still reachable: 0 bytes in 0 blocks
+==3993028==         suppressed: 208,307 bytes in 228 blocks
+==3993028==
+==3993028== For lists of detected and suppressed errors, rerun with: -s
+==3993028== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 0

@@ -1,29 +1,21 @@
-==3990026== Memcheck, a memory error detector
-==3990026== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==3990026== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==3990026== Command: ../minishell
-==3990026==
-(੭｡╹▿╹｡)੭$ echo -nnm teste
-WAHAHAHAHAHAHAHA
-DSDSsdf
-though you hafda
-TOKEN VALUE: echo
-TOKEN VALUE: -nnm
-TOKEN VALUE: teste
+==3993016== Memcheck, a memory error detector
+==3993016== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3993016== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3993016== Command: ../minishell
+==3993016==
 -nnm teste
-(੭｡╹▿╹｡)੭$ ==3990026==
-==3990026== FILE DESCRIPTORS: 3 open (3 std) at exit.
-==3990026==
-==3990026== HEAP SUMMARY:
-==3990026==     in use at exit: 208,313 bytes in 228 blocks
-==3990026==   total heap usage: 743 allocs, 515 frees, 247,507 bytes allocated
-==3990026==
-==3990026== LEAK SUMMARY:
-==3990026==    definitely lost: 0 bytes in 0 blocks
-==3990026==    indirectly lost: 0 bytes in 0 blocks
-==3990026==      possibly lost: 0 bytes in 0 blocks
-==3990026==    still reachable: 0 bytes in 0 blocks
-==3990026==         suppressed: 208,313 bytes in 228 blocks
-==3990026==
-==3990026== For lists of detected and suppressed errors, rerun with: -s
-==3990026== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3993016== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==3993016==
+==3993016== HEAP SUMMARY:
+==3993016==     in use at exit: 208,313 bytes in 228 blocks
+==3993016==   total heap usage: 743 allocs, 515 frees, 247,507 bytes allocated
+==3993016==
+==3993016== LEAK SUMMARY:
+==3993016==    definitely lost: 0 bytes in 0 blocks
+==3993016==    indirectly lost: 0 bytes in 0 blocks
+==3993016==      possibly lost: 0 bytes in 0 blocks
+==3993016==    still reachable: 0 bytes in 0 blocks
+==3993016==         suppressed: 208,313 bytes in 228 blocks
+==3993016==
+==3993016== For lists of detected and suppressed errors, rerun with: -s
+==3993016== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
