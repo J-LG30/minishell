@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 15:10:00 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/29 16:25:25 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 20:30:49 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ extern void rl_replace_line (const char *, int);
 
 void	child_handler(int sig)
 {
-	g_sig = sig;
 	if (sig == SIGQUIT)
 		write(2, "Quit (core dumped)", 19);
 	rl_on_new_line();
@@ -24,7 +23,9 @@ void	child_handler(int sig)
 
 void	prompt_handler(int sig)
 {
-	write(1, "\n", 1);
+	// write(2, "123456\n", 7);
+	if (g_sig == 0)
+		write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
@@ -34,8 +35,12 @@ void	heredoc_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
+		// write(2, "HIIIII\n", 7);
 		g_sig = 1;
 		write(1, "\n", 1);
+		rl_done = 1;
+		rl_on_new_line();
+		rl_replace_line("", 0);
 		close(STDIN_FILENO);
 	}
 }

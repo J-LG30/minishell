@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:56:46 by david             #+#    #+#             */
-/*   Updated: 2024/04/30 20:13:22 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/30 21:05:08 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static int	err_heredoc(int *fd)
 	return (fd[0]);
 }
 
+#include <termios.h>
 int	ft_heredoc(t_ast *tree, t_shelgon *shelgon)
 {
 	int		fd[2];
@@ -36,15 +37,20 @@ int	ft_heredoc(t_ast *tree, t_shelgon *shelgon)
 		while (1)
 		{
 			res = readline("> ");
-			if (temp->heredoc)
-				res = check_heredoc(res, shelgon);
 			if (g_sig == 1)
 			{
 				dup2(std_in, STDIN_FILENO);
+				rl_replace_line("", 0);
+				free(res);
 				return (-2);
 			}
 			if (!res)
+			{
+				g_sig = 2;
 				return (err_heredoc(fd));
+			}
+			if (temp->heredoc)
+				res = check_heredoc(res, shelgon);
 			if (ft_strncmp(temp->value, res, ft_strlen(temp->value)) == 0
 				&& (ft_strlen(temp->value) == ft_strlen(res)))
 				break ;
