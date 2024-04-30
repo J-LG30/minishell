@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:30:45 by david             #+#    #+#             */
-/*   Updated: 2024/04/30 12:11:31 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/30 20:10:41 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	exe->pid1 = fork();
 	if (exe->pid1 < 0)
-	{
-		ft_putendl_fd("dork\n", 2);
-		ft_error(0, exe);
-	}
+		ft_error(0, cmds, exe);
 	if (exe->pid1 == 0)
 	{
 		close(exe->fd[0]);

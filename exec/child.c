@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/30 17:14:28 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 19:57:52 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	if (exe->fd_out != STDOUT_FILENO)
 		close(exe->fd_out);
 	if (exe->dup_fd[0] < 0 || exe->dup_fd[1] < 0)
-		ft_error(1, exe);
+		ft_error(1, cmds, exe);
 	if (cmds->ref && cmds->ref->type == WORD && !(is_btin(cmds->full_cmd[0])))
 	{
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
@@ -52,7 +52,6 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
 		ft_putendl_fd("5", 2);
 		ft_putendl_fd("Error executing command", 2);
-		//free_all(exe->pkcenter, exe, WRONG_CMD);
 	}
 }
 
@@ -73,7 +72,7 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	if (exe->dup_fd[0] < 0)
 	{
 		ft_putendl_fd("end\n", 2);
-		ft_error(0, exe);
+		ft_error(0, cmds, exe);
 	}
 	if (cmds->ref && cmds->ref->type == WORD && !(is_btin(cmds->full_cmd[0])))
 	{
@@ -103,7 +102,7 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	close(exe->fd_in);
 	close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)
-		ft_error(1, exe);
+		ft_error(1, cmds, exe);
 	if (cmds->ref && cmds->ref->type == WORD && !(is_btin(cmds->full_cmd[0])))
 	{
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);

@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/30 16:54:19 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/30 18:32:07 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ void					only_redir(t_ast *tree, t_exegg *exe);
 char					*try_cmd(char *cargs, char **cpath);
 void					ft_path(t_exegg *exe, t_env *env);
 char					**ms_split(char const *s, char c);
-void					ft_error(int flg, t_exegg *exe);
+void					ft_error(int flg, t_branch *cmds, t_exegg *exe);
 t_branch				*msh_lstlast(t_branch *lst);
 int						ft_heredoc(t_ast *tree, t_shelgon *shelgon);
 t_branch				*node_cmd(t_ast *tree);

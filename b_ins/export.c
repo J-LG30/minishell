@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/29 20:30:02 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/04/30 21:02:10 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ static int	args_exist(char *str, t_env *env)
 		flg = 1;
 	while (tmp)
 	{
-		if (tmp && (ft_strcmp(str, tmp->vr) == 0) && flg)
+		if (tmp && ((ft_strcmp(str, tmp->vr) != 0) || (ft_strcmp(str, tmp->cpy) != 0)) && flg)
 		{
+			ft_putendl_fd("devias", 2);
 			free(tmp->vr);
 			free(tmp->cpy);
 			tmp->vr = ft_strdup(str);
@@ -61,7 +62,7 @@ static int	args_exist(char *str, t_env *env)
 			tmp->prnt = 1;
 			return (0);
 		}
-		else if (tmp && tmp->vr && (ft_strcmp(str, tmp->vr) == 0) && !(flg))
+		else if (tmp && tmp->vr && ((ft_strncmp(str, tmp->vr, i) == 0) || (ft_strncmp(str, tmp->cpy, i) == 0)) && !(flg))
 			return (0);
 		tmp = tmp->next;
 	}
