@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:56:46 by david             #+#    #+#             */
-/*   Updated: 2024/04/30 20:33:34 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 21:05:08 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,15 @@ static void	do_red(t_ast *temp, t_exegg *exe, t_branch *cmds, int fl)
 	}
 	else if (temp && fl == 1)
 	{
+		if (exe->fd_out != STDOUT_FILENO)
+			close(exe->fd_out);
 		exe->out_value = temp->value;
 		exe->fd_out = open(exe->out_value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	}
 	else if (temp && fl == 2)
 	{
+		if (exe->fd_out != STDOUT_FILENO)
+			close(exe->fd_out);
 		exe->out_value = temp->value;
 		exe->fd_out = open(exe->out_value, O_CREAT | O_APPEND | O_WRONLY, 0644);
 	}
@@ -96,6 +100,8 @@ static void	deal_doc(t_exegg *exe, t_branch *com)
 {
 	while (com)
 	{
+		if (exe->fd_in != STDIN_FILENO)
+			close(exe->fd_in);
 		if (com->ref && com->ref->type == REDIR_DELIMIT)
 			exe->fd_in = com->pipe[0];
 		com = com->next;

@@ -1,9 +1,0 @@
-bash: line 1: export: `': not a valid identifier
-bash: line 1: export: `.': not a valid identifier
-bash: line 1: export: `:': not a valid identifier
-bash: line 1: export: `,': not a valid identifier
-bash: line 1: export: `!': not a valid identifier
-bash: line 1: export: ` +': not a valid identifier
-bash: line 1: export: `=': not a valid identifier
-bash: line 1: export: `-': not a valid identifier
-1

@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 16:08:34 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/01 17:42:41 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,12 +183,13 @@ void					only_redir(t_ast *tree, t_exegg *exe);
 char					*try_cmd(char *cargs, char **cpath);
 void					ft_path(t_exegg *exe, t_env *env);
 char					**ms_split(char const *s, char c);
-void					ft_error(int flg, t_exegg *exe);
+void					ft_error(int flg, t_branch *cmds, t_exegg *exe);
 t_branch				*msh_lstlast(t_branch *lst);
 int						ft_heredoc(t_ast *tree, t_shelgon *shelgon);
 t_branch				*node_cmd(t_ast *tree);
 char					*get_path(t_env	*env);
 char					*check_heredoc(char *line, t_shelgon *shelgon);
+int						check_dotslash(char *str);
 
 // Built in functions
 int						is_btin(char *cmds);
@@ -209,6 +210,7 @@ void					unset(t_shelgon *shell, char **cmds, int flg);
 int						ft_strrem(char *str1, char *str2);
 void					print_exp(t_shelgon *shell);
 char					**sort_exp(t_shelgon *shell, char **copy);
+int						ms_lstsize(t_env *lst);
 
 /*FREEING*/
 void					free_shelgon(t_shelgon *sh);

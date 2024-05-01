@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:49:57 by david             #+#    #+#             */
-/*   Updated: 2024/04/30 20:41:53 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/04/30 21:04:27 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,24 @@ void	run_btin(t_ast *tree, t_exegg *exe, t_branch *cmds, int flg)
 	return ;
 }
 
-void	ft_error(int flg, t_exegg *exe)
+void	ft_error(int flg, t_branch *cmds, t_exegg *exe)
 {
-	int	i;
-
 	if (flg == 1)
 		ft_putendl_fd("Error with the input/output files", 2);
 	if (flg == 0)
 		ft_putendl_fd("Error with forking", 2);
-	i = -1;
-	if (!exe)
-		exit (1);
-	while (exe->cmdpath[++i])
-		free(exe->cmdpath[i]);
-	free(exe->cmdpath);
+	if (cmds->prev == NULL && exe->fd_in != STDIN_FILENO)
+		close(exe->fd_in);
+	else if ((cmds->next == NULL || cmds->next->ref->type != WORD)
+		&& exe->fd_out != STDOUT_FILENO)
+		close(exe->fd_out);
+	close(exe->fd[1]);
+	if (exe->last_fd != STDIN_FILENO)
+		close(exe->last_fd);
+	close(exe->fd[0]);
+	close(exe->dup_fd[0]);
+	close(exe->dup_fd[1]);
+	free_all(exe->pkcenter, exe, WRONG_CMD);
 	exit(1);
 }
 
