@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 19:18:10 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:00:38 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ t_ast					*new_env_node(t_token *token);
 t_ast					*new_end_node(void);
 void					free_ast(t_ast *tree);
 void					print_syntax_error(t_shelgon **shelgon, t_token *cur);
+void					add_word_tree(t_ast *subtree, t_shelgon **shelgon);
 
 /*SIGNALS*/
 void					sig_handler(int sig);

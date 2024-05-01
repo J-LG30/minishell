@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:44:07 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 16:49:18 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/01 18:31:48 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ t_ast	*expr_one_util(t_token *temp, t_shelgon **shelgon)
 	(*shelgon)->current = temp;
 	if ((*shelgon)->print_error == 0)
 	{
-		ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: syntax error near unexpected token 'newline'\n", 2);
+		ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: ", 2);
+		ft_putstr_fd("syntax error near unexpected token 'newline'\n", 2);
 		(*shelgon)->print_error = 1;
 	}
 	return (NULL);

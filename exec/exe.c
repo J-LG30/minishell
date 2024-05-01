@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/01 19:29:24 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:59:36 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 			shelgon->status = 130;
 		else if (WTERMSIG(s) == SIGQUIT)
 			shelgon->status = 131;
+		ft_putchar_fd('\n', 1);
 	}
 }
 
