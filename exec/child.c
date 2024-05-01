@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/30 19:57:52 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:46:47 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	find_redir(cmds->ref, exe, cmds);
+	if (cmds->full_cmd[0][0] == '/' || (cmds->full_cmd[0][0] == '.' && cmds->full_cmd[0][1] == '/'))
+		execve(cmds->full_cmd[0], cmds->full_cmd, exe->pkcenter->envr);
 	if (exe->fd_out == exe->fd[1] || (cmds->next && cmds->next->ref->type != WORD))
 		exe->fd_out = STDOUT_FILENO;
 	if (exe->fd_out != STDOUT_FILENO)
@@ -97,6 +99,8 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	find_redir(cmds->ref, exe, cmds);
+	if (cmds->full_cmd[0][0] == '/' || (cmds->full_cmd[0][0] == '.' && cmds->full_cmd[0][1] == '/'))
+		execve(cmds->full_cmd[0], cmds->full_cmd, exe->pkcenter->envr);
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
 	close(exe->fd_in);
