@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:30:45 by david             #+#    #+#             */
-/*   Updated: 2024/04/30 20:10:41 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/01 17:37:39 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,9 @@ char	*try_cmd(char *cargs, char **cpath)
 
 	i = 0;
 	com = NULL;
-	if (!cpath || !cargs || !cargs[i])
+	if (!cpath || !cargs || !cargs[i] || (cargs[0] == '.' && cargs[1] == '.'))
+		return (NULL);
+	if (cargs[ft_strlen(cargs) - 1] == '.' || cargs[ft_strlen(cargs) - 1] == '/')
 		return (NULL);
 	while (cpath[i])
 	{
@@ -90,7 +92,7 @@ char	*try_cmd(char *cargs, char **cpath)
 			return (NULL);
 		com = ft_strjoin(temp, cargs);
 		free(temp);
-		if (access(com, F_OK) == 0)
+		if (access(com, X_OK) == 0)
 			return (com);
 		free(com);
 		i++;

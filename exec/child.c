@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/01 16:46:47 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/01 17:34:08 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 
 	temp = tree;
 	find_redir(cmds->ref, exe, cmds);
-	if (cmds->full_cmd[0][0] == '/' || (cmds->full_cmd[0][0] == '.' && cmds->full_cmd[0][1] == '/'))
+	if (check_dotslash(cmds->full_cmd[0]))
+	{
+		ft_putendl_fd("wtf", 2);
 		execve(cmds->full_cmd[0], cmds->full_cmd, exe->pkcenter->envr);
+	}
 	if (((!cmds->next || cmds->next->ref->type != WORD) && !(temp && (temp->type == PIPE)) && exe->fd_out == exe->fd[1]))
 	{
 		exe->fd_out = STDOUT_FILENO;
@@ -58,7 +61,7 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	find_redir(cmds->ref, exe, cmds);
-	if (cmds->full_cmd[0][0] == '/' || (cmds->full_cmd[0][0] == '.' && cmds->full_cmd[0][1] == '/'))
+	if ((cmds->full_cmd[0][0] == '/' && cmds->full_cmd[0][1]) || (cmds->full_cmd[0][0] == '.' && cmds->full_cmd[0][1] == '/'))
 		execve(cmds->full_cmd[0], cmds->full_cmd, exe->pkcenter->envr);
 	if (exe->fd_out == exe->fd[1] || (cmds->next && cmds->next->ref->type != WORD))
 		exe->fd_out = STDOUT_FILENO;

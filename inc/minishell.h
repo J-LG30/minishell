@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 15:07:43 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/01 17:33:46 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ int						ft_heredoc(t_ast *tree, t_shelgon *shelgon);
 t_branch				*node_cmd(t_ast *tree);
 char					*get_path(t_env	*env);
 char					*check_heredoc(char *line, t_shelgon *shelgon);
+int						check_dotslash(char *str);
 
 // Built in functions
 int						is_btin(char *cmds);
