@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:12:20 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/30 13:25:20 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:15:16 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ int	var_status(char *str, t_env *env)
 	return (-1);
 }
 
-char	*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index,
-		int flag)
+char	*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index)
 {
 	int		i;
 	int		j;
@@ -50,24 +49,13 @@ char	*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index,
 	char	*trim_l;
 	int		size;
 
-	printf("in expanded\n");
 	i = 0;
-	if (flag)
-	{
-		trim_l = ft_strchr(line, '=');
-		if (!trim_l)
-			return (NULL);
-		trim_l++;
-		while (line[i] && line[i] != '=')
-			i++;
-	}
-	else
-	{
-		trim_l = ft_itoa(shelgon->status);
-		i++;
-	}
+	trim_l = ft_strchr(line, '=');
 	if (!trim_l)
 		return (NULL);
+	trim_l++;
+	while (line[i] && line[i] != '=')
+		i++;
 	size = ft_strlen(tok_str) + ft_strlen(trim_l) - i + 1;
 	new = malloc(sizeof(char) * size);
 	if (!new)
@@ -79,8 +67,6 @@ char	*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index,
 	while (index + i-- > 0)
 		tok_str++;
 	ft_strlcat(new, tok_str, size);
-	if (!flag)
-		free(trim_l);
 	return (new);
 }
 
@@ -108,23 +94,6 @@ char	*ft_rm_substr(char *str, int start, int end)
 	return (new);
 }
 
-t_env	*return_index(t_env *head, int index)
-{
-	int		i;
-	t_env	*temp;
-
-	i = 0;
-	temp = head;
-	while (temp)
-	{
-		if (i == index)
-			return (temp);
-		i++;
-		temp = temp->next;
-	}
-	return (NULL);
-}
-
 int	expand_util_cases(t_token *token, int i, int j, t_shelgon *shelgon)
 {
 	char	*new_val;
@@ -132,9 +101,7 @@ int	expand_util_cases(t_token *token, int i, int j, t_shelgon *shelgon)
 
 	if (i == -1)
 	{
-		i = j + 1;
-		while (ft_isalnum(token->value[i]) || token->value[i] == '_')
-			i++;
+		i = while_var(token->value, j + 1);
 		new_val = ft_rm_substr(token->value, j, i - 1);
 		free(token->value);
 		token->value = new_val;
@@ -143,7 +110,10 @@ int	expand_util_cases(t_token *token, int i, int j, t_shelgon *shelgon)
 	else if (i >= 0)
 	{
 		env = return_index(shelgon->env, i);
-		new_val = expanded(shelgon, env->vr, token->value, j + 1, i);
+		if (i > 0)
+			new_val = expanded(shelgon, env->vr, token->value, j + 1);
+		else
+			new_val = expand_status(shelgon, env->vr, token->value, j + 1);
 		if (!new_val)
 			return (0);
 		free(token->value);

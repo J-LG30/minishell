@@ -6,7 +6,7 @@
 #    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/04/30 17:31:49 by jle-goff         ###   ########.fr        #
+#    Updated: 2024/05/01 12:42:23 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ SRCS = 	main.c free.c free2.c lexer/lexer.c lexer/lexer_lst_utils.c lexer/quotes
 		parser/redirections.c parser/print_ast.c exec/child.c exec/exe.c\
 		b_ins/env.c b_ins/env_utils.c b_ins/export.c b_ins/echo.c b_ins/pwd.c b_ins/cd.c\
 		b_ins/exit.c b_ins/unset.c exec/utils_exec.c exec/utils_exec2.c signals/signals.c\
-		exec/utils_exec3.c exec/utils_exec4.c exec/cmds.c b_ins/export_utils.c \
-		exec/heredoc_expansion.c \
+		exec/utils_exec3.c exec/utils_exec4.c exec/cmds.c b_ins/export_utils.c\
+		exec/heredoc_expansion.c signals/sig_heredoc.c lexer/expansion_utils.c\
 
 OBJS = $(SRCS:.c=.o)
 

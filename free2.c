@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:31:54 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/30 17:41:07 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/01 12:35:02 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	free_branch(t_branch *branch)
 {
 	t_branch	*cursor;
 	int			i;
-	static int y = 0;
 
 	if (!branch)
 		return ;

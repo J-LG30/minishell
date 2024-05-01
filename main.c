@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/30 20:35:11 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:47:07 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ void	wait_loop(t_shelgon *shelgon, char *line, t_token *token, t_token *temp)
 		shelgon->list_token = token;
 		shelgon->current = token;
 		shelgon->top_root = NULL;
+		shelgon->print_error = 0;
 		if (parser(token, &shelgon))
-		{
-			//print_tree(shelgon->tree);
 			exeggutor(shelgon->tree, shelgon, shelgon->env);
-		}
+		else
+			shelgon->status = 2;
 		free_ast(shelgon->tree);
 		free_tokens(token);
 	}

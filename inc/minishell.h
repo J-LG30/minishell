@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/30 20:42:41 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:08:34 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct s_shelgon
 	int					cmd_root;
 	int					status;
 	struct s_env		*env;
+	int					print_error;
 }						t_shelgon;
 
 void					execute_command(char *command, char **env);
@@ -133,11 +134,12 @@ int						unclosed_quotes(t_token *token);
 char					*rm_quotes(t_token *token);
 void					expansion(t_token *token, t_shelgon *shelgon);
 int						var_status(char *str, t_env *env);
-int						handle_word(t_token *token, t_shelgon *shelgon);
+int						handle_word(t_token *token, t_shelgon *shelgon, t_token *head);
 char					*ft_rm_substr(char *str, int start, int end);
 t_env					*return_index(t_env *head, int index);
-char					*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index,
-							int flag);
+char					*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index);
+char					*expand_status(t_shelgon *sh, char *line, char *tok_str, int index);
+int						while_var(char *str, int i);
 
 /* PARSER FUNCTIONS*/
 t_ast					*parser(t_token *head, t_shelgon **shelgon);
@@ -148,6 +150,7 @@ t_ast					*new_redir_node(t_token *token);
 t_ast					*new_env_node(t_token *token);
 t_ast					*new_end_node(void);
 void					free_ast(t_ast *tree);
+void					print_syntax_error(t_shelgon **shelgon, t_token *cur);
 
 /*SIGNALS*/
 void					sig_handler(int sig);

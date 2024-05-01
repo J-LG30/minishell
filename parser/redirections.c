@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:03 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/28 16:04:39 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:39:00 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,24 @@
 
 // redirectin -> REDIR_IN command_word
 //         | REDIR_APP command_word
+
+void	print_syntax_error(t_shelgon **shelgon, t_token *cur)
+{
+	if ((*shelgon)->print_error == 1)
+		return ;
+	ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: ", 2);
+	ft_putstr_fd("syntax error near unexpected token '", 2);
+	if (cur->type == PIPE)
+		ft_putstr_fd("|'\n", 2);
+	else if (cur->type == REDIR_APP || cur->type == REDIR_IN)
+		ft_putstr_fd("<'\n", 2);
+	else if (cur->type == REDIR_DELIMIT || cur->type == REDIR_OUT)
+		ft_putstr_fd(">'\n", 2);
+	else if (cur->type == END)
+		ft_putstr_fd("newline'\n", 2);
+	(*shelgon)->print_error = 1;
+}
+
 t_ast	*create_redirectin(t_shelgon **shelgon)
 {
 	t_ast	*new;
@@ -25,8 +43,7 @@ t_ast	*create_redirectin(t_shelgon **shelgon)
 	{
 		free_ast((*shelgon)->tree);
 		(*shelgon)->tree = NULL;
-		ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: ", 2);
-		ft_putstr_fd("syntax error near unexpected token 'newline'\n", 2);
+		print_syntax_error(shelgon, cur->next);
 		return (NULL);
 	}
 	if ((cur->type == REDIR_IN && cur->next->type == WORD)
@@ -52,8 +69,7 @@ t_ast	*create_redirectout(t_shelgon **shelgon)
 	{
 		free_ast((*shelgon)->tree);
 		(*shelgon)->tree = NULL;
-		ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: ", 2);
-		ft_putstr_fd("syntax error near unexpected token 'newline'\n", 2);
+		print_syntax_error(shelgon, cur->next);
 		return (NULL);
 	}
 	if ((cur->type == REDIR_OUT && cur->next->type == WORD)

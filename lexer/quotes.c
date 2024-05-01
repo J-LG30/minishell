@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/30 17:42:02 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/01 12:55:37 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,23 @@ int	unclosed_quotes(t_token *token)
 	int		closed;
 	char	q;
 
-	i = 0;
+	i = -1;
 	closed = 1;
-	while (token->value[i])
+	while (token->value[++i])
 	{
 		q = '\0';
 		if (token->value[i] == '\'' || token->value[i] == '"')
 		{
 			closed *= -1;
-			q = token->value[i++];
-			while (token->value[i] && closed == -1)
+			q = token->value[i];
+			while (token->value[++i] && closed == -1)
 			{
 				if (token->value[i] == q)
 					closed *= -1;
-				i++;
 			}
 		}
 		if (!token->value[i])
 			break ;
-		i++;
 	}
 	if (closed == -1 && q != '\0')
 		return (1);
@@ -120,21 +118,25 @@ char	*rm_quotes(t_token *token)
 	return (new_val);
 }
 
-// print error message
-int	handle_word(t_token *token, t_shelgon *shelgon)
+int	handle_word(t_token *token, t_shelgon *shelgon, t_token *head)
 {
 	char	*new_val;
 
 	if (unclosed_quotes(token))
 	{
-		//free_tokens(token);
 		ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: Error: Unclosed quotes\n", 2);
+		ft_tokenadd_back(&head, token);
+		free_tokens(head);
 		return (1);
 	}
 	expansion(token, shelgon);
 	new_val = rm_quotes(token);
 	if (!new_val)
+	{
+		ft_tokenadd_back(&head, token);
+		free_tokens(head);
 		return (1);
+	}
 	free(token->value);
 	token->value = new_val;
 	token->type = WORD;

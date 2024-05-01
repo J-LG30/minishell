@@ -1,62 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   sig_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/12 15:10:00 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 12:33:11 by jle-goff         ###   ########.fr       */
+/*   Created: 2024/05/01 12:32:40 by jle-goff          #+#    #+#             */
+/*   Updated: 2024/05/01 12:33:23 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-//extern void	rl_replace_line(const char *, int);
-
-void	child_handler(int sig)
+void	heredoc_handler(int sig)
 {
-	if (sig == SIGQUIT)
-		write(2, "Quit (core dumped)", 19);
-	rl_on_new_line();
-}
-
-void	prompt_handler(int sig)
-{
-	if (g_sig == 0)
+	if (sig == SIGINT)
+	{
+		g_sig = 1;
 		write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+		rl_done = 1;
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		close(STDIN_FILENO);
+	}
 }
 
-void	set_child_handler(void)
+void	set_heredoc_handler(void)
 {
 	struct sigaction	sa;
 	struct sigaction	act;
 
+	sa.sa_flags = 0;
+	sa.sa_handler = &heredoc_handler;
 	act.sa_flags = 0;
 	act.sa_handler = SIG_IGN;
-	sa.sa_handler = &child_handler;
-	sa.sa_flags = SA_RESTART;
 	sigemptyset(&sa.sa_mask);
 	sigemptyset(&act.sa_mask);
-	sigaction(SIGQUIT, &sa, NULL);
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGTERM, &act, NULL);
-}
-
-void	set_prompt_handler(void)
-{
-	struct sigaction	sa;
-	struct sigaction	act;
-
-	sa.sa_handler = &prompt_handler;
-	sa.sa_flags = SA_RESTART;
-	act.sa_flags = 0;
-	act.sa_handler = SIG_IGN;
-	sigemptyset(&act.sa_mask);
-	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &act, NULL);
 	sigaction(SIGTERM, &act, NULL);
