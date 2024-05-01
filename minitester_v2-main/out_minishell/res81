@@ -1,0 +1,22 @@
+==4106095== Memcheck, a memory error detector
+==4106095== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==4106095== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==4106095== Command: ../minishell
+==4106095==
+(╯°□ °)╯︵ ┻━┻: syntax error near unexpected token 'newline'
+==4106095==
+==4106095== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==4106095==
+==4106095== HEAP SUMMARY:
+==4106095==     in use at exit: 208,369 bytes in 232 blocks
+==4106095==   total heap usage: 763 allocs, 531 frees, 248,001 bytes allocated
+==4106095==
+==4106095== LEAK SUMMARY:
+==4106095==    definitely lost: 0 bytes in 0 blocks
+==4106095==    indirectly lost: 0 bytes in 0 blocks
+==4106095==      possibly lost: 0 bytes in 0 blocks
+==4106095==    still reachable: 0 bytes in 0 blocks
+==4106095==         suppressed: 208,369 bytes in 232 blocks
+==4106095==
+==4106095== For lists of detected and suppressed errors, rerun with: -s
+==4106095== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

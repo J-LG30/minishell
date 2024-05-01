@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:50:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/28 15:57:29 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/01 18:30:55 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,59 +22,26 @@ int	is_redir(t_ast *node)
 	return (0);
 }
 
-void	add_word_tree(t_ast *subtree, t_shelgon **shelgon)
+void	subtree_redir(t_ast *temp, t_ast *subtree, t_shelgon **shelgon)
 {
-	t_ast	*temp;
-	t_ast	*redir_temp;
-
-	temp = (*shelgon)->tree;
-	if ((*shelgon)->tree->type != PIPE)
+	if (temp->type == PIPE
+		&& ((*shelgon)->cmd_root == 2 || (*shelgon)->cmd_root == 3))
 	{
-		if ((*shelgon)->cmd_root == 2)
-		{
-			(*shelgon)->tree = subtree;
-			subtree->left = temp;
-			subtree->right = NULL;
-		}
-		else if ((*shelgon)->cmd_root == 3)
-		{
-			while (temp->right)
-				temp = temp->right;
+		if (!temp->right)
 			temp->right = subtree;
+		else
+		{
+			temp = temp->right;
+			while (temp->left)
+				temp = temp->left;
+			temp->left = subtree;
 		}
 	}
 	else
 	{
-		while (temp->right && temp->right->type == PIPE)
-			temp = temp->right;
-		redir_temp = temp->left;
-		if ((*shelgon)->cmd_root == 0)
-		{
-			temp->left = subtree;
-			subtree->left = redir_temp;
-		}
-		else if ((*shelgon)->cmd_root == 1)
-		{
+		while (temp->left)
 			temp = temp->left;
-			while (temp->right)
-				temp = temp->right;
-			temp->right = subtree;
-		}
-		else if ((*shelgon)->cmd_root == 2)
-		{
-			redir_temp = temp->right;
-			temp->right = subtree;
-			if (redir_temp && redir_temp->type != WORD)
-				subtree->left = redir_temp;
-		}
-		else if ((*shelgon)->cmd_root == 3)
-		{
-			redir_temp = temp->left;
-			temp = temp->right;
-			while (temp->right)
-				temp = temp->right;
-			temp->right = subtree;
-		}
+		temp->left = subtree;
 	}
 }
 
@@ -99,27 +66,7 @@ t_ast	*connect_subtree(t_ast *root, t_ast *subtree,
 		if (subtree->type == PIPE)
 			temp->right = subtree;
 		else
-		{
-			if (temp->type == PIPE
-				&& ((*shelgon)->cmd_root == 2 || (*shelgon)->cmd_root == 3))
-			{
-				if (!temp->right)
-					temp->right = subtree;
-				else
-				{
-					temp = temp->right;
-					while (temp->left)
-						temp = temp->left;
-					temp->left = subtree;
-				}
-			}
-			else
-			{
-				while (temp->left)
-					temp = temp->left;
-				temp->left = subtree;
-			}
-		}
+			subtree_redir(temp, subtree, shelgon);
 	}
 	return ((*shelgon)->tree);
 }

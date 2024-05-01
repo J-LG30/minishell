@@ -1,0 +1,22 @@
+==4105383== Memcheck, a memory error detector
+==4105383== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==4105383== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==4105383== Command: ../minishell
+==4105383==
+cat: lonely: No such file or directory
+==4105383==
+==4105383== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==4105383==
+==4105383== HEAP SUMMARY:
+==4105383==     in use at exit: 208,379 bytes in 232 blocks
+==4105383==   total heap usage: 781 allocs, 549 frees, 248,430 bytes allocated
+==4105383==
+==4105383== LEAK SUMMARY:
+==4105383==    definitely lost: 0 bytes in 0 blocks
+==4105383==    indirectly lost: 0 bytes in 0 blocks
+==4105383==      possibly lost: 0 bytes in 0 blocks
+==4105383==    still reachable: 0 bytes in 0 blocks
+==4105383==         suppressed: 208,379 bytes in 232 blocks
+==4105383==
+==4105383== For lists of detected and suppressed errors, rerun with: -s
+==4105383== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
