@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 14:41:47 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/01 15:15:09 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/01 17:50:43 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static void	print_sort(char **copy)
 		i = 0;
 		while (copy && copy[i])
 		{
-			if (copy && copy[i] && copy[i + 1] && ft_strcmp(copy[i], copy[i + 1]) >= 0)
+			if (copy && copy[i] && copy[i + 1]
+				&& ft_strcmp(copy[i], copy[i + 1]) >= 0)
 			{
 				flag = 1;
 				tmp = copy[i];
@@ -58,5 +59,5 @@ char	**sort_exp(t_shelgon *shell, char **copy)
 	}
 	copy[i] = NULL;
 	print_sort(copy);
-	return(copy);
+	return (copy);
 }

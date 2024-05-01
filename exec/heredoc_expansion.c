@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_expansion.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:57:51 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 15:41:53 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/01 18:27:15 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,15 @@ char	*check_heredoc(char *line, t_shelgon *shelgon)
 		j++;
 	}
 	return (new_val);
+}
+
+int	check_dotslash(char *str)
+{
+	if (str[0] == '/' && str[ft_strlen(str) - 1] != '/')
+		return (1);
+	if (str[0] == '.' && str[1] == '/' && str[ft_strlen(str) - 1] != '/')
+		return (1);
+	if (str[ft_strlen(str) - 1] == '/')
+		return (0);
+	return (0);
 }
