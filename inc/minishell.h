@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/30 21:05:34 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:07:43 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,7 @@ void					unset(t_shelgon *shell, char **cmds, int flg);
 int						ft_strrem(char *str1, char *str2);
 void					print_exp(t_shelgon *shell);
 char					**sort_exp(t_shelgon *shell, char **copy);
+int						ms_lstsize(t_env *lst);
 
 /*FREEING*/
 void					free_shelgon(t_shelgon *sh);

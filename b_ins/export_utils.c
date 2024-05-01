@@ -6,13 +6,13 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 20:29:05 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/30 16:48:26 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:06:48 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static int	ms_lstsize(t_env *lst)
+int	ms_lstsize(t_env *lst)
 {
 	int		size;
 	t_env	*cursor;
@@ -27,47 +27,6 @@ static int	ms_lstsize(t_env *lst)
 		cursor = cursor -> next;
 	}
 	return (size);
-}
-
-char	**sort_exp(t_shelgon *shell, char **copy)
-{
-	t_env	*tmp;
-	char	*var_tmp;
-	int		i;
-	int		flag;
-
-	tmp = shell->env;
-	i = 0;
-	copy = (char **)malloc(sizeof(char *) * (ms_lstsize(tmp) + 1));
-	if (!copy)
-		return (NULL);
-	flag = 0;
-	while (1)
-	{
-		flag = 0;
-		while (tmp)
-		{
-			if (tmp->next && ft_strcmp(tmp->cpy, tmp->next->cpy) > 0)
-			{
-				flag = 1;
-				var_tmp = tmp->cpy;
-				copy[i] = var_tmp;
-				var_tmp = tmp->next->cpy;
-				i++;
-				copy[i] = var_tmp;
-			}
-			else
-			{
-				copy[i] = tmp->cpy;
-				i++;
-			}
-			tmp = tmp->next;
-		}
-		if (flag == 0)
-			break ;
-	}
-	copy[i] = NULL;
-	return (copy);
 }
 
 static int	exp_util(char tmp, int flg)
