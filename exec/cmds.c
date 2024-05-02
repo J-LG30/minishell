@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 23:22:13 by david             #+#    #+#             */
-/*   Updated: 2024/04/30 18:08:52 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 12:51:55 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,6 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 			set_heredoc_handler();
 			cur->pipe[0] = ft_heredoc(temp, exe->pkcenter);
 			set_child_handler();
-			if (cur->pipe[0] == -2)
-			{
-				return (-1);
-			}
 			cur->ref = temp;
 			if(!(*cmds))
 			{
@@ -127,6 +123,10 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 				last = msh_lstlast(*cmds);
 				last->next = cur;
 				cur->prev = last;
+			}
+			if (cur->pipe[0] == -2)
+			{
+				return (-1);
 			}
 		}
 		temp = temp->left;

@@ -6,11 +6,18 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 12:55:37 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:35:11 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	what_return(int closed, char q)
+{
+	if (closed == -1 && q != '\0')
+		return (1);
+	return (0);
+}
 
 int	unclosed_quotes(t_token *token)
 {
@@ -26,19 +33,19 @@ int	unclosed_quotes(t_token *token)
 		if (token->value[i] == '\'' || token->value[i] == '"')
 		{
 			closed *= -1;
-			q = token->value[i];
-			while (token->value[++i] && closed == -1)
+			q = token->value[i++];
+			while (token->value[i] && closed == -1)
 			{
 				if (token->value[i] == q)
 					closed *= -1;
+				else
+					i++;
 			}
 		}
 		if (!token->value[i])
 			break ;
 	}
-	if (closed == -1 && q != '\0')
-		return (1);
-	return (0);
+	return (what_return(closed, q));
 }
 
 int	which_quote(t_token *token)
@@ -129,6 +136,7 @@ int	handle_word(t_token *token, t_shelgon *shelgon, t_token *head)
 		free_tokens(head);
 		return (1);
 	}
+	translation_str(token);
 	expansion(token, shelgon);
 	new_val = rm_quotes(token);
 	if (!new_val)

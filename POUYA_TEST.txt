@@ -1,0 +1,96 @@
+-------------------------------------------------------------------
+
+➜  final git:(main) ✗ echo $SHLVL
+1
+➜  final git:(main) ✗ ./minishell 
+(੭｡╹▿╹｡)੭$ echo $SHLVL
+1
+
+
+THE first time we run it it doesn't update the shlvl? 
+
+---------------------------------------------------------------------
+
+(੭｡╹▿╹｡)੭$ echo "smth" '$PATH'
+smth $PATH
+(੭｡╹▿╹｡)੭$ echo "smth"'$PATH'
+(╯°□ °)╯︵ ┻━┻: Error: Unclosed quotes
+
+
+When the quotes are back to back they are not handled correctly.
+Both of these inputs should produce the same output. (with a difference of a space)
+--------------------------------------------------------------------
+
+(੭｡╹▿╹｡)੭$ echo "SMT"'shit'
+(╯°□ °)╯︵ ┻━┻: Error: Unclosed quotes
+(੭｡╹▿╹｡)੭$ echo "SMT""shit"
+(╯°□ °)╯︵ ┻━┻: Error: Unclosed quotes
+
+Quotes back to back generally have some problem, same as previous issue.
+
+--------------------------------------------------------------------
+
+(੭｡╹▿╹｡)੭$ echo $"LOL"
+$LOL
+
+Bash prints just LOL, your shell is printing the dollar sign. HMMMMMMM!!
+
+--------------------------------------------------------------------
+
+(੭｡╹▿╹｡)੭$ < ls -a 
+==4122595== Warning: invalid file descriptor -1 in syscall close()
+Error with the input/output files
+==4122595== Warning: invalid file descriptor -1 in syscall close()
+==4122595== Warning: invalid file descriptor -1 in syscall close()
+==4122595== 
+==4122595== HEAP SUMMARY:
+==4122595==     in use at exit: 208,399 bytes in 234 blocks
+==4122595==   total heap usage: 795 allocs, 561 frees, 245,764 bytes allocated
+==4122595== 
+==4122595== LEAK SUMMARY:
+==4122595==    definitely lost: 0 bytes in 0 blocks
+==4122595==    indirectly lost: 0 bytes in 0 blocks
+==4122595==      possibly lost: 0 bytes in 0 blocks
+==4122595==    still reachable: 0 bytes in 0 blocks
+==4122595==         suppressed: 208,399 bytes in 234 blocks
+==4122595== 
+==4122595== For lists of detected and suppressed errors, rerun with: -s
+==4122595== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+(੭｡╹▿╹｡)੭$ < echo -a
+==4122619== Warning: invalid file descriptor -1 in syscall close()
+Error with the input/output files
+==4122619== Warning: invalid file descriptor -1 in syscall close()
+==4122619== Warning: invalid file descriptor -1 in syscall close()
+==4122619== 
+==4122619== HEAP SUMMARY:
+==4122619==     in use at exit: 208,469 bytes in 240 blocks
+==4122619==   total heap usage: 860 allocs, 620 frees, 247,031 bytes allocated
+==4122619== 
+==4122619== LEAK SUMMARY:
+==4122619==    definitely lost: 0 bytes in 0 blocks
+==4122619==    indirectly lost: 0 bytes in 0 blocks
+==4122619==      possibly lost: 0 bytes in 0 blocks
+==4122619==    still reachable: 0 bytes in 0 blocks
+==4122619==         suppressed: 208,469 bytes in 240 blocks
+==4122619== 
+==4122619== For lists of detected and suppressed errors, rerun with: -s
+==4122619== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+
+
+this means probably one of the close() functions are not protected. 
+
+but also the message is a bit different but that should be fine, duck it. 
+
+-------------------------------------------------------------------------
+
+(੭｡╹▿╹｡)੭$ export A="this is a beautiful"
+export: not a valid identifier
+(੭｡╹▿╹｡)੭$ echo $A
+
+le-goff@c1r20s2:~/core/MINISHELL/final$ export A="this is a beautiful"
+jle-goff@c1r20s2:~/core/MINISHELL/final$ echo $A
+this is a beautiful
+
+
+
+

@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 15:10:00 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 12:33:11 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 13:26:32 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 
 void	child_handler(int sig)
 {
-	if (sig == SIGQUIT)
-		write(2, "Quit (core dumped)", 19);
 	rl_on_new_line();
 }
 
@@ -53,7 +51,7 @@ void	set_prompt_handler(void)
 
 	sa.sa_handler = &prompt_handler;
 	sa.sa_flags = SA_RESTART;
-	act.sa_flags = 0;
+	act.sa_flags = SA_RESTART;
 	act.sa_handler = SIG_IGN;
 	sigemptyset(&act.sa_mask);
 	sigemptyset(&sa.sa_mask);

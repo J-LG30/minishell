@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 18:29:50 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:36:11 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <termios.h>
 # include <string.h>
 # include <sys/wait.h>
 # include <unistd.h>
@@ -140,6 +141,8 @@ t_env					*return_index(t_env *head, int index);
 char					*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index);
 char					*expand_status(t_shelgon *sh, char *line, char *tok_str, int index);
 int						while_var(char *str, int i);
+void					translation_str(t_token *token);
+int						what_return(int closed, char q);
 
 /* PARSER FUNCTIONS*/
 t_ast					*parser(t_token *head, t_shelgon **shelgon);

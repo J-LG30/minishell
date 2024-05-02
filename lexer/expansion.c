@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:12:20 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 13:15:16 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 15:41:44 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,16 +129,19 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 	int		j;
 	t_env	*env;
 	char	*new_val;
-	int		expand;
+	int		expand[2];
 
 	env = shelgon->env;
 	j = 0;
-	expand = 1;
+	expand[0] = 1;
+	expand[1] = 1;
 	while (token->value[j])
 	{
-		if (token->value[j] == '\'')
-			expand *= -1;
-		else if (token->value[j] == '$' && expand > 0)
+		if (token->value[j] == '"')
+			expand[1] *= -1; 
+		if (token->value[j] == '\'' && expand[1] > 0)
+			expand[0] *= -1;
+		else if (token->value[j] == '$' && expand[0] > 0)
 		{
 			i = var_status(&token->value[j + 1], env);
 			j = expand_util_cases(token, i, j, shelgon);
