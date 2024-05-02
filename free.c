@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:40:09 by julietteleg       #+#    #+#             */
-/*   Updated: 2024/04/30 15:14:52 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 21:35:54 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,26 @@ void	free_shelgon(t_shelgon *sh)
 	int	i;
 
 	i = 0;
-	free_tokens(sh->list_token);
-	free_ast(sh->tree);
-	while (sh->envr && sh->envr[i])
+	if (!sh)
+		return ;
+	if (sh->list_token)
+		free_tokens(sh->list_token);
+	if (sh->tree)
+		free_ast(sh->tree);
+	while (sh->envr && sh->envr[i] && sh->free)
 	{
-		free(sh->envr[i]);
+		if (sh->envr[i])
+			free(sh->envr[i]);
 		i++;
 	}
+	if (!sh->free)
+		free(sh->envr[0]);
 	if (sh->envr)
 		free(sh->envr);
-	free_env(sh->env);
-	free(sh);
+	if (sh->env)
+		free_env(sh->env);
+	if (sh)
+		free(sh);
 }
 
 void	free_all(t_shelgon *shelgon, t_exegg *exe, int flag)

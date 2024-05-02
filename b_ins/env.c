@@ -3,24 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:34:42 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/26 17:15:11 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 17:47:26 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-// static void	free_env(t_env *var)
-// {
-// 	while (var->next)
-// 	{
-// 		free(var->vr);
-// 		var = var->next;
-// 	}
-// 	free(var);
-// }
+static t_env	*env_lstadd(char *s)
+{
+	t_env	*node;
+
+	node = malloc(sizeof(t_env));
+	if (!node)
+		return (NULL);
+	if (node)
+	{
+		if (s && s[0])
+		{
+			node->vr = ft_strdup(s);
+			node->cpy = ft_strdup(s);
+			node->prnt = 1;
+			node->next = NULL;
+			node->prev = NULL;
+		}
+	}
+	return (node);
+}
+
+static void	env_addnode(t_env **arr, char *s)
+{
+	t_env	*node;
+	t_env	*temp;
+
+	if (s != NULL && s[0] != '\0')
+		node = env_lstadd(s);
+	if (!node)
+		return ;
+	if (*arr == NULL)
+		(*arr) = node;
+	else
+	{
+		temp = ms_lstlast(*arr);
+		temp->next = node;
+		node->prev = temp;
+	}
+}
 
 t_env	*env(t_shelgon *shell, char **envp, int flg, int retexit)
 {
@@ -31,9 +61,9 @@ t_env	*env(t_shelgon *shell, char **envp, int flg, int retexit)
 	{
 		i = 0;
 		var = NULL;
-		while (envp[i])
+		while (shell->envr && shell->envr[i] != NULL)
 		{
-			ms_addnode(&var, envp[i]);
+			env_addnode(&var, shell->envr[i]);
 			i++;
 		}
 		return (var);

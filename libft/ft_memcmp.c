@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:38:47 by jle-goff          #+#    #+#             */
-/*   Updated: 2023/04/18 18:02:21 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:58:11 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(void)
 	char str2[50] = "mello";
 	char s[] = {-128, 0, 127, 0};
 	char sCpy[] = {-128, 0, 127, 0};
-	printf("Expected: %i\nGot: %i\n", memcmp(s, sCpy, 4),ft_memcmp(s, sCpy, 4));    
+	printf("Expected: %i\nGot: %i\n", memcmp(s, sCpy, 4),ft_memcmp(s, sCpy, 4));
 	return (0);
 }
 */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:14:10 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/30 20:47:44 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:15:15 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ void	ft_exit(t_shelgon *shelgon, t_branch *cmds, t_exegg *exe, int flg)
 	}
 	if (status != 1 || flg == 0)
 		free_all(shelgon, shelgon->exe, BTIN);
+	status = shelgon->status;
 	exit(status);
 }

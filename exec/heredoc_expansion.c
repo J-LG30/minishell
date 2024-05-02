@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:57:51 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 20:36:27 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 21:15:32 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,12 @@ char	*check_heredoc(char *line, t_shelgon *shelgon)
 
 int	check_dotslash(char *str)
 {
-	if (str[0] == '/' && str[ft_strlen(str) - 1] != '/')
+	if (str[0] && str[0] == '/' && str[ft_strlen(str) - 1] != '/')
 		return (1);
-	if (str[0] == '.' && str[1] == '/' && str[ft_strlen(str) - 1] != '/')
+	if (str[0] && str[0] == '.' && str[1] == '/'
+		&& str[ft_strlen(str) - 1] != '/')
 		return (1);
-	if (str[ft_strlen(str) - 1] == '/')
+	if (str[0] && str[ft_strlen(str) - 1] == '/')
 		return (0);
 	return (0);
 }
@@ -83,4 +84,14 @@ int	redir_del(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
 	else if (temp && temp->type == REDIR_DELIMIT)
 		i = pr_her(temp, cur, last, cmds);
 	return (i);
+}
+
+int	here_help(int std_in, char *res, int *fd)
+{
+	dup2(std_in, STDIN_FILENO);
+	close(std_in);
+	rl_replace_line("", 0);
+	free(res);
+	close(fd[1]);
+	return (fd[0]);
 }

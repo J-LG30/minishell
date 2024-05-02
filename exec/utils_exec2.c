@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:49:57 by david             #+#    #+#             */
-/*   Updated: 2024/05/02 15:57:25 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 19:01:14 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,20 @@ void	ft_error(int flg, t_branch *cmds, t_exegg *exe)
 		ft_putendl_fd("Error with the input/output files", 2);
 	if (flg == 0)
 		ft_putendl_fd("Error with forking", 2);
-	if (cmds->prev == NULL && exe->fd_in != STDIN_FILENO)
+	if (cmds->prev == NULL && exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
 		close(exe->fd_in);
 	else if ((cmds->next == NULL || cmds->next->ref->type != WORD)
-		&& exe->fd_out != STDOUT_FILENO)
+		&& exe->fd_out != STDOUT_FILENO && exe->fd_out > 2)
 		close(exe->fd_out);
-	if (exe->fd[1])
+	if (exe->fd[1] > 2)
 		close(exe->fd[1]);
-	if (exe->last_fd != STDIN_FILENO)
+	if (exe->last_fd != STDIN_FILENO && exe->last_fd > 2)
 		close(exe->last_fd);
-	if (exe->fd[0])
+	if (exe->fd[0] > 2)
 		close(exe->fd[0]);
-	if (exe->dup_fd[0])
+	if (exe->dup_fd[0] > 2)
 		close(exe->dup_fd[0]);
-	if (exe->dup_fd[0])
+	if (exe->dup_fd[0] > 2)
 		close(exe->dup_fd[1]);
 	free_all(exe->pkcenter, exe, WRONG_CMD);
 	exit(1);

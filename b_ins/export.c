@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/02 16:29:29 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:36:22 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,15 @@ static int	parse_arg(char *str, t_shelgon *shell)
 	int	i;
 
 	i = 0;
-	if (ft_isdigit(str[0]) || !ft_isalpha(str[0]))
+	while (str[i] && str[i] != '=')
 	{
-		shell->status = 1;
-		ft_putendl_fd("export: not a valid identifier", 2);
-		return (0);
-	}
-	while (str[i])
-	{
-		if ((!(ft_isalnum(str[i])) && !(str[i] == '_') && !(str[i] == '='
-				 && !(str[i] == '\"'))))
+		if (ft_isdigit(str[0]) || (!ft_isdigit(str[0]) && !ft_isalnum(str[i])))
 		{
 			shell->status = 1;
-			ft_putendl_fd("export: not a valid identifier", 2);
+			ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: ", 2);
+			ft_putstr_fd("export: \'", 2);
+			ft_putstr_fd(str, 2);
+			ft_putendl_fd("\': not a valid identifier", 2);
 			return (0);
 		}
 		i++;

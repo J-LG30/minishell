@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/02 16:39:19 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 19:00:46 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ static void	built_red(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	if (exe->fd_out != STDOUT_FILENO)
 		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
-	if (exe->fd_in != STDIN_FILENO)
+	if (exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
 		close(exe->fd_in);
-	if (exe->fd_out != STDOUT_FILENO)
+	if (exe->fd_out != STDOUT_FILENO && exe->fd_out > 2)
 		close(exe->fd_out);
 	run_btin(tree, exe, cmds, 1);
-	if (cmds->prev == NULL && exe->fd_in != STDIN_FILENO)
+	if (cmds->prev == NULL && exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
 		close(exe->fd_in);
 	if ((cmds->next == NULL || (cmds->next && cmds->next->ref->type != WORD))
-		&& exe->fd_out != STDOUT_FILENO)
+		&& exe->fd_out != STDOUT_FILENO && exe->fd_out > 2)
 		close(exe->fd_out);
 	dup2(exe->fd_out, saved_file[0]);
 	dup2(exe->fd_in, saved_file[1]);
@@ -46,7 +46,7 @@ void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		&& (!cmds->next || cmds->next->ref->type != WORD) && (!cmds->prev))
 	{
 		built_red(tree, exe, cmds);
-		if (exe->last_fd != STDIN_FILENO)
+		if (exe->last_fd != STDIN_FILENO && exe->last_fd > 2)
 			close(exe->last_fd);
 		return ;
 	}

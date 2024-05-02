@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/02 16:40:16 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:54:29 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int	what_return(int closed, char q)
-{
-	if (closed == -1 && q != '\0')
-		return (1);
-	return (0);
-}
 
 int	unclosed_quotes(t_token *token)
 {
@@ -74,7 +67,6 @@ int	which_quote(t_token *token)
 // flag == 1 means inside a quoted str, dont remove any quotes
 int	size_wo_quotes(t_token *token)
 {
-	char	*new_val;
 	char	q;
 	int		i;
 	int		size;
