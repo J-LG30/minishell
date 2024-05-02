@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ast_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:25 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/30 14:52:43 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:21:07 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-t_ast	*new_node_init(void)
+t_ast	*new_node_init(t_token *temp)
 {
 	t_ast	*new;
 
@@ -24,6 +24,7 @@ t_ast	*new_node_init(void)
 	new->type = -1;
 	new->value = NULL;
 	new->heredoc = 0;
+	new->shell = temp->shell;
 	return (new);
 }
 
@@ -31,7 +32,7 @@ t_ast	*new_pipe_node(t_token *temp)
 {
 	t_ast	*new;
 
-	new = new_node_init();
+	new = new_node_init(temp);
 	if (!new)
 		return (NULL);
 	new->type = PIPE;
@@ -44,7 +45,7 @@ t_ast	*new_word_node(t_token *token)
 {
 	t_ast	*new;
 
-	new = new_node_init();
+	new = new_node_init(token);
 	if (!new)
 		return (NULL);
 	new->type = token->type;
@@ -58,7 +59,7 @@ t_ast	*new_redir_node(t_token *token)
 	int		i;
 	int		flag;
 
-	new = new_node_init();
+	new = new_node_init(token);
 	if (!new)
 		return (NULL);
 	new->type = token->type;

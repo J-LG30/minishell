@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/01 17:49:18 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:29:29 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static int	parse_arg(char *str, t_shelgon *shell)
 	}
 	while (str[i])
 	{
-		if ((!(ft_isalnum(str[i])) && !(str[i] == '_') && !(str[i] == '=')))
+		if ((!(ft_isalnum(str[i])) && !(str[i] == '_') && !(str[i] == '='
+				 && !(str[i] == '\"'))))
 		{
 			shell->status = 1;
 			ft_putendl_fd("export: not a valid identifier", 2);

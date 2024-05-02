@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:57:51 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 18:27:15 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:36:27 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,16 @@ int	check_dotslash(char *str)
 	if (str[ft_strlen(str) - 1] == '/')
 		return (0);
 	return (0);
+}
+
+int	redir_del(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
+{
+	int	i;
+
+	i = 1;
+	if (temp && temp->type == WORD)
+		i = 1;
+	else if (temp && temp->type == REDIR_DELIMIT)
+		i = pr_her(temp, cur, last, cmds);
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:49:57 by david             #+#    #+#             */
-/*   Updated: 2024/04/30 21:04:27 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 15:57:25 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,16 @@ void	ft_error(int flg, t_branch *cmds, t_exegg *exe)
 	else if ((cmds->next == NULL || cmds->next->ref->type != WORD)
 		&& exe->fd_out != STDOUT_FILENO)
 		close(exe->fd_out);
-	close(exe->fd[1]);
+	if (exe->fd[1])
+		close(exe->fd[1]);
 	if (exe->last_fd != STDIN_FILENO)
 		close(exe->last_fd);
-	close(exe->fd[0]);
-	close(exe->dup_fd[0]);
-	close(exe->dup_fd[1]);
+	if (exe->fd[0])
+		close(exe->fd[0]);
+	if (exe->dup_fd[0])
+		close(exe->dup_fd[0]);
+	if (exe->dup_fd[0])
+		close(exe->dup_fd[1]);
 	free_all(exe->pkcenter, exe, WRONG_CMD);
 	exit(1);
 }

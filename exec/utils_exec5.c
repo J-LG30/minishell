@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 17:18:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/01 20:00:23 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:28:10 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		execve(cmds->full_cmd[0], cmds->full_cmd, exe->pkcenter->envr);
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
-	close(exe->fd_in);
-	close(exe->fd_out);
+	if (exe->fd_in)
+		close(exe->fd_in);
+	if (exe->fd_out)
+		close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)
 		ft_error(1, cmds, exe);
 	if (cmds->ref && cmds->ref->type == WORD && !(is_btin(cmds->full_cmd[0])))

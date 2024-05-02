@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/01 18:16:48 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:24:46 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ static void	lst_prep(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	if (exe->fd_in != STDIN_FILENO)
 		close(exe->fd_in);
-	close(exe->fd[1]);
-	close(exe->fd[0]);
+	if (exe->fd[1])
+		close(exe->fd[1]);
+	if (exe->fd[0])
+		close(exe->fd[0]);
 	if (exe->fd_out != STDOUT_FILENO)
 		close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)

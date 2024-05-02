@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 12:55:37 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:44:55 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ int	unclosed_quotes(t_token *token)
 		if (token->value[i] == '\'' || token->value[i] == '"')
 		{
 			closed *= -1;
-			q = token->value[i];
-			while (token->value[++i] && closed == -1)
+			q = token->value[i + 1];
+			while (token->value[i] && closed == -1)
 			{
 				if (token->value[i] == q)
 					closed *= -1;
+				i++;
 			}
 		}
 		if (!token->value[i])

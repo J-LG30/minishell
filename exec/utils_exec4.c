@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:30:45 by david             #+#    #+#             */
-/*   Updated: 2024/05/01 17:37:39 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:27:39 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,16 @@ static void	parent_process(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	else if ((cmds->next == NULL || cmds->next->ref->type != WORD)
 		&& exe->fd_out != STDOUT_FILENO)
 		close(exe->fd_out);
-	close(exe->fd[1]);
+	if (exe->fd[1])
+		close(exe->fd[1]);
 	if (exe->last_fd != STDIN_FILENO)
 		close(exe->last_fd);
 	if (cmds->next)
 		exe->last_fd = exe->fd[0];
 	else
 		close(exe->fd[0]);
+	if (cmds->pipe[0])
+		close(cmds->pipe[0]);
 }
 
 void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
@@ -61,7 +64,8 @@ void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		ft_error(0, cmds, exe);
 	if (exe->pid1 == 0)
 	{
-		close(exe->fd[0]);
+		if (exe->fd[0])
+			close(exe->fd[0]);
 		if (cmds->prev == NULL)
 			fst_child(tree, exe, cmds);
 		else if (cmds->next == NULL || cmds->next->ref->type != WORD)

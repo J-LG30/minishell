@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 23:22:13 by david             #+#    #+#             */
-/*   Updated: 2024/05/01 19:29:54 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:25:42 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,20 @@ static int	pr_nod(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
 	}
 	return (1);
 }
-
-static int	pr_her(t_ast *temp, t_branch *cur, t_branch *last, t_exegg *exe, t_branch **cmds)
+int	pr_her(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
 {
 	cur = ft_calloc(1, sizeof(t_branch));
 	if (!cur)
 		return (0);
 	ft_memset(cur, 0, 0);
 	set_heredoc_handler();
-	cur->pipe[0] = ft_heredoc(temp, exe->pkcenter);
+	cur->pipe[0] = ft_heredoc(temp, temp->shell);
 	set_child_handler();
-	if (cur->pipe[0] == -2)
+	if (g_sig == 1)
+	{
+		close(cur->pipe[0]);
 		return (-1);
+	}
 	cur->ref = temp;
 	if (!(*cmds))
 	{
@@ -57,7 +59,7 @@ static int	pr_her(t_ast *temp, t_branch *cur, t_branch *last, t_exegg *exe, t_br
 	return (1);
 }
 
-static int	c_help(t_ast *temp, t_branch *cur, t_branch *last, t_exegg *exe, t_branch **cmds)
+static int	c_help(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
 {
 	if (temp && temp->type != PIPE && temp->type != WORD && temp->type != REDIR_DELIMIT)
 	{
@@ -90,18 +92,6 @@ static void	looper(t_ast *temp, t_branch **cmds, t_exegg *exe, t_ast *tree)
 		get_cmd(temp->right, cmds, exe);
 }
 
-int	redir_del(t_ast *temp, t_branch *cur, t_branch *last, t_exegg *exe, t_branch **cmds)
-{
-	int	i;
-
-	i = 1;
-	if (temp && temp->type == WORD)
-		i = 1;
-	else if (temp && temp->type == REDIR_DELIMIT)
-		i = pr_her(temp, cur, last, exe, cmds);
-	return (i);
-}
-
 int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 {
 	t_ast		*temp;
@@ -120,12 +110,12 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 				return (0);
 			exe->no_cmds = 0;
 		}
-		ret = redir_del(temp, cur, last, exe, cmds);
+		ret = redir_del(temp, cur, last, cmds);
 		if (ret != 1)
 			return (ret);
 		temp = temp->left;
 	}
-	if (c_help(temp, cur, last, exe, cmds) == 0)
+	if (c_help(temp, cur, last, cmds) == 0)
 		return (0);
 	looper(temp, cmds, exe, tree);
 	return (exe->no_cmds);

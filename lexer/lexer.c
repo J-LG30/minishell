@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 12:49:12 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:20:11 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ int	redirect_token(t_token *token, char *line, int i)
 	return (0);
 }
 
-void	add_last(t_token *head)
+void	add_last(t_token *head, t_shelgon *shelgon)
 {
 	t_token	*token;
 
-	token = ft_new_token();
+	token = ft_new_token(shelgon);
 	token->type = END;
 	ft_tokenadd_back(&head, token);
 	head->prev = token;
@@ -92,7 +92,7 @@ t_token	*tokenize(char *line, t_shelgon *shelgon)
 	head = NULL;
 	while (line && line[i])
 	{
-		token = ft_new_token();
+		token = ft_new_token(shelgon);
 		while (line[i] == ' ')
 			i++;
 		if (line[i] == '<' || line[i] == '>')
@@ -107,7 +107,7 @@ t_token	*tokenize(char *line, t_shelgon *shelgon)
 		}
 		ft_tokenadd_back(&head, token);
 	}
-	add_last(head);
+	add_last(head, shelgon);
 	return (head);
 }
 

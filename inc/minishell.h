@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 20:00:38 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:46:04 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_token
 	char				*copy;
 	int					type;
 	int					error;
+	struct s_shelgon	*shell;
 }						t_token;
 
 typedef struct s_ast
@@ -105,6 +106,7 @@ typedef struct s_ast
 	int					type;
 	char				*value;
 	int					heredoc;
+	struct s_shelgon	*shell;
 }						t_ast;
 
 typedef struct s_shelgon
@@ -126,7 +128,7 @@ void					execute_command(char *command, char **env);
 /* LEXER FUNCTIONS */
 t_token					*ft_tokenlast(t_token *lst);
 void					ft_tokenadd_back(t_token **lst, t_token *new);
-t_token					*ft_new_token(void);
+t_token					*ft_new_token(t_shelgon *shelgon);
 t_token					*token_type_exists(t_token *lst, int type);
 int						is_token_type(t_token *token, int type);
 t_token					*tokenize(char *line, t_shelgon *shelgon);
@@ -144,7 +146,7 @@ int						while_var(char *str, int i);
 
 /* PARSER FUNCTIONS*/
 t_ast					*parser(t_token *head, t_shelgon **shelgon);
-t_ast					*new_node_init(void);
+t_ast					*new_node_init(t_token *temp);
 t_ast					*new_pipe_node(t_token *token);
 t_ast					*new_word_node(t_token *token);
 t_ast					*new_redir_node(t_token *token);
@@ -192,6 +194,8 @@ t_branch				*node_cmd(t_ast *tree);
 char					*get_path(t_env	*env);
 char					*check_heredoc(char *line, t_shelgon *shelgon);
 int						check_dotslash(char *str);
+int						redir_del(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds);
+int						pr_her(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds);
 
 // Built in functions
 int						is_btin(char *cmds);
