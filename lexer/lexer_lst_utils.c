@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_lst_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:32 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/04/28 14:41:39 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:25:16 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_tokenadd_back(t_token **lst, t_token *new)
 }
 
 //malloc error management
-t_token	*ft_new_token(void)
+t_token	*ft_new_token(t_shelgon *shelgon)
 {
 	t_token	*new;
 
@@ -58,6 +58,7 @@ t_token	*ft_new_token(void)
 	new->type = 0;
 	new->value = NULL;
 	new->copy = NULL;
+	new->shell = shelgon;
 	return (new);
 }
 

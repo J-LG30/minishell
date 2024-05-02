@@ -6,18 +6,21 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:56:46 by david             #+#    #+#             */
-/*   Updated: 2024/04/30 21:05:08 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:26:54 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static int	err_heredoc(int *fd)
+static int	err_heredoc(int *fd, int std_in, char *res)
 {
 	ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: warning", 2);
 	ft_putendl_fd(": here-document delimited by end-of-file", 2);
 	rl_on_new_line();
-	close(fd[1]);
+	if (std_in)
+		close(std_in);
+	if (fd[1])
+		close(fd[1]);
 	return (fd[0]);
 }
 
@@ -40,14 +43,16 @@ int	ft_heredoc(t_ast *tree, t_shelgon *shelgon)
 			if (g_sig == 1)
 			{
 				dup2(std_in, STDIN_FILENO);
+				close(std_in);
 				rl_replace_line("", 0);
 				free(res);
-				return (-2);
+				close(fd[1]);
+				return (fd[0]);
 			}
 			if (!res)
 			{
 				g_sig = 2;
-				return (err_heredoc(fd));
+				return (err_heredoc(fd, std_in, res));
 			}
 			if (temp->heredoc)
 				res = check_heredoc(res, shelgon);
@@ -58,6 +63,7 @@ int	ft_heredoc(t_ast *tree, t_shelgon *shelgon)
 			free(res);
 		}
 		free(res);
+		close(std_in);
 		close(fd[1]);
 		return (fd[0]);
 	}
@@ -100,10 +106,12 @@ static void	deal_doc(t_exegg *exe, t_branch *com)
 {
 	while (com)
 	{
-		if (exe->fd_in != STDIN_FILENO)
-			close(exe->fd_in);
 		if (com->ref && com->ref->type == REDIR_DELIMIT)
+		{
+			if (exe->fd_in != STDIN_FILENO)
+				close(exe->fd_in);
 			exe->fd_in = com->pipe[0];
+		}
 		com = com->next;
 	}
 }

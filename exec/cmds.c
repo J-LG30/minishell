@@ -6,131 +6,61 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 23:22:13 by david             #+#    #+#             */
-/*   Updated: 2024/05/02 12:51:55 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:38:59 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static int	count_cmds(t_ast *temp)
+static int	pr_nod(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
 {
-	int	j;
-
-	j = 1;
-	while (temp->right && temp->right->type == WORD)
+	cur = node_cmd(temp);
+	if (!cur)
+		return (0);
+	if (!(*cmds))
 	{
-		j++;
-		temp = temp->right;
+		*cmds = cur;
+		cur->prev = NULL;
 	}
-	return (j);
+	else
+	{
+		last = msh_lstlast(*cmds);
+		last->next = cur;
+		cur->prev = last;
+	}
+	return (1);
+}
+int	pr_her(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
+{
+	cur = ft_calloc(1, sizeof(t_branch));
+	if (!cur)
+		return (0);
+	ft_memset(cur, 0, 0);
+	set_heredoc_handler();
+	cur->pipe[0] = ft_heredoc(temp, temp->shell);
+	set_child_handler();
+	if (g_sig == 1)
+	{
+		close(cur->pipe[0]);
+		return (-1);
+	}
+	cur->ref = temp;
+	if (!(*cmds))
+	{
+		*cmds = cur;
+		cur->prev = NULL;
+	}
+	else
+	{
+		last = msh_lstlast(*cmds);
+		last->next = cur;
+		cur->prev = last;
+	}
+	return (1);
 }
 
-static int	save_fullcmd(t_ast *temp, t_branch *new)
+static int	c_help(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
 {
-	int	i;
-
-	i = 0;
-	if (new->cmd)
-		new->full_cmd[0] = new->cmd;
-	new->ref = temp;
-	while (temp->right && temp->right->type == WORD)
-	{
-		i++;
-		new->full_cmd[i] = temp->right->value;
-		temp = temp->right;
-	}
-	new->full_cmd[i + 1] = NULL;
-	new->pipe[0] = 0;
-	return (i);
-}
-
-t_branch	*node_cmd(t_ast *tree)
-{
-	t_branch	*new;
-	t_ast		*temp;
-	int			i;
-	int			j;
-
-	i = 0;
-	j = 1;
-	temp = tree;
-	new = ft_calloc(1, sizeof(t_branch));
-	if (!new)
-		return (NULL);
-	if (temp->type == WORD)
-	{
-		new->cmd = temp->value;
-		j = count_cmds(temp);
-		new->full_cmd = (char **)malloc(sizeof(char*) * (j + 1));
-		if (!new->full_cmd)
-			return (NULL);
-		temp = tree;
-		i = save_fullcmd(temp, new);
-	}
-	new->full_cmd[i + 1] = NULL;
-	return (new);
-}
-
-int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
-{
-	t_ast		*temp;
-	t_branch	*cur;
-	t_branch	*last;
-	int			no_cmds;
-	static int	i = 0;
-
-	temp = tree;
-	no_cmds = 1;
-	cur = NULL;
-	while (temp)
-	{
-		if (temp && temp->type == WORD)
-		{
-			cur = node_cmd(temp);
-			if (!cur)
-				return (0);
-			if(!(*cmds))
-			{
-				*cmds = cur;
-				cur->prev = NULL;
-			}
-			else
-			{
-				last = msh_lstlast(*cmds);
-				last->next = cur;
-				cur->prev = last;
-			}
-			i++;
-			no_cmds = 0;
-		}
-		else if (temp && temp->type == REDIR_DELIMIT)
-		{
-			cur = ft_calloc(1, sizeof(t_branch));
-			if (!cur)
-				return (0);
-			ft_memset(cur, 0, 0);
-			set_heredoc_handler();
-			cur->pipe[0] = ft_heredoc(temp, exe->pkcenter);
-			set_child_handler();
-			cur->ref = temp;
-			if(!(*cmds))
-			{
-				*cmds = cur;
-				cur->prev = NULL;
-			}
-			else
-			{
-				last = msh_lstlast(*cmds);
-				last->next = cur;
-				cur->prev = last;
-			}
-			if (cur->pipe[0] == -2)
-			{
-				return (-1);
-			}
-		}
-		temp = temp->left;
-	}
 	if (temp && temp->type != PIPE && temp->type != WORD && temp->type != REDIR_DELIMIT)
 	{
 		cur = ft_calloc(1, sizeof(t_branch));
@@ -152,8 +82,41 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 	}
 	if (cur)
 		cur->next = NULL;
+	return (1);
+}
+
+static void	looper(t_ast *temp, t_branch **cmds, t_exegg *exe, t_ast *tree)
+{
 	temp = tree;
 	if (temp && temp->type == PIPE)
 		get_cmd(temp->right, cmds, exe);
-	return (no_cmds);
+}
+
+int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
+{
+	t_ast		*temp;
+	t_branch	*cur;
+	t_branch	*last;
+	int			no_cmds;
+	int			ret;
+
+	temp = tree;
+	cur = NULL;
+	while (temp)
+	{
+		if (temp && temp->type == WORD)
+		{
+			if (pr_nod(temp, cur, last, cmds) == 0)
+				return (0);
+			exe->no_cmds = 0;
+		}
+		ret = redir_del(temp, cur, last, cmds);
+		if (ret != 1)
+			return (ret);
+		temp = temp->left;
+	}
+	if (c_help(temp, cur, last, cmds) == 0)
+		return (0);
+	looper(temp, cmds, exe, tree);
+	return (exe->no_cmds);
 }

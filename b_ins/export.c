@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/01 16:37:53 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:29:29 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,25 @@ static int	parse_arg(char *str, t_shelgon *shell)
 	}
 	while (str[i])
 	{
-		if ((!(ft_isalnum(str[i])) && !(str[i] == '_') && !(str[i] == '=')))
+		if ((!(ft_isalnum(str[i])) && !(str[i] == '_') && !(str[i] == '='
+				 && !(str[i] == '\"'))))
 		{
-		shell->status = 1;
-		ft_putendl_fd("export: not a valid identifier", 2);
-		return (0);
+			shell->status = 1;
+			ft_putendl_fd("export: not a valid identifier", 2);
+			return (0);
 		}
 		i++;
 	}
 	return (1);
+}
+
+static void	change_arg(t_env *tmp, char *str)
+{
+	free(tmp->vr);
+	free(tmp->cpy);
+	tmp->vr = ft_strdup(str);
+	tmp->cpy = ft_strdup(str);
+	tmp->prnt = 1;
 }
 
 static int	args_exist(char *str, t_env *env)
@@ -50,16 +60,14 @@ static int	args_exist(char *str, t_env *env)
 		i++;
 	while (tmp)
 	{
-		if (tmp && ((ft_strncmp(str, tmp->cpy, i) == 0) && (str[i] == '=' && (tmp->cpy[i] == '=' || !tmp->cpy[i]))))
+		if (tmp && ((ft_strncmp(str, tmp->cpy, i) == 0) && (str[i] == '='
+					&& (tmp->cpy[i] == '=' || !tmp->cpy[i]))))
 		{
-			free(tmp->vr);
-			free(tmp->cpy);
-			tmp->vr = ft_strdup(str);
-			tmp->cpy = ft_strdup(str);
-			tmp->prnt = 1;
+			change_arg(tmp, str);
 			return (0);
 		}
-		else if (tmp && ((ft_strncmp(str, tmp->cpy, i) == 0) && str[i] != '=' && ((tmp->cpy[i] == '=') || (tmp->cpy[i] == '\0'))))
+		else if (tmp && ((ft_strncmp(str, tmp->cpy, i) == 0) && str[i] != '='
+				&& ((tmp->cpy[i] == '=') || (tmp->cpy[i] == '\0'))))
 			return (0);
 		tmp = tmp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/02 13:25:46 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:39:19 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static void	save_exe(t_shelgon *shelgon, t_exegg *exe)
 	exe->pkcenter = shelgon;
 	exe->last_fd = 0;
 	exe->cmdpath = NULL;
+	exe->no_cmds = 1;
 }
 
 static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
