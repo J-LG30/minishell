@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:30:45 by david             #+#    #+#             */
-/*   Updated: 2024/05/02 19:03:58 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:53:01 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ char	*try_cmd(char *cargs, char **cpath)
 	com = NULL;
 	if (!cpath || !cargs || !cargs[i] || (cargs[0] == '.' && cargs[1] == '.'))
 		return (NULL);
-	if (cargs[ft_strlen(cargs) - 1] == '.' || cargs[ft_strlen(cargs) - 1] == '/')
+	if (cargs[ft_strlen(cargs) - 1] == '.'
+		|| cargs[ft_strlen(cargs) - 1] == '/')
 		return (NULL);
 	while (cpath[i])
 	{
@@ -109,7 +110,7 @@ char	*try_cmd(char *cargs, char **cpath)
 
 int	pipe_it(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cmds)

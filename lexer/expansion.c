@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:12:20 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 11:14:24 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:08:03 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 	while (token->value && token->value[j])
 	{
 		if (token->value[j] == '"')
-			expand[1] *= -1; 
+			expand[1] *= -1;
 		if (token->value[j] == '\'' && expand[1] > 0)
 			expand[0] *= -1;
 		else if (token->value[j] == '$' && expand[0] > 0)

@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:56:46 by david             #+#    #+#             */
-/*   Updated: 2024/05/03 09:36:06 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:07:01 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int	err_heredoc(int *fd, int std_in, char *res)
-{
-	g_sig = 2;
-	ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: warning", 2);
-	ft_putendl_fd(": here-document delimited by end-of-file", 2);
-	rl_on_new_line();
-	if (std_in > 2)
-		close(std_in);
-	if (fd[1] > 2)
-		close(fd[1]);
-	return (fd[0]);
-}
 
 int	ft_heredoc(t_ast *tree, t_shelgon *shelgon)
 {
@@ -39,11 +26,18 @@ int	ft_heredoc(t_ast *tree, t_shelgon *shelgon)
 		ret = here_loop(res, fd, temp, shelgon);
 		if (ret != -4)
 			return (ret);
-		//free(res);
 		close(fd[1]);
 		return (fd[0]);
 	}
 	return (-1);
+}
+
+static void	last_red(t_exegg *exe)
+{
+	if (exe->fd_in == STDIN_FILENO)
+		exe->fd_in = exe->last_fd;
+	if (exe->fd_out == STDOUT_FILENO)
+		exe->fd_out = exe->fd[1];
 }
 
 static void	do_red(t_ast *temp, t_exegg *exe, t_branch *cmds, int fl)
@@ -70,12 +64,7 @@ static void	do_red(t_ast *temp, t_exegg *exe, t_branch *cmds, int fl)
 		exe->fd_out = open(exe->out_value, O_CREAT | O_APPEND | O_WRONLY, 0644);
 	}
 	else if (fl == 3)
-	{
-		if (exe->fd_in == STDIN_FILENO)
-			exe->fd_in = exe->last_fd;
-		if (exe->fd_out == STDOUT_FILENO)
-			exe->fd_out = exe->fd[1];
-	}
+		last_red(exe);
 }
 
 static void	deal_doc(t_exegg *exe, t_branch *com)
