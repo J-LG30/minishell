@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 12:57:38 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:45:19 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef struct s_shelgon
 void					execute_command(char *command, char **env);
 void					main_help(t_shelgon *shelgon, t_token *token);
 void					time_to_start(t_shelgon *shelgon, t_token *token);
+void					loop_env(char **envp, t_shelgon *shelgon);
 
 /* LEXER FUNCTIONS */
 t_token					*ft_tokenlast(t_token *lst);
