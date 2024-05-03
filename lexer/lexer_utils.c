@@ -3,33 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:18:27 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 13:04:23 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:14:11 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static void	rm_token_help(t_token *cursor, t_token *head, int fl)
+t_token *nullstr_helper(t_token *cursor, t_token *head, t_token *temp)
 {
-	if (fl == 1)
+	while (cursor)
 	{
-		if (cursor->next)
+		if (cursor->type == WORD && !cursor->value)
 		{
-			cursor->next->prev = cursor->prev;
-			cursor->prev->next = cursor->next;
+			temp = cursor;
+			if (cursor->next && cursor->prev->type == END)
+			{
+				head = cursor->next;
+				head->prev = cursor->prev;
+			}
+			else if (cursor->next)
+			{
+				cursor->next->prev = cursor->prev;
+				cursor->prev->next = cursor->next;
+			}
+			cursor = cursor->next;
+			free(temp->copy);
+			free(temp);
 		}
+		else
+			cursor = cursor->next;
 	}
-	else if (fl == 2)
-	{
-		if (cursor->next && cursor->prev->type == END)
-		{
-			head = cursor->next;
-			head->prev = cursor->prev;
-		}
-	}
+	return (head);
 }
 
 t_token	*remove_nullstr_token(t_token *head)
@@ -40,23 +47,7 @@ t_token	*remove_nullstr_token(t_token *head)
 	cursor = head;
 	if (!cursor)
 		return (NULL);
-	while (cursor)
-	{
-		if (cursor->type == WORD && !cursor->value)
-		{
-			temp = cursor;
-			if (cursor->next && cursor->prev->type == END)
-				rm_token_help(cursor, head, 2);
-			else if (cursor->next)
-				rm_token_help(cursor, head, 1);
-			cursor = cursor->next;
-			free(temp->copy);
-			free(temp);
-		}
-		else
-			cursor = cursor->next;
-	}
-	return (head);
+	return (nullstr_helper(cursor, head, temp));
 }
 
 t_token	*check_tokens(t_token *head, t_shelgon *shelgon)

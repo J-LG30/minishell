@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 13:02:32 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:14:08 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static char	*wait_helper(t_shelgon *shel, char *l, t_token *tok)
 	set_prompt_handler();
 	rl_on_new_line();
 	l = readline("(੭｡╹▿╹｡)੭$ ");
+	if (g_sig == 1)
+		shel->status = 130;
 	if (g_sig != 0)
 		g_sig = 0;
 	add_history(l);
@@ -66,6 +68,7 @@ static char	*wait_helper(t_shelgon *shel, char *l, t_token *tok)
 	if (!l)
 	{
 		free_all(shel, NULL, 1);
+		ft_putendl_fd("exit (¬_¬)ﾉ", 1);
 		exit(0);
 	}
 	return (l);
