@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_lst_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:32 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 20:25:16 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:32:34 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_token	*ft_new_token(t_shelgon *shelgon)
 	new->value = NULL;
 	new->copy = NULL;
 	new->shell = shelgon;
+	new->has_quotes = 0;
 	return (new);
 }
 

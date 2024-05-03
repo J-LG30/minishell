@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 20:20:11 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:19:16 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,5 @@ t_token	*tokenize(char *line, t_shelgon *shelgon)
 		ft_tokenadd_back(&head, token);
 	}
 	add_last(head, shelgon);
-	return (head);
+	return (check_tokens(head, shelgon));
 }
-
-			// if (handle_word(token, shelgon, head))
-			// {
-			// 	ft_tokenadd_back(&head, token);
-			// 	free_tokens(head);
-			// 	return (NULL);
-			// }

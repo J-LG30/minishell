@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:57:51 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 12:04:00 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:06:19 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,20 @@ char	*check_heredoc(char *line, t_shelgon *shelgon)
 	env = shelgon->env;
 	j = 0;
 	new_val = line;
-	while (line[j])
+	while (line && line[j])
 	{
 		if (line[j] == '$')
 		{
 			i = var_status(&line[j + 1], env);
 			new_val = expand_heredoc(line, i, j, shelgon);
+			line = new_val;
 		}
+		if (!line || !line[j])
+			break ;
 		j++;
 	}
+	if (!new_val)
+		return (ft_strdup(""));
 	return (new_val);
 }
 

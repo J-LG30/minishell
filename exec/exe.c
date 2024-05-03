@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/02 19:00:46 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:43:07 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static void	save_exe(t_shelgon *shelgon, t_exegg *exe)
 	exe->last_fd = 0;
 	exe->cmdpath = NULL;
 	exe->no_cmds = 1;
+	exe->pid1 = 0;
 }
 
 static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
@@ -84,11 +85,13 @@ static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 	s = 0;
 	flag = 0;
 	s = 0;
-	i = pipe_it(tree, shelgon, cmds, exe);
+	i = pipe_it(tree, shelgon, cmds, exe) - 1;
+	if (exe->pid1)
+		waitpid(exe->pid1, &s, 0);
 	while (--i >= 0)
 	{
-		if (wait(&s) == -1)
-			flag = 1;
+			if (wait(NULL) == -1)
+				flag = 1;
 	}
 	if (WIFEXITED(s) != 0 && flag == 0)
 		shelgon->status = WEXITSTATUS(s);
@@ -97,10 +100,7 @@ static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 		if (WTERMSIG(s) == SIGINT)
 			shelgon->status = 130;
 		else if (WTERMSIG(s) == SIGQUIT)
-		{
-			write(2, "Quit (core dumped)", 19);
 			shelgon->status = 131;
-		}
 		ft_putchar_fd('\n', 1);
 	}
 }

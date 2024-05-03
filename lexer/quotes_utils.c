@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:25:37 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/02 16:35:55 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:16:31 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,7 @@ int	what_return(int closed, char q)
 		return (1);
 	return (0);
 }
+
+// char	*rm_quotes_helper(t_token *token)
+// {
+// }

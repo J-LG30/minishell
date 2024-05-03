@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:12:20 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 11:57:39 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:08:03 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	var_status(char *str, t_env *env)
 	int		i;
 	int		j;
 	int		exit;
-	t_env	*temp;
+	t_env	*t;
 
 	i = 0;
 	if (str[0] == '_')
@@ -30,13 +30,13 @@ int	var_status(char *str, t_env *env)
 	if (i == 0)
 		return (-2);
 	j = 0;
-	temp = env;
-	while (temp)
+	t = env;
+	while (t)
 	{
-		if (!ft_strncmp(str, temp->vr, i) && temp->vr[i] == '=')
+		if (!ft_strncmp(str, t->vr, i) && t->vr[i] == '=' && t->vr[i + 1])
 			return (j);
 		j++;
-		temp = temp->next;
+		t = t->next;
 	}
 	return (-1);
 }
@@ -70,25 +70,29 @@ char	*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index)
 	return (new);
 }
 
+//norming might have changed this
 char	*ft_rm_substr(char *str, int start, int end)
 {
 	char	*new;
 	int		i;
 	int		j;
 
+	if (end - start <= 0)
+		return (NULL);
 	new = malloc(sizeof(char) * (ft_strlen(str) - (end - start) + 1));
 	if (!new)
 		return (NULL);
-	i = 0;
+	i = -1;
 	j = 0;
-	while (str[i])
+	while (str[++i])
 	{
 		if (i < start || i > end)
-		{
-			new[j] = str[i];
-			j++;
-		}
-		i++;
+			new[j++] = str[i];
+	}
+	if (j == 0)
+	{
+		free(new);
+		return (NULL);
 	}
 	new[j] = '\0';
 	return (new);
@@ -122,7 +126,6 @@ int	expand_util_cases(t_token *token, int i, int j, t_shelgon *shelgon)
 	return (j);
 }
 
-// might remove a token if it cant expand instead we shall see
 void	expansion(t_token *token, t_shelgon *shelgon)
 {
 	int		i;
@@ -135,7 +138,7 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 	j = 0;
 	expand[0] = 1;
 	expand[1] = 1;
-	while (token->value[j])
+	while (token->value && token->value[j])
 	{
 		if (token->value[j] == '"')
 			expand[1] *= -1;
@@ -148,4 +151,5 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 		}
 		j++;
 	}
+	return ;
 }
