@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 12:41:31 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 11:57:21 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:12:28 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	only_var(char *str)
 
 	i = 0;
 	flag = 0;
-	printf("VAR STR: %s\n", str);
 	while (str[i])
 	{
 		if (str[i] == '$')
@@ -128,6 +127,7 @@ void	check_mult_tok(t_token *token, t_shelgon *shelgon)
 			new->value = ft_strdup(tokens[i]);
 			new->copy = ft_strdup(new->value);
 			ft_tokenadd_back(&subhead, new);
+			handle_word(new, shelgon, token);
 			i++;
 		}
 		i = -1;

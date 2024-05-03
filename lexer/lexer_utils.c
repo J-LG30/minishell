@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:18:27 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 11:19:29 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:56:35 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_token	*check_tokens(t_token *head, t_shelgon *shelgon)
 		{
 			if (cursor->next->value)
 				free(cursor->next->value);
-			cursor->next->value = ft_strdup(cursor->next->copy);
+			cursor->next->value = rm_quo(cursor->next->copy);
 		}
 		cursor = cursor->next;
 	}

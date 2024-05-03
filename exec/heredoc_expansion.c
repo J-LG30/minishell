@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:57:51 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 09:35:59 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:08:59 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ char	*check_heredoc(char *line, t_shelgon *shelgon)
 
 int	check_dotslash(char *str)
 {
+	if (!str)
+		return (0);
 	if (str[0] && str[0] == '/' && str[ft_strlen(str) - 1] != '/')
 		return (1);
 	if (str[0] && str[0] == '.' && str[1] == '/'
