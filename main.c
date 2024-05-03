@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 10:39:25 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:38:54 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 volatile int	g_sig;
 
 /* extern int	rl_on_new_line(void); */
-
 static void	env_help(char **envp, t_shelgon *shelgon, int i)
 {
 	if (envp == NULL || envp[0] == NULL)
@@ -53,7 +52,7 @@ static void	save_env(char **envp, t_shelgon *shelgon)
 	env_help(envp, shelgon, i);
 }
 
-static char	*wait_helper(t_shelgon *shel, char *l, t_token *tok, t_token *tmp)
+static char	*wait_helper(t_shelgon *shel, char *l, t_token *tok)
 {
 	shel->tree = NULL;
 	shel->list_token = NULL;
@@ -72,37 +71,21 @@ static char	*wait_helper(t_shelgon *shel, char *l, t_token *tok, t_token *tmp)
 	return (l);
 }
 
-void	wait_loop(t_shelgon *shelgon, char *line, t_token *token, t_token *temp)
+static void	wait_loop(t_shelgon *shelgon, char *line, t_token *token)
 {
 	while (1)
 	{
-		line = wait_helper(shelgon, line, token, temp);
+		line = wait_helper(shelgon, line, token);
 		if (ft_strlen(line) == 0)
 		{
 			free (line);
 			continue ;
 		}
 		token = tokenize(line, shelgon);
-		t_token *temp;
-		temp = token;
-		while (temp)
-		{
-			printf("TOKEN VALUE: %s\n", temp->value);
-			printf("TOKEN TYPE: %d\n", temp->type);
-			temp = temp->next;
-		}
 		if (!token)
 			continue ;
-		temp = token;
-		while (temp)
-			temp = temp->next;
 		main_help(shelgon, token);
-		if (parser(token, &shelgon))
-			exeggutor(shelgon->tree, shelgon, shelgon->env);
-		else
-			shelgon->status = 2;
-		free_ast(shelgon->tree);
-		free_tokens(token);
+		time_to_start(shelgon, token);
 	}
 	free_shelgon(shelgon);
 }
@@ -112,7 +95,6 @@ int	main(int argc, char **argv, char **envp)
 	char		*line;
 	t_token		*token;
 	t_shelgon	*shelgon;
-	t_token		*temp;
 
 	shelgon = malloc(sizeof(t_shelgon) * 1);
 	if (!shelgon)
@@ -124,5 +106,5 @@ int	main(int argc, char **argv, char **envp)
 	shelgon->env = env(shelgon, shelgon->envr, 1, 1);
 	(void)argc;
 	(void)argv;
-	wait_loop(shelgon, line, token, temp);
+	wait_loop(shelgon, line, token);
 }

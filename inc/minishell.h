@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 12:07:42 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:57:38 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct s_shelgon
 
 void					execute_command(char *command, char **env);
 void					main_help(t_shelgon *shelgon, t_token *token);
+void					time_to_start(t_shelgon *shelgon, t_token *token);
 
 /* LEXER FUNCTIONS */
 t_token					*ft_tokenlast(t_token *lst);
@@ -155,6 +156,13 @@ void					translation_str(t_token *token);
 int						what_return(int closed, char q);
 void					check_mult_tok(t_token *token, t_shelgon *shelgon);
 t_token					*check_tokens(t_token *head, t_shelgon *shelgon);
+int						token_loop(char **tokens, t_shelgon *shelgon,
+							t_token *token);
+void					token_help(char **tokens);
+void					free_tokens_char(char **tokens);
+int						help_unc_quotes(int closed, t_token *token);
+char					*rm_quotes_loop(char *new_val, int size,
+							t_token *token);
 
 /* PARSER FUNCTIONS*/
 t_ast					*parser(t_token *head, t_shelgon **shelgon);

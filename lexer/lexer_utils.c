@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:18:27 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 11:19:29 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:47:25 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static void	rm_token_help(t_token *cursor, t_token *head, int fl)
+{
+	if (fl == 1)
+	{
+		if (cursor->next)
+		{
+			cursor->next->prev = cursor->prev;
+			cursor->prev->next = cursor->next;
+		}
+	}
+	else if (fl == 2)
+	{
+		if (cursor->next && cursor->prev->type == END)
+		{
+			head = cursor->next;
+			head->prev = cursor->prev;
+		}
+	}
+}
 
 t_token	*remove_nullstr_token(t_token *head)
 {
@@ -26,15 +46,9 @@ t_token	*remove_nullstr_token(t_token *head)
 		{
 			temp = cursor;
 			if (cursor->next && cursor->prev->type == END)
-			{
-				head = cursor->next;
-				head->prev = cursor->prev;
-			}
+				rm_token_help(cursor, head, 2);
 			else if (cursor->next)
-			{
-				cursor->next->prev = cursor->prev;
-				cursor->prev->next = cursor->next;
-			}
+				rm_token_help(cursor, head, 1);
 			cursor = cursor->next;
 			free(temp->copy);
 			free(temp);

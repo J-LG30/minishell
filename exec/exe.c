@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 11:43:07 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:19:16 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 		waitpid(exe->pid1, &s, 0);
 	while (--i >= 0)
 	{
-			if (wait(NULL) == -1)
-				flag = 1;
+		if (wait(NULL) == -1)
+			flag = 1;
 	}
 	if (WIFEXITED(s) != 0 && flag == 0)
 		shelgon->status = WEXITSTATUS(s);

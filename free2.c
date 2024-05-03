@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:31:54 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/02 21:09:20 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:17:46 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,14 @@ void	main_help(t_shelgon *shelgon, t_token *token)
 	shelgon->current = token;
 	shelgon->top_root = NULL;
 	shelgon->print_error = 0;
+}
+
+void	time_to_start(t_shelgon *shelgon, t_token *token)
+{
+	if (parser(token, &shelgon))
+		exeggutor(shelgon->tree, shelgon, shelgon->env);
+	else
+		shelgon->status = 2;
+	free_ast(shelgon->tree);
+	free_tokens(token);
 }

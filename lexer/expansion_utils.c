@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 12:41:31 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 11:57:21 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:42:51 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,7 @@ void	check_mult_tok(t_token *token, t_shelgon *shelgon)
 {
 	char	**tokens;
 	int		i;
-	t_token	*new;
-	t_token	*subhead;
 
-	subhead = NULL;
 	i = only_var(token->copy);
 	if (i == 0)
 		return ;
@@ -111,33 +108,11 @@ void	check_mult_tok(t_token *token, t_shelgon *shelgon)
 		while (tokens[i])
 			i++;
 		if (i == 1)
-		{
-			free(tokens[0]);
-			free(tokens);
-			return ;
-		}
+			return (token_help(tokens));
 		free(token->value);
 		token->value = ft_strdup(tokens[0]);
-		i = 1;
-		while (tokens[i])
-		{
-			new = ft_new_token(shelgon);
-			if (!new)
-				return ;
-			new->type = WORD;
-			new->value = ft_strdup(tokens[i]);
-			new->copy = ft_strdup(new->value);
-			ft_tokenadd_back(&subhead, new);
-			i++;
-		}
-		i = -1;
-		while (tokens[++i])
-			free(tokens[i]);
-		free(tokens);
-		token->next->prev = new;
-		new->next = token->next;
-		subhead->prev = token;
-		token->next = subhead;
+		if (token_loop(tokens, shelgon, token))
+			return ;
 	}
 	return ;
 }
