@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 14:45:19 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:32:51 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,7 @@ t_env					*ms_lstadd(char *s);
 void					export(t_branch *cmds, t_shelgon *shell, int flg);
 void					echo(char **cmds, int flg, t_shelgon *shelgon);
 void					pwd(int flg, t_shelgon *shelgon);
-void					cd(char *arg, int flg, t_shelgon *shelgon);
+void					cd(char **arg, int flg, t_shelgon *shelgon);
 void					ft_exit(t_shelgon *shelgon, t_branch *cmds,
 							t_exegg *exe, int flg);
 void					unset(t_shelgon *shell, char **cmds, int flg);

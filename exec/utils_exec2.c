@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:49:57 by david             #+#    #+#             */
-/*   Updated: 2024/05/02 19:01:14 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:32:32 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	run_btin(t_ast *tree, t_exegg *exe, t_branch *cmds, int flg)
 	if (ft_strcmp(cmds->full_cmd[0], "pwd") == 0)
 		pwd(flg, exe->pkcenter);
 	else if (ft_strcmp(cmds->full_cmd[0], "cd") == 0)
-		cd(cmds->full_cmd[1], flg, exe->pkcenter);
+		cd(cmds->full_cmd, flg, exe->pkcenter);
 	else if (ft_strcmp(cmds->full_cmd[0], "export") == 0)
 		export(cmds, exe->pkcenter, flg);
 	else if (ft_strcmp(cmds->full_cmd[0], "env") == 0)

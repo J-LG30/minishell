@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:56:02 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 16:45:51 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:41:29 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,19 @@ static void	update_pwd(t_shelgon *shelgon)
 	free(tmp);
 }
 
-void	cd(char *arg, int flg, t_shelgon *shelgon)
+void	cd(char **arg, int flg, t_shelgon *shelgon)
 {
-	if (chdir(arg) != 0)
+	if (arg[2])
 	{
 		ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: cd: ", 2);
-		if (arg)
-			ft_putstr_fd(arg, 2);
+		ft_putendl_fd("too many arguments", 2);
+		shelgon->status = 1;
+	}
+	else if (chdir(arg[1]) != 0)
+	{
+		ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: cd: ", 2);
+		if (arg[1])
+			ft_putstr_fd(arg[1], 2);
 		ft_putendl_fd(": No such file or directory", 2);
 		shelgon->status = 1;
 	}
