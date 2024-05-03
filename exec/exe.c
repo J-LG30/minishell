@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 12:19:16 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:26:25 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	if (is_btin(cmds->full_cmd[0])
 		&& (!cmds->next || cmds->next->ref->type != WORD) && (!cmds->prev))
 	{
+		exe->btin = 1;
 		built_red(tree, exe, cmds);
 		if (exe->last_fd != STDIN_FILENO && exe->last_fd > 2)
 			close(exe->last_fd);
@@ -74,6 +75,7 @@ static void	save_exe(t_shelgon *shelgon, t_exegg *exe)
 	exe->cmdpath = NULL;
 	exe->no_cmds = 1;
 	exe->pid1 = 0;
+	exe->btin = 0;
 }
 
 static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
@@ -85,14 +87,13 @@ static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 	s = 0;
 	flag = 0;
 	s = 0;
-	i = pipe_it(tree, shelgon, cmds, exe) - 1;
-	if (exe->pid1)
+	i = pipe_it(tree, shelgon, cmds, exe);
+	if (exe->pid1 && exe->btin == 0)
 		waitpid(exe->pid1, &s, 0);
-	while (--i >= 0)
-	{
-		if (wait(NULL) == -1)
-			flag = 1;
-	}
+	while (--i >= 0 && exe->btin)
+		wait(NULL);
+	if (exe->btin)
+		flag = 1;
 	if (WIFEXITED(s) != 0 && flag == 0)
 		shelgon->status = WEXITSTATUS(s);
 	else if (WIFSIGNALED(s) && flag == 0)

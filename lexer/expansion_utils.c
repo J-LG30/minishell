@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 12:41:31 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 13:04:16 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:45:31 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	check_mult_tok(t_token *token, t_shelgon *shelgon)
 	int		i;
 
 	i = only_var(token->copy);
-	if (i == 0)
+	if (i == 0 || var_only_one(token->value))
 		return ;
 	if (i == 1)
 	{

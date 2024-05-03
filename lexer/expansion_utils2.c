@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:22:16 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 13:08:39 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:45:59 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,28 @@ void	token_help(char **tokens)
 	free(tokens[0]);
 	free(tokens);
 	return ;
+}
+
+int	var_only_one(char *s)
+{
+	int	i;
+	int	flag;
+	
+	i = 0;
+	flag = 0;
+	while (s[i] && (s[i] == ' ' || s[i] != '\t' || s[i] != '\n'))
+		i++;
+	if (!s[i])
+		return (1);
+	while (s[i] && (s[i] != ' ' && s[i] != '\t' && s[i] != '\n'))
+		i++;
+	if (!s[i])
+		return (1);
+	while (s[i] && (s[i] == ' ' || s[i] != '\t' || s[i] != '\n'))
+		i++;
+	if (!s[i])
+		return (1);
+	if (s[i] && (s[i] != ' ' && s[i] != '\t' && s[i] != '\n'))
+		return (0);
+	return (0);
 }

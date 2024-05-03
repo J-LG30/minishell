@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/02 20:36:22 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:56:12 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ static void	add_export(char **args, t_shelgon *shell)
 	int	flg;
 
 	i = 1;
-	flg = 0;
 	while (args[i])
 	{
 		j = -1;
@@ -94,6 +93,7 @@ static void	add_export(char **args, t_shelgon *shell)
 			}
 			if (!flg)
 				ms_addexp(&shell->env, args[i]);
+				shell->status = 0;
 		}
 		i++;
 	}
@@ -105,7 +105,6 @@ void	export(t_branch *cmds, t_shelgon *shell, int flg)
 		print_exp(shell);
 	else
 		add_export(cmds->full_cmd, shell);
-	shell->status = 0;
 	if (flg)
 		return ;
 	free_all(shell, shell->exe, BTIN);

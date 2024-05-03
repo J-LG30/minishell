@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 12:57:16 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:40:58 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,11 @@ char	*rm_quotes(t_token *token)
 	char	q;
 
 	size = size_wo_quotes(token);
-	if (size == 0)
-		return (NULL);
+	// if (size == 0 && )
+	// {
+	// 	printf("huhhhhh");
+	// 	return (NULL);
+	// }
 	new_val = malloc(sizeof(char) * (size + 1));
 	if (!new_val)
 		return (NULL);
@@ -123,7 +126,10 @@ int	handle_word(t_token *token, t_shelgon *shelgon, t_token *head)
 	expansion(token, shelgon);
 	new_val = rm_quotes(token);
 	if (!new_val)
+	{
+		printf("huhhhhhh???");
 		return (0);
+	}
 	free(token->value);
 	token->value = new_val;
 	token->type = WORD;

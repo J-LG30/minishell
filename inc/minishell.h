@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 12:57:38 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:24:04 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_exegg
 	char				*out_value;
 	char				*path;
 	char				**cmdpath;
+	int					btin;
 	struct s_env		*env;
 	struct s_branch		*cmd;
 	struct s_shelgon	*pkcenter;
@@ -163,6 +164,7 @@ void					free_tokens_char(char **tokens);
 int						help_unc_quotes(int closed, t_token *token);
 char					*rm_quotes_loop(char *new_val, int size,
 							t_token *token);
+int						var_only_one(char *s);
 
 /* PARSER FUNCTIONS*/
 t_ast					*parser(t_token *head, t_shelgon **shelgon);
