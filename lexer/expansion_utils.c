@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 12:41:31 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 12:42:51 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:04:16 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	only_var(char *str)
 
 	i = 0;
 	flag = 0;
-	printf("VAR STR: %s\n", str);
 	while (str[i])
 	{
 		if (str[i] == '$')

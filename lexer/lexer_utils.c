@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:18:27 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 12:47:25 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:04:23 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_token	*check_tokens(t_token *head, t_shelgon *shelgon)
 		{
 			if (cursor->next->value)
 				free(cursor->next->value);
-			cursor->next->value = ft_strdup(cursor->next->copy);
+			cursor->next->value = rm_quo(cursor->next->copy);
 		}
 		cursor = cursor->next;
 	}
