@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 17:24:04 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:11:31 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_shelgon
 void					execute_command(char *command, char **env);
 void					main_help(t_shelgon *shelgon, t_token *token);
 void					time_to_start(t_shelgon *shelgon, t_token *token);
+void					loop_env(char **envp, t_shelgon *shelgon);
 
 /* LEXER FUNCTIONS */
 t_token					*ft_tokenlast(t_token *lst);
@@ -238,7 +239,7 @@ t_env					*ms_lstadd(char *s);
 void					export(t_branch *cmds, t_shelgon *shell, int flg);
 void					echo(char **cmds, int flg, t_shelgon *shelgon);
 void					pwd(int flg, t_shelgon *shelgon);
-void					cd(char *arg, int flg, t_shelgon *shelgon);
+void					cd(char **arg, int flg, t_shelgon *shelgon);
 void					ft_exit(t_shelgon *shelgon, t_branch *cmds,
 							t_exegg *exe, int flg);
 void					unset(t_shelgon *shell, char **cmds, int flg);

@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 16:38:10 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:11:11 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static char	*wait_helper(t_shelgon *shel, char *l, t_token *tok)
 	if (!l)
 	{
 		free_all(shel, NULL, 1);
-		ft_putendl_fd("exit (¬_¬)ﾉ", 1);
 		exit(0);
 	}
 	return (l);
@@ -87,13 +86,6 @@ static void	wait_loop(t_shelgon *shelgon, char *line, t_token *token)
 		token = tokenize(line, shelgon);
 		if (!token)
 			continue ;
-		// t_token *temp;
-		// temp = token;
-		// while (temp)
-		// {
-		// 	printf("TOKEN VALUE: %s\n", temp->value);
-		// 	temp = temp->next;
-		// }
 		main_help(shelgon, token);
 		time_to_start(shelgon, token);
 	}

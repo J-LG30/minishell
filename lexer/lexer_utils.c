@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:18:27 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 14:14:11 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:04:01 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-t_token *nullstr_helper(t_token *cursor, t_token *head, t_token *temp)
+t_token	*nullstr_helper(t_token *cursor, t_token *head, t_token *temp)
 {
 	while (cursor)
 	{
