@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 17:26:25 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:24:49 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env)
 		free_exegg(exe);
 		return (1);
 	}
-	exe->cmd = cmds;
 	ft_path(exe, env);
 	exeg(tree, shelgon, cmds, exe);
 	free_exegg(exe);

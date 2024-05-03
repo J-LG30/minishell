@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:57:51 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 13:00:42 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:29:13 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int	redir_del(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
 int	here_help(int std_in, char *res, int *fd)
 {
 	dup2(std_in, STDIN_FILENO);
-	close(std_in);
 	rl_replace_line("", 0);
 	free(res);
 	close(fd[1]);

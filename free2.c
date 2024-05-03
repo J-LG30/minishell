@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:31:54 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 12:17:46 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:40:47 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	free_exegg(t_exegg *exe)
 		free(exe->cmdpath[i]);
 		i++;
 	}
+	if (exe->fd[0])
+		close(exe->fd[0]);
 	free(exe->cmdpath);
 	free(exe);
 }

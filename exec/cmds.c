@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 23:22:13 by david             #+#    #+#             */
-/*   Updated: 2024/05/02 21:10:32 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:33:52 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,19 @@ static int	pr_nod(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
 	return (1);
 }
 
+//ft_memset(cur, 0, 0); <= took this out for lines, dont think it was necessary
 int	pr_her(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
 {
 	cur = ft_calloc(1, sizeof(t_branch));
 	if (!cur)
 		return (0);
-	ft_memset(cur, 0, 0);
 	set_heredoc_handler();
 	cur->pipe[0] = ft_heredoc(temp, temp->shell);
 	set_child_handler();
 	if (g_sig == 1)
 	{
 		close(cur->pipe[0]);
+		free(cur);
 		return (-1);
 	}
 	cur->ref = temp;
