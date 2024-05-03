@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:57:51 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/02 21:15:32 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:04:00 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ int	here_help(int std_in, char *res, int *fd)
 	rl_replace_line("", 0);
 	free(res);
 	close(fd[1]);
+	close(std_in);
 	return (fd[0]);
 }

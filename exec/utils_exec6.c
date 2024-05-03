@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:22:45 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 11:55:29 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:04:44 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	here_loop(char *res, int *fd, t_ast *temp, t_shelgon *shelgon)
 		ft_putendl_fd(res, fd[1]);
 		free(res);
 	}
+	close(std_in);
 	return (-4);
 }
 
