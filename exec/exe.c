@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/02 16:39:19 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:23:40 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,12 @@ static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 	s = 0;
 	flag = 0;
 	s = 0;
-	i = pipe_it(tree, shelgon, cmds, exe);
+	i = pipe_it(tree, shelgon, cmds, exe) - 1;
+	waitpid(exe->pid1, &s, 0);
 	while (--i >= 0)
 	{
-		if (wait(&s) == -1)
-			flag = 1;
+			if (wait(NULL) == -1)
+				flag = 1;
 	}
 	if (WIFEXITED(s) != 0 && flag == 0)
 		shelgon->status = WEXITSTATUS(s);
@@ -97,10 +98,7 @@ static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 		if (WTERMSIG(s) == SIGINT)
 			shelgon->status = 130;
 		else if (WTERMSIG(s) == SIGQUIT)
-		{
-			write(2, "Quit (core dumped)", 19);
 			shelgon->status = 131;
-		}
 		ft_putchar_fd('\n', 1);
 	}
 }

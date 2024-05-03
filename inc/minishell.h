@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/02 16:39:46 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:32:02 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_token
 	int					type;
 	int					error;
 	struct s_shelgon	*shell;
+	int					has_quotes;
 }						t_token;
 
 typedef struct s_ast

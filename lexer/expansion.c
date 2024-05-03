@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:12:20 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/02 15:41:44 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 21:26:13 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ int	var_status(char *str, t_env *env)
 	temp = env;
 	while (temp)
 	{
-		if (!ft_strncmp(str, temp->vr, i) && temp->vr[i] == '=')
+		if (!ft_strncmp(str, temp->vr, i) && temp->vr[i] == '=' && temp->vr[i + 1])
 			return (j);
 		j++;
 		temp = temp->next;
 	}
 	return (-1);
 }
+
 
 char	*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index)
 {
@@ -76,6 +77,8 @@ char	*ft_rm_substr(char *str, int start, int end)
 	int		i;
 	int		j;
 
+	if (end - start <= 0)
+		return (NULL);
 	new = malloc(sizeof(char) * (ft_strlen(str) - (end - start) + 1));
 	if (!new)
 		return (NULL);
@@ -89,6 +92,11 @@ char	*ft_rm_substr(char *str, int start, int end)
 			j++;
 		}
 		i++;
+	}
+	if (j == 0)
+	{
+		free(new);
+		return (NULL);
 	}
 	new[j] = '\0';
 	return (new);
@@ -122,7 +130,59 @@ int	expand_util_cases(t_token *token, int i, int j, t_shelgon *shelgon)
 	return (j);
 }
 
-// might remove a token if it cant expand instead we shall see
+// void	expansion(t_token *token, t_shelgon *shelgon)
+// {
+// 	int		i;
+// 	int		j;
+// 	t_env	*env;
+// 	char	*new_val;
+// 	int		expand;
+
+// 	env = shelgon->env;
+// 	j = 0;
+// 	expand = 1;
+// 	while (token->value && token->value[j])
+// 	{
+// 		if (token->value[j] == '\'')
+// 			expand *= -1;
+// 		else if (token->value[j] == '$' && expand > 0)
+// 		{
+// 			i = var_status(&token->value[j + 1], env);
+// 			j = expand_util_cases(token, i, j, shelgon);
+// 		}
+// 		j++;
+// 	}
+// }
+
+t_token	*check_mult_tok(t_token *token, t_shelgon *shelgon)
+{
+	char	**tokens;
+	int		i;
+	t_token	*sub_head;
+	t_token	*temp;
+	t_token	*last;
+	
+	temp = token;
+	sub_head = tokenize(token->value, shelgon);
+	last = ft_tokenlast(sub_head);
+	last->prev->next = NULL;
+	temp = last->prev;
+	free(last->value);
+	free(last->copy);
+	free(last);
+	temp->next = token->next;
+	temp = token;
+	while (temp)
+	{
+		printf("%i\n", token->type);
+		printf("TOKEN VALUE: %s\n", temp->value);
+		temp = temp->next;
+	}
+	exit (1);
+	return (token);
+}
+
+//might remove a token if it cant expand instead we shall see
 void	expansion(t_token *token, t_shelgon *shelgon)
 {
 	int		i;
@@ -135,7 +195,7 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 	j = 0;
 	expand[0] = 1;
 	expand[1] = 1;
-	while (token->value[j])
+	while (token->value && token->value[j])
 	{
 		if (token->value[j] == '"')
 			expand[1] *= -1; 
@@ -148,4 +208,5 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 		}
 		j++;
 	}
+	return ;
 }

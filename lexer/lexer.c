@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 20:20:11 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 21:25:49 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+// void	checkif_multtok(t_token *token)
+// {
+// 	int	env;
+// 	int	quote;
+// 	int	i;
+	
+// 	i = 0;
+// 	while (token->value[i])
+// 	{
+// 		if (token->value[i] == "")
+// 	}
+// }
 
 int	str_token(t_token *token, int type, char *line, int i)
 {
@@ -82,6 +95,61 @@ int	pipe_token(t_token *token, int i)
 	return (i + 1);
 }
 
+t_token	*remove_nullstr_token(t_token *head)
+{
+	t_token	*cursor;
+	t_token	*temp;
+
+	cursor = head;
+	if (!cursor)
+		return NULL;
+	while (cursor)
+	{
+		if (cursor->type == WORD && !cursor->value)
+		{
+			temp = cursor;
+			if (cursor->next && cursor->prev->type == END)
+			{
+				head = cursor->next;
+				head->prev = cursor->prev;
+			}
+			else if (cursor->next)
+			{
+				cursor->next->prev = cursor->prev;
+				cursor->prev->next = cursor->next;
+				
+			}
+			cursor = cursor->next;
+			free(temp->copy);
+			free(temp);
+		}
+		else
+			cursor = cursor->next;
+	}
+	return (head);
+}
+
+t_token	*check_tokens(t_token *head)
+{
+	t_token	*new_head;
+	t_token	*cursor;
+
+	cursor = head;
+	while (cursor)
+	{
+		if (cursor->type == REDIR_DELIMIT && cursor->next && cursor->next->type == WORD)
+		{
+			printf("a\n");
+			if (cursor->next->value)
+				free(cursor->next->value);
+			cursor->next->value = ft_strdup(cursor->next->copy);
+		}
+		cursor = cursor->next;
+	}
+	new_head = remove_nullstr_token(head);
+	return (new_head);
+}
+
 t_token	*tokenize(char *line, t_shelgon *shelgon)
 {
 	int		i;
@@ -108,12 +176,5 @@ t_token	*tokenize(char *line, t_shelgon *shelgon)
 		ft_tokenadd_back(&head, token);
 	}
 	add_last(head, shelgon);
-	return (head);
+	return (check_tokens(head));
 }
-
-			// if (handle_word(token, shelgon, head))
-			// {
-			// 	ft_tokenadd_back(&head, token);
-			// 	free_tokens(head);
-			// 	return (NULL);
-			// }

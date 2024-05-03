@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:56:46 by david             #+#    #+#             */
-/*   Updated: 2024/05/02 16:26:54 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 19:53:26 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ int	ft_heredoc(t_ast *tree, t_shelgon *shelgon)
 				g_sig = 2;
 				return (err_heredoc(fd, std_in, res));
 			}
-			if (temp->heredoc)
-				res = check_heredoc(res, shelgon);
 			if (ft_strncmp(temp->value, res, ft_strlen(temp->value)) == 0
 				&& (ft_strlen(temp->value) == ft_strlen(res)))
 				break ;
+			if (temp->heredoc)
+				res = check_heredoc(res, shelgon);
 			ft_putendl_fd(res, fd[1]);
 			free(res);
 		}

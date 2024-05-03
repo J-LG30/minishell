@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/02 15:29:40 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 19:39:59 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,15 @@ void	wait_loop(t_shelgon *shelgon, char *line, t_token *token, t_token *temp)
 		temp = token;
 		while (temp)
 		{
+			printf("%i\n", token->type);
 			printf("TOKEN VALUE: %s\n", temp->value);
 			temp = temp->next;
 		}
 		shelgon->tree = NULL;
 		shelgon->list_token = token;
 		shelgon->current = token;
+		if (!shelgon->current)
+			printf("mop\n");
 		shelgon->top_root = NULL;
 		shelgon->print_error = 0;
 		if (parser(token, &shelgon))
