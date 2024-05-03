@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:12:20 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/02 21:26:13 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:14:24 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	var_status(char *str, t_env *env)
 	int		i;
 	int		j;
 	int		exit;
-	t_env	*temp;
+	t_env	*t;
 
 	i = 0;
 	if (str[0] == '_')
@@ -30,17 +30,16 @@ int	var_status(char *str, t_env *env)
 	if (i == 0)
 		return (-2);
 	j = 0;
-	temp = env;
-	while (temp)
+	t = env;
+	while (t)
 	{
-		if (!ft_strncmp(str, temp->vr, i) && temp->vr[i] == '=' && temp->vr[i + 1])
+		if (!ft_strncmp(str, t->vr, i) && t->vr[i] == '=' && t->vr[i + 1])
 			return (j);
 		j++;
-		temp = temp->next;
+		t = t->next;
 	}
 	return (-1);
 }
-
 
 char	*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index)
 {
@@ -71,6 +70,7 @@ char	*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index)
 	return (new);
 }
 
+//norming might have changed this
 char	*ft_rm_substr(char *str, int start, int end)
 {
 	char	*new;
@@ -82,16 +82,12 @@ char	*ft_rm_substr(char *str, int start, int end)
 	new = malloc(sizeof(char) * (ft_strlen(str) - (end - start) + 1));
 	if (!new)
 		return (NULL);
-	i = 0;
+	i = -1;
 	j = 0;
-	while (str[i])
+	while (str[++i])
 	{
 		if (i < start || i > end)
-		{
-			new[j] = str[i];
-			j++;
-		}
-		i++;
+			new[j++] = str[i];
 	}
 	if (j == 0)
 	{
@@ -130,59 +126,6 @@ int	expand_util_cases(t_token *token, int i, int j, t_shelgon *shelgon)
 	return (j);
 }
 
-// void	expansion(t_token *token, t_shelgon *shelgon)
-// {
-// 	int		i;
-// 	int		j;
-// 	t_env	*env;
-// 	char	*new_val;
-// 	int		expand;
-
-// 	env = shelgon->env;
-// 	j = 0;
-// 	expand = 1;
-// 	while (token->value && token->value[j])
-// 	{
-// 		if (token->value[j] == '\'')
-// 			expand *= -1;
-// 		else if (token->value[j] == '$' && expand > 0)
-// 		{
-// 			i = var_status(&token->value[j + 1], env);
-// 			j = expand_util_cases(token, i, j, shelgon);
-// 		}
-// 		j++;
-// 	}
-// }
-
-t_token	*check_mult_tok(t_token *token, t_shelgon *shelgon)
-{
-	char	**tokens;
-	int		i;
-	t_token	*sub_head;
-	t_token	*temp;
-	t_token	*last;
-	
-	temp = token;
-	sub_head = tokenize(token->value, shelgon);
-	last = ft_tokenlast(sub_head);
-	last->prev->next = NULL;
-	temp = last->prev;
-	free(last->value);
-	free(last->copy);
-	free(last);
-	temp->next = token->next;
-	temp = token;
-	while (temp)
-	{
-		printf("%i\n", token->type);
-		printf("TOKEN VALUE: %s\n", temp->value);
-		temp = temp->next;
-	}
-	exit (1);
-	return (token);
-}
-
-//might remove a token if it cant expand instead we shall see
 void	expansion(t_token *token, t_shelgon *shelgon)
 {
 	int		i;

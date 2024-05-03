@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 09:36:31 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:06:43 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	size_wo_quotes(t_token *token)
 	int		i;
 	int		size;
 	int		j;
+	char	*new_val;
 
 	i = 0;
 	size = 0;

@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 12:41:31 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/02 17:38:17 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:57:21 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,82 @@ int	while_var(char *str, int i)
 	while (ft_isalnum(str[i]) || str[i] == '_')
 		i++;
 	return (i);
+}
+
+int	only_var(char *str)
+{
+	int	i;
+	int	flag;
+
+	i = 0;
+	flag = 0;
+	printf("VAR STR: %s\n", str);
+	while (str[i])
+	{
+		if (str[i] == '$')
+		{
+			while (str[i])
+			{
+				if (str[i] == ' ')
+					return (0);
+				i++;
+			}
+			return (1);
+		}
+		if (!str[i])
+			return (0);
+		i++;
+	}
+	return (0);
+}
+
+void	check_mult_tok(t_token *token, t_shelgon *shelgon)
+{
+	char	**tokens;
+	int		i;
+	t_token	*new;
+	t_token	*subhead;
+
+	subhead = NULL;
+	i = only_var(token->copy);
+	if (i == 0)
+		return ;
+	if (i == 1)
+	{
+		tokens = ms_split(token->value, ' ');
+		if (!tokens)
+			return ;
+		i = 0;
+		while (tokens[i])
+			i++;
+		if (i == 1)
+		{
+			free(tokens[0]);
+			free(tokens);
+			return ;
+		}
+		free(token->value);
+		token->value = ft_strdup(tokens[0]);
+		i = 1;
+		while (tokens[i])
+		{
+			new = ft_new_token(shelgon);
+			if (!new)
+				return ;
+			new->type = WORD;
+			new->value = ft_strdup(tokens[i]);
+			new->copy = ft_strdup(new->value);
+			ft_tokenadd_back(&subhead, new);
+			i++;
+		}
+		i = -1;
+		while (tokens[++i])
+			free(tokens[i]);
+		free(tokens);
+		token->next->prev = new;
+		new->next = token->next;
+		subhead->prev = token;
+		token->next = subhead;
+	}
+	return ;
 }

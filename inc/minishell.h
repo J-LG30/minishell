@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 09:36:11 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:20:15 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,8 @@ char					*expand_status(t_shelgon *sh, char *line, char *tok_str, int index);
 int						while_var(char *str, int i);
 void					translation_str(t_token *token);
 int						what_return(int closed, char q);
+void					check_mult_tok(t_token *token, t_shelgon *shelgon);
+t_token					*check_tokens(t_token *head, t_shelgon *shelgon);
 
 /* PARSER FUNCTIONS*/
 t_ast					*parser(t_token *head, t_shelgon **shelgon);
