@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:22:16 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 13:05:18 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:06:24 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	token_loop(char **tokens, t_shelgon *shelgon, t_token *token)
 		new->value = ft_strdup(tokens[i]);
 		new->copy = ft_strdup(new->value);
 		ft_tokenadd_back(&subhead, new);
-		handle_word(new, token, shelgon);
+		handle_word(new, shelgon, token);
 		i++;
 	}
 	free_tokens_char(tokens);
