@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/02 21:30:31 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:57:15 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,11 +141,14 @@ int						unclosed_quotes(t_token *token);
 char					*rm_quotes(t_token *token);
 void					expansion(t_token *token, t_shelgon *shelgon);
 int						var_status(char *str, t_env *env);
-int						handle_word(t_token *token, t_shelgon *shelgon, t_token *head);
+int						handle_word(t_token *token, t_shelgon *shelgon,
+							t_token *head);
 char					*ft_rm_substr(char *str, int start, int end);
 t_env					*return_index(t_env *head, int index);
-char					*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index);
-char					*expand_status(t_shelgon *sh, char *line, char *tok_str, int index);
+char					*expanded(t_shelgon *shelgon, char *line, char *tok_str,
+							int index);
+char					*expand_status(t_shelgon *sh, char *line, char *tok_str,
+							int index);
 int						while_var(char *str, int i);
 void					translation_str(t_token *token);
 int						what_return(int closed, char q);
@@ -200,12 +203,15 @@ t_branch				*node_cmd(t_ast *tree);
 char					*get_path(t_env	*env);
 char					*check_heredoc(char *line, t_shelgon *shelgon);
 int						check_dotslash(char *str);
-int						redir_del(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds);
-int						pr_her(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds);
+int						redir_del(t_ast *temp, t_branch *cur, t_branch *last,
+							t_branch **cmds);
+int						pr_her(t_ast *temp, t_branch *cur, t_branch *last,
+							t_branch **cmds);
 void					dumb_env(t_shelgon *shelgon);
 int						here_help(int std_in, char *res, int *fd);
 int						err_heredoc(int *fd, int std_in, char *res);
-int						here_loop(char *res, int *fd, t_ast *temp, t_shelgon *shelgon);
+int						here_loop(char *res, int *fd, t_ast *temp,
+							t_shelgon *shelgon);
 
 // Built in functions
 int						is_btin(char *cmds);

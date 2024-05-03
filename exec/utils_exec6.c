@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:22:45 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/02 21:29:14 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:55:29 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	here_loop(char *res, int *fd, t_ast *temp, t_shelgon *shelgon)
 	{
 		res = readline("> ");
 		if (g_sig == 1)
-			return(here_help(std_in, res, fd));
+			return (here_help(std_in, res, fd));
 		if (!res)
 			return (err_heredoc(fd, std_in, res));
 		if (temp->heredoc)
@@ -33,4 +33,17 @@ int	here_loop(char *res, int *fd, t_ast *temp, t_shelgon *shelgon)
 		free(res);
 	}
 	return (-4);
+}
+
+int	err_heredoc(int *fd, int std_in, char *res)
+{
+	g_sig = 2;
+	ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: warning", 2);
+	ft_putendl_fd(": here-document delimited by end-of-file", 2);
+	rl_on_new_line();
+	if (std_in > 2)
+		close(std_in);
+	if (fd[1] > 2)
+		close(fd[1]);
+	return (fd[0]);
 }

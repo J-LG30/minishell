@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 17:18:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/02 19:03:25 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:55:10 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ t_branch	*node_cmd(t_ast *tree)
 	return (new);
 }
 
-void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
+static void	mid_prep(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
-	find_redir(cmds->ref, exe, cmds);
-	if (cmds->full_cmd[0][0] == '/' || (cmds->full_cmd[0][0] == '.' && cmds->full_cmd[0][1] == '/'))
+	if (cmds->full_cmd[0][0] == '/'
+		|| (cmds->full_cmd[0][0] == '.' && cmds->full_cmd[0][1] == '/'))
 		execve(cmds->full_cmd[0], cmds->full_cmd, exe->pkcenter->envr);
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
@@ -84,6 +84,12 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)
 		ft_error(1, cmds, exe);
+}
+
+void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
+{
+	find_redir(cmds->ref, exe, cmds);
+	mid_prep(tree, exe, cmds);
 	if (cmds->ref && cmds->ref->type == WORD && !(is_btin(cmds->full_cmd[0])))
 	{
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
