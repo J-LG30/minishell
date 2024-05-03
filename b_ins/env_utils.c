@@ -6,13 +6,13 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:32:23 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/02 16:36:58 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/02 17:37:05 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static t_env	*ms_lstlast(t_env *lst)
+t_env	*ms_lstlast(t_env *lst)
 {
 	t_env	*ls;
 
@@ -34,8 +34,10 @@ t_env	*ms_lstadd(char *s)
 		return (NULL);
 	if (node)
 	{
+		s = rm_quo(s);
 		node->vr = ft_strdup(s);
 		node->cpy = ft_strdup(s);
+		free(s);
 		node->prnt = 1;
 		node->next = NULL;
 		node->prev = NULL;

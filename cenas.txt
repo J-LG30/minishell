@@ -1,0 +1,4 @@
+ls | exit 123 (exit should be 123)
+<<"'$PATH'" ('$PATH' should close)
+cat <<$""PATH"" ($PATH should close)
+export FLAG=' -la' and then ls$FLAG (should run ls with the flag)

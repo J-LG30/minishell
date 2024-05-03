@@ -6,64 +6,40 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:56:46 by david             #+#    #+#             */
-/*   Updated: 2024/05/02 19:53:26 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 09:36:06 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static int	err_heredoc(int *fd, int std_in, char *res)
+int	err_heredoc(int *fd, int std_in, char *res)
 {
+	g_sig = 2;
 	ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: warning", 2);
 	ft_putendl_fd(": here-document delimited by end-of-file", 2);
 	rl_on_new_line();
-	if (std_in)
+	if (std_in > 2)
 		close(std_in);
-	if (fd[1])
+	if (fd[1] > 2)
 		close(fd[1]);
 	return (fd[0]);
 }
 
-#include <termios.h>
 int	ft_heredoc(t_ast *tree, t_shelgon *shelgon)
 {
 	int		fd[2];
 	char	*res;
 	t_ast	*temp;
-	int		std_in;
+	int		ret;
 
-	std_in = dup(STDIN_FILENO);
 	temp = tree;
 	if (temp && temp->type == REDIR_DELIMIT)
 	{
 		pipe(fd);
-		while (1)
-		{
-			res = readline("> ");
-			if (g_sig == 1)
-			{
-				dup2(std_in, STDIN_FILENO);
-				close(std_in);
-				rl_replace_line("", 0);
-				free(res);
-				close(fd[1]);
-				return (fd[0]);
-			}
-			if (!res)
-			{
-				g_sig = 2;
-				return (err_heredoc(fd, std_in, res));
-			}
-			if (ft_strncmp(temp->value, res, ft_strlen(temp->value)) == 0
-				&& (ft_strlen(temp->value) == ft_strlen(res)))
-				break ;
-			if (temp->heredoc)
-				res = check_heredoc(res, shelgon);
-			ft_putendl_fd(res, fd[1]);
-			free(res);
-		}
-		free(res);
-		close(std_in);
+		ret = here_loop(res, fd, temp, shelgon);
+		if (ret != -4)
+			return (ret);
+		//free(res);
 		close(fd[1]);
 		return (fd[0]);
 	}
@@ -74,21 +50,21 @@ static void	do_red(t_ast *temp, t_exegg *exe, t_branch *cmds, int fl)
 {
 	if (temp && fl == 0)
 	{
-		if (exe->fd_in != STDIN_FILENO)
+		if (exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
 			close(exe->fd_in);
 		exe->in_value = temp->value;
 		exe->fd_in = open(exe->in_value, O_RDONLY);
 	}
 	else if (temp && fl == 1)
 	{
-		if (exe->fd_out != STDOUT_FILENO)
+		if (exe->fd_out != STDOUT_FILENO && exe->fd_out > 2)
 			close(exe->fd_out);
 		exe->out_value = temp->value;
 		exe->fd_out = open(exe->out_value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	}
 	else if (temp && fl == 2)
 	{
-		if (exe->fd_out != STDOUT_FILENO)
+		if (exe->fd_out != STDOUT_FILENO && exe->fd_out > 2)
 			close(exe->fd_out);
 		exe->out_value = temp->value;
 		exe->fd_out = open(exe->out_value, O_CREAT | O_APPEND | O_WRONLY, 0644);
@@ -107,11 +83,7 @@ static void	deal_doc(t_exegg *exe, t_branch *com)
 	while (com)
 	{
 		if (com->ref && com->ref->type == REDIR_DELIMIT)
-		{
-			if (exe->fd_in != STDIN_FILENO)
-				close(exe->fd_in);
 			exe->fd_in = com->pipe[0];
-		}
 		com = com->next;
 	}
 }

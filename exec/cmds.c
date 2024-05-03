@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 23:22:13 by david             #+#    #+#             */
-/*   Updated: 2024/05/02 16:38:59 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/02 21:10:32 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	pr_nod(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
 	}
 	return (1);
 }
+
 int	pr_her(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
 {
 	cur = ft_calloc(1, sizeof(t_branch));
@@ -61,14 +62,15 @@ int	pr_her(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
 
 static int	c_help(t_ast *temp, t_branch *cur, t_branch *last, t_branch **cmds)
 {
-	if (temp && temp->type != PIPE && temp->type != WORD && temp->type != REDIR_DELIMIT)
+	if (temp && temp->type != PIPE && temp->type != WORD
+		&& temp->type != REDIR_DELIMIT)
 	{
 		cur = ft_calloc(1, sizeof(t_branch));
 		if (!cur)
 			return (0);
 		ft_memset(cur, 0, 0);
 		cur->ref = temp;
-		if(!(*cmds))
+		if (!(*cmds))
 		{
 			*cmds = cur;
 			cur->prev = NULL;

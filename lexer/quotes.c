@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/02 20:33:59 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 09:36:31 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	which_quote(t_token *token)
 // flag == 1 means inside a quoted str, dont remove any quotes
 int	size_wo_quotes(t_token *token)
 {
-	char	*new_val;
 	char	q;
 	int		i;
 	int		size;
