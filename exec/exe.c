@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 18:24:49 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/04 00:58:16 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,24 @@ static void	built_red(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	saved_file[0] = STDIN_FILENO;
 	saved_file[1] = STDOUT_FILENO;
 	find_redir(tree, exe, cmds);
+	if (exe->err)
+	{
+		if (exe->fd_in != STDIN_FILENO)
+			close(exe->fd_in);
+		if (exe->fd_out != STDOUT_FILENO)
+			close(exe->fd_out);
+		return ;
+	}
 	if (((!cmds->next || cmds->next->ref->type != WORD)
 			&& !(tree && (tree->type == PIPE)) && exe->fd_out == saved_file[1]))
 		exe->fd_out = STDOUT_FILENO;
 	if (exe->fd_in != STDIN_FILENO)
 		exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
-	if (exe->fd_out != STDOUT_FILENO)
-		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
 	if (exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
 		close(exe->fd_in);
-	if (exe->fd_out != STDOUT_FILENO && exe->fd_out > 2)
+	if (exe->fd_out != STDOUT_FILENO)
+		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
+	if (exe->err)
 		close(exe->fd_out);
 	run_btin(tree, exe, cmds, 1);
 	if (cmds->prev == NULL && exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
@@ -43,7 +51,7 @@ static void	built_red(t_ast *tree, t_exegg *exe, t_branch *cmds)
 void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	if (is_btin(cmds->full_cmd[0])
-		&& (!cmds->next || cmds->next->ref->type != WORD) && (!cmds->prev))
+		&& (!cmds->next || cmds->next->ref->type != WORD))
 	{
 		exe->btin = 1;
 		built_red(tree, exe, cmds);
@@ -51,8 +59,11 @@ void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
 			close(exe->last_fd);
 		return ;
 	}
-	else if (pipe(exe->fd) == 0)
-		which_child(tree, exe, cmds);
+	else if (cmds->ref->type == WORD && exe->err == 0)
+	{
+		if (pipe(exe->fd) == 0 && cmds->ref->type == WORD)
+			which_child(tree, exe, cmds);
+	}
 	else
 	{
 		ft_putendl_fd("pipefd is not valid.", 2);
@@ -74,8 +85,11 @@ static void	save_exe(t_shelgon *shelgon, t_exegg *exe)
 	exe->last_fd = 0;
 	exe->cmdpath = NULL;
 	exe->no_cmds = 1;
+	exe->in_value = NULL;
+	exe->out_value = NULL;
 	exe->pid1 = 0;
 	exe->btin = 0;
+	exe->err = 0;
 }
 
 static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)

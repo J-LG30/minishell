@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 18:11:31 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 21:50:30 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_exegg
 	char				*path;
 	char				**cmdpath;
 	int					btin;
+	int					err;
 	struct s_env		*env;
 	struct s_branch		*cmd;
 	struct s_shelgon	*pkcenter;

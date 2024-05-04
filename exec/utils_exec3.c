@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:56:46 by david             #+#    #+#             */
-/*   Updated: 2024/05/03 12:07:01 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/04 01:13:14 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,32 @@ static void	do_red(t_ast *temp, t_exegg *exe, t_branch *cmds, int fl)
 		if (exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
 			close(exe->fd_in);
 		exe->in_value = temp->value;
+		if (exe->btin && ft_strcmp(exe->in_value, exe->out_value) == 0 && exe->err)
+		{
+			exe->fd_in = dup(STDIN_FILENO);
+			exe->err = 1;
+			return ;
+		}
 		exe->fd_in = open(exe->in_value, O_RDONLY);
+		if (exe->btin && (exe->fd_in < 0 || exe->err))
+		{
+			exe->fd_in = dup(STDIN_FILENO);
+			exe->err = 1;
+			ft_putendl_fd("no such file or directory", 2);
+			return ;
+		}
 	}
 	else if (temp && fl == 1)
 	{
 		if (exe->fd_out != STDOUT_FILENO && exe->fd_out > 2)
 			close(exe->fd_out);
 		exe->out_value = temp->value;
+		if (exe->btin && exe->fd_out < 0 || (ft_strcmp(exe->in_value, exe->out_value) == 0 && exe->err))
+		{
+			exe->fd_out = dup(STDOUT_FILENO);
+			exe->err = 1;
+			return ;
+		}
 		exe->fd_out = open(exe->out_value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	}
 	else if (temp && fl == 2)
@@ -86,8 +105,11 @@ void	find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	com = cmds;
 	exe->fd_in = STDIN_FILENO;
 	exe->fd_out = STDOUT_FILENO;
+	exe->err = 0;
 	while (temp)
 	{
+		if (exe->err)
+			return ;
 		if (temp && temp->type == REDIR_IN)
 			do_red(temp, exe, cmds, 0);
 		else if (temp && temp->type == REDIR_OUT)

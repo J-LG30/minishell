@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 23:22:13 by david             #+#    #+#             */
-/*   Updated: 2024/05/03 18:33:52 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/03 19:45:56 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,10 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 		ret = redir_del(temp, cur, last, cmds);
 		if (ret != 1)
 			return (ret);
+		if (c_help(temp, cur, last, cmds) == 0)
+			return (0);
 		temp = temp->left;
 	}
-	if (c_help(temp, cur, last, cmds) == 0)
-		return (0);
 	looper(temp, cmds, exe, tree);
 	return (exe->no_cmds);
 }

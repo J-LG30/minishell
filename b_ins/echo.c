@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:06:50 by davda-si          #+#    #+#             */
-/*   Updated: 2024/04/29 20:21:53 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:55:50 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static int	check_flag(char **cmds)
 	int	res;
 
 	i = 1;
-	j = 1;
 	res = 0;
-	while (cmds[i][0] == '-')
+	while (cmds && cmds[i] && cmds[i][0] == '-')
 	{
+		j = 1;
 		while (cmds[i][j])
 		{
 			if (cmds[i][j] != 'n')
@@ -76,7 +76,7 @@ static int	check_args(char **cmds)
 	int	i;
 
 	i = 1;
-	while (cmds[i] && cmds[i][0] == '-')
+	while (cmds && cmds[i] && cmds[i][0] == '-')
 		i++;
 	if (cmds[i])
 		return (0);
@@ -99,7 +99,7 @@ void	echo(char **cmds, int rexit, t_shelgon *shelgon)
 		free_all(shelgon, shelgon->exe, BTIN);
 		exit (1);
 	}
-	if (cmds[1][0] == '-' && cmds[2])
+	if (cmds && cmds[1][0] == '-' && cmds[2])
 		flg = check_flag(cmds);
 	else if (cmds[1][0] == '-' && !cmds[2])
 		flg = -1;

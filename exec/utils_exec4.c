@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:30:45 by david             #+#    #+#             */
-/*   Updated: 2024/05/03 11:53:01 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/03 20:16:16 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	only_redir(t_ast *tree, t_exegg *exe)
 	exe->fd_out = STDOUT_FILENO;
 	if (temp && temp->type == REDIR_IN)
 	{
-		if (exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
-			close(exe->fd_in);
 		exe->in_value = temp->value;
 		exe->fd_in = open(exe->in_value, O_RDONLY);
 	}
@@ -36,6 +34,10 @@ void	only_redir(t_ast *tree, t_exegg *exe)
 		exe->out_value = temp->value;
 		exe->fd_out = open(exe->out_value, O_CREAT | O_APPEND | O_WRONLY, 0644);
 	}
+	if (exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
+		close(exe->fd_in);
+	if (exe->fd_out != STDOUT_FILENO && exe->fd_out > 2)
+		close(exe->fd_out);
 }
 
 static void	parent_process(t_ast *tree, t_exegg *exe, t_branch *cmds)
