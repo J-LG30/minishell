@@ -6,7 +6,7 @@
 /*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/04 00:58:16 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/04 17:57:54 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,13 @@ static void	built_red(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	int	saved_file[2];
 
-	saved_file[0] = STDIN_FILENO;
-	saved_file[1] = STDOUT_FILENO;
+	saved_file[0] = dup(STDIN_FILENO);
+	saved_file[1] = dup(STDOUT_FILENO);
 	find_redir(tree, exe, cmds);
 	if (exe->err)
 	{
-		if (exe->fd_in != STDIN_FILENO)
-			close(exe->fd_in);
-		if (exe->fd_out != STDOUT_FILENO)
-			close(exe->fd_out);
+		close(saved_file[0]);
+		close(saved_file[1]);
 		return ;
 	}
 	if (((!cmds->next || cmds->next->ref->type != WORD)
@@ -36,16 +34,16 @@ static void	built_red(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		close(exe->fd_in);
 	if (exe->fd_out != STDOUT_FILENO)
 		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
-	if (exe->err)
-		close(exe->fd_out);
 	run_btin(tree, exe, cmds, 1);
 	if (cmds->prev == NULL && exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
 		close(exe->fd_in);
 	if ((cmds->next == NULL || (cmds->next && cmds->next->ref->type != WORD))
 		&& exe->fd_out != STDOUT_FILENO && exe->fd_out > 2)
 		close(exe->fd_out);
-	dup2(exe->fd_out, saved_file[0]);
-	dup2(exe->fd_in, saved_file[1]);
+	exe->fd_in = dup2(saved_file[0], STDIN_FILENO);
+	exe->fd_out = dup2(saved_file[1], STDOUT_FILENO);
+	close(saved_file[1]);
+	close(saved_file[0]);
 }
 
 void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
