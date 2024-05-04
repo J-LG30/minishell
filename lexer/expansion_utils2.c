@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:22:16 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 18:12:03 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/04 20:12:54 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	var_only_one(char *s)
 {
 	int	i;
 	int	flag;
-	
+
 	i = 0;
 	flag = 0;
 	while (s[i] && (s[i] == ' ' || s[i] != '\t' || s[i] != '\n'))

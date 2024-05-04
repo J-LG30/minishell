@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 16:56:12 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/04 20:15:25 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void	add_export(char **args, t_shelgon *shell)
 			}
 			if (!flg)
 				ms_addexp(&shell->env, args[i]);
-				shell->status = 0;
+			shell->status = 0;
 		}
 		i++;
 	}

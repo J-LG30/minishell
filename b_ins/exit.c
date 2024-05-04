@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:14:10 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 18:07:34 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/04 20:13:46 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	is_numeric_exit(char **full_cmd, t_shelgon *shelgon)
 	}
 	return (0);
 }
-
 
 int	too_many_args(char **full_cmd)
 {

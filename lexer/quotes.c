@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 16:40:58 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/04 20:12:39 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,6 @@ char	*rm_quotes(t_token *token)
 	char	q;
 
 	size = size_wo_quotes(token);
-	// if (size == 0 && )
-	// {
-	// 	printf("huhhhhh");
-	// 	return (NULL);
-	// }
 	new_val = malloc(sizeof(char) * (size + 1));
 	if (!new_val)
 		return (NULL);
