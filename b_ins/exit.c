@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:14:10 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/04 20:13:46 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/05 14:07:46 by david            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,10 @@ void	ft_exit(t_shelgon *shelgon, t_branch *cmds, t_exegg *exe, int flg)
 			status += 256;
 		ft_putendl_fd("exit (¬_¬)ﾉ", 2);
 	}
+	exe->fd_in = dup2(exe->saved_file[0], STDIN_FILENO);
+	exe->fd_out = dup2(exe->saved_file[1], STDOUT_FILENO);
+	close(exe->saved_file[1]);
+	close(exe->saved_file[0]);
 	free_all(shelgon, shelgon->exe, BTIN);
 	exit(status);
 }
