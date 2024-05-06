@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:56:46 by david             #+#    #+#             */
-/*   Updated: 2024/05/06 14:58:36 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/06 18:52:19 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,35 +42,25 @@ static void	last_red(t_exegg *exe)
 
 static void	do_red(t_ast *temp, t_exegg *exe, t_branch *cmds, int fl)
 {
-	if (temp && fl == 0)
-	{
-		if (exe->fd_in != STDIN_FILENO || exe->fd_in > 0)
-			close(exe->fd_in);
-		exe->in_value = temp->value;
-		if (exe->btin && ft_strcmp(exe->in_value, exe->out_value) == 0 && exe->err)
-		{
-			exe->err = 1;
-			return ;
-		}
-		exe->fd_in = open(exe->in_value, O_RDONLY);
-		if (exe->btin && (exe->fd_in < 0 || exe->err))
-		{
-			exe->err = 1;
-			ft_putendl_fd("No such file or directory", 2);
-			return ;
-		}
-	}
+	if (temp && fl == 0 && treat_in(temp, exe, cmds))
+		return ;
 	else if (temp && fl == 1)
 	{
 		if (exe->fd_out != STDOUT_FILENO)
 			close(exe->fd_out);
 		exe->out_value = temp->value;
-		if (exe->btin && exe->fd_out < 0 || (ft_strcmp(exe->in_value, exe->out_value) == 0 && exe->err))
+		if (exe->btin && exe->fd_out < 0
+			|| (ft_strcmp(exe->in_value, exe->out_value) == 0 && exe->err))
 		{
 			exe->err = 1;
 			return ;
 		}
 		exe->fd_out = open(exe->out_value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		if (exe->fd_out < 0)
+		{
+			
+			exe->err = 1;
+		}
 	}
 	else if (temp && fl == 2)
 	{

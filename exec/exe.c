@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/06 16:21:19 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/06 18:57:04 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ static void	built_red(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	{
 		if (exe->fd_out != STDOUT_FILENO && exe->fd_out > 2)
 			close(exe->fd_out);
-		if (exe->fd_in != STDIN_FILENO  && exe->fd_in > 2)
+		if (exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
 			close(exe->fd_in);
 		close(exe->saved_file[0]);
 		close(exe->saved_file[1]);
 		return ;
 	}
 	if (((!cmds->next || cmds->next->ref->type != WORD)
-			&& !(tree && (tree->type == PIPE)) && exe->fd_out == exe->saved_file[1]))
+			&& !(tree && (tree->type == PIPE))
+			&& exe->fd_out == exe->saved_file[1]))
 		exe->fd_out = STDOUT_FILENO;
 	if (exe->fd_in != STDIN_FILENO)
 		exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
@@ -37,14 +38,7 @@ static void	built_red(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	if (exe->fd_out != STDOUT_FILENO)
 		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
 	run_btin(tree, exe, cmds, 1);
-	close(exe->fd_in);
-	close(exe->fd_out);
-	close(exe->dup_fd[0]);
-	close(exe->dup_fd[1]);
-	exe->fd_in = dup2(exe->saved_file[0], STDIN_FILENO);
-	exe->fd_out = dup2(exe->saved_file[1], STDOUT_FILENO);
-	close(exe->saved_file[1]);
-	close(exe->saved_file[0]);
+	close_fds(exe);
 }
 
 void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)

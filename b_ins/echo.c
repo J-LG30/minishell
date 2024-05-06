@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:06:50 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/06 16:00:43 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:39:11 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	check_flag(char **cmds)
 			return (0);
 		else
 			return (1);
-		}
+	}
 	return (0);
 }
 
@@ -49,7 +49,7 @@ static int	start_print(char **cmds, int flg)
 			if (!cmds[i][j])
 				i++;
 			else
-				break ;	
+				break ;
 		}
 		else
 			break ;

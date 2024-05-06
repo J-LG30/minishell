@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/05 14:02:48 by david            ###   ########.fr       */
+/*   Updated: 2024/05/06 18:35:57 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,9 +225,12 @@ int						pr_her(t_ast *temp, t_branch *cur, t_branch *last,
 							t_branch **cmds);
 void					dumb_env(t_shelgon *shelgon);
 int						here_help(int std_in, char *res, int *fd);
-int						err_heredoc(int *fd, int std_in, char *res);
+int						err_heredoc(int *fd, int std_in, char *res, t_shelgon *shelgon);
 int						here_loop(char *res, int *fd, t_ast *temp,
 							t_shelgon *shelgon);
+void					close_fds(t_exegg *exe);
+int						treat_in(t_ast *temp, t_exegg *exe, t_branch *cmds);
+void					treat_only(t_exegg *exe, t_ast *temp, int fl);
 
 // Built in functions
 int						is_btin(char *cmds);
@@ -251,6 +254,9 @@ char					**sort_exp(t_shelgon *shell, char **copy);
 int						ms_lstsize(t_env *lst);
 char					*rm_quo(char *str);
 t_env					*ms_lstlast(t_env *lst);
+void					print_err_msg(char **full_cmd);
+void					finish_ex(t_exegg *exe, t_shelgon *shelgon, int status);
+void					exit_err(t_shelgon *shelgon);
 
 /*FREEING*/
 void					free_shelgon(t_shelgon *sh);

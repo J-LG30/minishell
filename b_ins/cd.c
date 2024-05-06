@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:56:02 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/06 16:10:57 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:38:38 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static void	free_wtv(char *pwd, char *tmp)
+{
+	if (pwd)
+		free(pwd);
+	if (tmp)
+		free(tmp);
+}
 
 static char	*new_pwd(t_env *cursor, char *pwd, char *tmp)
 {
@@ -61,8 +69,6 @@ static void	update_pwd(t_shelgon *shelgon)
 			tmp = new_pwd(cursor, pwd, tmp);
 		cursor = cursor->next;
 	}
-	if (!tmp)
-	
 	cursor = head;
 	while (cursor && cursor->vr)
 	{
@@ -70,10 +76,7 @@ static void	update_pwd(t_shelgon *shelgon)
 			new_old_pwd(cursor, tmp);
 		cursor = cursor->next;
 	}
-	if (pwd)
-		free(pwd);
-	if (tmp)
-		free(tmp);
+	free_wtv(pwd, tmp);
 }
 
 void	cd(char **arg, int flg, t_shelgon *shelgon)

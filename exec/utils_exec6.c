@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec6.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:22:45 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 13:01:38 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/06 18:35:34 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	here_loop(char *res, int *fd, t_ast *temp, t_shelgon *shelgon)
 		if (g_sig == 1)
 			return (here_help(std_in, res, fd));
 		if (!res)
-			return (err_heredoc(fd, std_in, res));
+			return (err_heredoc(fd, std_in, res, shelgon));
 		if (ft_strncmp(temp->value, res, ft_strlen(temp->value)) == 0
 			&& (ft_strlen(temp->value) == ft_strlen(res)))
 			break ;
@@ -36,8 +36,9 @@ int	here_loop(char *res, int *fd, t_ast *temp, t_shelgon *shelgon)
 	return (-4);
 }
 
-int	err_heredoc(int *fd, int std_in, char *res)
+int	err_heredoc(int *fd, int std_in, char *res, t_shelgon *shelgon)
 {
+	shelgon->status = 0;
 	g_sig = 2;
 	ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: warning", 2);
 	ft_putendl_fd(": here-document delimited by end-of-file", 2);
@@ -47,4 +48,50 @@ int	err_heredoc(int *fd, int std_in, char *res)
 	if (fd[1] > 2)
 		close(fd[1]);
 	return (fd[0]);
+}
+
+void	close_fds(t_exegg *exe)
+{
+	close(exe->fd_in);
+	close(exe->fd_out);
+	close(exe->dup_fd[0]);
+	close(exe->dup_fd[1]);
+	exe->fd_in = dup2(exe->saved_file[0], STDIN_FILENO);
+	exe->fd_out = dup2(exe->saved_file[1], STDOUT_FILENO);
+	close(exe->saved_file[1]);
+	close(exe->saved_file[0]);
+}
+
+int	treat_in(t_ast *temp, t_exegg *exe, t_branch *cmds)
+{
+	if (exe->fd_in != STDIN_FILENO || exe->fd_in > 0)
+		close(exe->fd_in);
+	exe->in_value = temp->value;
+	if (exe->btin && ft_strcmp(exe->in_value, exe->out_value) == 0 && exe->err)
+	{
+		exe->err = 1;
+		return (1);
+	}
+	exe->fd_in = open(exe->in_value, O_RDONLY);
+	if (exe->btin && (exe->fd_in < 0 || exe->err))
+	{
+		exe->err = 1;
+		ft_putendl_fd("No such file or directory", 2);
+		return (1);
+	}
+	return (0);
+}
+
+void	treat_only(t_exegg *exe, t_ast *temp, int fl)
+{
+	if (fl == 1)
+	{
+		exe->out_value = temp->value;
+		exe->fd_out = open(exe->out_value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	}
+	else if (fl == 2)
+	{
+		exe->out_value = temp->value;
+		exe->fd_out = open(exe->out_value, O_CREAT | O_APPEND | O_WRONLY, 0644);
+	}
 }

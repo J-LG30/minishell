@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:14:10 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/06 16:26:26 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:47:41 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,7 @@ int	check_error(char **full_cmd, t_shelgon *shelgon)
 	{
 		if (!ft_isdigit(full_cmd[1][i]) && full_cmd[1][i] != ' ')
 		{
-			ft_putendl_fd("exit (¬_¬)ﾉ", 1);
-			ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: exit: ", 2);
-			ft_putstr_fd(full_cmd[1], 2);
-			ft_putendl_fd(": numeric argument required", 2);
+			print_err_msg(full_cmd);
 			shelgon->status = 2;
 			return (2);
 		}
@@ -129,10 +126,7 @@ void	ft_exit(t_shelgon *shelgon, t_branch *cmds, t_exegg *exe, int flg)
 		if (status == 1 && flg == 1)
 			return ;
 		else if (status == 1 && flg == 0)
-		{
-			free_all(shelgon, shelgon->exe, BTIN);
-			exit (2);
-		}
+			exit_err(shelgon);
 	}
 	if (status != 2 && status != 1 && full_cmd[1])
 	{
@@ -141,10 +135,5 @@ void	ft_exit(t_shelgon *shelgon, t_branch *cmds, t_exegg *exe, int flg)
 			status += 256;
 		ft_putendl_fd("exit (¬_¬)ﾉ", 2);
 	}
-	exe->fd_in = dup2(exe->saved_file[0], STDIN_FILENO);
-	exe->fd_out = dup2(exe->saved_file[1], STDOUT_FILENO);
-	close(exe->saved_file[1]);
-	close(exe->saved_file[0]);
-	free_all(shelgon, shelgon->exe, BTIN);
-	exit(status);
+	finish_ex(exe, shelgon, status);
 }
