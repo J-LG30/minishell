@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:14:10 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/05 14:07:46 by david            ###   ########.fr       */
+/*   Updated: 2024/05/06 16:26:26 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,13 @@ void	ft_exit(t_shelgon *shelgon, t_branch *cmds, t_exegg *exe, int flg)
 	else
 	{
 		status = check_error(full_cmd, shelgon);
-		if (status == 1)
+		if (status == 1 && flg == 1)
 			return ;
+		else if (status == 1 && flg == 0)
+		{
+			free_all(shelgon, shelgon->exe, BTIN);
+			exit (2);
+		}
 	}
 	if (status != 2 && status != 1 && full_cmd[1])
 	{

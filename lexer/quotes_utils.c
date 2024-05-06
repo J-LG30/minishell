@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:25:37 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 12:56:31 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/05 15:19:32 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	translation_str(t_token *token)
 	{
 		if (token->value[i] == '$' && token->value[i + 1] == '"')
 		{
-			new_val = ft_rm_substr(token->value, i, i);
+			new_val = ft_rm_substr(token->value, i, i + 1);
 			if (!new_val)
 				return ;
 			free(token->value);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:30:45 by david             #+#    #+#             */
-/*   Updated: 2024/05/03 20:16:16 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/06 14:37:55 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,29 @@ void	only_redir(t_ast *tree, t_exegg *exe)
 	temp = tree;
 	exe->fd_in = STDIN_FILENO;
 	exe->fd_out = STDOUT_FILENO;
-	if (temp && temp->type == REDIR_IN)
+	while (temp)
 	{
-		exe->in_value = temp->value;
-		exe->fd_in = open(exe->in_value, O_RDONLY);
+		if (temp && temp->type == REDIR_IN)
+		{
+			exe->in_value = temp->value;
+			exe->fd_in = open(exe->in_value, O_RDONLY);
+		}
+		else if (temp && temp->type == REDIR_OUT)
+		{
+			exe->out_value = temp->value;
+			exe->fd_out = open(exe->out_value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		}
+		else if (temp && temp->type == REDIR_APP)
+		{
+			exe->out_value = temp->value;
+			exe->fd_out = open(exe->out_value, O_CREAT | O_APPEND | O_WRONLY, 0644);
+		}
+		if (exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
+			close(exe->fd_in);
+		if (exe->fd_out != STDOUT_FILENO && exe->fd_out > 2)
+			close(exe->fd_out);
+		temp = temp->left;
 	}
-	else if (temp && temp->type == REDIR_OUT)
-	{
-		exe->out_value = temp->value;
-		exe->fd_out = open(exe->out_value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	}
-	else if (temp && temp->type == REDIR_APP)
-	{
-		exe->out_value = temp->value;
-		exe->fd_out = open(exe->out_value, O_CREAT | O_APPEND | O_WRONLY, 0644);
-	}
-	if (exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
-		close(exe->fd_in);
-	if (exe->fd_out != STDOUT_FILENO && exe->fd_out > 2)
-		close(exe->fd_out);
 }
 
 static void	parent_process(t_ast *tree, t_exegg *exe, t_branch *cmds)

@@ -91,6 +91,23 @@ le-goff@c1r20s2:~/core/MINISHELL/final$ export A="this is a beautiful"
 jle-goff@c1r20s2:~/core/MINISHELL/final$ echo $A
 this is a beautiful
 
+testing mpanic:
+
+when you have invalid cmd | cat /inalid directory or invalid file
+our shell doesnt print the prompt, you have to hit enter to get it back but bash gives it back immediately
+(after testing, it only happens when you run the program w valgrind since stdout/stdin is probs being messed up
+, idk how urgent it is)
+
+when PATH is unset, error messages are different
+
+Bash prints: bash: ls: No such file or directory
+
+wrongcmd > redir1
+leaks fds (but only sometimes lol)
+
+running export in a pipe eg: export | cmd1 segfaults but only w valgrind
+
+echo hello | ls needs an enter to return back to prompt (same as cat, only w valgrind)
 
 
 

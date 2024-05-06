@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 19:02:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/01 17:51:15 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/06 16:05:26 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@ int	do_unset(t_env *tmp, t_env *cur, t_shelgon *shell, char *cmds)
 			tmp->prev->next = tmp->next;
 		if (tmp->next)
 			tmp->next->prev = tmp->prev;
-		free(tmp->vr);
-		free(tmp->cpy);
-		free(tmp);
+		if (tmp->vr)
+			free(tmp->vr);
+		if (tmp->cpy)
+			free(tmp->cpy);
+		if (tmp)
+			free(tmp);
 		tmp = cur;
 		return (1);
 	}

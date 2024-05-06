@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/04 20:12:39 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/05 17:04:07 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,28 @@ int	unclosed_quotes(t_token *token)
 	return (what_return(closed, q));
 }
 
-int	which_quote(t_token *token)
-{
-	int	quote;
-	int	i;
+// int	which_quote(t_token *token)
+// {
+// 	int	quote;
+// 	int	i;
 
-	i = 0;
-	while (token->value[i])
-	{
-		if (token->value[i] == '\'')
-		{
-			quote = 1;
-			return (1);
-		}
-		if (token->value[i] == '"')
-		{
-			quote = 2;
-			return (2);
-		}
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	while (token->value[i])
+// 	{
+// 		if (token->value[i] == '\'')
+// 		{
+// 			quote = 1;
+// 			return (1);
+// 		}
+// 		if (token->value[i] == '"')
+// 		{
+// 			quote = 2;
+// 			return (2);
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 // flag == 1 means inside a quoted str, dont remove any quotes
 int	size_wo_quotes(t_token *token)
@@ -119,12 +119,11 @@ int	handle_word(t_token *token, t_shelgon *shelgon, t_token *head)
 	}
 	translation_str(token);
 	expansion(token, shelgon);
+	if (!token->value)
+		return (0);
 	new_val = rm_quotes(token);
 	if (!new_val)
-	{
-		printf("huhhhhhh???");
 		return (0);
-	}
 	free(token->value);
 	token->value = new_val;
 	token->type = WORD;

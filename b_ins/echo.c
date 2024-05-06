@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:06:50 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 18:55:50 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/06 16:00:43 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,40 @@ static int	check_flag(char **cmds)
 
 	i = 1;
 	res = 0;
-	while (cmds && cmds[i] && cmds[i][0] == '-')
+	if (cmds && cmds[i] && cmds[i][0] == '-' && cmds[i][1] == 'n')
 	{
-		j = 1;
-		while (cmds[i][j])
-		{
-			if (cmds[i][j] != 'n')
-				res = 2;
+		j = 2;
+		while (cmds[i][j] == 'n')
 			j++;
+		if (!cmds[i][j])
+			return (0);
+		else
+			return (1);
 		}
-		i++;
-	}
-	return (res);
+	return (0);
 }
 
 static int	start_print(char **cmds, int flg)
 {
 	int	i;
+	int	j;
 
 	i = 1;
-	if (flg == 2 || flg == -1)
-		return (1);
-	while (cmds[i][0] == '-')
-		i++;
+	while (cmds[i])
+	{
+		j = 1;
+		if (cmds[i][0] == '-')
+		{
+			while (cmds[i][j] && cmds[i][j] == 'n')
+				j++;
+			if (!cmds[i][j])
+				i++;
+			else
+				break ;	
+		}
+		else
+			break ;
+	}
 	return (i);
 }
 
@@ -50,20 +61,21 @@ static void	print_it(char **cmds, int flg, int i)
 {
 	if (flg == 1 || flg == 2)
 	{
-		while (cmds[i])
+		while (cmds && cmds[i])
 		{
-			printf("%s", cmds[i++]);
-			if (cmds[i])
+			if (cmds && cmds[i])
+				printf("%s", cmds[i++]);
+			if (cmds && cmds[i])
 				printf(" ");
 		}
 	}
 	else if (flg == 0)
 	{
-		while (cmds[i])
+		while (cmds && cmds[i])
 		{
-			if (cmds[i])
+			if (cmds && cmds[i])
 				printf("%s", cmds[i++]);
-			if (cmds[i])
+			if (cmds && cmds[i])
 				printf(" ");
 		}
 	}
@@ -71,17 +83,6 @@ static void	print_it(char **cmds, int flg, int i)
 		printf("\n");
 }
 
-static int	check_args(char **cmds)
-{
-	int	i;
-
-	i = 1;
-	while (cmds && cmds[i] && cmds[i][0] == '-')
-		i++;
-	if (cmds[i])
-		return (0);
-	return (1);
-}
 //FIX SEGFAULT IF: echo -n -n test
 
 void	echo(char **cmds, int rexit, t_shelgon *shelgon)
@@ -90,18 +91,17 @@ void	echo(char **cmds, int rexit, t_shelgon *shelgon)
 	int	flg;
 
 	shelgon->status = 0;
-	if (!cmds[1])
-		ft_putchar_fd('\n', 1);
-	if (check_args(cmds))
+	if (cmds && !cmds[1])
 	{
+		ft_putchar_fd('\n', 1);
 		if (rexit)
 			return ;
 		free_all(shelgon, shelgon->exe, BTIN);
-		exit (1);
+		exit (0);
 	}
-	if (cmds && cmds[1][0] == '-' && cmds[2])
+	else if (cmds && cmds[1][0] == '-' && cmds[2])
 		flg = check_flag(cmds);
-	else if (cmds[1][0] == '-' && !cmds[2])
+	else if ((cmds[1][0] == '-' && !cmds[1][1]) && !cmds[2])
 		flg = -1;
 	else
 		flg = 1;

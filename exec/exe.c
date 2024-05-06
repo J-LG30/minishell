@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/05 14:07:01 by david            ###   ########.fr       */
+/*   Updated: 2024/05/06 16:21:19 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ static void	built_red(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	find_redir(tree, exe, cmds);
 	if (exe->err)
 	{
+		if (exe->fd_out != STDOUT_FILENO && exe->fd_out > 2)
+			close(exe->fd_out);
+		if (exe->fd_in != STDIN_FILENO  && exe->fd_in > 2)
+			close(exe->fd_in);
 		close(exe->saved_file[0]);
 		close(exe->saved_file[1]);
 		return ;
@@ -33,11 +37,10 @@ static void	built_red(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	if (exe->fd_out != STDOUT_FILENO)
 		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
 	run_btin(tree, exe, cmds, 1);
-	if (cmds->prev == NULL && exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
-		close(exe->fd_in);
-	if ((cmds->next == NULL || (cmds->next && cmds->next->ref->type != WORD))
-		&& exe->fd_out != STDOUT_FILENO && exe->fd_out > 2)
-		close(exe->fd_out);
+	close(exe->fd_in);
+	close(exe->fd_out);
+	close(exe->dup_fd[0]);
+	close(exe->dup_fd[1]);
 	exe->fd_in = dup2(exe->saved_file[0], STDIN_FILENO);
 	exe->fd_out = dup2(exe->saved_file[1], STDOUT_FILENO);
 	close(exe->saved_file[1]);
@@ -47,7 +50,7 @@ static void	built_red(t_ast *tree, t_exegg *exe, t_branch *cmds)
 void	ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
 	if (is_btin(cmds->full_cmd[0])
-		&& (!cmds->next || cmds->next->ref->type != WORD))
+		&& (!cmds->next || cmds->next->ref->type != WORD) && !cmds->prev)
 	{
 		exe->btin = 1;
 		built_red(tree, exe, cmds);
@@ -76,6 +79,8 @@ static void	save_exe(t_shelgon *shelgon, t_exegg *exe)
 	exe->dup_fd[1] = STDOUT_FILENO;
 	exe->fd[0] = STDIN_FILENO;
 	exe->fd[1] = STDOUT_FILENO;
+	exe->saved_file[0] = STDIN_FILENO;
+	exe->saved_file[1] = STDOUT_FILENO;
 	exe->redir = 'n';
 	exe->pkcenter = shelgon;
 	exe->last_fd = 0;
@@ -100,7 +105,7 @@ static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 	i = pipe_it(tree, shelgon, cmds, exe);
 	if (exe->pid1 && exe->btin == 0)
 		waitpid(exe->pid1, &s, 0);
-	while (--i >= 0 && exe->btin)
+	while (--i >= 0)
 		wait(NULL);
 	if (exe->btin)
 		flag = 1;

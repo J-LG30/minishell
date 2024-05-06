@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 15:10:00 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 13:13:13 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/06 15:33:21 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	child_handler(int sig)
 
 void	prompt_handler(int sig)
 {
-	if (g_sig == 0)
-		write(1, "\n", 1);
+	write(1, "\n", 1);
 	if (sig == SIGINT)
 		g_sig = 1;
 	rl_on_new_line();
