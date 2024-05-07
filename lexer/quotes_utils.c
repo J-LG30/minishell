@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:25:37 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/05 15:19:32 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/07 19:30:09 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@ void	translation_str(t_token *token)
 {
 	int		i;
 	char	*new_val;
+	int		exp;
 
 	i = 0;
+	exp = 1;
 	while (token->value[i])
 	{
-		if (token->value[i] == '$' && token->value[i + 1] == '"')
+		if (token->value[i] == '\'')
+			exp *= -1;
+		if (token->value[i] == '$' && token->value[i + 1] == '"' && exp == 1)
 		{
 			new_val = ft_rm_substr(token->value, i, i + 1);
 			if (!new_val)
