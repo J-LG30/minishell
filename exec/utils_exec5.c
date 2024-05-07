@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec5.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 17:18:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 20:09:55 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:40:41 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 		if (!cmds->cmd)
 		{
-			ft_putendl_fd("command not found", 2);
+			ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: ", 2);
+			ft_putstr_fd(cmds->full_cmd[0], 2);
+			ft_putendl_fd(": command not found", 2);
 			free_all(exe->pkcenter, exe, WRONG_CMD);
 			exit (127);
 		}

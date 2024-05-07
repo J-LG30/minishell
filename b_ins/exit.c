@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:14:10 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/07 11:40:29 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:11:55 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ __int64_t	ft_mod_atoi(const char *str)
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (res > (LLONG_MAX - (str[i] - '0')) / 10) 
+		if (res > (LLONG_MAX - (str[i] - '0')) / 10)
 			return (-1);
 		res = res * 10 + (str[i] - '0');
 		i++;
@@ -50,6 +50,8 @@ int	is_numeric_exit(char **full_cmd, t_shelgon *shelgon)
 	flag = 0;
 	if (!full_cmd[1] || !full_cmd[1][0])
 		flag = 1;
+	if ((full_cmd[1][0] == '+' || full_cmd[1][0] == '-') && !full_cmd[1][1])
+		flag = 1;
 	else
 	{
 		while (full_cmd[1][i] && full_cmd[1][i] == ' ')
@@ -62,8 +64,7 @@ int	is_numeric_exit(char **full_cmd, t_shelgon *shelgon)
 	}
 	if (flag == 1)
 	{
-		print_err_msg(full_cmd);
-		shelgon->status = 2;
+		print_err_msg(full_cmd, shelgon);
 		return (2);
 	}
 	return (0);
@@ -97,7 +98,7 @@ int	check_error(char **full_cmd, t_shelgon *shelgon)
 	{
 		if (!ft_isdigit(full_cmd[1][i]) && full_cmd[1][i] != ' ')
 		{
-			print_err_msg(full_cmd);
+			print_err_msg(full_cmd, shelgon);
 			shelgon->status = 2;
 			return (2);
 		}
@@ -120,7 +121,7 @@ void	ft_exit(t_shelgon *shelgon, t_branch *cmds, t_exegg *exe, int flg)
 	if (!full_cmd[1])
 	{
 		status = shelgon->status;
-		ft_putendl_fd("exit (¬_¬)ﾉ", 2);
+		ft_putendl_fd("exit (¬_¬)ﾉ", 1);
 	}
 	else
 	{
@@ -135,7 +136,7 @@ void	ft_exit(t_shelgon *shelgon, t_branch *cmds, t_exegg *exe, int flg)
 		status = ft_mod_atoi(full_cmd[1]);
 		if (status < 0)
 			status += 256;
-		ft_putendl_fd("exit (¬_¬)ﾉ", 2);
+		ft_putendl_fd("exit (¬_¬)ﾉ", 1);
 	}
 	finish_ex(exe, shelgon, status);
 }

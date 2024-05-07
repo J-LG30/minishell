@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:56:46 by david             #+#    #+#             */
-/*   Updated: 2024/05/06 18:52:19 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:32:07 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,10 @@ static void	do_red(t_ast *temp, t_exegg *exe, t_branch *cmds, int fl)
 		exe->out_value = temp->value;
 		if (exe->btin && exe->fd_out < 0
 			|| (ft_strcmp(exe->in_value, exe->out_value) == 0 && exe->err))
-		{
-			exe->err = 1;
-			return ;
-		}
+			fd_message(temp, exe);
 		exe->fd_out = open(exe->out_value, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		if (exe->fd_out < 0)
-		{
-			
-			exe->err = 1;
-		}
+			fd_message(temp, exe);
 	}
 	else if (temp && fl == 2)
 	{
@@ -68,6 +62,8 @@ static void	do_red(t_ast *temp, t_exegg *exe, t_branch *cmds, int fl)
 			close(exe->fd_out);
 		exe->out_value = temp->value;
 		exe->fd_out = open(exe->out_value, O_CREAT | O_APPEND | O_WRONLY, 0644);
+		if (exe->fd_out < 0)
+			fd_message(temp, exe);
 	}
 	else if (fl == 3)
 		last_red(exe);

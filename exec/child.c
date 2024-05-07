@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/06 15:44:37 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:40:07 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
 		if (!cmds->cmd)
 		{
-			ft_putendl_fd("command not found", 2);
+			ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: ", 2);
+			ft_putstr_fd(cmds->full_cmd[0], 2);
+			ft_putendl_fd(": command not found", 2);
 			free_all(exe->pkcenter, exe, WRONG_CMD);
 			exit (127);
 		}
@@ -107,4 +109,13 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		ft_putendl_fd("Error executing command", 2);
 	}
 	exit (1);
+}
+
+void	fd_message(t_ast *temp, t_exegg *exe)
+{
+	ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: ", 2);
+	ft_putstr_fd(temp->value, 2);
+	ft_putstr_fd(": ", 2);
+	perror(NULL);
+	exe->err = 1;
 }

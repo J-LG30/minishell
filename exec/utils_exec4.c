@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:30:45 by david             #+#    #+#             */
-/*   Updated: 2024/05/06 17:58:37 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:03:29 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	only_redir(t_ast *tree, t_exegg *exe)
 		{
 			exe->in_value = temp->value;
 			exe->fd_in = open(exe->in_value, O_RDONLY);
+			if (exe->fd_in < 0)
+				fd_message(temp, exe);
 		}
 		else if (temp && temp->type == REDIR_OUT)
 			treat_only(exe, temp, 1);

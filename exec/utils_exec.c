@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:34:54 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 14:33:29 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:03:22 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ char	*get_path(t_env	*env)
 
 	res = NULL;
 	temp = env;
-	while (temp)
+	if (!temp || !temp->vr)
+		return (NULL);
+	while (temp && temp->vr)
 	{
-		if ((temp && temp->vr) && (ft_strlen(temp->vr) >= 5
+		if (temp && temp->vr && (ft_strlen(temp->vr) >= 5
 				&& ft_strncmp(temp->vr, "PATH=", 5) == 0))
 		{
 			res = temp->vr + 5;

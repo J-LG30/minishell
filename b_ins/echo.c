@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:06:50 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/06 17:39:11 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:00:32 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	check_flag(char **cmds)
 		else
 			return (1);
 	}
-	return (0);
+	return (1);
 }
 
 static int	start_print(char **cmds, int flg)
@@ -83,8 +83,6 @@ static void	print_it(char **cmds, int flg, int i)
 		printf("\n");
 }
 
-//FIX SEGFAULT IF: echo -n -n test
-
 void	echo(char **cmds, int rexit, t_shelgon *shelgon)
 {
 	int	i;
@@ -101,7 +99,8 @@ void	echo(char **cmds, int rexit, t_shelgon *shelgon)
 	}
 	else if (cmds && cmds[1][0] == '-' && cmds[2])
 		flg = check_flag(cmds);
-	else if ((cmds[1][0] == '-' && !cmds[1][1]) && !cmds[2])
+	else if ((cmds[1][0] == '-' && (!cmds[1][1] || cmds[1][1] == 'n'))
+				&& !cmds[2])
 		flg = -1;
 	else
 		flg = 1;

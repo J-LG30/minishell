@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:56:02 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/06 17:38:38 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:14:40 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static char	*new_pwd(t_env *cursor, char *pwd, char *tmp)
 			free(cursor->vr);
 		if (cursor->cpy)
 			free(cursor->cpy);
-		if (cursor->vr && pwd)
+		if (pwd)
 			cursor->vr = ft_strjoin("PWD=", pwd);
-		if (cursor->cpy && pwd)
+		if (pwd)
 			cursor->cpy = ft_strjoin("PWD=", pwd);
 	}
 	return (tmp);
@@ -45,9 +45,9 @@ static void	new_old_pwd(t_env *cursor, char *tmp)
 			free(cursor->vr);
 		if (cursor->cpy)
 			free(cursor->cpy);
-		if (cursor->vr && tmp)
+		if (tmp)
 			cursor->vr = ft_strjoin("OLDPWD=", tmp + 4);
-		if (cursor->cpy && tmp)
+		if (tmp)
 			cursor->cpy = ft_strjoin("OLDPWD=", tmp + 4);
 	}
 }
@@ -60,6 +60,8 @@ static void	update_pwd(t_shelgon *shelgon)
 	t_env	*cursor;
 
 	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		return ;
 	head = shelgon->env;
 	cursor = head;
 	tmp = NULL;
@@ -72,7 +74,7 @@ static void	update_pwd(t_shelgon *shelgon)
 	cursor = head;
 	while (cursor && cursor->vr)
 	{
-		if (cursor->vr && ft_strncmp(cursor->vr, "OLDPWD=", 7) == 0)
+		if (cursor->vr && ft_strncmp(cursor->vr, "OLDPWD=", 7) == 0 && tmp)
 			new_old_pwd(cursor, tmp);
 		cursor = cursor->next;
 	}
