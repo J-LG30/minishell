@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:18:27 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 17:04:01 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/07 19:00:41 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ t_token	*check_tokens(t_token *head, t_shelgon *shelgon)
 	}
 	new_head = remove_nullstr_token(head);
 	cursor = new_head;
+	// t_token *temp = new_head;
+	// static int i = 0;
+	// while (temp)
+	// {
+	// 	printf("temp value: %s temp type: %d\n", temp->value, temp->type);
+	// 	temp = temp->next;
+	// }
 	while (cursor)
 	{
 		if (cursor->type == WORD)

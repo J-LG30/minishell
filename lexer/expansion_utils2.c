@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:22:16 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/04 20:12:54 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/07 17:14:07 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,9 @@ int	var_only_one(char *s)
 
 	i = 0;
 	flag = 0;
-	while (s[i] && (s[i] == ' ' || s[i] != '\t' || s[i] != '\n'))
+	if (!s)
+		return (0);
+	while (s[i] && (s[i] == ' ' || s[i] == '\t' || s[i] == '\n'))
 		i++;
 	if (!s[i])
 		return (1);
@@ -80,7 +82,7 @@ int	var_only_one(char *s)
 		i++;
 	if (!s[i])
 		return (1);
-	while (s[i] && (s[i] == ' ' || s[i] != '\t' || s[i] != '\n'))
+	while (s[i] && (s[i] == ' ' || s[i] == '\t' || s[i] == '\n'))
 		i++;
 	if (!s[i])
 		return (1);

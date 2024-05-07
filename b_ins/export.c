@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/05 16:24:03 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:48:22 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	parse_arg(char *str, t_shelgon *shell)
 	i = 0;
 	while (str[i] && str[i] != '=')
 	{
-		if (ft_isdigit(str[0]) || (!ft_isdigit(str[0]) && !ft_isalnum(str[i])))
+		if (ft_isdigit(str[0]) || (!ft_isdigit(str[0]) && !ft_isalnum(str[i]))
+			&& str[i] != '_')
 		{
 			shell->status = 1;
 			ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: ", 2);

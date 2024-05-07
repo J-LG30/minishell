@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+         #
+#    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/05/06 17:43:31 by davda-si         ###   ########.fr        #
+#    Updated: 2024/05/07 17:00:04 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS = 	main.c free.c free2.c lexer/lexer.c lexer/lexer_lst_utils.c lexer/quotes
 		exec/heredoc_expansion.c b_ins/export_sort.c exec/utils_exec5.c\
 		signals/sig_heredoc.c lexer/expansion_utils.c parser/connect_tree_utils.c\
 		lexer/quotes_utils.c exec/utils_exec6.c lexer/lexer_utils.c lexer/expansion_utils2.c\
-		b_ins/exit_utils.c\
+		b_ins/exit_utils.c lexer/expansion_utils3.c \
 
 OBJS = $(SRCS:.c=.o)
 

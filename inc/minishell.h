@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/07 15:03:55 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/07 16:59:20 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ int						help_unc_quotes(int closed, t_token *token);
 char					*rm_quotes_loop(char *new_val, int size,
 							t_token *token);
 int						var_only_one(char *s);
+void					trimming_var(t_token *token);
 
 /* PARSER FUNCTIONS*/
 t_ast					*parser(t_token *head, t_shelgon **shelgon);
