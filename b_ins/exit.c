@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:14:10 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/06 17:47:41 by davda-si         ###   ########.fr       */
+/*   Updated: 2024/05/07 11:40:29 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ __int64_t	ft_mod_atoi(const char *str)
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
+		if (res > (LLONG_MAX - (str[i] - '0')) / 10) 
+			return (-1);
 		res = res * 10 + (str[i] - '0');
 		i++;
 	}
@@ -48,19 +50,19 @@ int	is_numeric_exit(char **full_cmd, t_shelgon *shelgon)
 	flag = 0;
 	if (!full_cmd[1] || !full_cmd[1][0])
 		flag = 1;
-	while (full_cmd[1][i] && full_cmd[1][i] == ' ')
-		i++;
-	if (!full_cmd[1][i])
-		flag = 1;
-	i = ft_mod_atoi(full_cmd[1]);
-	if (i >= 9223372036854775807 || i <= -9223372036854775807)
-		flag = 1;
+	else
+	{
+		while (full_cmd[1][i] && full_cmd[1][i] == ' ')
+			i++;
+		if (!full_cmd[1][i])
+			flag = 1;
+		i = ft_mod_atoi(full_cmd[1]);
+		if (i == -1 && full_cmd[1][2])
+			flag = 1;
+	}
 	if (flag == 1)
 	{
-		ft_putendl_fd("exit (¬_¬)ﾉ", 1);
-		ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: exit: ", 2);
-		ft_putstr_fd(full_cmd[1], 2);
-		ft_putendl_fd(": numeric argument required", 2);
+		print_err_msg(full_cmd);
 		shelgon->status = 2;
 		return (2);
 	}
