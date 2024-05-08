@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/07 19:26:59 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/08 11:38:49 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ int	handle_word(t_token *token, t_shelgon *shelgon, t_token *head)
 {
 	char	*new_val;
 
-	printf("FRESH VALUE: %s\n", token->value);
 	if (unclosed_quotes(token))
 	{
 		ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: Error: Unclosed quotes\n", 2);
@@ -120,11 +119,9 @@ int	handle_word(t_token *token, t_shelgon *shelgon, t_token *head)
 	}
 	translation_str(token);
 	expansion(token, shelgon);
-	printf("EXPANDED VALUE: %s\n", token->value);
 	if (!token->value)
 		return (0);
 	new_val = rm_quotes(token);
-	printf("RM QUOTES VALUE: %s\n", new_val);
 	if (!new_val)
 		return (0);
 	free(token->value);

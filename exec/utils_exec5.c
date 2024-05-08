@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 17:18:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/07 14:40:41 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/08 11:34:48 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,15 @@ t_branch	*node_cmd(t_ast *tree)
 
 static void	mid_prep(t_ast *tree, t_exegg *exe, t_branch *cmds)
 {
-	if (cmds->full_cmd[0][0] == '/'
-		|| (cmds->full_cmd[0][0] == '.' && cmds->full_cmd[0][1] == '/'))
-		execve(cmds->full_cmd[0], cmds->full_cmd, exe->pkcenter->envr);
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
 	close(exe->fd_in);
 	close(exe->fd_out);
 	if (exe->dup_fd[0] < 0)
 		ft_error(1, cmds, exe);
+	if (cmds->full_cmd[0][0] == '/'
+		|| (cmds->full_cmd[0][0] == '.' && cmds->full_cmd[0][1] == '/'))
+		execve(cmds->full_cmd[0], cmds->full_cmd, exe->pkcenter->envr);
 }
 
 void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
