@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 12:41:31 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/07 18:59:42 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/08 11:53:25 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,8 @@ void	check_mult_tok(t_token *token, t_shelgon *shelgon)
 	int		i;
 
 	if (!token->value || !token->copy)
-		return ;	
-	i = only_var(token->copy);
-	if (i == 0)
+		return ;
+	if (!only_var(token->copy))
 		return ;
 	if (var_only_one(token->value))
 		return (trimming_var(token));
