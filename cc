@@ -1,14 +1,17 @@
 ?
 a
 aa
+aaa
+aaaa
 abomida
 b
+bb
 b_ins
 bora
 c
+cc
 cenas.txt
 exec
-fi le
 file
 free2.c
 free2.o
@@ -62,12 +65,10 @@ test
 test1
 test2_new
 test2.txt
-testdirtest
 tester
 test_new
 test_new2
 testpls
-test_rm
 USER
 yer
 yop

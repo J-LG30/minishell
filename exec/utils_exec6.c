@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec6.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:22:45 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/07 14:32:43 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/07 19:46:16 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,18 @@ void	close_fds(t_exegg *exe)
 
 int	treat_in(t_ast *temp, t_exegg *exe, t_branch *cmds)
 {
-	if (exe->fd_in != STDIN_FILENO || exe->fd_in > 0)
-		close(exe->fd_in);
+	int	fd;
+
 	exe->in_value = temp->value;
 	if (exe->btin && ft_strcmp(exe->in_value, exe->out_value) == 0 && exe->err)
 	{
 		exe->err = 1;
 		return (1);
 	}
-	exe->fd_in = open(exe->in_value, O_RDONLY);
+	fd = open(exe->in_value, O_RDONLY);
+	if (exe->fd_in != STDIN_FILENO)
+		close(exe->fd_in);
+	exe->fd_in = fd;
 	if ((exe->fd_in < 0 || exe->err))
 	{
 		fd_message(temp, exe);

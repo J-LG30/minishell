@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/07 16:59:20 by jle-goff         ###   ########.fr       */
+/*   Updated: 2024/05/07 19:55:02 by davda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,7 @@ int						here_loop(char *res, int *fd, t_ast *temp,
 void					close_fds(t_exegg *exe);
 int						treat_in(t_ast *temp, t_exegg *exe, t_branch *cmds);
 void					treat_only(t_exegg *exe, t_ast *temp, int fl);
+void					take_out(t_exegg *exe, t_ast *temp);
 
 // Built in functions
 int						is_btin(char *cmds);
