@@ -1,3 +1,0 @@
-exit | echo $? > test
-echo $? > exitcodes
-rm test

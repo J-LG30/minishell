@@ -1,4 +1,0 @@
-export $var=test
-echo $? > exitcodes
-unset $var
-echo $? >> exitcodes

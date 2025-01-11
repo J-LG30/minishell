@@ -1,3 +1,0 @@
-echo bonjour > "test 1"
-echo $? > exitcodes
-rm "test 1"

@@ -1,2 +1,0 @@
-echo "bip | bip ><"
-echo $? > exitcodes

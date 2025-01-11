@@ -1,3 +1,0 @@
-echo test > file test1
-echo $? > exitcodes
-rm file test1

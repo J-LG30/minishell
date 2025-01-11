@@ -1,5 +1,0 @@
-declare -x FT_HOOK_PATHNAME="login-user.d"
-declare -x PATH="/home/davda-si/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
-declare -x XDG_SEAT_PATH="/org/freedesktop/DisplayManager/Seat0"
-declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session34"
-0

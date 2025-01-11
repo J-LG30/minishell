@@ -1,3 +1,0 @@
->a ls >b >>c >d
-echo $? > exitcodes
-rm a b c d

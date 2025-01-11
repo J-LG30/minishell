@@ -1,2 +1,0 @@
-export $var | grep "PATH"
-echo $? > exitcodes

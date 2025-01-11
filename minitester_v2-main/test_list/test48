@@ -1,2 +1,0 @@
-cd too many arguments
-echo $? > exitcodes

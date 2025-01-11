@@ -1,2 +1,0 @@
-export env
-echo $? > exitcodes
