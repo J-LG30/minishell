@@ -1,28 +1,66 @@
+# Minishell
 
-The Bash manual: (actually pretty easy to read and helpful)
-https://www.gnu.org/software/bash/manual/bash.html#Single-Quotes
+A functioning Unix shell for Linux and Mac with features such as pipes, variable expansions, I/O redirections, and more.
 
-3.1.1 Shell Operation
-The following is a brief description of the shell’s operation when it reads and executes a command. Basically, the shell does the following:
+## Getting Started
 
-Reads its input from a file (see Shell Scripts), from a string supplied as an argument to the -c invocation option (see Invoking Bash), or from the user’s terminal.
-Breaks the input into words and operators, obeying the quoting rules described in Quoting. These tokens are separated by metacharacters. Alias expansion is performed by this step (see Aliases).
-Parses the tokens into simple and compound commands (see Shell Commands).
-Performs the various shell expansions (see Shell Expansions), breaking the expanded tokens into lists of filenames (see Filename Expansion) and commands and arguments.
-Performs any necessary redirections (see Redirections) and removes the redirection operators and their operands from the argument list.
-Executes the command (see Executing Commands).
-Optionally waits for the command to complete and collects its exit status (see Exit Status).
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-Above is a subsection of the manual and i think it explains really clearly how the shell should work + steps we should take!!
+### Prerequisites
 
-For how quoting works:
-https://rg1-teaching.mpi-inf.mpg.de/unixffb-ss98/quoting-guide.html
+What things you need to install the software and how to install them
 
-this guide from a textbook on writing your own shell:
-https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
+```
+Give examples
+```
 
-another guide for shell syntax kinda like bash manual:
-https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
+### Installing
+
+A step by step series of examples that tell you how to get a development env running
+
+Say what the step will be
+
+```
+Give the example
+```
+
+And repeat
+
+```
+until finished
+```
+
+End with an example of getting some data out of the system or using it for a little demo
+
+## Running the tests
+
+Explain how to run the automated tests for this system
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## Authors
+
+* **Juliette Le Goff**
+* **David Almeida**
+
+## Acknowledgments
+
+* Thank you to all our friends and fellow students at 42 who gave us inspiration on how to develop the shell, and helped us in thoroughly testing its functionality!
+
 
 Grammar rules:
 N:B word in CAPITALS are tokens w/ that token type. Words in lower case are non-terminals and words in upper case are terminals.
@@ -41,4 +79,3 @@ redirectout → REDIR_OUT command_word
 
 command_word -> WORD
 
-https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_03
