@@ -1,5 +1,7 @@
 # Minishell
 
+![Minishell Demo](https://github.com/J-LG30/minishell/blob/main/out.gif)
+
 A functioning Unix shell for Ubuntu and MacOS with features such as pipes, variable expansions, I/O redirections, and more.
 
 ## Getting Started
