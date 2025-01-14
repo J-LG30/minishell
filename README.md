@@ -45,7 +45,10 @@ make
 ```
 
 On MacOS, you need to modify the Makefile slightly.
-Use this command to find where readline has been installed:
+First, uncomment the lines that are in-between the "Version for macs", and comment the lines that are in-between the "Version for Ubuntu".
+
+
+Then use this command to find where readline has been installed:
 ```
 brew --prefix readline
 ```
@@ -76,7 +79,9 @@ Actually run the shell with the command:
 ./minishell
 ```
 
-Some command ideas to test the shell:
+## Utilisation
+
+Here are some command ideas to test the shell:
 
 ```
 echo "hello world" > testing.txt
@@ -84,6 +89,8 @@ ls | grep "a"
 export HOTEL="trivago"
 env
 ```
+
+Exit the shell by writing "exit", or with Ctrl-D.
 
 ## Authors
 
@@ -93,22 +100,3 @@ env
 ## Acknowledgments
 
 * Thank you to all our friends and fellow students at 42 who gave us inspiration on how to develop the shell, and helped us in thoroughly testing its functionality!
-
-
-Grammar rules:
-N:B word in CAPITALS are tokens w/ that token type. Words in lower case are non-terminals and words in upper case are terminals.
-expression → command
-        | command PIPE expression
-
-command → redirectin command
-        | redirectout command
-        | command_word command
-
-redirectin -> REDIR_IN command_word
-        | REDIR_APP command_word
-
-redirectout → REDIR_OUT command_word
-        | REDIR_DELIMIT command_word
-
-command_word -> WORD
-
