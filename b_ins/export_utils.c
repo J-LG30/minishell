@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 20:29:05 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/07 15:10:51 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:24:21 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	print_exp(t_shelgon *shell)
 	int		j;
 	int		flg;
 
+	copy = NULL;
 	copy = sort_exp(shell, copy);
 	j = -1;
 	while (copy && copy[++j])

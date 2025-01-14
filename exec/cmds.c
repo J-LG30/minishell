@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 23:22:13 by david             #+#    #+#             */
-/*   Updated: 2024/05/03 19:45:56 by davda-si         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:24:02 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,11 @@ int	get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe)
 	t_ast		*temp;
 	t_branch	*cur;
 	t_branch	*last;
-	int			no_cmds;
 	int			ret;
 
 	temp = tree;
 	cur = NULL;
+	last = NULL;
 	while (temp)
 	{
 		if (temp && temp->type == WORD)

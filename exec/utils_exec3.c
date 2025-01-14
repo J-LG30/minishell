@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:56:46 by david             #+#    #+#             */
-/*   Updated: 2024/05/07 19:55:21 by davda-si         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:33:24 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ft_heredoc(t_ast *tree, t_shelgon *shelgon)
 	t_ast	*temp;
 	int		ret;
 
+	res = NULL;
 	temp = tree;
 	if (temp && temp->type == REDIR_DELIMIT)
 	{
@@ -40,9 +41,9 @@ static void	last_red(t_exegg *exe)
 		exe->fd_out = exe->fd[1];
 }
 
-static void	do_red(t_ast *temp, t_exegg *exe, t_branch *cmds, int fl)
+static void	do_red(t_ast *temp, t_exegg *exe, int fl)
 {
-	if (temp && fl == 0 && treat_in(temp, exe, cmds))
+	if (temp && fl == 0 && treat_in(temp, exe))
 		return ;
 	else if (temp && fl == 1)
 		take_out(exe, temp);
@@ -88,14 +89,14 @@ void	find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		if (exe->err)
 			return ;
 		if (temp && temp->type == REDIR_IN)
-			do_red(temp, exe, cmds, 0);
+			do_red(temp, exe, 0);
 		else if (temp && temp->type == REDIR_OUT)
-			do_red(temp, exe, cmds, 1);
+			do_red(temp, exe, 1);
 		else if (temp && temp->type == REDIR_APP)
-			do_red(temp, exe, cmds, 2);
+			do_red(temp, exe, 2);
 		else if (temp && temp->type == REDIR_DELIMIT)
 			deal_doc(exe, com);
 		temp = temp->left;
 	}
-	do_red(temp, exe, cmds, 3);
+	do_red(temp, exe, 3);
 }

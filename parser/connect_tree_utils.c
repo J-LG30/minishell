@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 18:27:51 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 18:33:31 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:31:10 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	not_pipe_word(t_ast *subtree, t_shelgon **shelgon)
 void	add_word_tree(t_ast *subtree, t_shelgon **shelgon)
 {
 	t_ast	*temp;
-	t_ast	*redir_temp;
 
 	temp = (*shelgon)->tree;
 	if ((*shelgon)->tree->type != PIPE)

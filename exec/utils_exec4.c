@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 22:30:45 by david             #+#    #+#             */
-/*   Updated: 2024/05/07 15:03:29 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:28:13 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	only_redir(t_ast *tree, t_exegg *exe)
 	}
 }
 
-static void	parent_process(t_ast *tree, t_exegg *exe, t_branch *cmds)
+static void	parent_process(t_exegg *exe, t_branch *cmds)
 {
 	if (cmds->prev == NULL && exe->fd_in != STDIN_FILENO && exe->fd_in > 2)
 		close(exe->fd_in);
@@ -74,12 +74,12 @@ void	which_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		if (cmds->prev == NULL)
 			fst_child(tree, exe, cmds);
 		else if (cmds->next == NULL || cmds->next->ref->type != WORD)
-			lst_child(tree, exe, cmds);
+			lst_child(exe, cmds);
 		else
-			mid_child(tree, exe, cmds);
+			mid_child(exe, cmds);
 	}
 	else
-		parent_process(tree, exe, cmds);
+		parent_process(exe, cmds);
 }
 
 char	*try_cmd(char *cargs, char **cpath)
@@ -110,7 +110,7 @@ char	*try_cmd(char *cargs, char **cpath)
 	return (NULL);
 }
 
-int	pipe_it(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
+int	pipe_it(t_ast *tree, t_branch *cmds, t_exegg *exe)
 {
 	int	i;
 

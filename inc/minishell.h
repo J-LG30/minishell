@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/07 19:55:02 by davda-si         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:32:27 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,10 +153,9 @@ int						handle_word(t_token *token, t_shelgon *shelgon,
 							t_token *head);
 char					*ft_rm_substr(char *str, int start, int end);
 t_env					*return_index(t_env *head, int index);
-char					*expanded(t_shelgon *shelgon, char *line, char *tok_str,
+char					*expanded(char *line, char *tok_str,
 							int index);
-char					*expand_status(t_shelgon *sh, char *line, char *tok_str,
-							int index);
+char					*expand_status(t_shelgon *sh, char *tok_str, int index);
 int						while_var(char *str, int i);
 void					translation_str(t_token *token);
 int						what_return(int closed, char q);
@@ -173,7 +172,7 @@ int						var_only_one(char *s);
 void					trimming_var(t_token *token);
 
 /* PARSER FUNCTIONS*/
-t_ast					*parser(t_token *head, t_shelgon **shelgon);
+t_ast					*parser(t_shelgon **shelgon);
 t_ast					*new_node_init(t_token *temp);
 t_ast					*new_pipe_node(t_token *token);
 t_ast					*new_word_node(t_token *token);
@@ -191,7 +190,7 @@ void					set_prompt_handler(void);
 void					set_child_handler(void);
 void					set_heredoc_handler(void);
 // command productions
-t_ast					*create_command(t_token *head, t_shelgon **shelgon);
+t_ast					*create_command(t_shelgon **shelgon);
 t_ast					*command_word(t_shelgon **shelgon);
 t_ast					*command_prefix(t_shelgon **shelgon);
 t_ast					*command_suffix(t_shelgon **shelgon);
@@ -205,11 +204,10 @@ int						exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env);
 void					find_redir(t_ast *tree, t_exegg *exe, t_branch *cmds);
 void					which_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
 void					ft_pipe(t_ast *tree, t_exegg *exe, t_branch *cmds);
-int						pipe_it(t_ast *tree, t_shelgon *shelgon, t_branch *cmds,
-							t_exegg *exe);
+int						pipe_it(t_ast *tree, t_branch *cmds, t_exegg *exe);
 void					fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
-void					lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
-void					mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds);
+void					lst_child(t_exegg *exe, t_branch *cmds);
+void					mid_child(t_exegg *exe, t_branch *cmds);
 int						get_cmd(t_ast *tree, t_branch **cmds, t_exegg *exe);
 void					only_redir(t_ast *tree, t_exegg *exe);
 char					*try_cmd(char *cargs, char **cpath);
@@ -228,20 +226,19 @@ int						pr_her(t_ast *temp, t_branch *cur, t_branch *last,
 							t_branch **cmds);
 void					dumb_env(t_shelgon *shelgon);
 int						here_help(int std_in, char *res, int *fd);
-int						err_heredoc(int *fd, int std_in, char *res,
-							t_shelgon *shelgon);
+int						err_heredoc(int *fd, int std_in, t_shelgon *shelgon);
 int						here_loop(char *res, int *fd, t_ast *temp,
 							t_shelgon *shelgon);
 void					close_fds(t_exegg *exe);
-int						treat_in(t_ast *temp, t_exegg *exe, t_branch *cmds);
+int						treat_in(t_ast *temp, t_exegg *exe);
 void					treat_only(t_exegg *exe, t_ast *temp, int fl);
 void					take_out(t_exegg *exe, t_ast *temp);
 
 // Built in functions
 int						is_btin(char *cmds);
-void					run_btin(t_ast *tree, t_exegg *exe, t_branch *cmds,
+void					run_btin(t_exegg *exe, t_branch *cmds,
 							int flg);
-t_env					*env(t_shelgon *shell, char **envp, int flg, int rexit);
+t_env					*env(t_shelgon *shell, int flg, int rexit);
 void					print_list(t_env *arr);
 void					ms_addnode(t_env **arr, char *s);
 void					ms_addexp(t_env **arr, char *s);
@@ -274,6 +271,5 @@ void					free_ast(t_ast *tree);
 
 /*DEBUGGING*/
 void					print_tree(t_ast *root);
-t_ast					*connect_subtree(t_ast *root, t_ast *subtree,
-							t_shelgon **shelgon, int dir);
+t_ast					*connect_subtree(t_ast *subtree, t_shelgon **shelgon);
 #endif

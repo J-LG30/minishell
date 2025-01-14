@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:34:42 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/03 16:32:21 by davda-si         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:11:39 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	env_addnode(t_env **arr, char *s)
 	t_env	*node;
 	t_env	*temp;
 
+	node = NULL;
 	if (s != NULL && s[0] != '\0')
 		node = env_lstadd(s);
 	if (!node)
@@ -52,7 +53,7 @@ static void	env_addnode(t_env **arr, char *s)
 	}
 }
 
-t_env	*env(t_shelgon *shell, char **envp, int flg, int retexit)
+t_env	*env(t_shelgon *shell, int flg, int retexit)
 {
 	t_env	*var;
 	int		i;

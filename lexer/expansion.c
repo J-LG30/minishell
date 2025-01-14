@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:12:20 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/07 19:23:09 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:29:39 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	var_status(char *str, t_env *env)
 {
 	int		i;
 	int		j;
-	int		exit;
 	t_env	*t;
 
 	i = 0;
@@ -41,10 +40,9 @@ int	var_status(char *str, t_env *env)
 	return (-1);
 }
 
-char	*expanded(t_shelgon *shelgon, char *line, char *tok_str, int index)
+char	*expanded(char *line, char *tok_str, int index)
 {
 	int		i;
-	int		j;
 	char	*new;
 	char	*trim_l;
 	int		size;
@@ -115,9 +113,9 @@ int	expand_util_cases(t_token *token, int i, int j, t_shelgon *shelgon)
 	{
 		env = return_index(shelgon->env, i);
 		if (i > 0)
-			new_val = expanded(shelgon, env->vr, token->value, j + 1);
+			new_val = expanded(env->vr, token->value, j + 1);
 		else
-			new_val = expand_status(shelgon, env->vr, token->value, j + 1);
+			new_val = expand_status(shelgon, token->value, j + 1);
 		if (!new_val)
 			return (0);
 		free(token->value);
@@ -131,7 +129,6 @@ void	expansion(t_token *token, t_shelgon *shelgon)
 	int		i;
 	int		j;
 	t_env	*env;
-	char	*new_val;
 	int		expand[2];
 
 	env = shelgon->env;

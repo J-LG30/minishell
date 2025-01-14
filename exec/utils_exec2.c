@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:49:57 by david             #+#    #+#             */
-/*   Updated: 2024/05/03 18:11:22 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:17:20 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	is_btin(char *cmds)
 		return (0);
 }
 
-void	run_btin(t_ast *tree, t_exegg *exe, t_branch *cmds, int flg)
+void	run_btin(t_exegg *exe, t_branch *cmds, int flg)
 {
 	if (ft_strcmp(cmds->full_cmd[0], "echo") == 0)
 		echo(cmds->full_cmd, flg, exe->pkcenter);
@@ -54,7 +54,7 @@ void	run_btin(t_ast *tree, t_exegg *exe, t_branch *cmds, int flg)
 	else if (ft_strcmp(cmds->full_cmd[0], "export") == 0)
 		export(cmds, exe->pkcenter, flg);
 	else if (ft_strcmp(cmds->full_cmd[0], "env") == 0)
-		env(exe->pkcenter, exe->pkcenter->envr, 0, flg);
+		env(exe->pkcenter, 0, flg);
 	else if (ft_strcmp(cmds->full_cmd[0], "unset") == 0)
 		unset(exe->pkcenter, cmds->full_cmd, flg);
 	else if (ft_strcmp(cmds->full_cmd[0], "exit") == 0)

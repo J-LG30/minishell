@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:48:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/08 11:49:24 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:12:38 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	save_env(char **envp, t_shelgon *shelgon)
 	env_help(envp, shelgon, i);
 }
 
-static char	*wait_helper(t_shelgon *shel, char *l, t_token *tok)
+static char	*wait_helper(t_shelgon *shel, char *l)
 {
 	shel->tree = NULL;
 	shel->list_token = NULL;
@@ -78,7 +78,7 @@ static void	wait_loop(t_shelgon *shelgon, char *line, t_token *token)
 {
 	while (1)
 	{
-		line = wait_helper(shelgon, line, token);
+		line = wait_helper(shelgon, line);
 		if (ft_strlen(line) == 0)
 		{
 			free (line);
@@ -106,8 +106,10 @@ int	main(int argc, char **argv, char **envp)
 	shelgon->exe = NULL;
 	shelgon->free = 1;
 	save_env(envp, shelgon);
-	shelgon->env = env(shelgon, shelgon->envr, 1, 1);
+	shelgon->env = env(shelgon, 1, 1);
 	(void)argc;
 	(void)argv;
+	line = NULL;
+	token = NULL;
 	wait_loop(shelgon, line, token);
 }

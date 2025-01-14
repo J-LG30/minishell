@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: david <david@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:31:54 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/05 14:07:21 by david            ###   ########.fr       */
+/*   Updated: 2025/01/14 13:06:33 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	free_branch(t_branch *branch)
 {
 	t_branch	*cursor;
-	int			i;
 
 	if (!branch)
 		return ;
@@ -82,7 +81,7 @@ void	main_help(t_shelgon *shelgon, t_token *token)
 
 void	time_to_start(t_shelgon *shelgon, t_token *token)
 {
-	if (parser(token, &shelgon))
+	if (parser(&shelgon))
 		exeggutor(shelgon->tree, shelgon, shelgon->env);
 	else
 		shelgon->status = 2;

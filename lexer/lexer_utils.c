@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:18:27 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/08 11:54:56 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:34:11 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ t_token	*remove_nullstr_token(t_token *head)
 {
 	t_token	*cursor;
 	t_token	*temp;
-
+	
+	temp = NULL;
 	cursor = head;
 	if (!cursor)
 		return (NULL);

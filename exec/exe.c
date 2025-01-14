@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:30:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/07 15:16:21 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:23:35 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	built_red(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		close(exe->fd_in);
 	if (exe->fd_out != STDOUT_FILENO)
 		exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
-	run_btin(tree, exe, cmds, 1);
+	run_btin(exe, cmds, 1);
 	close_fds(exe);
 }
 
@@ -96,7 +96,7 @@ static void	exeg(t_ast *tree, t_shelgon *shelgon, t_branch *cmds, t_exegg *exe)
 	s = 0;
 	flag = 0;
 	s = 0;
-	i = pipe_it(tree, shelgon, cmds, exe);
+	i = pipe_it(tree, cmds, exe);
 	if (exe->pid1 && exe->btin == 0)
 		waitpid(exe->pid1, &s, 0);
 	while (--i >= 0)
@@ -120,9 +120,7 @@ int	exeggutor(t_ast *tree, t_shelgon *shelgon, t_env *env)
 	t_exegg		*exe;
 	t_branch	*cmds;
 	int			i;
-	int			s;
 
-	s = 0;
 	cmds = NULL;
 	exe = malloc(sizeof(t_exegg) * 1);
 	if (!exe)

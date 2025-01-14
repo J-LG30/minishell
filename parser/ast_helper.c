@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:25 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 20:21:07 by davda-si         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:07:08 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ t_ast	*new_redir_node(t_token *token)
 	return (new);
 }
 
-t_ast	*new_end_node(void)
-{
-	t_ast	*new;
+// t_ast	*new_end_node(void)
+// {
+// 	t_ast	*new;
 
-	if (!new)
-		return (NULL);
-	new->type = END;
-	return (new);
-}
+// 	if (!new)
+// 		return (NULL);
+// 	new->type = END;
+// 	return (new);
+// }

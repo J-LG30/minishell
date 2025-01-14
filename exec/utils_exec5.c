@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 17:18:58 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/08 11:34:48 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:27:29 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_branch	*node_cmd(t_ast *tree)
 	return (new);
 }
 
-static void	mid_prep(t_ast *tree, t_exegg *exe, t_branch *cmds)
+static void	mid_prep(t_exegg *exe, t_branch *cmds)
 {
 	exe->dup_fd[1] = dup2(exe->fd_in, STDIN_FILENO);
 	exe->dup_fd[0] = dup2(exe->fd_out, STDOUT_FILENO);
@@ -84,10 +84,10 @@ static void	mid_prep(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		execve(cmds->full_cmd[0], cmds->full_cmd, exe->pkcenter->envr);
 }
 
-void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
+void	mid_child(t_exegg *exe, t_branch *cmds)
 {
 	find_redir(cmds->ref, exe, cmds);
-	mid_prep(tree, exe, cmds);
+	mid_prep(exe, cmds);
 	if (cmds->ref && cmds->ref->type == WORD && !(is_btin(cmds->full_cmd[0])))
 	{
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
@@ -101,7 +101,7 @@ void	mid_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		}
 	}
 	if (is_btin(cmds->full_cmd[0]))
-		run_btin(tree, exe, cmds, 0);
+		run_btin(exe, cmds, 0);
 	else
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);

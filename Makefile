@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+         #
+#    By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 21:24:04 by davda-si          #+#    #+#              #
-#    Updated: 2024/05/07 19:52:09 by davda-si         ###   ########.fr        #
+#    Updated: 2025/01/14 14:16:05 by jle-goff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = @cc
-FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address #-static-libsan
+FLAGS = -Wall -Wextra -Werror -D_GNU_SOURCE #-fsanitize=address -static-libsan
 LIB = -lreadline
 
 #ASAN_OPTIONS=symbolize=1
@@ -35,16 +35,19 @@ OBJS = $(SRCS:.c=.o)
 LIBFT_DIR = libft
 LIBFT_A = $(LIBFT_DIR)/libft.a
 
-#version for my mac
-#LIB_DIR = -L /usr/local/opt/readline/lib
+#version for macs: replace these with the paths on your machine
+LIB_DIR = -L/opt/homebrew/opt/readline/lib
+LIB_INC = -I/opt/homebrew/opt/readline/include
+
+%.o: %.c
+	@$(CC) $(FLAGS) $(LIB_INC) -c $< -o $@
 
 all: $(NAME)
 
-#version for my mac
+#version for macs
 
-#$(NAME): $(OBJS) $(LIBFT_A)
-#	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o  $(@) $(LIB) -lreadline $(LIB_DIR)
-#-I /usr/local/opt/readline/include
+# $(NAME): $(OBJS) $(LIBFT_A)
+# 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o  $(@) -lreadline $(LIB_DIR) 
 
 $(NAME): $(OBJS) $(LIBFT_A)
 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT_A) -o $(@) $(LIB)

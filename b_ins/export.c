@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 19:17:00 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/07 15:48:22 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:14:51 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	parse_arg(char *str, t_shelgon *shell)
 	i = 0;
 	while (str[i] && str[i] != '=')
 	{
-		if (ft_isdigit(str[0]) || (!ft_isdigit(str[0]) && !ft_isalnum(str[i]))
-			&& str[i] != '_')
+		if (ft_isdigit(str[0]) || (!ft_isdigit(str[0]) && !ft_isalnum(str[i])
+			&& str[i] != '_'))
 		{
 			shell->status = 1;
 			ft_putstr_fd("(╯°□ °)╯︵ ┻━┻: ", 2);
@@ -46,12 +46,9 @@ static void	change_arg(t_env *tmp, char *str)
 static int	args_exist(char *str, t_env *env)
 {
 	t_env	*tmp;
-	t_env	*new;
 	int		i;
-	int		flg;
 
 	i = 0;
-	flg = 0;
 	tmp = env;
 	while (str[i] && str[i] != '=')
 		i++;
@@ -73,9 +70,9 @@ static int	args_exist(char *str, t_env *env)
 
 static void	add_export(char **args, t_shelgon *shell)
 {
-	int	i;
-	int	j;
-	int	flg;
+	int		i;
+	size_t	j;
+	int		flg;
 
 	i = 1;
 	while (args[i])

@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 15:36:32 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/08 11:49:40 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:19:22 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		}
 	}
 	if (is_btin(cmds->full_cmd[0]))
-		run_btin(tree, exe, cmds, 0);
+		run_btin(exe, cmds, 0);
 	else
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);
@@ -63,7 +63,7 @@ void	fst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 	}
 }
 
-static void	lst_prep(t_ast *tree, t_exegg *exe, t_branch *cmds)
+static void	lst_prep(t_exegg *exe, t_branch *cmds)
 {
 	if (exe->fd_out == exe->fd[1]
 		|| (cmds->next && cmds->next->ref->type != WORD))
@@ -85,10 +85,10 @@ static void	lst_prep(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		execve(cmds->full_cmd[0], cmds->full_cmd, exe->pkcenter->envr);
 }
 
-void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
+void	lst_child(t_exegg *exe, t_branch *cmds)
 {
 	find_redir(cmds->ref, exe, cmds);
-	lst_prep(tree, exe, cmds);
+	lst_prep(exe, cmds);
 	if (cmds->ref && cmds->ref->type == WORD && !(is_btin(cmds->full_cmd[0])))
 	{
 		cmds->cmd = try_cmd(cmds->full_cmd[0], exe->cmdpath);
@@ -102,7 +102,7 @@ void	lst_child(t_ast *tree, t_exegg *exe, t_branch *cmds)
 		}
 	}
 	if (is_btin(cmds->full_cmd[0]))
-		run_btin(tree, exe, cmds, 0);
+		run_btin(exe, cmds, 0);
 	else
 	{
 		execve(cmds->cmd, cmds->full_cmd, exe->pkcenter->envr);

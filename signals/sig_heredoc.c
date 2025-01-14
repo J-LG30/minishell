@@ -6,17 +6,19 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 12:32:40 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 12:33:23 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:34:40 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+extern void	rl_replace_line(const char *, int);
+
 void	heredoc_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_sig = 1;
+		//g_sig = 1;
 		write(1, "\n", 1);
 		rl_done = 1;
 		rl_on_new_line();

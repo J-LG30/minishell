@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec6.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davda-si <davda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:22:45 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/07 19:46:16 by davda-si         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:33:48 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	here_loop(char *res, int *fd, t_ast *temp, t_shelgon *shelgon)
 		if (g_sig == 1)
 			return (here_help(std_in, res, fd));
 		if (!res)
-			return (err_heredoc(fd, std_in, res, shelgon));
+			return (err_heredoc(fd, std_in, shelgon));
 		if (ft_strncmp(temp->value, res, ft_strlen(temp->value)) == 0
 			&& (ft_strlen(temp->value) == ft_strlen(res)))
 			break ;
@@ -36,7 +36,7 @@ int	here_loop(char *res, int *fd, t_ast *temp, t_shelgon *shelgon)
 	return (-4);
 }
 
-int	err_heredoc(int *fd, int std_in, char *res, t_shelgon *shelgon)
+int	err_heredoc(int *fd, int std_in, t_shelgon *shelgon)
 {
 	shelgon->status = 0;
 	g_sig = 2;
@@ -62,7 +62,7 @@ void	close_fds(t_exegg *exe)
 	close(exe->saved_file[0]);
 }
 
-int	treat_in(t_ast *temp, t_exegg *exe, t_branch *cmds)
+int	treat_in(t_ast *temp, t_exegg *exe)
 {
 	int	fd;
 

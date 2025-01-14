@@ -6,11 +6,13 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:57:51 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 18:29:13 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:30:39 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+extern void	rl_replace_line(const char *, int);
 
 char	*expand_heredoc(char *line, int i, int j, t_shelgon *shelgon)
 {
@@ -29,9 +31,9 @@ char	*expand_heredoc(char *line, int i, int j, t_shelgon *shelgon)
 	{
 		env = return_index(shelgon->env, i);
 		if (i > 0)
-			new_val = expanded(shelgon, env->vr, line, j + 1);
+			new_val = expanded(env->vr, line, j + 1);
 		else
-			new_val = expand_status(shelgon, env->vr, line, j + 1);
+			new_val = expand_status(shelgon, line, j + 1);
 		if (!new_val)
 			return (0);
 		free(line);

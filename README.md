@@ -1,55 +1,88 @@
 # Minishell
 
-A functioning Unix shell for Linux and Mac with features such as pipes, variable expansions, I/O redirections, and more.
+A functioning Unix shell for Ubuntu and MacOS with features such as pipes, variable expansions, I/O redirections, and more.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the shell up and running on your machine!
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+To compile/use the shell, you will need the GNU readline library installed on your computer.
 
+To check if it is already installed, copy this command into your terminal:
+
+Ubuntu command:
 ```
-Give examples
+dpkg -l | grep readline
 ```
+MacOS command:
+```
+brew list readline
+```
+If these have an output along the line of ..../include/readline...., you should be good to go!
+
+If not, to install readline copy this command into your terminal:
+
+Ubuntu command:
+```
+sudo apt install libreadline-dev
+```
+
+MacOS command:
+```
+brew install readline
+```
+
+You can confirm the installation of the library by using the other commands above.
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+On Ubuntu machines, you can install the shell by cloning the github repo onto your machine, entering the repo directory and using the command:
 
 ```
-Give the example
+make
 ```
 
-And repeat
-
+On MacOS, you need to modify the Makefile slightly.
+Use this command to find where readline has been installed:
 ```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
+brew --prefix readline
 ```
 
-### And coding style tests
+Then, in the Makefile underneath the line where it says:
+```
+#version for macs: replace these with the paths on your machine
+```
 
-Explain what these tests test and why
+Replace it with:
 
 ```
-Give an example
+LIB_DIR = -L/the_path_you_got/lib
+LIB_INC = -I/the_path_you_got/include
+```
+
+Where the path you got is the output of brew --prefix readline.
+
+And now you should be good to go! You can simply run:
+
+```
+make
+```
+
+Actually run the shell with the command:
+
+```
+./minishell
+```
+
+Some command ideas to test the shell:
+
+```
+echo "hello world" > testing.txt
+ls | grep "a"
+export HOTEL="trivago"
+env
 ```
 
 ## Authors

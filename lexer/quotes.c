@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:45:36 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/08 11:38:49 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:47:36 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int	size_wo_quotes(t_token *token)
 	char	q;
 	int		i;
 	int		size;
-	int		j;
-	char	*new_val;
 
 	i = 0;
 	size = 0;
@@ -95,9 +93,6 @@ char	*rm_quotes(t_token *token)
 {
 	int		size;
 	char	*new_val;
-	int		i;
-	int		j;
-	char	q;
 
 	size = size_wo_quotes(token);
 	new_val = malloc(sizeof(char) * (size + 1));

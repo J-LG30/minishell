@@ -6,13 +6,13 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:43:44 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/03 11:19:16 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:46:57 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	str_token(t_token *token, int type, char *line, int i)
+int	str_token(t_token *token, char *line, int i)
 {
 	int		j;
 	char	c;
@@ -101,7 +101,7 @@ t_token	*tokenize(char *line, t_shelgon *shelgon)
 			i = pipe_token(token, i);
 		else if (line[i])
 		{
-			i = str_token(token, WORD, line, i);
+			i = str_token(token, line, i);
 			if (handle_word(token, shelgon, head))
 				return (NULL);
 		}

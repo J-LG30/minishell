@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:50:28 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/01 18:30:55 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:51:34 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ void	subtree_redir(t_ast *temp, t_ast *subtree, t_shelgon **shelgon)
 	}
 }
 
-t_ast	*connect_subtree(t_ast *root, t_ast *subtree,
-							t_shelgon **shelgon, int DIR)
+t_ast	*connect_subtree(t_ast *subtree, t_shelgon **shelgon)
 {
 	t_ast	*temp;
 

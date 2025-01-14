@@ -6,16 +6,17 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 15:10:00 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/06 15:33:21 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:21:32 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-//extern void	rl_replace_line(const char *, int);
+extern void	rl_replace_line(const char *, int);
 
 void	child_handler(int sig)
 {
+	(void)sig;
 	rl_on_new_line();
 }
 

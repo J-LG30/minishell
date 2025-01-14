@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 18:06:50 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/07 15:00:32 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:15:19 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ static int	check_flag(char **cmds)
 {
 	int	i;
 	int	j;
-	int	res;
 
 	i = 1;
-	res = 0;
 	if (cmds && cmds[i] && cmds[i][0] == '-' && cmds[i][1] == 'n')
 	{
 		j = 2;
@@ -33,7 +31,7 @@ static int	check_flag(char **cmds)
 	return (1);
 }
 
-static int	start_print(char **cmds, int flg)
+static int	start_print(char **cmds)
 {
 	int	i;
 	int	j;
@@ -104,7 +102,7 @@ void	echo(char **cmds, int rexit, t_shelgon *shelgon)
 		flg = -1;
 	else
 		flg = 1;
-	i = start_print(cmds, flg);
+	i = start_print(cmds);
 	print_it(cmds, flg, i);
 	if (rexit)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 12:41:31 by jle-goff          #+#    #+#             */
-/*   Updated: 2024/05/08 11:53:25 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:30:56 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ t_env	*return_index(t_env *head, int index)
 	return (NULL);
 }
 
-char	*expand_status(t_shelgon *sh, char *line, char *tok_str, int index)
+char	*expand_status(t_shelgon *sh, char *tok_str, int index)
 {
 	int		i;
-	int		j;
 	char	*new;
 	char	*trim_l;
 	int		size;
@@ -67,10 +66,8 @@ int	while_var(char *str, int i)
 int	only_var(char *str)
 {
 	int	i;
-	int	flag;
 
 	i = 0;
-	flag = 0;
 	while (str[i])
 	{
 		if (str[i] == '$')

@@ -6,7 +6,7 @@
 /*   By: jle-goff <jle-goff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 14:41:47 by davda-si          #+#    #+#             */
-/*   Updated: 2024/05/07 15:13:15 by jle-goff         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:26:41 by jle-goff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	print_sort(char **copy)
 char	**sort_exp(t_shelgon *shell, char **copy)
 {
 	t_env	*tmp;
-	char	*var_tmp;
 	int		i;
 
 	tmp = shell->env;
@@ -67,7 +66,6 @@ static int	size_quotes(char *str)
 	char	q;
 	int		i;
 	int		size;
-	int		j;
 
 	i = 0;
 	size = 0;
